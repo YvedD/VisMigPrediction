@@ -1,0 +1,6094 @@
+{
+  "json": [
+    {
+      "soortid": "235",
+      "soortnaam": "Zomertortel",
+      "soortkey": "Zmrtortel",
+      "latin": "Streptopelia turtur",
+      "sortering": "14320"
+    },
+    {
+      "soortid": "1071",
+      "soortnaam": "Gele luzernevlinder",
+      "soortkey": "Gele luzernevlinder",
+      "latin": "Colias hyale",
+      "sortering": "80070"
+    },
+    {
+      "soortid": "170",
+      "soortnaam": "Houtsnip",
+      "soortkey": "Houtsnip",
+      "latin": "Scolopax rusticola",
+      "sortering": "21060"
+    },
+    {
+      "soortid": "148",
+      "soortnaam": "Steppekievit",
+      "soortkey": "Steppekievit",
+      "latin": "Vanellus gregarius",
+      "sortering": "20400"
+    },
+    {
+      "soortid": "745",
+      "soortnaam": "Drieteenspecht",
+      "soortkey": "Drieteenspecht",
+      "latin": "Picoides tridactylus",
+      "sortering": "38440"
+    },
+    {
+      "soortid": "1133",
+      "soortnaam": "Arabische Woestijnpatrijs",
+      "soortkey": "Arabische Woestijnpatrijs",
+      "latin": "Ammoperdix heyi",
+      "sortering": "4990"
+    },
+    {
+      "soortid": "836",
+      "soortnaam": "Iberische Tjiftjaf",
+      "soortkey": "Iberische Tjiftjaf",
+      "latin": "Phylloscopus ibericus",
+      "sortering": "77330"
+    },
+    {
+      "soortid": "528",
+      "soortnaam": "ooievaar spec.",
+      "soortkey": "ooievaar spec.",
+      "latin": "Ciconia spec.",
+      "sortering": "25332"
+    },
+    {
+      "soortid": "4808",
+      "soortnaam": "Goudvink ssp europaea",
+      "soortkey": "Goudvink ssp europaea",
+      "latin": "Pyrrhula pyrrhula europea",
+      "sortering": "100981"
+    },
+    {
+      "soortid": "428",
+      "soortnaam": "Witkopgors",
+      "soortkey": "Witkopgors",
+      "latin": "Emberiza leucocephalos",
+      "sortering": "103250"
+    },
+    {
+      "soortid": "64",
+      "soortnaam": "Zomertaling",
+      "soortkey": "Zomerta",
+      "latin": "Spatula querquedula",
+      "sortering": "1410"
+    },
+    {
+      "soortid": "2301",
+      "soortnaam": "stern/moerasstern spec.",
+      "soortkey": "stern/moerasstern spec.",
+      "latin": "Sterna/Chlidonias spec.",
+      "sortering": "22302"
+    },
+    {
+      "soortid": "128",
+      "soortnaam": "Meerkoet",
+      "soortkey": "Meerkoet",
+      "latin": "Fulica atra",
+      "sortering": "18250"
+    },
+    {
+      "soortid": "900",
+      "soortnaam": "Wilsons Zanger",
+      "soortkey": "Wilsons Zanger",
+      "latin": "Cardellina pusilla",
+      "sortering": "107300"
+    },
+    {
+      "soortid": "1153",
+      "soortnaam": "Kleine dwergvleermuis",
+      "soortkey": "Kleine dwergvleermuis",
+      "latin": "Pipistrellus pygmaeus",
+      "sortering": "101180"
+    },
+    {
+      "soortid": "246",
+      "soortnaam": "Velduil",
+      "soortkey": "Velduil",
+      "latin": "Asio flammeus",
+      "sortering": "31570"
+    },
+    {
+      "soortid": "116",
+      "soortnaam": "Schots Sneeuwhoen",
+      "soortkey": "Schots Sneeuwhoen",
+      "latin": "Lagopus scotica",
+      "sortering": "4081"
+    },
+    {
+      "soortid": "56",
+      "soortnaam": "Smient",
+      "soortkey": "Smient",
+      "latin": "Mareca penelope",
+      "sortering": "1530"
+    },
+    {
+      "soortid": "177",
+      "soortnaam": "Tureluur",
+      "soortkey": "Turel",
+      "latin": "Tringa totanus",
+      "sortering": "21480"
+    },
+    {
+      "soortid": "80",
+      "soortnaam": "Grote Zee-eend",
+      "soortkey": "GrZeeeend",
+      "latin": "Melanitta fusca",
+      "sortering": "2130"
+    },
+    {
+      "soortid": "1129",
+      "soortnaam": "Moabmus",
+      "soortkey": "Moabmus",
+      "latin": "Passer moabiticus",
+      "sortering": "97080"
+    },
+    {
+      "soortid": "680",
+      "soortnaam": "Scandinavische Zilvermeeuw",
+      "soortkey": "Scandinavische Zilvermeeuw",
+      "latin": "Larus argentatus argentatus",
+      "sortering": "22941"
+    },
+    {
+      "soortid": "737",
+      "soortnaam": "gierzwaluw spec.",
+      "soortkey": "gierzwaluw spec.",
+      "latin": "Apus spec.",
+      "sortering": "7912"
+    },
+    {
+      "soortid": "4614",
+      "soortnaam": "Heidelibel onbekend",
+      "soortkey": "Heidelibel onbekend",
+      "latin": "Sympetrum spec.",
+      "sortering": "90370"
+    },
+    {
+      "soortid": "1111",
+      "soortnaam": "Mediterrane Monniksrob",
+      "soortkey": "Mediterrane Monniksrob",
+      "latin": "Monachus monachus",
+      "sortering": "100710"
+    },
+    {
+      "soortid": "45",
+      "soortnaam": "Grauwe Gans",
+      "soortkey": "GrGans",
+      "latin": "Anser anser",
+      "sortering": "840"
+    },
+    {
+      "soortid": "84",
+      "soortnaam": "Grote Zaagbek",
+      "soortkey": "GrZaag",
+      "latin": "Mergus merganser",
+      "sortering": "2260"
+    },
+    {
+      "soortid": "812",
+      "soortnaam": "Zwartkoprietzanger",
+      "soortkey": "Zwartkoprietzanger",
+      "latin": "Acrocephalus melanopogon",
+      "sortering": "78260"
+    },
+    {
+      "soortid": "28",
+      "soortnaam": "Grote Zilverreiger",
+      "soortkey": "GroZilv",
+      "latin": "Ardea alba",
+      "sortering": "26930"
+    },
+    {
+      "soortid": "1176",
+      "soortnaam": "Gewone Grootoorvleermuis",
+      "soortkey": "Gewone Grootoorvleermuis",
+      "latin": "Plecotus auritus",
+      "sortering": "101190"
+    },
+    {
+      "soortid": "718",
+      "soortnaam": "Oosterse Tortel",
+      "soortkey": "Oosterse Tortel",
+      "latin": "Streptopelia orientalis",
+      "sortering": "14350"
+    },
+    {
+      "soortid": "55",
+      "soortnaam": "Mandarijneend",
+      "soortkey": "Mandarijneend",
+      "latin": "Aix galericulata",
+      "sortering": "1310"
+    },
+    {
+      "soortid": "771",
+      "soortnaam": "Bergheggenmus",
+      "soortkey": "Bergheggenmus",
+      "latin": "Prunella montanella",
+      "sortering": "99960"
+    },
+    {
+      "soortid": "4678",
+      "soortnaam": "Kanarie",
+      "soortkey": "Kanarie",
+      "latin": "Serinus canaria",
+      "sortering": "102540"
+    },
+    {
+      "soortid": "763",
+      "soortnaam": "zwaluw spec.",
+      "soortkey": "zwaluw spec.",
+      "latin": "Hirundine sp.",
+      "sortering": "76332"
+    },
+    {
+      "soortid": "1001",
+      "soortnaam": "Heremietibis",
+      "soortkey": "Heremietibis",
+      "latin": "Geronticus eremita",
+      "sortering": "26050"
+    },
+    {
+      "soortid": "930",
+      "soortnaam": "Zilvermeeuw x Gr. Burgemeester",
+      "soortkey": "Zilvermeeuw x Gr. Burgemeester",
+      "latin": "L. argentatus x L. hyperboreus",
+      "sortering": "22942"
+    },
+    {
+      "soortid": "238",
+      "soortnaam": "Kerkuil",
+      "soortkey": "Kerkuil",
+      "latin": "Tyto alba",
+      "sortering": "29920"
+    },
+    {
+      "soortid": "19",
+      "soortnaam": "Jan-van-gent",
+      "soortkey": "JvGent",
+      "latin": "Morus bassanus",
+      "sortering": "25410"
+    },
+    {
+      "soortid": "241",
+      "soortnaam": "Sneeuwuil",
+      "soortkey": "Sneeuwuil",
+      "latin": "Bubo scandiacus",
+      "sortering": "31610"
+    },
+    {
+      "soortid": "159",
+      "soortnaam": "Krombekstrandloper",
+      "soortkey": "Krombek",
+      "latin": "Calidris ferruginea",
+      "sortering": "21680"
+    },
+    {
+      "soortid": "2292",
+      "soortnaam": "Jakhals",
+      "soortkey": "Jakhals",
+      "latin": "Canis aureus",
+      "sortering": "104600"
+    },
+    {
+      "soortid": "871",
+      "soortnaam": "Zwarte Spreeuw",
+      "soortkey": "Zwarte Spreeuw",
+      "latin": "Sturnus unicolor",
+      "sortering": "88630"
+    },
+    {
+      "soortid": "844",
+      "soortnaam": "Bruinkopmees",
+      "soortkey": "Bruinkopmees",
+      "latin": "Poecile cinctus",
+      "sortering": "72230"
+    },
+    {
+      "soortid": "4624",
+      "soortnaam": "Libel onbekend",
+      "soortkey": "Libel onbekend",
+      "latin": "Anisoptera indet.",
+      "sortering": "90470"
+    },
+    {
+      "soortid": "386",
+      "soortnaam": "Roodkopklauwier",
+      "soortkey": "Roodkopklauwier",
+      "latin": "Lanius senator",
+      "sortering": "69230"
+    },
+    {
+      "soortid": "958",
+      "soortnaam": "Gestreepte Dolfijn",
+      "soortkey": "Gestreepte Dolfijn",
+      "latin": "Stenella coeruleoalba",
+      "sortering": "100080"
+    },
+    {
+      "soortid": "464",
+      "soortnaam": "Franklins Meeuw",
+      "soortkey": "Franklins Meeuw",
+      "latin": "Leucophaeus pipixcan",
+      "sortering": "22740"
+    },
+    {
+      "soortid": "114",
+      "soortnaam": "Giervalk",
+      "soortkey": "Giervalk",
+      "latin": "Falco rusticolus",
+      "sortering": "40640"
+    },
+    {
+      "soortid": "953",
+      "soortnaam": "Gramper/Grijze dolfijn",
+      "soortkey": "Gramper/Grijze dolfijn",
+      "latin": "Grampus griseus",
+      "sortering": "100030"
+    },
+    {
+      "soortid": "258",
+      "soortnaam": "Grijskopspecht",
+      "soortkey": "Grijskopspecht",
+      "latin": "Picus canus",
+      "sortering": "39700"
+    },
+    {
+      "soortid": "99",
+      "soortnaam": "Havik",
+      "soortkey": "Havik",
+      "latin": "Accipiter gentilis",
+      "sortering": "28860"
+    },
+    {
+      "soortid": "97",
+      "soortnaam": "Steppekiekendief",
+      "soortkey": "Steppekiek",
+      "latin": "Circus macrourus",
+      "sortering": "29020"
+    },
+    {
+      "soortid": "1000",
+      "soortnaam": "Sint-Helenafazantje",
+      "soortkey": "Sint-Helenafazantje",
+      "latin": "Estrilda astrild",
+      "sortering": "99280"
+    },
+    {
+      "soortid": "5248",
+      "soortnaam": "Noorse / Baltische Kleine Mantelmeeuw",
+      "soortkey": "Noorse / Baltische Kleine Mantelmeeuw",
+      "latin": "Larus f. intermedius/ Larus f. fuscus",
+      "sortering": "23002"
+    },
+    {
+      "soortid": "831",
+      "soortnaam": "Swinhoes Boszanger",
+      "soortkey": "Swinhoes Boszanger",
+      "latin": "Phylloscopus plumbeitarsus",
+      "sortering": "77530"
+    },
+    {
+      "soortid": "333",
+      "soortnaam": "Waterrietzanger",
+      "soortkey": "Waterrietzanger",
+      "latin": "Acrocephalus paludicola",
+      "sortering": "78270"
+    },
+    {
+      "soortid": "1147",
+      "soortnaam": "Kortteen/Kleine Kortteenleeuwerik",
+      "soortkey": "Kortteen/Kleine Kortteenleeuwerik",
+      "latin": "Calandrella brachydactyla/Alaudala rufescens",
+      "sortering": "73762"
+    },
+    {
+      "soortid": "1146",
+      "soortnaam": "Zwartkopzanger",
+      "soortkey": "Zwartkopzanger",
+      "latin": "Setophaga striata",
+      "sortering": "106780"
+    },
+    {
+      "soortid": "1032",
+      "soortnaam": "Bonte IJsvogel",
+      "soortkey": "Bonte IJsvogel",
+      "latin": "Ceryle rudis",
+      "sortering": "35010"
+    },
+    {
+      "soortid": "4608",
+      "soortnaam": "Steenrode heidelibel",
+      "soortkey": "Steenrode heidelibel",
+      "latin": "Sympetrum vulgatum",
+      "sortering": "90310"
+    },
+    {
+      "soortid": "1086",
+      "soortnaam": "Rouwmantel",
+      "soortkey": "Rouwmantel",
+      "latin": "Nymphalis antiopa",
+      "sortering": "80210"
+    },
+    {
+      "soortid": "339",
+      "soortnaam": "Kleine Spotvogel",
+      "soortkey": "Kleine Spotvogel",
+      "latin": "Iduna caligata",
+      "sortering": "78400"
+    },
+    {
+      "soortid": "74",
+      "soortnaam": "Koningseider",
+      "soortkey": "Koningseider",
+      "latin": "Somateria spectabilis",
+      "sortering": "2090"
+    },
+    {
+      "soortid": "912",
+      "soortnaam": "Grauwe/Steppekiekendief",
+      "soortkey": "Gr/Steppekiek",
+      "latin": "Circus pygargus/macrourus",
+      "sortering": "29042"
+    },
+    {
+      "soortid": "902",
+      "soortnaam": "Grijze Gors",
+      "soortkey": "Grijze Gors",
+      "latin": "Emberiza cia",
+      "sortering": "103260"
+    },
+    {
+      "soortid": "407",
+      "soortnaam": "Sijs",
+      "soortkey": "Sijs",
+      "latin": "Spinus spinus",
+      "sortering": "102630"
+    },
+    {
+      "soortid": "825",
+      "soortnaam": "Siberische Braamsluiper",
+      "soortkey": "Siberische Braamsluiper",
+      "latin": "Curruca curruca blythi",
+      "sortering": "81071"
+    },
+    {
+      "soortid": "59",
+      "soortnaam": "Krakeend",
+      "soortkey": "Krak",
+      "latin": "Mareca strepera",
+      "sortering": "1510"
+    },
+    {
+      "soortid": "1060",
+      "soortnaam": "Langstaartroodmus",
+      "soortkey": "Langstaartroodmus",
+      "latin": "Carpodacus sibiricus",
+      "sortering": "101340"
+    },
+    {
+      "soortid": "584",
+      "soortnaam": "kiekendief spec.",
+      "soortkey": "kiekendief spec.",
+      "latin": "Circus spec.",
+      "sortering": "29042"
+    },
+    {
+      "soortid": "435",
+      "soortnaam": "Dwerggors",
+      "soortkey": "Dwerggors",
+      "latin": "Emberiza pusilla",
+      "sortering": "103450"
+    },
+    {
+      "soortid": "1072",
+      "soortnaam": "Dagpauwoog",
+      "soortkey": "Dagpauw",
+      "latin": "Inachis io",
+      "sortering": "80150"
+    },
+    {
+      "soortid": "259",
+      "soortnaam": "Groene Specht",
+      "soortkey": "GroenSp",
+      "latin": "Picus viridis",
+      "sortering": "39650"
+    },
+    {
+      "soortid": "4604",
+      "soortnaam": "Zuidelijke keizerlibel",
+      "soortkey": "Zuidelijke keizerlibel",
+      "latin": "Anax parthenope",
+      "sortering": "90002"
+    },
+    {
+      "soortid": "736",
+      "soortnaam": "Huisgierzwaluw",
+      "soortkey": "Huisgierzwaluw",
+      "latin": "Apus affinis",
+      "sortering": "7880"
+    },
+    {
+      "soortid": "369",
+      "soortnaam": "Baardman",
+      "soortkey": "Baard",
+      "latin": "Panurus biarmicus",
+      "sortering": "72780"
+    },
+    {
+      "soortid": "719",
+      "soortnaam": "Palmtortel",
+      "soortkey": "Palmtortel",
+      "latin": "Spilopelia senegalensis",
+      "sortering": "14480"
+    },
+    {
+      "soortid": "824",
+      "soortnaam": "Oostelijke Orpheusgrasmus",
+      "soortkey": "Oostelijke Orpheusgrasmus",
+      "latin": "Curruca crassirostris",
+      "sortering": "81120"
+    },
+    {
+      "soortid": "236",
+      "soortnaam": "Kuifkoekoek",
+      "soortkey": "Kuifkoekoek",
+      "latin": "Clamator glandarius",
+      "sortering": "12800"
+    },
+    {
+      "soortid": "61",
+      "soortnaam": "Wintertaling",
+      "soortkey": "WiTa",
+      "latin": "Anas crecca",
+      "sortering": "1760"
+    },
+    {
+      "soortid": "536",
+      "soortnaam": "Chileense Flamingo",
+      "soortkey": "Chileense Flamingo",
+      "latin": "Phoenicopterus chilensis",
+      "sortering": "19430"
+    },
+    {
+      "soortid": "495",
+      "soortnaam": "Yelkouanpijlstormvogel",
+      "soortkey": "Yelkouanpijlstormvogel",
+      "latin": "Puffinus yelkouan",
+      "sortering": "24890"
+    },
+    {
+      "soortid": "384",
+      "soortnaam": "Kleine Klapekster",
+      "soortkey": "Kleine Klapekster",
+      "latin": "Lanius minor",
+      "sortering": "69220"
+    },
+    {
+      "soortid": "273",
+      "soortnaam": "Huiszwaluw",
+      "soortkey": "HuisZw",
+      "latin": "Delichon urbicum",
+      "sortering": "76120"
+    },
+    {
+      "soortid": "923",
+      "soortnaam": "Brandgans x ?",
+      "soortkey": "Brandgans x ?",
+      "latin": "Branta leucopsis x ?",
+      "sortering": "782"
+    },
+    {
+      "soortid": "837",
+      "soortnaam": "loofzanger spec.",
+      "soortkey": "loofzanger spec.",
+      "latin": "Phylloscopus spec.",
+      "sortering": "77762"
+    },
+    {
+      "soortid": "990",
+      "soortnaam": "grote meeuw spec.",
+      "soortkey": "grote meeuw spec.",
+      "latin": "Large gull",
+      "sortering": "23002"
+    },
+    {
+      "soortid": "1510",
+      "soortnaam": "Oosterse Zwarte Roodstaart",
+      "soortkey": "Oosterse Zwarte Roodstaart",
+      "latin": "Phoenicurus ochruros phoenicuroides",
+      "sortering": "93611"
+    },
+    {
+      "soortid": "472",
+      "soortnaam": "Koninginnepage",
+      "soortkey": "Koninginnepage",
+      "latin": "Papilio machaon",
+      "sortering": "80260"
+    },
+    {
+      "soortid": "753",
+      "soortnaam": "Witvleugelleeuwerik",
+      "soortkey": "Witvleugelleeuwerik",
+      "latin": "Alauda leucoptera",
+      "sortering": "73460"
+    },
+    {
+      "soortid": "277",
+      "soortnaam": "Boompieper",
+      "soortkey": "Boomp",
+      "latin": "Anthus trivialis",
+      "sortering": "100420"
+    },
+    {
+      "soortid": "970",
+      "soortnaam": "Noordse Vinvis",
+      "soortkey": "Noordse Vinvis",
+      "latin": "Balaenoptera borealis",
+      "sortering": "100200"
+    },
+    {
+      "soortid": "362",
+      "soortnaam": "Noordse Fitis (spp acredula)",
+      "soortkey": "Noordse Fitis (spp acredula)",
+      "latin": "Phylloscopus trochilus acredula",
+      "sortering": "77291"
+    },
+    {
+      "soortid": "1131",
+      "soortnaam": "Palestijnse Honingzuiger",
+      "soortkey": "Palestijnse Honingzuiger",
+      "latin": "Cinnyris osea",
+      "sortering": "96000"
+    },
+    {
+      "soortid": "1190",
+      "soortnaam": "Amerikaanse Grote Zee-eend",
+      "soortkey": "Amerikaanse Grote Zee-eend",
+      "latin": "Melanitta deglandi",
+      "sortering": "2140"
+    },
+    {
+      "soortid": "376",
+      "soortnaam": "Pimpelmees",
+      "soortkey": "Pimpel",
+      "latin": "Cyanistes caeruleus",
+      "sortering": "72370"
+    },
+    {
+      "soortid": "357",
+      "soortnaam": "Bergfluiter",
+      "soortkey": "Bergfluiter",
+      "latin": "Phylloscopus bonelli",
+      "sortering": "77080"
+    },
+    {
+      "soortid": "27",
+      "soortnaam": "Kleine Zilverreiger",
+      "soortkey": "KlZilver",
+      "latin": "Egretta garzetta",
+      "sortering": "26730"
+    },
+    {
+      "soortid": "1114",
+      "soortnaam": "vliegende vis spec.",
+      "soortkey": "vliegende vis spec.",
+      "latin": "Hirundichthys spec.uliger",
+      "sortering": "110100"
+    },
+    {
+      "soortid": "1069",
+      "soortnaam": "Gehakkelde aurelia",
+      "soortkey": "Gehakkelde aurelia",
+      "latin": "Polygonia c-album",
+      "sortering": "80360"
+    },
+    {
+      "soortid": "969",
+      "soortnaam": "Dwergvinvis",
+      "soortkey": "Dwergvinvis",
+      "latin": "Balaenoptera acutorostrata",
+      "sortering": "100190"
+    },
+    {
+      "soortid": "1104",
+      "soortnaam": "Maanvis",
+      "soortkey": "Maanvis",
+      "latin": "Mola mola",
+      "sortering": "110500"
+    },
+    {
+      "soortid": "438",
+      "soortnaam": "Rietgors",
+      "soortkey": "Rietg",
+      "latin": "Emberiza schoeniclus",
+      "sortering": "103640"
+    },
+    {
+      "soortid": "234",
+      "soortnaam": "Turkse Tortel",
+      "soortkey": "TuTo",
+      "latin": "Streptopelia decaocto",
+      "sortering": "14380"
+    },
+    {
+      "soortid": "4691",
+      "soortnaam": "Grasparkiet",
+      "soortkey": "Grasparkiet",
+      "latin": "Melopsittacus undulatus",
+      "sortering": "44410"
+    },
+    {
+      "soortid": "498",
+      "soortnaam": "Madeirastormvogeltje",
+      "soortkey": "Madeirastormvogeltje",
+      "latin": "Hydrobates castro",
+      "sortering": "24060"
+    },
+    {
+      "soortid": "1117",
+      "soortnaam": "Amerikaanse Zwarte Stern",
+      "soortkey": "Amerikaanse Zwarte Stern",
+      "latin": "Chlidonias niger surinamensis",
+      "sortering": "22301"
+    },
+    {
+      "soortid": "690",
+      "soortnaam": "meeuw spec.",
+      "soortkey": "meeuw spec.",
+      "latin": "Laridae",
+      "sortering": "23002"
+    },
+    {
+      "soortid": "874",
+      "soortnaam": "mus spec.",
+      "soortkey": "mus spec.",
+      "latin": "Passer spec.",
+      "sortering": "96942"
+    },
+    {
+      "soortid": "182",
+      "soortnaam": "Witgat",
+      "soortkey": "Witgat",
+      "latin": "Tringa ochropus",
+      "sortering": "21420"
+    },
+    {
+      "soortid": "688",
+      "soortnaam": "Thayers Meeuw",
+      "soortkey": "Thayers Meeuw",
+      "latin": "Larus thayeri",
+      "sortering": "23051"
+    },
+    {
+      "soortid": "644",
+      "soortnaam": "Sporenkievit",
+      "soortkey": "Sporenkievit",
+      "latin": "Vanellus spinosus",
+      "sortering": "20240"
+    },
+    {
+      "soortid": "907",
+      "soortnaam": "gors spec.",
+      "soortkey": "gors spec.",
+      "latin": "Emberiza spec.",
+      "sortering": "103642"
+    },
+    {
+      "soortid": "634",
+      "soortnaam": "vorkstaartplevier spec.",
+      "soortkey": "vorkstaartplevier spec.",
+      "latin": "Glareola spec.",
+      "sortering": "22002"
+    },
+    {
+      "soortid": "787",
+      "soortnaam": "Bonte Tapuit",
+      "soortkey": "Bonte Tapuit",
+      "latin": "Oenanthe pleschanka",
+      "sortering": "94210"
+    },
+    {
+      "soortid": "856",
+      "soortnaam": "Iberische Klapekster",
+      "soortkey": "Iberische Klapekster",
+      "latin": "Lanius meridionalis",
+      "sortering": "69130"
+    },
+    {
+      "soortid": "4617",
+      "soortnaam": "Blauwe Glazenmaker",
+      "soortkey": "Blauwe Glazenmaker",
+      "latin": "Aeshna cyanea",
+      "sortering": "90400"
+    },
+    {
+      "soortid": "851",
+      "soortnaam": "Bruine Klauwier",
+      "soortkey": "Bruine Klauwier",
+      "latin": "Lanius cristatus",
+      "sortering": "69310"
+    },
+    {
+      "soortid": "951",
+      "soortnaam": "Gewone Dolfijn",
+      "soortkey": "Gewone Dolfijn",
+      "latin": "Delphinus delphis",
+      "sortering": "100010"
+    },
+    {
+      "soortid": "194",
+      "soortnaam": "Grote Jager",
+      "soortkey": "GroJag",
+      "latin": "Stercorarius skua",
+      "sortering": "23090"
+    },
+    {
+      "soortid": "1122",
+      "soortnaam": "Anthus petrosus littoralis",
+      "soortkey": "Anthus petrosus littoralis",
+      "latin": "Anthus petrosus littoralis",
+      "sortering": "100491"
+    },
+    {
+      "soortid": "1164",
+      "soortnaam": "Meervleermuis",
+      "soortkey": "Meervleermuis",
+      "latin": "Myotis dasycneme",
+      "sortering": "101070"
+    },
+    {
+      "soortid": "308",
+      "soortnaam": "Groenlandse Tapuit",
+      "soortkey": "Groenlandse Tapuit",
+      "latin": "Oenanthe oenanthe leucorhoa",
+      "sortering": "94111"
+    },
+    {
+      "soortid": "7",
+      "soortnaam": "Roodhalsfuut",
+      "soortkey": "Rhfuut",
+      "latin": "Podiceps grisegena",
+      "sortering": "19310"
+    },
+    {
+      "soortid": "1064",
+      "soortnaam": "Distelvlinder",
+      "soortkey": "Distelvlinder",
+      "latin": "Vanessa cardui",
+      "sortering": "80420"
+    },
+    {
+      "soortid": "1189",
+      "soortnaam": "Roodkopklauwier sp senator",
+      "soortkey": "Roodkopklauwier sp senator",
+      "latin": "Lanius senator senator",
+      "sortering": "69231"
+    },
+    {
+      "soortid": "744",
+      "soortnaam": "specht spec.",
+      "soortkey": "specht spec.",
+      "latin": "Dendrocopos spec.",
+      "sortering": "40002"
+    },
+    {
+      "soortid": "5210",
+      "soortnaam": "Kolgans / Groendlandse Kolgans",
+      "soortkey": "Kolgans / Groendlandse Kolgans",
+      "latin": "Anser albifrons albifrons/flavirostris",
+      "sortering": "892"
+    },
+    {
+      "soortid": "5148",
+      "soortnaam": "Soepeend",
+      "soortkey": "Soepeend",
+      "latin": "Anas platyrhynchos forma domestica",
+      "sortering": "846"
+    },
+    {
+      "soortid": "2313",
+      "soortnaam": "kleine steltloper spec.",
+      "soortkey": "kleine steltloper spec.",
+      "latin": "charadrius/calidris",
+      "sortering": "21652"
+    },
+    {
+      "soortid": "373",
+      "soortnaam": "Matkop",
+      "soortkey": "Matkop",
+      "latin": "Poecile montanus",
+      "sortering": "72350"
+    },
+    {
+      "soortid": "41",
+      "soortnaam": "Toendrarietgans",
+      "soortkey": "Toenriet",
+      "latin": "Anser serrirostris",
+      "sortering": "880"
+    },
+    {
+      "soortid": "2291",
+      "soortnaam": "gier spec.",
+      "soortkey": "gier spec.",
+      "latin": "vulture spec.",
+      "sortering": "27202"
+    },
+    {
+      "soortid": "2306",
+      "soortnaam": "Scopoli's Pijlstormvogel",
+      "soortkey": "Scopoli's Pijlstormvogel",
+      "latin": "Calonectris diomedea",
+      "sortering": "24780"
+    },
+    {
+      "soortid": "70",
+      "soortnaam": "Witoogeend",
+      "soortkey": "Witoogeend",
+      "latin": "Aythya nyroca",
+      "sortering": "2000"
+    },
+    {
+      "soortid": "602",
+      "soortnaam": "valk spec.",
+      "soortkey": "valk spec.",
+      "latin": "Falco spec.",
+      "sortering": "40423"
+    },
+    {
+      "soortid": "399",
+      "soortnaam": "Huismus",
+      "soortkey": "Huismus",
+      "latin": "Passer domesticus",
+      "sortering": "97010"
+    },
+    {
+      "soortid": "444",
+      "soortnaam": "Pontische Meeuw",
+      "soortkey": "PontMeeu",
+      "latin": "Larus cachinnans",
+      "sortering": "22920"
+    },
+    {
+      "soortid": "696",
+      "soortnaam": "Sierlijke Stern",
+      "soortkey": "Sierlijke Stern",
+      "latin": "Thalasseus elegans",
+      "sortering": "22470"
+    },
+    {
+      "soortid": "271",
+      "soortnaam": "Boerenzwaluw",
+      "soortkey": "Boer",
+      "latin": "Hirundo rustica",
+      "sortering": "76040"
+    },
+    {
+      "soortid": "4615",
+      "soortnaam": "Viervlek",
+      "soortkey": "Viervlek",
+      "latin": "Libellula quadrimaculata",
+      "sortering": "90380"
+    },
+    {
+      "soortid": "23",
+      "soortnaam": "Woudaap",
+      "soortkey": "Woudaap",
+      "latin": "Ixobrychus minutus",
+      "sortering": "26490"
+    },
+    {
+      "soortid": "568",
+      "soortnaam": "zaagbek spec.",
+      "soortkey": "zaagbek spec.",
+      "latin": "Mergus spec.",
+      "sortering": "2282"
+    },
+    {
+      "soortid": "152",
+      "soortnaam": "Drieteenstrandloper",
+      "soortkey": "Drietstra",
+      "latin": "Calidris alba",
+      "sortering": "21740"
+    },
+    {
+      "soortid": "255",
+      "soortnaam": "Scharrelaar",
+      "soortkey": "Scharrelaar",
+      "latin": "Coracias garrulus",
+      "sortering": "33730"
+    },
+    {
+      "soortid": "922",
+      "soortnaam": "Westelijke Canadese Gans",
+      "soortkey": "Westelijke Canadese Gans",
+      "latin": "Branta minima",
+      "sortering": "771"
+    },
+    {
+      "soortid": "1085",
+      "soortnaam": "Reuzenhaai",
+      "soortkey": "Reuzenhaai",
+      "latin": "Cetorhinus maximus",
+      "sortering": "110000"
+    },
+    {
+      "soortid": "107",
+      "soortnaam": "Steenarend",
+      "soortkey": "Steenarend",
+      "latin": "Aquila chrysaetos",
+      "sortering": "28190"
+    },
+    {
+      "soortid": "789",
+      "soortnaam": "Oostelijke Blonde Tapuit",
+      "soortkey": "Oostelijke Blonde Tapuit",
+      "latin": "Oenanthe melanoleuca",
+      "sortering": "94220"
+    },
+    {
+      "soortid": "341",
+      "soortnaam": "Orpheusspotvogel",
+      "soortkey": "Orpheusspotvogel",
+      "latin": "Hippolais polyglotta",
+      "sortering": "78470"
+    },
+    {
+      "soortid": "726",
+      "soortnaam": "uil spec.",
+      "soortkey": "uil spec.",
+      "latin": "Owl spec.",
+      "sortering": "31582"
+    },
+    {
+      "soortid": "1128",
+      "soortnaam": "Schreeuw/Bastaardarend",
+      "soortkey": "Schreeuw/Bastaardarend",
+      "latin": "Aquila pomarina/clanga",
+      "sortering": "28092"
+    },
+    {
+      "soortid": "439",
+      "soortnaam": "Zwartkopgors",
+      "soortkey": "Zwartkopgors",
+      "latin": "Emberiza melanocephala",
+      "sortering": "103560"
+    },
+    {
+      "soortid": "358",
+      "soortnaam": "Fluiter",
+      "soortkey": "Fluiter",
+      "latin": "Phylloscopus sibilatrix",
+      "sortering": "77070"
+    },
+    {
+      "soortid": "1301",
+      "soortnaam": "Westelijke Rifreiger",
+      "soortkey": "Westelijke Rifreiger",
+      "latin": "Egretta gularis",
+      "sortering": "26750"
+    },
+    {
+      "soortid": "1151",
+      "soortnaam": "Lanner/Saker/Slechtvalk",
+      "soortkey": "groteValk",
+      "latin": "Falco biarmicus/cherrug/peregrinus",
+      "sortering": "40662"
+    },
+    {
+      "soortid": "15",
+      "soortnaam": "Bont Stormvogeltje",
+      "soortkey": "Bont Stormvogeltje",
+      "latin": "Pelagodroma marina",
+      "sortering": "23700"
+    },
+    {
+      "soortid": "201",
+      "soortnaam": "Ringsnavelmeeuw",
+      "soortkey": "Ringsnavelmeeuw",
+      "latin": "Larus delawarensis",
+      "sortering": "22890"
+    },
+    {
+      "soortid": "274",
+      "soortnaam": "Grote Pieper",
+      "soortkey": "GroPiep",
+      "latin": "Anthus richardi",
+      "sortering": "100270"
+    },
+    {
+      "soortid": "954",
+      "soortnaam": "Witflankdolfijn",
+      "soortkey": "Witflankdolfijn",
+      "latin": "Lagenorhynchus acutus",
+      "sortering": "100040"
+    },
+    {
+      "soortid": "533",
+      "soortnaam": "Heilige Ibis",
+      "soortkey": "Heilige Ibis",
+      "latin": "Threskiornis aethiopicus",
+      "sortering": "25960"
+    },
+    {
+      "soortid": "263",
+      "soortnaam": "Kleine Bonte Specht",
+      "soortkey": "KlBonte",
+      "latin": "Dryobates minor",
+      "sortering": "38710"
+    },
+    {
+      "soortid": "547",
+      "soortnaam": "Branta-gans spec.",
+      "soortkey": "Branta-gans spec.",
+      "latin": "Branta spec.",
+      "sortering": "792"
+    },
+    {
+      "soortid": "601",
+      "soortnaam": "Barbarijse Valk",
+      "soortkey": "Barbarijse Valk",
+      "latin": "Falco pelegrinoides",
+      "sortering": "40661"
+    },
+    {
+      "soortid": "480",
+      "soortnaam": "Soort onbekend",
+      "soortkey": "Soort onbekend",
+      "latin": "avis spec.",
+      "sortering": "108062"
+    },
+    {
+      "soortid": "121",
+      "soortnaam": "Fazant",
+      "soortkey": "Fazant",
+      "latin": "Phasianus colchicus",
+      "sortering": "4280"
+    },
+    {
+      "soortid": "974",
+      "soortnaam": "Walrus",
+      "soortkey": "Walrus",
+      "latin": "Odobenus rosmarus",
+      "sortering": "100640"
+    },
+    {
+      "soortid": "232",
+      "soortnaam": "Holenduif",
+      "soortkey": "Holend",
+      "latin": "Columba oenas",
+      "sortering": "13820"
+    },
+    {
+      "soortid": "1018",
+      "soortnaam": "Shikra",
+      "soortkey": "Shikra",
+      "latin": "Accipiter badius",
+      "sortering": "28450"
+    },
+    {
+      "soortid": "445",
+      "soortnaam": "Geelpootmeeuw",
+      "soortkey": "Geelpmeeu",
+      "latin": "Larus michahellis",
+      "sortering": "22960"
+    },
+    {
+      "soortid": "103",
+      "soortnaam": "Arendbuizerd",
+      "soortkey": "Arendbuizerd",
+      "latin": "Buteo rufinus",
+      "sortering": "29720"
+    },
+    {
+      "soortid": "526",
+      "soortnaam": "reiger (Ardea) spec.",
+      "soortkey": "reiger (Ardea) spec.",
+      "latin": "Ardea spec.",
+      "sortering": "26952"
+    },
+    {
+      "soortid": "618",
+      "soortnaam": "Purperkoet",
+      "soortkey": "Purperkoet",
+      "latin": "Porphyrio porphyrio",
+      "sortering": "18350"
+    },
+    {
+      "soortid": "841",
+      "soortnaam": "vliegenvanger spec",
+      "soortkey": "vliegenvanger spec",
+      "latin": "Muscicapa / Ficedula spec.",
+      "sortering": "91612"
+    },
+    {
+      "soortid": "178",
+      "soortnaam": "IJslandse Tureluur",
+      "soortkey": "IJslandse Tureluur",
+      "latin": "Tringa totanus robusta",
+      "sortering": "21481"
+    },
+    {
+      "soortid": "964",
+      "soortnaam": "Noordelijke Butskop",
+      "soortkey": "Noordelijke Butskop",
+      "latin": "Hyperoodon ampullatus",
+      "sortering": "100140"
+    },
+    {
+      "soortid": "4616",
+      "soortnaam": "Paardenbijter",
+      "soortkey": "Paardenbijter",
+      "latin": "Aeshna mixta",
+      "sortering": "90390"
+    },
+    {
+      "soortid": "649",
+      "soortnaam": "Grijze Strandloper",
+      "soortkey": "Grijze Strandloper",
+      "latin": "Calidris pusilla",
+      "sortering": "21840"
+    },
+    {
+      "soortid": "1081",
+      "soortnaam": "Boompieper/Sib. Boompieper",
+      "soortkey": "Boompieper/Sib. Boompieper",
+      "latin": "Anthus trivialis/hodgsoni",
+      "sortering": "100432"
+    },
+    {
+      "soortid": "1127",
+      "soortnaam": "Vink/Keep",
+      "soortkey": "Vink/Keep",
+      "latin": "Fringilla coelebs/montifringilla",
+      "sortering": "100812"
+    },
+    {
+      "soortid": "208",
+      "soortnaam": "Grote Burgemeester",
+      "soortkey": "GrBurg",
+      "latin": "Larus hyperboreus",
+      "sortering": "22990"
+    },
+    {
+      "soortid": "777",
+      "soortnaam": "Witgesterde Blauwborst",
+      "soortkey": "Witgesterde Blauwborst",
+      "latin": "Luscinia svecica cyanecula",
+      "sortering": "92591"
+    },
+    {
+      "soortid": "290",
+      "soortnaam": "Rouwkwikstaart",
+      "soortkey": "Rouwkw",
+      "latin": "Motacilla alba yarrellii",
+      "sortering": "100140"
+    },
+    {
+      "soortid": "997",
+      "soortnaam": "roofvogel spec.",
+      "soortkey": "roofvogel spec.",
+      "latin": "Raptor",
+      "sortering": "29752"
+    },
+    {
+      "soortid": "49",
+      "soortnaam": "Brandgans",
+      "soortkey": "Brand",
+      "latin": "Branta leucopsis",
+      "sortering": "780"
+    },
+    {
+      "soortid": "758",
+      "soortnaam": "leeuwerik spec.",
+      "soortkey": "leeuwerik spec.",
+      "latin": "Alaudidae spec.",
+      "sortering": "73762"
+    },
+    {
+      "soortid": "67",
+      "soortnaam": "Krooneend",
+      "soortkey": "Krooneend",
+      "latin": "Netta rufina",
+      "sortering": "1910"
+    },
+    {
+      "soortid": "53",
+      "soortnaam": "Casarca",
+      "soortkey": "Casarca",
+      "latin": "Tadorna ferruginea",
+      "sortering": "1200"
+    },
+    {
+      "soortid": "340",
+      "soortnaam": "Spotvogel",
+      "soortkey": "Spotvogel",
+      "latin": "Hippolais icterina",
+      "sortering": "78480"
+    },
+    {
+      "soortid": "950",
+      "soortnaam": "Boerenzwaluw x Huiszwaluw",
+      "soortkey": "Boerenzwaluw x Huiszwaluw",
+      "latin": "Hirundo rustica x Delichon urbicum  (hybrid)",
+      "sortering": "13562"
+    },
+    {
+      "soortid": "126",
+      "soortnaam": "Kwartelkoning",
+      "soortkey": "Kwartelkoning",
+      "latin": "Crex crex",
+      "sortering": "17820"
+    },
+    {
+      "soortid": "88",
+      "soortnaam": "Zwarte Wouw",
+      "soortkey": "ZwWouw",
+      "latin": "Milvus migrans",
+      "sortering": "29060"
+    },
+    {
+      "soortid": "963",
+      "soortnaam": "Potvis",
+      "soortkey": "Potvis",
+      "latin": "Physeter macrocephalus",
+      "sortering": "100130"
+    },
+    {
+      "soortid": "366",
+      "soortnaam": "Kleine Vliegenvanger",
+      "soortkey": "Kleine Vliegenvanger",
+      "latin": "Ficedula parva",
+      "sortering": "93260"
+    },
+    {
+      "soortid": "996",
+      "soortnaam": "Continentale Aalscholver",
+      "soortkey": "Continentale Aalscholver",
+      "latin": "Phalacrocorax carbo sinensis",
+      "sortering": "25751"
+    },
+    {
+      "soortid": "1506",
+      "soortnaam": "Bateleur",
+      "soortkey": "Bateleur",
+      "latin": "Terathopius ecaudatus",
+      "sortering": "27830"
+    },
+    {
+      "soortid": "1",
+      "soortnaam": "Roodkeelduiker",
+      "soortkey": "Roodkeel",
+      "latin": "Gavia stellata",
+      "sortering": "23430"
+    },
+    {
+      "soortid": "1076",
+      "soortnaam": "Westelijke Orpheusgrasmus",
+      "soortkey": "Westelijke Orpheusgrasmus",
+      "latin": "Curruca hortensis",
+      "sortering": "81110"
+    },
+    {
+      "soortid": "51",
+      "soortnaam": "Witbuikrotgans",
+      "soortkey": "Witbuikr",
+      "latin": "Branta hrota",
+      "sortering": "741"
+    },
+    {
+      "soortid": "309",
+      "soortnaam": "blonde tapuit spec.",
+      "soortkey": "blonde tapuit spec.",
+      "latin": "Oenanthe hispanica / melanoleuca",
+      "sortering": "94202"
+    },
+    {
+      "soortid": "334",
+      "soortnaam": "Rietzanger",
+      "soortkey": "Rietz",
+      "latin": "Acrocephalus schoenobaenus",
+      "sortering": "78280"
+    },
+    {
+      "soortid": "245",
+      "soortnaam": "Ransuil",
+      "soortkey": "Ransuil",
+      "latin": "Asio otus",
+      "sortering": "31530"
+    },
+    {
+      "soortid": "77",
+      "soortnaam": "IJseend",
+      "soortkey": "IJseend",
+      "latin": "Clangula hyemalis",
+      "sortering": "2180"
+    },
+    {
+      "soortid": "228",
+      "soortnaam": "Kleine Alk",
+      "soortkey": "KleAlk",
+      "latin": "Alle alle",
+      "sortering": "23300"
+    },
+    {
+      "soortid": "640",
+      "soortnaam": "Kaspische Plevier",
+      "soortkey": "Kaspische Plevier",
+      "latin": "Anarhynchus asiaticus",
+      "sortering": "20460"
+    },
+    {
+      "soortid": "1070",
+      "soortnaam": "Oranje luzernevlinder",
+      "soortkey": "OrLuzerne",
+      "latin": "Colias croceus",
+      "sortering": "80040"
+    },
+    {
+      "soortid": "420",
+      "soortnaam": "Noordse Goudvink",
+      "soortkey": "Noordse Goudvink",
+      "latin": "P. p. pyrrhula",
+      "sortering": "100981"
+    },
+    {
+      "soortid": "1068",
+      "soortnaam": "Kleine vos",
+      "soortkey": "KlVos",
+      "latin": "Aglais urticae",
+      "sortering": "80000"
+    },
+    {
+      "soortid": "944",
+      "soortnaam": "Noordse (trompet) Goudvink",
+      "soortkey": "Noordse (trompet) Goudvink",
+      "latin": "P. p. pyrrhula",
+      "sortering": "100981"
+    },
+    {
+      "soortid": "117",
+      "soortnaam": "Korhoen",
+      "soortkey": "Korhoen",
+      "latin": "Lyrurus tetrix",
+      "sortering": "4140"
+    },
+    {
+      "soortid": "389",
+      "soortnaam": "Notenkraker",
+      "soortkey": "Notenkraker",
+      "latin": "Nucifraga caryocatactes",
+      "sortering": "70160"
+    },
+    {
+      "soortid": "897",
+      "soortnaam": "Noordse Waterlijster",
+      "soortkey": "Noordse Waterlijster",
+      "latin": "Parkesia noveboracensis",
+      "sortering": "106290"
+    },
+    {
+      "soortid": "1459",
+      "soortnaam": "Accipiter sp.",
+      "soortkey": "Accipiter sp.",
+      "latin": "Accipiter sp.",
+      "sortering": "28862"
+    },
+    {
+      "soortid": "949",
+      "soortnaam": "albatros spec.",
+      "soortkey": "albatros spec.",
+      "latin": "Thalassarche spec.",
+      "sortering": "23912"
+    },
+    {
+      "soortid": "1137",
+      "soortnaam": "Zwarte Waaierstaart",
+      "soortkey": "Zwarte Waaierstaart",
+      "latin": "Cercotrichas podobe",
+      "sortering": "91010"
+    },
+    {
+      "soortid": "89",
+      "soortnaam": "Rode Wouw",
+      "soortkey": "RoWouw",
+      "latin": "Milvus milvus",
+      "sortering": "29050"
+    },
+    {
+      "soortid": "735",
+      "soortnaam": "Pijlstaartgierzwaluw",
+      "soortkey": "Pijlstaartgierzwaluw",
+      "latin": "Apus caffer",
+      "sortering": "7910"
+    },
+    {
+      "soortid": "1139",
+      "soortnaam": "Ménétriés' Zwartkop",
+      "soortkey": "Ménétriés' Zwartkop",
+      "latin": "Curruca mystacea",
+      "sortering": "81160"
+    },
+    {
+      "soortid": "179",
+      "soortnaam": "Poelruiter",
+      "soortkey": "Poelruiter",
+      "latin": "Tringa stagnatilis",
+      "sortering": "21460"
+    },
+    {
+      "soortid": "806",
+      "soortnaam": "lijster spec.",
+      "soortkey": "lijsterSpec",
+      "latin": "Turdus spec.",
+      "sortering": "90542"
+    },
+    {
+      "soortid": "936",
+      "soortnaam": "Humes Bladkoning",
+      "soortkey": "Humes Bladkoning",
+      "latin": "Phylloscopus humei",
+      "sortering": "77120"
+    },
+    {
+      "soortid": "431",
+      "soortnaam": "Ortolaan",
+      "soortkey": "Ortolaan",
+      "latin": "Emberiza hortulana",
+      "sortering": "103330"
+    },
+    {
+      "soortid": "804",
+      "soortnaam": "IJslandse Koperwiek",
+      "soortkey": "IJslandse Koperwiek",
+      "latin": "Turdus iliacus coburni",
+      "sortering": "90231"
+    },
+    {
+      "soortid": "50",
+      "soortnaam": "Rotgans",
+      "soortkey": "Rot",
+      "latin": "Branta bernicla",
+      "sortering": "740"
+    },
+    {
+      "soortid": "880",
+      "soortnaam": "Roodvoorhoofdkanarie",
+      "soortkey": "Roodvoorhoofdkanarie",
+      "latin": "Serinus pusillus",
+      "sortering": "102510"
+    },
+    {
+      "soortid": "679",
+      "soortnaam": "Noorse Kleine Mantelmeeuw",
+      "soortkey": "Noorse Kleine Mantelmeeuw",
+      "latin": "Larus fuscus intermedius",
+      "sortering": "23001"
+    },
+    {
+      "soortid": "220",
+      "soortnaam": "Dwergstern",
+      "soortkey": "Dwergst",
+      "latin": "Sternula albifrons",
+      "sortering": "22160"
+    },
+    {
+      "soortid": "2304",
+      "soortnaam": "Gele Kwikstaart (leucocephala)",
+      "soortkey": "Gele Kwikstaart (leucocephala)",
+      "latin": "Motacilla flava leucocephala",
+      "sortering": "100051"
+    },
+    {
+      "soortid": "727",
+      "soortnaam": "Moorse Nachtzwaluw",
+      "soortkey": "Moorse Nachtzwaluw",
+      "latin": "Caprimulgus ruficollis",
+      "sortering": "6050"
+    },
+    {
+      "soortid": "591",
+      "soortnaam": "arend spec.",
+      "soortkey": "arend spec.",
+      "latin": "Aquila spec.",
+      "sortering": "28242"
+    },
+    {
+      "soortid": "1101",
+      "soortnaam": "Sperwer/Balkansperwer",
+      "soortkey": "Sperwer/Balkansperwer",
+      "latin": "Accipiter nisus/brevipes",
+      "sortering": "28742"
+    },
+    {
+      "soortid": "475",
+      "soortnaam": "Huiskraai",
+      "soortkey": "Huiskraai",
+      "latin": "Corvus splendens",
+      "sortering": "70230"
+    },
+    {
+      "soortid": "2293",
+      "soortnaam": "Siberische Waterpieper",
+      "soortkey": "Siberische Waterpieper",
+      "latin": "Anthus japonicus",
+      "sortering": "100471"
+    },
+    {
+      "soortid": "643",
+      "soortnaam": "Amerikaanse/Aziatische Goudplevier",
+      "soortkey": "Amerikaanse/Aziatische Goudplevier",
+      "latin": "Pluvialis dominica/fulva",
+      "sortering": "20042"
+    },
+    {
+      "soortid": "592",
+      "soortnaam": "Dwergarend",
+      "soortkey": "Dwergar",
+      "latin": "Hieraaetus pennatus",
+      "sortering": "28120"
+    },
+    {
+      "soortid": "190",
+      "soortnaam": "Rosse Franjepoot",
+      "soortkey": "RosseFra",
+      "latin": "Phalaropus fulicarius",
+      "sortering": "21370"
+    },
+    {
+      "soortid": "5",
+      "soortnaam": "Dodaars",
+      "soortkey": "Dodaars",
+      "latin": "Tachybaptus ruficollis",
+      "sortering": "19190"
+    },
+    {
+      "soortid": "1011",
+      "soortnaam": "Dwergaalscholver",
+      "soortkey": "Dwergaalscholver",
+      "latin": "Microcarbo pygmaeus",
+      "sortering": "25540"
+    },
+    {
+      "soortid": "975",
+      "soortnaam": "Klapmuts",
+      "soortkey": "Klapmuts",
+      "latin": "Cystophora cristata",
+      "sortering": "100650"
+    },
+    {
+      "soortid": "145",
+      "soortnaam": "Goudplevier",
+      "soortkey": "Goudpl",
+      "latin": "Pluvialis apricaria",
+      "sortering": "20020"
+    },
+    {
+      "soortid": "161",
+      "soortnaam": "Bonte Strandloper",
+      "soortkey": "BonteStra",
+      "latin": "Calidris alpina",
+      "sortering": "21750"
+    },
+    {
+      "soortid": "424",
+      "soortnaam": "Grijze Junco",
+      "soortkey": "Grijze Junco",
+      "latin": "Junco hyemalis",
+      "sortering": "104290"
+    },
+    {
+      "soortid": "165",
+      "soortnaam": "Kemphaan",
+      "soortkey": "Kemph",
+      "latin": "Calidris pugnax",
+      "sortering": "21640"
+    },
+    {
+      "soortid": "280",
+      "soortnaam": "Waterpieper",
+      "soortkey": "Waterp",
+      "latin": "Anthus spinoletta",
+      "sortering": "100480"
+    },
+    {
+      "soortid": "296",
+      "soortnaam": "Roodborst",
+      "soortkey": "Roodborst",
+      "latin": "Erithacus rubecula",
+      "sortering": "92190"
+    },
+    {
+      "soortid": "1026",
+      "soortnaam": "Maskerduif",
+      "soortkey": "Maskerduif",
+      "latin": "Oena capensis",
+      "sortering": "14750"
+    },
+    {
+      "soortid": "977",
+      "soortnaam": "Zadelrob",
+      "soortkey": "Zadelrob",
+      "latin": "Phoca groenlandica",
+      "sortering": "100670"
+    },
+    {
+      "soortid": "981",
+      "soortnaam": "duif (Columba) spec.",
+      "soortkey": "duif (Columba) spec.",
+      "latin": "Columba spec.",
+      "sortering": "13992"
+    },
+    {
+      "soortid": "588",
+      "soortnaam": "Steppearend",
+      "soortkey": "Steppearend",
+      "latin": "Aquila nipalensis",
+      "sortering": "28150"
+    },
+    {
+      "soortid": "1095",
+      "soortnaam": "walvis spec.",
+      "soortkey": "walvis spec.",
+      "latin": "Cetacea spec.",
+      "sortering": "100235"
+    },
+    {
+      "soortid": "827",
+      "soortnaam": "Kroonboszanger",
+      "soortkey": "Kroonboszanger",
+      "latin": "Phylloscopus coronatus",
+      "sortering": "77340"
+    },
+    {
+      "soortid": "1113",
+      "soortnaam": "haai spec.",
+      "soortkey": "haai spec.",
+      "latin": "shark spec.",
+      "sortering": "110001"
+    },
+    {
+      "soortid": "282",
+      "soortnaam": "Gele Kwikstaart",
+      "soortkey": "GeleKwik",
+      "latin": "Motacilla flava flava",
+      "sortering": "100050"
+    },
+    {
+      "soortid": "1148",
+      "soortnaam": "Otter    ",
+      "soortkey": "Otter    ",
+      "latin": "Lutra lutra",
+      "sortering": "104500"
+    },
+    {
+      "soortid": "766",
+      "soortnaam": "pieper spec.",
+      "soortkey": "pieper spec.",
+      "latin": "Anthus spec.",
+      "sortering": "100722"
+    },
+    {
+      "soortid": "210",
+      "soortnaam": "Ross' Meeuw",
+      "soortkey": "Ross' Meeuw",
+      "latin": "Rhodostethia rosea",
+      "sortering": "22550"
+    },
+    {
+      "soortid": "2",
+      "soortnaam": "Parelduiker",
+      "soortkey": "Pareld",
+      "latin": "Gavia arctica",
+      "sortering": "23440"
+    },
+    {
+      "soortid": "714",
+      "soortnaam": "Zwartbuikzandhoen",
+      "soortkey": "Zwartbuikzandhoen",
+      "latin": "Pterocles orientalis",
+      "sortering": "13670"
+    },
+    {
+      "soortid": "794",
+      "soortnaam": "Monnikstapuit",
+      "soortkey": "Monnikstapuit",
+      "latin": "Oenanthe monacha",
+      "sortering": "94180"
+    },
+    {
+      "soortid": "227",
+      "soortnaam": "Zwarte Zeekoet",
+      "soortkey": "Zwarte Zeekoet",
+      "latin": "Cepphus grylle",
+      "sortering": "23250"
+    },
+    {
+      "soortid": "430",
+      "soortnaam": "Cirlgors",
+      "soortkey": "Cirlgors",
+      "latin": "Emberiza cirlus",
+      "sortering": "103350"
+    },
+    {
+      "soortid": "372",
+      "soortnaam": "Glanskop",
+      "soortkey": "Glanskop",
+      "latin": "Poecile palustris",
+      "sortering": "72320"
+    },
+    {
+      "soortid": "130",
+      "soortnaam": "Kleine Trap",
+      "soortkey": "Kleine Trap",
+      "latin": "Tetrax tetrax",
+      "sortering": "12070"
+    },
+    {
+      "soortid": "1157",
+      "soortnaam": "Mopsvleermuis",
+      "soortkey": "Mopsvleermuis",
+      "latin": "Barbastella barbastellus",
+      "sortering": "101000"
+    },
+    {
+      "soortid": "142",
+      "soortnaam": "Strandplevier",
+      "soortkey": "Strandplevier",
+      "latin": "Anarhynchus alexandrinus",
+      "sortering": "20680"
+    },
+    {
+      "soortid": "1073",
+      "soortnaam": "Klein Geaderd Witje",
+      "soortkey": "Klein Geaderd Witje",
+      "latin": "Pieris napi",
+      "sortering": "80330"
+    },
+    {
+      "soortid": "395",
+      "soortnaam": "Bonte Kraai",
+      "soortkey": "BonteKr",
+      "latin": "Corvus cornix",
+      "sortering": "70510"
+    },
+    {
+      "soortid": "283",
+      "soortnaam": "Engelse Kwikstaart",
+      "soortkey": "EngGele",
+      "latin": "Motacilla flava flavissima",
+      "sortering": "100051"
+    },
+    {
+      "soortid": "203",
+      "soortnaam": "Kleine Mantelmeeuw",
+      "soortkey": "KlMantel",
+      "latin": "Larus fuscus",
+      "sortering": "23000"
+    },
+    {
+      "soortid": "196",
+      "soortnaam": "Zwartkopmeeuw",
+      "soortkey": "Zwartkmee",
+      "latin": "Ichthyaetus melanocephalus",
+      "sortering": "22790"
+    },
+    {
+      "soortid": "1150",
+      "soortnaam": "middelgrote roofvogel",
+      "soortkey": "middelgrote roofvogel",
+      "latin": "Medium sized raptor",
+      "sortering": "29752"
+    },
+    {
+      "soortid": "183",
+      "soortnaam": "Bosruiter",
+      "soortkey": "Bosruit",
+      "latin": "Tringa glareola",
+      "sortering": "21470"
+    },
+    {
+      "soortid": "169",
+      "soortnaam": "Grote Grijze Snip",
+      "soortkey": "Grote Grijze Snip",
+      "latin": "Limnodromus scolopaceus",
+      "sortering": "21020"
+    },
+    {
+      "soortid": "807",
+      "soortnaam": "Westelijke Gestreepte Prinia",
+      "soortkey": "Westelijke Gestreepte Prinia",
+      "latin": "Prinia gracilis",
+      "sortering": "79970"
+    },
+    {
+      "soortid": "237",
+      "soortnaam": "Koekoek",
+      "soortkey": "Koekoek",
+      "latin": "Cuculus canorus",
+      "sortering": "13560"
+    },
+    {
+      "soortid": "889",
+      "soortnaam": "Tennesseezanger",
+      "soortkey": "Tennesseezanger",
+      "latin": "Leiothlypis peregrina",
+      "sortering": "106380"
+    },
+    {
+      "soortid": "219",
+      "soortnaam": "Forsters Stern",
+      "soortkey": "Forsters Stern",
+      "latin": "Sterna forsteri",
+      "sortering": "22330"
+    },
+    {
+      "soortid": "402",
+      "soortnaam": "Vink",
+      "soortkey": "Vink",
+      "latin": "Fringilla coelebs",
+      "sortering": "100740"
+    },
+    {
+      "soortid": "113",
+      "soortnaam": "Boomvalk",
+      "soortkey": "Boomvalk",
+      "latin": "Falco subbuteo",
+      "sortering": "40530"
+    },
+    {
+      "soortid": "846",
+      "soortnaam": "Azuurmees",
+      "soortkey": "Azuurmees",
+      "latin": "Cyanistes cyanus",
+      "sortering": "72380"
+    },
+    {
+      "soortid": "4619",
+      "soortnaam": "Vroege Glazenmaker",
+      "soortkey": "Vroege Glazenmaker",
+      "latin": "Aeshna isoceles",
+      "sortering": "90420"
+    },
+    {
+      "soortid": "215",
+      "soortnaam": "Grote Stern",
+      "soortkey": "GrStern",
+      "latin": "Thalasseus sandvicensis",
+      "sortering": "22450"
+    },
+    {
+      "soortid": "454",
+      "soortnaam": "Vale Pijlstormvogel",
+      "soortkey": "ValePijl",
+      "latin": "Puffinus mauretanicus",
+      "sortering": "24900"
+    },
+    {
+      "soortid": "251",
+      "soortnaam": "IJsvogel",
+      "soortkey": "IJsvogel",
+      "latin": "Alcedo atthis",
+      "sortering": "34670"
+    },
+    {
+      "soortid": "385",
+      "soortnaam": "Klapekster",
+      "soortkey": "Klapeks",
+      "latin": "Lanius excubitor",
+      "sortering": "69080"
+    },
+    {
+      "soortid": "725",
+      "soortnaam": "Dwerguil",
+      "soortkey": "Dwerguil",
+      "latin": "Glaucidium passerinum",
+      "sortering": "30600"
+    },
+    {
+      "soortid": "349",
+      "soortnaam": "Tuinfluiter",
+      "soortkey": "Tuinfl",
+      "latin": "Sylvia borin",
+      "sortering": "80970"
+    },
+    {
+      "soortid": "217",
+      "soortnaam": "Visdief",
+      "soortkey": "Visdief",
+      "latin": "Sterna hirundo",
+      "sortering": "22390"
+    },
+    {
+      "soortid": "209",
+      "soortnaam": "Grote Mantelmeeuw",
+      "soortkey": "GrMant",
+      "latin": "Larus marinus",
+      "sortering": "22980"
+    },
+    {
+      "soortid": "798",
+      "soortnaam": "Blauwe Rotslijster",
+      "soortkey": "Blauwe Rotslijster",
+      "latin": "Monticola solitarius",
+      "sortering": "93770"
+    },
+    {
+      "soortid": "482",
+      "soortnaam": "fuut spec.",
+      "soortkey": "fuut spec.",
+      "latin": "Podiceps spec.",
+      "sortering": "19402"
+    },
+    {
+      "soortid": "1925",
+      "soortnaam": "Rietgors ssp witherbyi",
+      "soortkey": "Rietgors ssp witherbyi",
+      "latin": "Emberiza schoeniclus witherbyi",
+      "sortering": "103641"
+    },
+    {
+      "soortid": "202",
+      "soortnaam": "Stormmeeuw",
+      "soortkey": "Storm",
+      "latin": "Larus canus",
+      "sortering": "22870"
+    },
+    {
+      "soortid": "335",
+      "soortnaam": "Veldrietzanger",
+      "soortkey": "Veldrietzanger",
+      "latin": "Acrocephalus agricola",
+      "sortering": "78330"
+    },
+    {
+      "soortid": "1098",
+      "soortnaam": "Kolibrievlinder",
+      "soortkey": "Kolibrievlinder",
+      "latin": "Macroglossum stellatarum",
+      "sortering": "80200"
+    },
+    {
+      "soortid": "98",
+      "soortnaam": "Grauwe Kiekendief",
+      "soortkey": "GrKiek",
+      "latin": "Circus pygargus",
+      "sortering": "29040"
+    },
+    {
+      "soortid": "14",
+      "soortnaam": "Noordse Pijlstormvogel",
+      "soortkey": "NoordsePijl",
+      "latin": "Puffinus puffinus",
+      "sortering": "24880"
+    },
+    {
+      "soortid": "118",
+      "soortnaam": "Rode Patrijs",
+      "soortkey": "Rode Patrijs",
+      "latin": "Alectoris rufa",
+      "sortering": "5130"
+    },
+    {
+      "soortid": "561",
+      "soortnaam": "Kleine Topper",
+      "soortkey": "Kleine Topper",
+      "latin": "Aythya affinis",
+      "sortering": "2050"
+    },
+    {
+      "soortid": "665",
+      "soortnaam": "wulp spec.",
+      "soortkey": "wulp spec.",
+      "latin": "Numenius spec.",
+      "sortering": "20962"
+    },
+    {
+      "soortid": "205",
+      "soortnaam": "Britse Kleine Mantelmeeuw",
+      "soortkey": "Britse Kleine Mantelmeeuw",
+      "latin": "Larus fuscus graellsii",
+      "sortering": "23001"
+    },
+    {
+      "soortid": "189",
+      "soortnaam": "Grauwe Franjepoot",
+      "soortkey": "Grauwe Franjepoot",
+      "latin": "Phalaropus lobatus",
+      "sortering": "21380"
+    },
+    {
+      "soortid": "111",
+      "soortnaam": "Roodpootvalk",
+      "soortkey": "RopoValk",
+      "latin": "Falco vespertinus",
+      "sortering": "40450"
+    },
+    {
+      "soortid": "206",
+      "soortnaam": "Zilvermeeuw",
+      "soortkey": "Zilverm",
+      "latin": "Larus argentatus",
+      "sortering": "22940"
+    },
+    {
+      "soortid": "304",
+      "soortnaam": "Gekraagde Roodstaart",
+      "soortkey": "GekRoods",
+      "latin": "Phoenicurus phoenicurus",
+      "sortering": "93620"
+    },
+    {
+      "soortid": "449",
+      "soortnaam": "Halsbandparkiet",
+      "soortkey": "Habapa",
+      "latin": "Psittacula krameri",
+      "sortering": "43290"
+    },
+    {
+      "soortid": "677",
+      "soortnaam": "Audouins Meeuw",
+      "soortkey": "Audouins Meeuw",
+      "latin": "Ichthyaetus audouinii",
+      "sortering": "22780"
+    },
+    {
+      "soortid": "171",
+      "soortnaam": "Grutto",
+      "soortkey": "Grutto",
+      "latin": "Limosa limosa",
+      "sortering": "20980"
+    },
+    {
+      "soortid": "967",
+      "soortnaam": "Grays spitssnuitdolfijn",
+      "soortkey": "Grays spitssnuitdolfijn",
+      "latin": "Mesoplodon grayi",
+      "sortering": "100170"
+    },
+    {
+      "soortid": "229",
+      "soortnaam": "Papegaaiduiker",
+      "soortkey": "PapDuiker",
+      "latin": "Fratercula arctica",
+      "sortering": "23150"
+    },
+    {
+      "soortid": "678",
+      "soortnaam": "Russische Stormmeeuw",
+      "soortkey": "Russische Stormmeeuw",
+      "latin": "Larus canus heinei",
+      "sortering": "22871"
+    },
+    {
+      "soortid": "288",
+      "soortnaam": "witte kwikstaart spec.",
+      "soortkey": "witKwikSpec",
+      "latin": "Motacilla alba",
+      "sortering": "100132"
+    },
+    {
+      "soortid": "543",
+      "soortnaam": "Groenlandse Kolgans",
+      "soortkey": "Groenlandse Kolgans",
+      "latin": "Anser albifrons flavirostris",
+      "sortering": "891"
+    },
+    {
+      "soortid": "36",
+      "soortnaam": "Knobbelzwaan",
+      "soortkey": "Knobbel",
+      "latin": "Cygnus olor",
+      "sortering": "940"
+    },
+    {
+      "soortid": "221",
+      "soortnaam": "Witwangstern",
+      "soortkey": "Witwangstern",
+      "latin": "Chlidonias hybrida",
+      "sortering": "22280"
+    },
+    {
+      "soortid": "1110",
+      "soortnaam": "Atlantische Gevlekte Dolfijn",
+      "soortkey": "Atlantische Gevlekte Dolfijn",
+      "latin": "Stenella Frontalis",
+      "sortering": "100099"
+    },
+    {
+      "soortid": "393",
+      "soortnaam": "Roek",
+      "soortkey": "Roek",
+      "latin": "Corvus frugilegus",
+      "sortering": "70390"
+    },
+    {
+      "soortid": "195",
+      "soortnaam": "Reuzenzwartkopmeeuw",
+      "soortkey": "Reuzenzwartkopmeeuw",
+      "latin": "Ichthyaetus ichthyaetus",
+      "sortering": "22760"
+    },
+    {
+      "soortid": "607",
+      "soortnaam": "Aziatische Steenpatrijs",
+      "soortkey": "Aziatische Steenpatrijs",
+      "latin": "Alectoris chukar",
+      "sortering": "5140"
+    },
+    {
+      "soortid": "328",
+      "soortnaam": "Graszanger",
+      "soortkey": "Graszanger",
+      "latin": "Cisticola juncidis",
+      "sortering": "79730"
+    },
+    {
+      "soortid": "363",
+      "soortnaam": "Goudhaan",
+      "soortkey": "Goudh",
+      "latin": "Regulus regulus",
+      "sortering": "85980"
+    },
+    {
+      "soortid": "4868",
+      "soortnaam": "Koereiger/Kleine Zilverreiger",
+      "soortkey": "Koereiger/Kleine Zilverreiger",
+      "latin": "Bubulcus ibis / Egretta garzetta",
+      "sortering": "26732"
+    },
+    {
+      "soortid": "226",
+      "soortnaam": "Alk",
+      "soortkey": "Alk",
+      "latin": "Alca torda",
+      "sortering": "23280"
+    },
+    {
+      "soortid": "785",
+      "soortnaam": "Izabeltapuit",
+      "soortkey": "Izabeltapuit",
+      "latin": "Oenanthe isabellina",
+      "sortering": "94160"
+    },
+    {
+      "soortid": "370",
+      "soortnaam": "Staartmees",
+      "soortkey": "Staartm",
+      "latin": "Aegithalos caudatus",
+      "sortering": "76970"
+    },
+    {
+      "soortid": "676",
+      "soortnaam": "Dunbekmeeuw",
+      "soortkey": "Dunbekmeeuw",
+      "latin": "Chroicocephalus genei",
+      "sortering": "22610"
+    },
+    {
+      "soortid": "350",
+      "soortnaam": "Zwartkop",
+      "soortkey": "Zwartkop",
+      "latin": "Sylvia atricapilla",
+      "sortering": "80960"
+    },
+    {
+      "soortid": "538",
+      "soortnaam": "Rosse Fluiteend",
+      "soortkey": "Rosse Fluiteend",
+      "latin": "Dendrocygna bicolor",
+      "sortering": "680"
+    },
+    {
+      "soortid": "1143",
+      "soortnaam": "Grote Alexanderparkiet",
+      "soortkey": "Grote Alexanderparkiet",
+      "latin": "Psittacula eupatria",
+      "sortering": "43270"
+    },
+    {
+      "soortid": "338",
+      "soortnaam": "Grote Karekiet",
+      "soortkey": "Grote Karekiet",
+      "latin": "Acrocephalus arundinaceus",
+      "sortering": "78020"
+    },
+    {
+      "soortid": "586",
+      "soortnaam": "buizerd spec.",
+      "soortkey": "buizerd spec.",
+      "latin": "Buteo spec.",
+      "sortering": "29752"
+    },
+    {
+      "soortid": "211",
+      "soortnaam": "Drieteenmeeuw",
+      "soortkey": "DrieteenM",
+      "latin": "Rissa tridactyla",
+      "sortering": "22560"
+    },
+    {
+      "soortid": "4859",
+      "soortnaam": "Madeirastormvogeltje (Grant's)",
+      "soortkey": "Madeirastormvogeltje (Grant's)",
+      "latin": "Oceanodroma castro grants",
+      "sortering": "24061"
+    },
+    {
+      "soortid": "1106",
+      "soortnaam": "Gon-gon/Freira",
+      "soortkey": "Gon-gon/Freira",
+      "latin": "Pterodroma feae/madeira",
+      "sortering": "24402"
+    },
+    {
+      "soortid": "879",
+      "soortnaam": "vink spec.",
+      "soortkey": "vinkSpec",
+      "latin": "Fringilla spec.",
+      "sortering": "100812"
+    },
+    {
+      "soortid": "426",
+      "soortnaam": "Sneeuwgors",
+      "soortkey": "SneeuwG",
+      "latin": "Plectrophenax nivalis",
+      "sortering": "103180"
+    },
+    {
+      "soortid": "4621",
+      "soortnaam": "Platbuik",
+      "soortkey": "Platbuik",
+      "latin": "Libellula depressa",
+      "sortering": "90440"
+    },
+    {
+      "soortid": "1118",
+      "soortnaam": "burgemeester spec.",
+      "soortkey": "burgemeester spec.",
+      "latin": "Larus hyperboreus/glaucoides",
+      "sortering": "23052"
+    },
+    {
+      "soortid": "381",
+      "soortnaam": "Buidelmees",
+      "soortkey": "Buidelm",
+      "latin": "Remiz pendulinus",
+      "sortering": "72640"
+    },
+    {
+      "soortid": "160",
+      "soortnaam": "Paarse Strandloper",
+      "soortkey": "PaarseS",
+      "latin": "Calidris maritima",
+      "sortering": "21760"
+    },
+    {
+      "soortid": "76",
+      "soortnaam": "Harlekijneend",
+      "soortkey": "Harlekijneend",
+      "latin": "Histrionicus histrionicus",
+      "sortering": "2110"
+    },
+    {
+      "soortid": "858",
+      "soortnaam": "Balearische Roodkopklauwier",
+      "soortkey": "Balearische Roodkopklauwier",
+      "latin": "Lanius senator badius",
+      "sortering": "69231"
+    },
+    {
+      "soortid": "168",
+      "soortnaam": "Poelsnip",
+      "soortkey": "Poelsnip",
+      "latin": "Gallinago media",
+      "sortering": "21230"
+    },
+    {
+      "soortid": "1132",
+      "soortnaam": "Tristrams Spreeuw",
+      "soortkey": "Tristrams Spreeuw",
+      "latin": "Onychognathus tristramii",
+      "sortering": "88990"
+    },
+    {
+      "soortid": "793",
+      "soortnaam": "Oostelijke Rouwtapuit",
+      "soortkey": "Oostelijke Rouwtapuit",
+      "latin": "Oenanthe lugens",
+      "sortering": "94350"
+    },
+    {
+      "soortid": "573",
+      "soortnaam": "wouw spec.",
+      "soortkey": "wouw spec.",
+      "latin": "Milvus spec.",
+      "sortering": "29092"
+    },
+    {
+      "soortid": "556",
+      "soortnaam": "grondeleend spec.",
+      "soortkey": "grondelSpec",
+      "latin": "Anas spec.",
+      "sortering": "1762"
+    },
+    {
+      "soortid": "204",
+      "soortnaam": "Baltische Mantelmeeuw",
+      "soortkey": "Baltische Mantelmeeuw",
+      "latin": "Larus fuscus fuscus",
+      "sortering": "23001"
+    },
+    {
+      "soortid": "817",
+      "soortnaam": "vale spotvogel spec.",
+      "soortkey": "vale spotvogel spec.",
+      "latin": "Iduna spec.",
+      "sortering": "78432"
+    },
+    {
+      "soortid": "30",
+      "soortnaam": "Purperreiger",
+      "soortkey": "Purperr",
+      "latin": "Ardea purpurea",
+      "sortering": "27000"
+    },
+    {
+      "soortid": "123",
+      "soortnaam": "Porseleinhoen",
+      "soortkey": "Porseleinhoen",
+      "latin": "Porzana porzana",
+      "sortering": "18090"
+    },
+    {
+      "soortid": "1014",
+      "soortnaam": "Aziatische Wespendief",
+      "soortkey": "Aziatische Wespendief",
+      "latin": "Pernis ptilorhynchus",
+      "sortering": "27430"
+    },
+    {
+      "soortid": "391",
+      "soortnaam": "Kauw",
+      "soortkey": "Kauw",
+      "latin": "Coloeus monedula",
+      "sortering": "70210"
+    },
+    {
+      "soortid": "109",
+      "soortnaam": "Visarend",
+      "soortkey": "Visar",
+      "latin": "Pandion haliaetus",
+      "sortering": "27250"
+    },
+    {
+      "soortid": "181",
+      "soortnaam": "Kleine Geelpootruiter",
+      "soortkey": "Kleine Geelpootruiter",
+      "latin": "Tringa flavipes",
+      "sortering": "21490"
+    },
+    {
+      "soortid": "2305",
+      "soortnaam": "Tringa spec.",
+      "soortkey": "Tringa spec.",
+      "latin": "Tringa spec.",
+      "sortering": "21502"
+    },
+    {
+      "soortid": "191",
+      "soortnaam": "Middelste Jager",
+      "soortkey": "MidJag",
+      "latin": "Stercorarius pomarinus",
+      "sortering": "23080"
+    },
+    {
+      "soortid": "2314",
+      "soortnaam": "grote steltloper spec.",
+      "soortkey": "grote steltloper spec.",
+      "latin": "large wader",
+      "sortering": "21652"
+    },
+    {
+      "soortid": "412",
+      "soortnaam": "Kleine Barmsijs",
+      "soortkey": "KlBarm",
+      "latin": "Acanthis cabaret",
+      "sortering": "102380"
+    },
+    {
+      "soortid": "429",
+      "soortnaam": "Geelgors",
+      "soortkey": "Geelgors",
+      "latin": "Emberiza citrinella",
+      "sortering": "103240"
+    },
+    {
+      "soortid": "582",
+      "soortnaam": "Rüppells Gier",
+      "soortkey": "Rüppells Gier",
+      "latin": "Gyps rueppelli",
+      "sortering": "27610"
+    },
+    {
+      "soortid": "52",
+      "soortnaam": "Nijlgans",
+      "soortkey": "Nijlgans",
+      "latin": "Alopochen aegyptiaca",
+      "sortering": "1090"
+    },
+    {
+      "soortid": "1107",
+      "soortnaam": "vinvis spec.",
+      "soortkey": "vinvis spec.",
+      "latin": "Balaenopteridae spec.",
+      "sortering": "100225"
+    },
+    {
+      "soortid": "849",
+      "soortnaam": "Kortsnavelboomkruiper",
+      "soortkey": "Kortsnavelboomkruiper",
+      "latin": "Certhia familiaris macrodactyla",
+      "sortering": "87431"
+    },
+    {
+      "soortid": "337",
+      "soortnaam": "Kleine Karekiet",
+      "soortkey": "KlKar",
+      "latin": "Acrocephalus scirpaceus",
+      "sortering": "78350"
+    },
+    {
+      "soortid": "411",
+      "soortnaam": "Grote Barmsijs",
+      "soortkey": "GrBarm",
+      "latin": "Acanthis flammea",
+      "sortering": "102370"
+    },
+    {
+      "soortid": "477",
+      "soortnaam": "Kleine Pijlstormvogel",
+      "soortkey": "Kleine Pijlstormvogel",
+      "latin": "Puffinus baroli",
+      "sortering": "25060"
+    },
+    {
+      "soortid": "5155",
+      "soortnaam": "grutto spec.",
+      "soortkey": "grutto spec.",
+      "latin": "Limosa sp.",
+      "sortering": "20982"
+    },
+    {
+      "soortid": "185",
+      "soortnaam": "Oeverloper",
+      "soortkey": "Oeverl",
+      "latin": "Actitis hypoleucos",
+      "sortering": "21400"
+    },
+    {
+      "soortid": "244",
+      "soortnaam": "Bosuil",
+      "soortkey": "Bosuil",
+      "latin": "Strix aluco",
+      "sortering": "32170"
+    },
+    {
+      "soortid": "231",
+      "soortnaam": "Rotsduif",
+      "soortkey": "Rotsduif",
+      "latin": "Columba livia",
+      "sortering": "13770"
+    },
+    {
+      "soortid": "78",
+      "soortnaam": "Zwarte Zee-eend",
+      "soortkey": "ZwZee",
+      "latin": "Melanitta nigra",
+      "sortering": "2160"
+    },
+    {
+      "soortid": "100",
+      "soortnaam": "Sperwer",
+      "soortkey": "Sperw",
+      "latin": "Accipiter nisus",
+      "sortering": "28740"
+    },
+    {
+      "soortid": "135",
+      "soortnaam": "Kluut",
+      "soortkey": "Kluut",
+      "latin": "Recurvirostra avosetta",
+      "sortering": "19970"
+    },
+    {
+      "soortid": "17",
+      "soortnaam": "Vaal Stormvogeltje",
+      "soortkey": "Vaaltje",
+      "latin": "Hydrobates leucorhous",
+      "sortering": "24020"
+    },
+    {
+      "soortid": "193",
+      "soortnaam": "Kleinste Jager",
+      "soortkey": "KlstJag",
+      "latin": "Stercorarius longicaudus",
+      "sortering": "23060"
+    },
+    {
+      "soortid": "104",
+      "soortnaam": "Ruigpootbuizerd",
+      "soortkey": "Ruigpb",
+      "latin": "Buteo lagopus",
+      "sortering": "29680"
+    },
+    {
+      "soortid": "947",
+      "soortnaam": "Citroensijs",
+      "soortkey": "Citroensijs",
+      "latin": "Carduelis citrinella",
+      "sortering": "102490"
+    },
+    {
+      "soortid": "401",
+      "soortnaam": "Roodoogvireo",
+      "soortkey": "Roodoogvireo",
+      "latin": "Vireo olivaceus",
+      "sortering": "66280"
+    },
+    {
+      "soortid": "66",
+      "soortnaam": "Slobeend",
+      "soortkey": "Slobeend",
+      "latin": "Spatula clypeata",
+      "sortering": "1500"
+    },
+    {
+      "soortid": "63",
+      "soortnaam": "Pijlstaart",
+      "soortkey": "Pijlst",
+      "latin": "Anas acuta",
+      "sortering": "1750"
+    },
+    {
+      "soortid": "1047",
+      "soortnaam": "Indische Karekiet",
+      "soortkey": "Indische Karekiet",
+      "latin": "Acrocephalus stentoreus",
+      "sortering": "78040"
+    },
+    {
+      "soortid": "694",
+      "soortnaam": "Bengaalse Stern",
+      "soortkey": "Bengaalse Stern",
+      "latin": "Thalasseus bengalensis",
+      "sortering": "22480"
+    },
+    {
+      "soortid": "94",
+      "soortnaam": "Slangenarend",
+      "soortkey": "SlangenA",
+      "latin": "Circaetus gallicus",
+      "sortering": "27760"
+    },
+    {
+      "soortid": "853",
+      "soortnaam": "Turkestaanse Klauwier",
+      "soortkey": "Turkestaanse Klauwier",
+      "latin": "Lanius phoenicuroides",
+      "sortering": "69290"
+    },
+    {
+      "soortid": "706",
+      "soortnaam": "moerasstern spec.",
+      "soortkey": "moerasstern spec.",
+      "latin": "Chlidonias spec.",
+      "sortering": "22302"
+    },
+    {
+      "soortid": "1003",
+      "soortnaam": "Oeraluil",
+      "soortkey": "Oeraluil",
+      "latin": "Strix uralensis",
+      "sortering": "32290"
+    },
+    {
+      "soortid": "1126",
+      "soortnaam": "zweefvlieg spec.",
+      "soortkey": "zweefvlieg spec.",
+      "latin": "Syrphidae spec.",
+      "sortering": "72000"
+    },
+    {
+      "soortid": "1092",
+      "soortnaam": "franjepoot spec.",
+      "soortkey": "franjepoot spec.",
+      "latin": "Phalaropus spec.",
+      "sortering": "21372"
+    },
+    {
+      "soortid": "720",
+      "soortnaam": "tortel spec",
+      "soortkey": "tortel spec",
+      "latin": "Streptopelia spec.",
+      "sortering": "14482"
+    },
+    {
+      "soortid": "436",
+      "soortnaam": "Rosse Gors",
+      "soortkey": "Rosse Gors",
+      "latin": "Emberiza rutila",
+      "sortering": "103540"
+    },
+    {
+      "soortid": "249",
+      "soortnaam": "Gierzwaluw",
+      "soortkey": "Gierzw",
+      "latin": "Apus apus",
+      "sortering": "7740"
+    },
+    {
+      "soortid": "447",
+      "soortnaam": "Noordse Stern/Visdief",
+      "soortkey": "Nrdse/Dief",
+      "latin": "Sterna paradisea/hirundo",
+      "sortering": "22352"
+    },
+    {
+      "soortid": "546",
+      "soortnaam": "anser spec.",
+      "soortkey": "anserSpec",
+      "latin": "Anser spec.",
+      "sortering": "842"
+    },
+    {
+      "soortid": "1140",
+      "soortnaam": "Gestreepte Gors",
+      "soortkey": "Gestreepte Gors",
+      "latin": "Emberiza striolata",
+      "sortering": "103360"
+    },
+    {
+      "soortid": "359",
+      "soortnaam": "Tjiftjaf",
+      "soortkey": "Tjiftjaf",
+      "latin": "Phylloscopus collybita",
+      "sortering": "77320"
+    },
+    {
+      "soortid": "348",
+      "soortnaam": "Grasmus",
+      "soortkey": "Grasmus",
+      "latin": "Curruca communis",
+      "sortering": "81230"
+    },
+    {
+      "soortid": "4610",
+      "soortnaam": "Geelvelkheidelibel",
+      "soortkey": "Geelvelkheidelibel",
+      "latin": "Sympetrum flaveolum",
+      "sortering": "90330"
+    },
+    {
+      "soortid": "13",
+      "soortnaam": "Grauwe Pijlstormvogel",
+      "soortkey": "Grwe Pijl",
+      "latin": "Ardenna grisea",
+      "sortering": "24820"
+    },
+    {
+      "soortid": "1096",
+      "soortnaam": "Loodbekje",
+      "soortkey": "Loodbekje",
+      "latin": "Euodice malabarica",
+      "sortering": "98530"
+    },
+    {
+      "soortid": "1103",
+      "soortnaam": "Schreeuw/Bastaard/Steppearend",
+      "soortkey": "S/B/Steppearend",
+      "latin": "clanga pomarina/clanga/nipalensis",
+      "sortering": "28152"
+    },
+    {
+      "soortid": "200",
+      "soortnaam": "Kokmeeuw",
+      "soortkey": "Kok",
+      "latin": "Chroicocephalus ridibundus",
+      "sortering": "22670"
+    },
+    {
+      "soortid": "842",
+      "soortnaam": "Balkanvliegenvanger",
+      "soortkey": "Balkanvliegenvanger",
+      "latin": "Ficedula semitorquata",
+      "sortering": "93280"
+    },
+    {
+      "soortid": "795",
+      "soortnaam": "Witkruintapuit",
+      "soortkey": "Witkruintapuit",
+      "latin": "Oenanthe leucopyga",
+      "sortering": "94390"
+    },
+    {
+      "soortid": "913",
+      "soortnaam": "grijze snip spec.",
+      "soortkey": "grijze snip spec.",
+      "latin": "Limnodromus spec.",
+      "sortering": "21032"
+    },
+    {
+      "soortid": "292",
+      "soortnaam": "Waterspreeuw",
+      "soortkey": "Waterspreeuw",
+      "latin": "Cinclus cinclus",
+      "sortering": "94440"
+    },
+    {
+      "soortid": "597",
+      "soortnaam": "Eleonora's Valk",
+      "soortkey": "Eleonora's Valk",
+      "latin": "Falco eleonorae",
+      "sortering": "40470"
+    },
+    {
+      "soortid": "269",
+      "soortnaam": "Strandleeuwerik",
+      "soortkey": "Strandlee",
+      "latin": "Eremophila alpestris",
+      "sortering": "73570"
+    },
+    {
+      "soortid": "952",
+      "soortnaam": "Griend",
+      "soortkey": "Griend",
+      "latin": "Globicephala melas",
+      "sortering": "100020"
+    },
+    {
+      "soortid": "110",
+      "soortnaam": "Torenvalk",
+      "soortkey": "TorenV",
+      "latin": "Falco tinnunculus",
+      "sortering": "40300"
+    },
+    {
+      "soortid": "96",
+      "soortnaam": "Blauwe Kiekendief",
+      "soortkey": "BlaKie",
+      "latin": "Circus cyaneus",
+      "sortering": "28990"
+    },
+    {
+      "soortid": "207",
+      "soortnaam": "Kleine Burgemeester",
+      "soortkey": "Kleine Burgemeester",
+      "latin": "Larus glaucoides",
+      "sortering": "23050"
+    },
+    {
+      "soortid": "945",
+      "soortnaam": "gans spec.",
+      "soortkey": "gansSpec",
+      "latin": "Anser/Branta spec.",
+      "sortering": "842"
+    },
+    {
+      "soortid": "415",
+      "soortnaam": "Kruisbek",
+      "soortkey": "Kruisb",
+      "latin": "Loxia curvirostra",
+      "sortering": "102420"
+    },
+    {
+      "soortid": "421",
+      "soortnaam": "Appelvink",
+      "soortkey": "Appelv",
+      "latin": "Coccothraustes coccothraustes",
+      "sortering": "100880"
+    },
+    {
+      "soortid": "875",
+      "soortnaam": "Rotsmus",
+      "soortkey": "Rotsmus",
+      "latin": "Petronia petronia",
+      "sortering": "96680"
+    },
+    {
+      "soortid": "314",
+      "soortnaam": "Beflijster",
+      "soortkey": "Beflijst",
+      "latin": "Turdus torquatus",
+      "sortering": "90420"
+    },
+    {
+      "soortid": "961",
+      "soortnaam": "Beloega",
+      "soortkey": "Beloega",
+      "latin": "Delphinapterus leucas",
+      "sortering": "100110"
+    },
+    {
+      "soortid": "216",
+      "soortnaam": "Dougalls Stern",
+      "soortkey": "Dougalls Stern",
+      "latin": "Sterna dougallii",
+      "sortering": "22420"
+    },
+    {
+      "soortid": "689",
+      "soortnaam": "Kumliens Meeuw",
+      "soortkey": "Kumliens Meeuw",
+      "latin": "Larus glaucoides kumlieni",
+      "sortering": "23051"
+    },
+    {
+      "soortid": "243",
+      "soortnaam": "Steenuil",
+      "soortkey": "Steenuil",
+      "latin": "Athene noctua",
+      "sortering": "30530"
+    },
+    {
+      "soortid": "286",
+      "soortnaam": "Citroenkwikstaart",
+      "soortkey": "Citroenkwikstaart",
+      "latin": "Motacilla citreola",
+      "sortering": "100070"
+    },
+    {
+      "soortid": "136",
+      "soortnaam": "Griel",
+      "soortkey": "Griel",
+      "latin": "Burhinus oedicnemus",
+      "sortering": "19720"
+    },
+    {
+      "soortid": "175",
+      "soortnaam": "Wulp",
+      "soortkey": "Wulp",
+      "latin": "Numenius arquata",
+      "sortering": "20960"
+    },
+    {
+      "soortid": "1180",
+      "soortnaam": "Tweekleurige Vleermuis",
+      "soortkey": "Tweekleurige Vleermuis",
+      "latin": "Vespertilio murinus",
+      "sortering": "101230"
+    },
+    {
+      "soortid": "173",
+      "soortnaam": "Regenwulp",
+      "soortkey": "Regenw",
+      "latin": "Numenius phaeopus",
+      "sortering": "20890"
+    },
+    {
+      "soortid": "518",
+      "soortnaam": "Mangrovereiger",
+      "soortkey": "Mangrovereiger",
+      "latin": "Butorides striata",
+      "sortering": "26800"
+    },
+    {
+      "soortid": "35",
+      "soortnaam": "Europese Flamingo",
+      "soortkey": "Europese Flamingo",
+      "latin": "Phoenicopterus roseus",
+      "sortering": "19410"
+    },
+    {
+      "soortid": "300",
+      "soortnaam": "Roodsterblauwborst",
+      "soortkey": "Roodsterblauwborst",
+      "latin": "Luscinia svecica svecica",
+      "sortering": "92591"
+    },
+    {
+      "soortid": "542",
+      "soortnaam": "Zwaangans",
+      "soortkey": "Zwaangans",
+      "latin": "Anser cygnoides",
+      "sortering": "850"
+    },
+    {
+      "soortid": "150",
+      "soortnaam": "Kievit",
+      "soortkey": "Kievit",
+      "latin": "Vanellus vanellus",
+      "sortering": "20210"
+    },
+    {
+      "soortid": "589",
+      "soortnaam": "Keizerarend",
+      "soortkey": "Keizerarend",
+      "latin": "Aquila heliaca",
+      "sortering": "28180"
+    },
+    {
+      "soortid": "180",
+      "soortnaam": "Groenpootruiter",
+      "soortkey": "Groenp",
+      "latin": "Tringa nebularia",
+      "sortering": "21530"
+    },
+    {
+      "soortid": "1156",
+      "soortnaam": "grote arend",
+      "soortkey": "groteAREND",
+      "latin": "large eagle",
+      "sortering": "28242"
+    },
+    {
+      "soortid": "4613",
+      "soortnaam": "Zuidelijke heidelibel",
+      "soortkey": "Zuidelijke heidelibel",
+      "latin": "Sympetrum meridionale",
+      "sortering": "90360"
+    },
+    {
+      "soortid": "93",
+      "soortnaam": "Monniksgier",
+      "soortkey": "Monniksgier",
+      "latin": "Aegypius monachus",
+      "sortering": "27670"
+    },
+    {
+      "soortid": "48",
+      "soortnaam": "Grote Canadese Gans",
+      "soortkey": "GrCanada",
+      "latin": "Branta canadensis",
+      "sortering": "770"
+    },
+    {
+      "soortid": "448",
+      "soortnaam": "Zwarte Zwaan",
+      "soortkey": "Zwarte Zwaan",
+      "latin": "Cygnus atratus",
+      "sortering": "920"
+    },
+    {
+      "soortid": "783",
+      "soortnaam": "Aziatische Roodborsttapuit",
+      "soortkey": "Aziatische Roodborsttapuit",
+      "latin": "Saxicola maurus",
+      "sortering": "93930"
+    },
+    {
+      "soortid": "364",
+      "soortnaam": "Vuurgoudhaan",
+      "soortkey": "Vuurgoudh",
+      "latin": "Regulus ignicapilla",
+      "sortering": "85940"
+    },
+    {
+      "soortid": "1116",
+      "soortnaam": "Amerikaanse Regenwulp",
+      "soortkey": "Amerikaanse Regenwulp",
+      "latin": "Numenius hudsonicus",
+      "sortering": "20900"
+    },
+    {
+      "soortid": "371",
+      "soortnaam": "Witkopstaartmees",
+      "soortkey": "Witkopstaartmees",
+      "latin": "Aegithalos caudatus caudatus",
+      "sortering": "76971"
+    },
+    {
+      "soortid": "914",
+      "soortnaam": "Kleine/Middelste Jager",
+      "soortkey": "Kleine/Middelste Jager",
+      "latin": "S. parasiticus / pomarinus",
+      "sortering": "23072"
+    },
+    {
+      "soortid": "31",
+      "soortnaam": "Zwarte Ooievaar",
+      "soortkey": "ZwOoi",
+      "latin": "Ciconia nigra",
+      "sortering": "25310"
+    },
+    {
+      "soortid": "297",
+      "soortnaam": "Noordse Nachtegaal",
+      "soortkey": "Noordse Nachtegaal",
+      "latin": "Luscinia luscinia",
+      "sortering": "92570"
+    },
+    {
+      "soortid": "453",
+      "soortnaam": "Alk/Zeekoet",
+      "soortkey": "Alk/Zeek",
+      "latin": "Alca torda/Uria aalge",
+      "sortering": "23282"
+    },
+    {
+      "soortid": "2307",
+      "soortnaam": "Kuhls Pijlstormvogel",
+      "soortkey": "Kuhls Pijlstormvogel",
+      "latin": "Calonectris borealis",
+      "sortering": "24770"
+    },
+    {
+      "soortid": "224",
+      "soortnaam": "Zeekoet",
+      "soortkey": "Zeekoet",
+      "latin": "Uria aalge",
+      "sortering": "23320"
+    },
+    {
+      "soortid": "5333",
+      "soortnaam": "Corsicaanse Citroensijs",
+      "soortkey": "Corsicaanse Citroensijs",
+      "latin": "Carduelis corsicana",
+      "sortering": "102500"
+    },
+    {
+      "soortid": "1084",
+      "soortnaam": "rotgans spec.",
+      "soortkey": "rotgans spec.",
+      "latin": "Branta bernicla/hrota/nigricans",
+      "sortering": "742"
+    },
+    {
+      "soortid": "1119",
+      "soortnaam": "Hommel spec.",
+      "soortkey": "Hommel spec.",
+      "latin": "Bombus spec.",
+      "sortering": "71500"
+    },
+    {
+      "soortid": "198",
+      "soortnaam": "Vorkstaartmeeuw",
+      "soortkey": "Vorkstm",
+      "latin": "Xema sabini",
+      "sortering": "22590"
+    },
+    {
+      "soortid": "102",
+      "soortnaam": "Steppebuizerd",
+      "soortkey": "Steppebuizerd",
+      "latin": "Buteo buteo vulpinus",
+      "sortering": "29751"
+    },
+    {
+      "soortid": "6",
+      "soortnaam": "Fuut",
+      "soortkey": "Fuut",
+      "latin": "Podiceps cristatus",
+      "sortering": "19320"
+    },
+    {
+      "soortid": "345",
+      "soortnaam": "Kleine Zwartkop",
+      "soortkey": "Kleine Zwartkop",
+      "latin": "Curruca melanocephala",
+      "sortering": "81190"
+    },
+    {
+      "soortid": "336",
+      "soortnaam": "Bosrietzanger",
+      "soortkey": "Bosrietzanger",
+      "latin": "Acrocephalus palustris",
+      "sortering": "78360"
+    },
+    {
+      "soortid": "1077",
+      "soortnaam": "Iberische Groene Specht",
+      "soortkey": "Iberische Groene Specht",
+      "latin": "Picus sharpei",
+      "sortering": "39660"
+    },
+    {
+      "soortid": "382",
+      "soortnaam": "Wielewaal",
+      "soortkey": "Wielew",
+      "latin": "Oriolus oriolus",
+      "sortering": "66980"
+    },
+    {
+      "soortid": "742",
+      "soortnaam": "Syrische Bonte Specht",
+      "soortkey": "Syrische Bonte Specht",
+      "latin": "Dendrocopos syriacus",
+      "sortering": "38990"
+    },
+    {
+      "soortid": "943",
+      "soortnaam": "grotere pijlstormvogel spec.",
+      "soortkey": "grotere pijlstormvogel spec.",
+      "latin": "Ardenna spec.",
+      "sortering": "24862"
+    },
+    {
+      "soortid": "75",
+      "soortnaam": "Stellers Eider",
+      "soortkey": "Stellers Eider",
+      "latin": "Polysticta stelleri",
+      "sortering": "2060"
+    },
+    {
+      "soortid": "43",
+      "soortnaam": "Kolgans",
+      "soortkey": "Kol",
+      "latin": "Anser albifrons",
+      "sortering": "890"
+    },
+    {
+      "soortid": "738",
+      "soortnaam": "Arabische Kleine Groene Bijeneter",
+      "soortkey": "Arabische Kleine Groene Bijeneter",
+      "latin": "Merops cyanophrys",
+      "sortering": "35400"
+    },
+    {
+      "soortid": "1186",
+      "soortnaam": "boomkruiper spec.",
+      "soortkey": "boomkruiper spec.",
+      "latin": "Certhia spec.",
+      "sortering": "87462"
+    },
+    {
+      "soortid": "703",
+      "soortnaam": "Bonte Stern",
+      "soortkey": "Bonte Stern",
+      "latin": "Onychoprion fuscatus",
+      "sortering": "22130"
+    },
+    {
+      "soortid": "1087",
+      "soortnaam": "Grote Vos",
+      "soortkey": "Grote Vos",
+      "latin": "Nymphalis polychloros",
+      "sortering": "80220"
+    },
+    {
+      "soortid": "506",
+      "soortnaam": "Roze Pelikaan",
+      "soortkey": "Roze Pelikaan",
+      "latin": "Pelecanus onocrotalus",
+      "sortering": "27080"
+    },
+    {
+      "soortid": "347",
+      "soortnaam": "Braamsluiper",
+      "soortkey": "Braamsl",
+      "latin": "Curruca curruca",
+      "sortering": "81070"
+    },
+    {
+      "soortid": "537",
+      "soortnaam": "Kleine Flamingo",
+      "soortkey": "Kleine Flamingo",
+      "latin": "Phoeniconaias minor",
+      "sortering": "19440"
+    },
+    {
+      "soortid": "4606",
+      "soortnaam": "Grote Keizerlibel",
+      "soortkey": "Grote Keizerlibel",
+      "latin": "Anax imperator",
+      "sortering": "90006"
+    },
+    {
+      "soortid": "3",
+      "soortnaam": "IJsduiker",
+      "soortkey": "Ijsdui",
+      "latin": "Gavia immer",
+      "sortering": "23460"
+    },
+    {
+      "soortid": "409",
+      "soortnaam": "Frater",
+      "soortkey": "Frater",
+      "latin": "Linaria flavirostris",
+      "sortering": "102330"
+    },
+    {
+      "soortid": "838",
+      "soortnaam": "goudhaan spec.",
+      "soortkey": "goudhaan spec.",
+      "latin": "Regulus spec.",
+      "sortering": "85932"
+    },
+    {
+      "soortid": "549",
+      "soortnaam": "Carolina-eend",
+      "soortkey": "Carolina-eend",
+      "latin": "Aix sponsa",
+      "sortering": "1300"
+    },
+    {
+      "soortid": "129",
+      "soortnaam": "Kraanvogel",
+      "soortkey": "Kraanv",
+      "latin": "Grus grus",
+      "sortering": "19140"
+    },
+    {
+      "soortid": "456",
+      "soortnaam": "pijlstormvogel spec.",
+      "soortkey": "pijlstrmSpec",
+      "latin": "Puffinus spec.",
+      "sortering": "25072"
+    },
+    {
+      "soortid": "672",
+      "soortnaam": "steltloper spec.",
+      "soortkey": "steltSpec",
+      "latin": "Limicolae",
+      "sortering": "21652"
+    },
+    {
+      "soortid": "788",
+      "soortnaam": "Westelijke Blonde Tapuit",
+      "soortkey": "Westelijke Blonde Tapuit",
+      "latin": "Oenanthe hispanica",
+      "sortering": "94200"
+    },
+    {
+      "soortid": "1154",
+      "soortnaam": "Noordse Vleermuis",
+      "soortkey": "Noordse Vleermuis",
+      "latin": "Eptesicus nilssonii",
+      "sortering": "101020"
+    },
+    {
+      "soortid": "22",
+      "soortnaam": "Roerdomp",
+      "soortkey": "Roerdomp",
+      "latin": "Botaurus stellaris",
+      "sortering": "26390"
+    },
+    {
+      "soortid": "1061",
+      "soortnaam": "kwikstaart spec.",
+      "soortkey": "kwikstaart spec.",
+      "latin": "Motacilla spec.",
+      "sortering": "100132"
+    },
+    {
+      "soortid": "982",
+      "soortnaam": "dolfijn spec.",
+      "soortkey": "dolfijn spec.",
+      "latin": "Delphinidae sp",
+      "sortering": "100099"
+    },
+    {
+      "soortid": "545",
+      "soortnaam": "Keizergans",
+      "soortkey": "Keizergans",
+      "latin": "Anser canagicus",
+      "sortering": "810"
+    },
+    {
+      "soortid": "91",
+      "soortnaam": "Zeearend",
+      "soortkey": "Zeearend",
+      "latin": "Haliaeetus albicilla",
+      "sortering": "29120"
+    },
+    {
+      "soortid": "306",
+      "soortnaam": "Roodborsttapuit",
+      "soortkey": "Robotap",
+      "latin": "Saxicola rubicola",
+      "sortering": "93940"
+    },
+    {
+      "soortid": "405",
+      "soortnaam": "Groenling",
+      "soortkey": "Groenl",
+      "latin": "Chloris chloris",
+      "sortering": "101840"
+    },
+    {
+      "soortid": "1121",
+      "soortnaam": "Koningspage",
+      "soortkey": "Koningspage",
+      "latin": "Iphiclides podalirius",
+      "sortering": "80160"
+    },
+    {
+      "soortid": "934",
+      "soortnaam": "Scandinavische Tjiftjaf",
+      "soortkey": "Scandinavische Tjiftjaf",
+      "latin": "Phylloscopus collybita abietinus",
+      "sortering": "77321"
+    },
+    {
+      "soortid": "4692",
+      "soortnaam": "Vale Braamsluiper",
+      "soortkey": "Vale Braamsluiper",
+      "latin": "Curruca curruca halimodendri",
+      "sortering": "81071"
+    },
+    {
+      "soortid": "1097",
+      "soortnaam": "Rans- of Velduil",
+      "soortkey": "Rans- of Velduil",
+      "latin": "Asio spec.",
+      "sortering": "31572"
+    },
+    {
+      "soortid": "948",
+      "soortnaam": "fregatvogel spec.",
+      "soortkey": "fregatvogel spec.",
+      "latin": "Fregata species",
+      "sortering": "25372"
+    },
+    {
+      "soortid": "367",
+      "soortnaam": "Withalsvliegenvanger",
+      "soortkey": "Withalsvliegenvanger",
+      "latin": "Ficedula albicollis",
+      "sortering": "93310"
+    },
+    {
+      "soortid": "585",
+      "soortnaam": "Sperwer/Havik",
+      "soortkey": "Sperwer/Havik",
+      "latin": "Accipiter nisus/gentilis.",
+      "sortering": "28862"
+    },
+    {
+      "soortid": "816",
+      "soortnaam": "karekiet spec",
+      "soortkey": "karekiet spec",
+      "latin": "Acrocephalus spec.",
+      "sortering": "78352"
+    },
+    {
+      "soortid": "661",
+      "soortnaam": "IJslandse Grutto",
+      "soortkey": "IJslandse Grutto",
+      "latin": "Limosa limosa islandica",
+      "sortering": "20981"
+    },
+    {
+      "soortid": "184",
+      "soortnaam": "Terekruiter",
+      "soortkey": "Terekruiter",
+      "latin": "Xenus cinereus",
+      "sortering": "21390"
+    },
+    {
+      "soortid": "1013",
+      "soortnaam": "Woestijnvalk",
+      "soortkey": "Woestijnvalk",
+      "latin": "Falco concolor",
+      "sortering": "40480"
+    },
+    {
+      "soortid": "46",
+      "soortnaam": "Sneeuwgans",
+      "soortkey": "Sneeuwgans",
+      "latin": "Anser caerulescens",
+      "sortering": "830"
+    },
+    {
+      "soortid": "578",
+      "soortnaam": "Aasgier",
+      "soortkey": "Aasgier",
+      "latin": "Neophron percnopterus",
+      "sortering": "27360"
+    },
+    {
+      "soortid": "4867",
+      "soortnaam": "Zomertaling/Wintertaling",
+      "soortkey": "Zomertaling/Wintertaling",
+      "latin": "Spatula querquedula / Anas crecca",
+      "sortering": "1762"
+    },
+    {
+      "soortid": "577",
+      "soortnaam": "Lammergier",
+      "soortkey": "Lammergier",
+      "latin": "Gypaetus barbatus",
+      "sortering": "27350"
+    },
+    {
+      "soortid": "57",
+      "soortnaam": "Amerikaanse Smient",
+      "soortkey": "Amerikaanse Smient",
+      "latin": "Mareca americana",
+      "sortering": "1550"
+    },
+    {
+      "soortid": "119",
+      "soortnaam": "Patrijs",
+      "soortkey": "Patrijs",
+      "latin": "Perdix perdix",
+      "sortering": "4190"
+    },
+    {
+      "soortid": "326",
+      "soortnaam": "Grote Lijster",
+      "soortkey": "GrLijster",
+      "latin": "Turdus viscivorus",
+      "sortering": "90090"
+    },
+    {
+      "soortid": "632",
+      "soortnaam": "Oosterse Vorkstaartplevier",
+      "soortkey": "Oosterse Vorkstaartplevier",
+      "latin": "Glareola maldivarum",
+      "sortering": "21990"
+    },
+    {
+      "soortid": "932",
+      "soortnaam": "Zwarte x Bonte Kraai",
+      "soortkey": "Zwarte x Bonte Kraai",
+      "latin": "Corvus corone x cornix",
+      "sortering": "70512"
+    },
+    {
+      "soortid": "434",
+      "soortnaam": "Bosgors",
+      "soortkey": "Bosgors",
+      "latin": "Emberiza rustica",
+      "sortering": "103470"
+    },
+    {
+      "soortid": "295",
+      "soortnaam": "Alpenheggenmus",
+      "soortkey": "Alpenheggenmus",
+      "latin": "Prunella collaris",
+      "sortering": "99920"
+    },
+    {
+      "soortid": "886",
+      "soortnaam": "Woestijnvink",
+      "soortkey": "Woestijnvink",
+      "latin": "Bucanetes githagineus",
+      "sortering": "101020"
+    },
+    {
+      "soortid": "403",
+      "soortnaam": "Keep",
+      "soortkey": "Keep",
+      "latin": "Fringilla montifringilla",
+      "sortering": "100810"
+    },
+    {
+      "soortid": "279",
+      "soortnaam": "Roodkeelpieper",
+      "soortkey": "Roodkpiep",
+      "latin": "Anthus cervinus",
+      "sortering": "100460"
+    },
+    {
+      "soortid": "9",
+      "soortnaam": "Geoorde Fuut",
+      "soortkey": "GeoordeF",
+      "latin": "Podiceps nigricollis",
+      "sortering": "19340"
+    },
+    {
+      "soortid": "186",
+      "soortnaam": "Amerikaanse Oeverloper",
+      "soortkey": "Amerikaanse Oeverloper",
+      "latin": "Actitis macularius",
+      "sortering": "21410"
+    },
+    {
+      "soortid": "673",
+      "soortnaam": "Zuidpooljager",
+      "soortkey": "Zuidpooljager",
+      "latin": "Stercorarius maccormicki",
+      "sortering": "23120"
+    },
+    {
+      "soortid": "865",
+      "soortnaam": "Noordse Kauw",
+      "soortkey": "Noordse Kauw",
+      "latin": "Corvus m. soemmerringii",
+      "sortering": "70211"
+    },
+    {
+      "soortid": "1145",
+      "soortnaam": "Geel-/Witkopgors",
+      "soortkey": "Geel-/Witkopgors",
+      "latin": "Emberiza citrinella/leucocephalos",
+      "sortering": "103252"
+    },
+    {
+      "soortid": "1124",
+      "soortnaam": "Tijgerblauwtje",
+      "soortkey": "Tijgerblauwtje",
+      "latin": "Lampides boeticus",
+      "sortering": "100180"
+    },
+    {
+      "soortid": "946",
+      "soortnaam": "flamingo spec.",
+      "soortkey": "flamingo spec.",
+      "latin": "Phoenicopterus spec.",
+      "sortering": "19442"
+    },
+    {
+      "soortid": "387",
+      "soortnaam": "Gaai",
+      "soortkey": "Gaai",
+      "latin": "Garrulus glandarius",
+      "sortering": "69790"
+    },
+    {
+      "soortid": "54",
+      "soortnaam": "Bergeend",
+      "soortkey": "Berge",
+      "latin": "Tadorna tadorna",
+      "sortering": "1190"
+    },
+    {
+      "soortid": "848",
+      "soortnaam": "Taigaboomkruiper",
+      "soortkey": "Taigaboomkruiper",
+      "latin": "Certhia familiaris",
+      "sortering": "87430"
+    },
+    {
+      "soortid": "1091",
+      "soortnaam": "Napoleonwever",
+      "soortkey": "Napoleonwever",
+      "latin": "Euplectes afer",
+      "sortering": "98130"
+    },
+    {
+      "soortid": "818",
+      "soortnaam": "Grote Vale Spotvogel",
+      "soortkey": "Grote Vale Spotvogel",
+      "latin": "Hippolais languida",
+      "sortering": "78450"
+    },
+    {
+      "soortid": "38",
+      "soortnaam": "Wilde Zwaan",
+      "soortkey": "WiZwaan",
+      "latin": "Cygnus cygnus",
+      "sortering": "970"
+    },
+    {
+      "soortid": "884",
+      "soortnaam": "kruisbek spec.",
+      "soortkey": "kruisbek spec.",
+      "latin": "Loxia spec.",
+      "sortering": "102422"
+    },
+    {
+      "soortid": "937",
+      "soortnaam": "Siberische Tjiftjaf 'fulvescens'",
+      "soortkey": "Siberische Tjiftjaf 'fulvescens'",
+      "latin": "Phylloscopus collybita tristis 'fulvescens'",
+      "sortering": "77321"
+    },
+    {
+      "soortid": "356",
+      "soortnaam": "Bruine Boszanger",
+      "soortkey": "Bruine Boszanger",
+      "latin": "Phylloscopus fuscatus",
+      "sortering": "77260"
+    },
+    {
+      "soortid": "796",
+      "soortnaam": "Zwarte Tapuit",
+      "soortkey": "Zwarte Tapuit",
+      "latin": "Oenanthe leucura",
+      "sortering": "94410"
+    },
+    {
+      "soortid": "4806",
+      "soortnaam": "Valkparkiet",
+      "soortkey": "Valkparkiet",
+      "latin": "Nymphicus hollandicus",
+      "sortering": "40770"
+    },
+    {
+      "soortid": "4623",
+      "soortnaam": "Glazenmaker onbekend",
+      "soortkey": "Glazenmaker onbekend",
+      "latin": "Aeshna spec.",
+      "sortering": "90460"
+    },
+    {
+      "soortid": "400",
+      "soortnaam": "Ringmus",
+      "soortkey": "Ringmus",
+      "latin": "Passer montanus",
+      "sortering": "96940"
+    },
+    {
+      "soortid": "342",
+      "soortnaam": "Provençaalse Grasmus",
+      "soortkey": "Provençaalse Grasmus",
+      "latin": "Curruca undata",
+      "sortering": "81260"
+    },
+    {
+      "soortid": "773",
+      "soortnaam": "Zwartkeelheggenmus",
+      "soortkey": "Zwartkeelheggenmus",
+      "latin": "Prunella atrogularis",
+      "sortering": "99990"
+    },
+    {
+      "soortid": "16",
+      "soortnaam": "Stormvogeltje",
+      "soortkey": "Stofje",
+      "latin": "Hydrobates pelagicus",
+      "sortering": "23970"
+    },
+    {
+      "soortid": "978",
+      "soortnaam": "Gewone Zeehond",
+      "soortkey": "GewZeeho",
+      "latin": "Phoca vitulina",
+      "sortering": "100680"
+    },
+    {
+      "soortid": "26",
+      "soortnaam": "Koereiger",
+      "soortkey": "Koereiger",
+      "latin": "Bubulcus ibis",
+      "sortering": "26900"
+    },
+    {
+      "soortid": "791",
+      "soortnaam": "Roodstuittapuit",
+      "soortkey": "Roodstuittapuit",
+      "latin": "Oenanthe moesta",
+      "sortering": "94260"
+    },
+    {
+      "soortid": "705",
+      "soortnaam": "stern spec.",
+      "soortkey": "stern spec.",
+      "latin": "Sterna spec.",
+      "sortering": "22442"
+    },
+    {
+      "soortid": "275",
+      "soortnaam": "Duinpieper",
+      "soortkey": "Duinpi",
+      "latin": "Anthus campestris",
+      "sortering": "100340"
+    },
+    {
+      "soortid": "654",
+      "soortnaam": "strandloper spec.",
+      "soortkey": "strandloper spec.",
+      "latin": "Calidris spec.",
+      "sortering": "21832"
+    },
+    {
+      "soortid": "469",
+      "soortnaam": "Siberische Strandloper",
+      "soortkey": "Siberische Strandloper",
+      "latin": "Calidris acuminata",
+      "sortering": "21660"
+    },
+    {
+      "soortid": "11",
+      "soortnaam": "Kuhls/Scopoli's Pijlstormvogel",
+      "soortkey": "Kuhls",
+      "latin": "Calonectris borealis/diomedea",
+      "sortering": "24772"
+    },
+    {
+      "soortid": "1006",
+      "soortnaam": "Soepgans",
+      "soortkey": "Soepgans",
+      "latin": "Anser (feral)",
+      "sortering": "846"
+    },
+    {
+      "soortid": "1149",
+      "soortnaam": "Oostelijke Roodkopklauwier",
+      "soortkey": "Oostelijke Roodkopklauwier",
+      "latin": "Lanius senator niloticus",
+      "sortering": "69231"
+    },
+    {
+      "soortid": "550",
+      "soortnaam": "Amerikaanse Wintertaling",
+      "soortkey": "Amerikaanse Wintertaling",
+      "latin": "Anas carolinensis",
+      "sortering": "1770"
+    },
+    {
+      "soortid": "972",
+      "soortnaam": "Gewone Vinvis",
+      "soortkey": "Gewone Vinvis",
+      "latin": "Balaenoptera physalus",
+      "sortering": "100220"
+    },
+    {
+      "soortid": "155",
+      "soortnaam": "Temmincks Strandloper",
+      "soortkey": "Temmincks Strandloper",
+      "latin": "Calidris temminckii",
+      "sortering": "21690"
+    },
+    {
+      "soortid": "377",
+      "soortnaam": "Koolmees",
+      "soortkey": "Kool",
+      "latin": "Parus major",
+      "sortering": "72400"
+    },
+    {
+      "soortid": "965",
+      "soortnaam": "Gewone Spitssnuitdolfijn",
+      "soortkey": "Gewone Spitssnuitdolfijn",
+      "latin": "Mesoplodon bidens",
+      "sortering": "100150"
+    },
+    {
+      "soortid": "65",
+      "soortnaam": "Blauwvleugeltaling",
+      "soortkey": "Blauwvleugeltaling",
+      "latin": "Spatula discors",
+      "sortering": "1470"
+    },
+    {
+      "soortid": "242",
+      "soortnaam": "Sperweruil",
+      "soortkey": "Sperweruil",
+      "latin": "Surnia ulula",
+      "sortering": "30590"
+    },
+    {
+      "soortid": "352",
+      "soortnaam": "Noordse Boszanger",
+      "soortkey": "Noordse Boszanger",
+      "latin": "Phylloscopus borealis",
+      "sortering": "77610"
+    },
+    {
+      "soortid": "248",
+      "soortnaam": "Nachtzwaluw",
+      "soortkey": "Nachtzwaluw",
+      "latin": "Caprimulgus europaeus",
+      "sortering": "6090"
+    },
+    {
+      "soortid": "980",
+      "soortnaam": "Ringelrob",
+      "soortkey": "Ringelrob",
+      "latin": "Pusa hispida",
+      "sortering": "100700"
+    },
+    {
+      "soortid": "675",
+      "soortnaam": "Lachmeeuw",
+      "soortkey": "Lachmeeuw",
+      "latin": "Leucophaeus atricilla",
+      "sortering": "22730"
+    },
+    {
+      "soortid": "1105",
+      "soortnaam": "Ruige Dwergvleermuis",
+      "soortkey": "Ruige Dwergvleermuis",
+      "latin": "Pipistrellus nathusii",
+      "sortering": "101160"
+    },
+    {
+      "soortid": "603",
+      "soortnaam": "Hazelhoen",
+      "soortkey": "Hazelhoen",
+      "latin": "Tetrastes bonasia",
+      "sortering": "3980"
+    },
+    {
+      "soortid": "115",
+      "soortnaam": "Slechtvalk",
+      "soortkey": "Slechtv",
+      "latin": "Falco peregrinus",
+      "sortering": "40660"
+    },
+    {
+      "soortid": "1138",
+      "soortnaam": "Smyrnaijsvogel",
+      "soortkey": "Smyrnaijsvogel",
+      "latin": "Halcyon smyrnensis",
+      "sortering": "34130"
+    },
+    {
+      "soortid": "266",
+      "soortnaam": "Kuifleeuwerik",
+      "soortkey": "Kuifleeuwerik",
+      "latin": "Galerida cristata",
+      "sortering": "73540"
+    },
+    {
+      "soortid": "4649",
+      "soortnaam": "Hooibeestje",
+      "soortkey": "Hooibeestje",
+      "latin": "Coenonympha pamphilus",
+      "sortering": "80430"
+    },
+    {
+      "soortid": "998",
+      "soortnaam": "kraai spec.",
+      "soortkey": "kraai spec.",
+      "latin": "Corvus spec.",
+      "sortering": "70672"
+    },
+    {
+      "soortid": "497",
+      "soortnaam": "Chinees Stormvogeltje",
+      "soortkey": "Chinees Stormvogeltje",
+      "latin": "Hydrobates monorhis",
+      "sortering": "24000"
+    },
+    {
+      "soortid": "1066",
+      "soortnaam": "Klein koolwitje",
+      "soortkey": "KlKoolw",
+      "latin": "Pieris rapae",
+      "sortering": "80340"
+    },
+    {
+      "soortid": "360",
+      "soortnaam": "Siberische Tjiftjaf",
+      "soortkey": "Siberische Tjiftjaf",
+      "latin": "Phylloscopus tristis",
+      "sortering": "77321"
+    },
+    {
+      "soortid": "73",
+      "soortnaam": "Eider",
+      "soortkey": "Eider",
+      "latin": "Somateria mollissima",
+      "sortering": "2100"
+    },
+    {
+      "soortid": "2303",
+      "soortnaam": "spreeuw spec.",
+      "soortkey": "spreeuw spec.",
+      "latin": "Sturnus spec.",
+      "sortering": "88622"
+    },
+    {
+      "soortid": "1038",
+      "soortnaam": "Vale Rotszwaluw",
+      "soortkey": "Vale Rotszwaluw",
+      "latin": "Ptyonoprogne obsoleta",
+      "sortering": "75930"
+    },
+    {
+      "soortid": "1057",
+      "soortnaam": "Steenortolaan",
+      "soortkey": "Steenortolaan",
+      "latin": "Emberiza buchanani",
+      "sortering": "103310"
+    },
+    {
+      "soortid": "264",
+      "soortnaam": "Kalanderleeuwerik",
+      "soortkey": "Kalanderleeuwerik",
+      "latin": "Melanocorypha calandra",
+      "sortering": "73660"
+    },
+    {
+      "soortid": "176",
+      "soortnaam": "Zwarte Ruiter",
+      "soortkey": "ZwRuiter",
+      "latin": "Tringa erythropus",
+      "sortering": "21520"
+    },
+    {
+      "soortid": "474",
+      "soortnaam": "Mongoolse Pieper",
+      "soortkey": "Mongoolse Pieper",
+      "latin": "Anthus godlewskii",
+      "sortering": "100330"
+    },
+    {
+      "soortid": "1089",
+      "soortnaam": "donsstormvogel",
+      "soortkey": "donsstormvogel",
+      "latin": "Pterodroma mollis sp.",
+      "sortering": "24264"
+    },
+    {
+      "soortid": "562",
+      "soortnaam": "duikeend spec.",
+      "soortkey": "duikeend spec.",
+      "latin": "Aythya spec.",
+      "sortering": "2052"
+    },
+    {
+      "soortid": "262",
+      "soortnaam": "Middelste Bonte Specht",
+      "soortkey": "Middelste Bonte Specht",
+      "latin": "Dendrocoptes medius",
+      "sortering": "38490"
+    },
+    {
+      "soortid": "332",
+      "soortnaam": "Snor",
+      "soortkey": "Snor",
+      "latin": "Locustella luscinioides",
+      "sortering": "78610"
+    },
+    {
+      "soortid": "427",
+      "soortnaam": "Maskergors",
+      "soortkey": "Maskergors",
+      "latin": "Emberiza spodocephala",
+      "sortering": "103590"
+    },
+    {
+      "soortid": "1130",
+      "soortnaam": "Zwartstaart",
+      "soortkey": "Zwartstaart",
+      "latin": "Oenanthe melanura",
+      "sortering": "94270"
+    },
+    {
+      "soortid": "261",
+      "soortnaam": "Grote Bonte Specht",
+      "soortkey": "GrBonSp",
+      "latin": "Dendrocopos major",
+      "sortering": "39010"
+    },
+    {
+      "soortid": "106",
+      "soortnaam": "Bastaardarend",
+      "soortkey": "Bastaardarend",
+      "latin": "Clanga clanga",
+      "sortering": "28090"
+    },
+    {
+      "soortid": "324",
+      "soortnaam": "Zanglijster",
+      "soortkey": "Zangl",
+      "latin": "Turdus philomelos",
+      "sortering": "90080"
+    },
+    {
+      "soortid": "315",
+      "soortnaam": "Merel",
+      "soortkey": "Merel",
+      "latin": "Turdus merula",
+      "sortering": "90240"
+    },
+    {
+      "soortid": "1924",
+      "soortnaam": "Citroenvlinder",
+      "soortkey": "Citroenvlinder",
+      "latin": "Gonepteryx rhamni",
+      "sortering": "80090"
+    },
+    {
+      "soortid": "233",
+      "soortnaam": "Houtduif",
+      "soortkey": "Houtd",
+      "latin": "Columba palumbus",
+      "sortering": "13850"
+    },
+    {
+      "soortid": "278",
+      "soortnaam": "Graspieper",
+      "soortkey": "Grasp",
+      "latin": "Anthus pratensis",
+      "sortering": "100410"
+    },
+    {
+      "soortid": "955",
+      "soortnaam": "Witsnuitdolfijn",
+      "soortkey": "Witsnuitdolfijn",
+      "latin": "Lagenorhynchus albirostris",
+      "sortering": "100050"
+    },
+    {
+      "soortid": "1062",
+      "soortnaam": "Waterpieper/Oeverpieper",
+      "soortkey": "Waterpieper/Oeverpieper",
+      "latin": "Anthus spinoletta/petrosus",
+      "sortering": "100492"
+    },
+    {
+      "soortid": "523",
+      "soortnaam": "zilverreiger spec.",
+      "soortkey": "zilverreiger spec.",
+      "latin": "Egretta/Casmerodius",
+      "sortering": "26732"
+    },
+    {
+      "soortid": "24",
+      "soortnaam": "Kwak",
+      "soortkey": "Kwak",
+      "latin": "Nycticorax nycticorax",
+      "sortering": "26550"
+    },
+    {
+      "soortid": "311",
+      "soortnaam": "Rode Rotslijster",
+      "soortkey": "Rode Rotslijster",
+      "latin": "Monticola saxatilis",
+      "sortering": "93760"
+    },
+    {
+      "soortid": "491",
+      "soortnaam": "Bulwers Stormvogel",
+      "soortkey": "Bulwers Stormvogel",
+      "latin": "Bulweria bulwerii",
+      "sortering": "25120"
+    },
+    {
+      "soortid": "1041",
+      "soortnaam": "Arabische Buulbuul",
+      "soortkey": "Arabische Buulbuul",
+      "latin": "Pycnonotus xanthopygos",
+      "sortering": "75380"
+    },
+    {
+      "soortid": "819",
+      "soortnaam": "Griekse Spotvogel",
+      "soortkey": "Griekse Spotvogel",
+      "latin": "Hippolais olivetorum",
+      "sortering": "78460"
+    },
+    {
+      "soortid": "992",
+      "soortnaam": "Iberische Kwikstaart ",
+      "soortkey": "Iberische Kwikstaart ",
+      "latin": "Motacilla flava iberiae",
+      "sortering": "100051"
+    },
+    {
+      "soortid": "416",
+      "soortnaam": "Grote Kruisbek",
+      "soortkey": "Grote Kruisbek",
+      "latin": "Loxia pytyopsittacus",
+      "sortering": "102400"
+    },
+    {
+      "soortid": "823",
+      "soortnaam": "Woestijngrasmus",
+      "soortkey": "Woestijngrasmus",
+      "latin": "Curruca nana",
+      "sortering": "81140"
+    },
+    {
+      "soortid": "62",
+      "soortnaam": "Wilde Eend",
+      "soortkey": "WildeE",
+      "latin": "Anas platyrhynchos",
+      "sortering": "1660"
+    },
+    {
+      "soortid": "222",
+      "soortnaam": "Zwarte Stern",
+      "soortkey": "ZwaSte",
+      "latin": "Chlidonias niger",
+      "sortering": "22300"
+    },
+    {
+      "soortid": "141",
+      "soortnaam": "Bontbekplevier",
+      "soortkey": "Bontbek",
+      "latin": "Charadrius hiaticula",
+      "sortering": "20100"
+    },
+    {
+      "soortid": "984",
+      "soortnaam": "eend spec.",
+      "soortkey": "eendSpec",
+      "latin": "Anatidae spec.",
+      "sortering": "1762"
+    },
+    {
+      "soortid": "446",
+      "soortnaam": "Tjiftjaf/Fitis",
+      "soortkey": "fitis/tjif",
+      "latin": "Phylloscopus collybita/trochilus",
+      "sortering": "77322"
+    },
+    {
+      "soortid": "396",
+      "soortnaam": "Raaf",
+      "soortkey": "Raaf",
+      "latin": "Corvus corax",
+      "sortering": "70650"
+    },
+    {
+      "soortid": "904",
+      "soortnaam": "Huisgors",
+      "soortkey": "Huisgors",
+      "latin": "Emberiza sahari",
+      "sortering": "103370"
+    },
+    {
+      "soortid": "87",
+      "soortnaam": "Grijze Wouw",
+      "soortkey": "Grijze Wouw",
+      "latin": "Elanus caeruleus",
+      "sortering": "27260"
+    },
+    {
+      "soortid": "830",
+      "soortnaam": "Groene Fitis",
+      "soortkey": "Groene Fitis",
+      "latin": "Phylloscopus nitidus",
+      "sortering": "77520"
+    },
+    {
+      "soortid": "1019",
+      "soortnaam": "Balkansperwer",
+      "soortkey": "Balkansperwer",
+      "latin": "Accipiter brevipes",
+      "sortering": "28470"
+    },
+    {
+      "soortid": "44",
+      "soortnaam": "Dwerggans",
+      "soortkey": "Dwerggans",
+      "latin": "Anser erythropus",
+      "sortering": "900"
+    },
+    {
+      "soortid": "213",
+      "soortnaam": "Lachstern",
+      "soortkey": "Lachstern",
+      "latin": "Gelochelidon nilotica",
+      "sortering": "22240"
+    },
+    {
+      "soortid": "368",
+      "soortnaam": "Bonte Vliegenvanger",
+      "soortkey": "Bonte Vliegenvanger",
+      "latin": "Ficedula hypoleuca",
+      "sortering": "93300"
+    },
+    {
+      "soortid": "1109",
+      "soortnaam": "spitssnuitdolfijn spec.",
+      "soortkey": "spitssnuitdolfijn spec.",
+      "latin": "Ziphiidae spec.",
+      "sortering": "100179"
+    },
+    {
+      "soortid": "1187",
+      "soortnaam": "Moltoni's Baardgrasmus",
+      "soortkey": "Moltoni's Baardgrasmus",
+      "latin": "Curruca subalpina",
+      "sortering": "81210"
+    },
+    {
+      "soortid": "4609",
+      "soortnaam": "Zwervende heidelibel",
+      "soortkey": "Zwervende heidelibel",
+      "latin": "Sympetrum fonscolombii",
+      "sortering": "90320"
+    },
+    {
+      "soortid": "1142",
+      "soortnaam": "Amerikaanse Zee-eend",
+      "soortkey": "Amerikaanse Zee-eend",
+      "latin": "Melanitta americana",
+      "sortering": "2170"
+    },
+    {
+      "soortid": "354",
+      "soortnaam": "Bladkoning",
+      "soortkey": "Bladkoning",
+      "latin": "Phylloscopus inornatus",
+      "sortering": "77130"
+    },
+    {
+      "soortid": "1083",
+      "soortnaam": "matkop/glanskop",
+      "soortkey": "matkop/glanskop",
+      "latin": "Parus palustris/montanus",
+      "sortering": "72352"
+    },
+    {
+      "soortid": "437",
+      "soortnaam": "Wilgengors",
+      "soortkey": "Wilgengors",
+      "latin": "Emberiza aureola",
+      "sortering": "103490"
+    },
+    {
+      "soortid": "134",
+      "soortnaam": "Steltkluut",
+      "soortkey": "Steltkluut",
+      "latin": "Himantopus himantopus",
+      "sortering": "19910"
+    },
+    {
+      "soortid": "544",
+      "soortnaam": "Indische Gans",
+      "soortkey": "Indische Gans",
+      "latin": "Anser indicus",
+      "sortering": "800"
+    },
+    {
+      "soortid": "392",
+      "soortnaam": "Russische Kauw",
+      "soortkey": "Russische Kauw",
+      "latin": "Corvus m. monedula",
+      "sortering": "70211"
+    },
+    {
+      "soortid": "933",
+      "soortnaam": "Bruinvis",
+      "soortkey": "Bruinvis",
+      "latin": "Phocoena Phocoena",
+      "sortering": "100000"
+    },
+    {
+      "soortid": "478",
+      "soortnaam": "Wenkbrauwalbatros",
+      "soortkey": "Wenkbrauwalbatros",
+      "latin": "Thalassarche melanophris",
+      "sortering": "23950"
+    },
+    {
+      "soortid": "590",
+      "soortnaam": "Spaanse Keizerarend",
+      "soortkey": "Spaanse Keizerarend",
+      "latin": "Aquila adalberti",
+      "sortering": "28170"
+    },
+    {
+      "soortid": "598",
+      "soortnaam": "Lannervalk",
+      "soortkey": "Lannervalk",
+      "latin": "Falco biarmicus",
+      "sortering": "40610"
+    },
+    {
+      "soortid": "1120",
+      "soortnaam": "alk spec.",
+      "soortkey": "alk spec.",
+      "latin": "Alca/Fratercula",
+      "sortering": "23282"
+    },
+    {
+      "soortid": "623",
+      "soortnaam": "kraanvogel spec.",
+      "soortkey": "kraanvogel spec.",
+      "latin": "Grus spec.",
+      "sortering": "19142"
+    },
+    {
+      "soortid": "956",
+      "soortnaam": "Orca",
+      "soortkey": "Orca",
+      "latin": "Orcinus orca",
+      "sortering": "100060"
+    },
+    {
+      "soortid": "4",
+      "soortnaam": "Geelsnavelduiker",
+      "soortkey": "Geelsnavelduiker",
+      "latin": "Gavia adamsii",
+      "sortering": "23470"
+    },
+    {
+      "soortid": "285",
+      "soortnaam": "Balkankwikstaart",
+      "soortkey": "Balkankwikstaart",
+      "latin": "Motacilla flava feldegg",
+      "sortering": "100051"
+    },
+    {
+      "soortid": "885",
+      "soortnaam": "Vale Woestijnvink",
+      "soortkey": "Vale Woestijnvink",
+      "latin": "Rhodospiza obsoleta",
+      "sortering": "101900"
+    },
+    {
+      "soortid": "443",
+      "soortnaam": "Oeverpieper",
+      "soortkey": "Oeverp",
+      "latin": "Anthus petrosus",
+      "sortering": "100490"
+    },
+    {
+      "soortid": "756",
+      "soortnaam": "Thekla's Leeuwerik",
+      "soortkey": "Thekla's Leeuwerik",
+      "latin": "Galerida theklae",
+      "sortering": "73530"
+    },
+    {
+      "soortid": "1055",
+      "soortnaam": "Pacifische Waterpieper",
+      "soortkey": "Pacifische Waterpieper",
+      "latin": "Anthus rubescens",
+      "sortering": "100470"
+    },
+    {
+      "soortid": "4620",
+      "soortnaam": "Smaragdlibel",
+      "soortkey": "Smaragdlibel",
+      "latin": "Cordulia aenea",
+      "sortering": "90430"
+    },
+    {
+      "soortid": "71",
+      "soortnaam": "Kuifeend",
+      "soortkey": "Kuifeend",
+      "latin": "Aythya fuligula",
+      "sortering": "2030"
+    },
+    {
+      "soortid": "4618",
+      "soortnaam": "Glassnijder",
+      "soortkey": "Glassnijder",
+      "latin": "Brachytron pratense",
+      "sortering": "90410"
+    },
+    {
+      "soortid": "361",
+      "soortnaam": "Fitis",
+      "soortkey": "Fitis",
+      "latin": "Phylloscopus trochilus",
+      "sortering": "77290"
+    },
+    {
+      "soortid": "187",
+      "soortnaam": "Steenloper",
+      "soortkey": "Steenl",
+      "latin": "Arenaria interpres",
+      "sortering": "21590"
+    },
+    {
+      "soortid": "1099",
+      "soortnaam": "Boomvalk/Roodpootvalk",
+      "soortkey": "Boomvalk/Roodpootvalk",
+      "latin": "Falco subbuteo/vespertinus",
+      "sortering": "40532"
+    },
+    {
+      "soortid": "239",
+      "soortnaam": "Dwergooruil",
+      "soortkey": "Dwergooruil",
+      "latin": "Otus scops",
+      "sortering": "31130"
+    },
+    {
+      "soortid": "398",
+      "soortnaam": "Roze Spreeuw",
+      "soortkey": "Roze Spreeuw",
+      "latin": "Pastor roseus",
+      "sortering": "88610"
+    },
+    {
+      "soortid": "327",
+      "soortnaam": "Cetti's Zanger",
+      "soortkey": "Cetti's Zanger",
+      "latin": "Cettia cetti",
+      "sortering": "76790"
+    },
+    {
+      "soortid": "916",
+      "soortnaam": "Roodkeel/Parelduiker",
+      "soortkey": "Roodkeel/Parelduiker",
+      "latin": "Gavia stellata / arctica",
+      "sortering": "23442"
+    },
+    {
+      "soortid": "240",
+      "soortnaam": "Oehoe",
+      "soortkey": "Oehoe",
+      "latin": "Bubo bubo",
+      "sortering": "31640"
+    },
+    {
+      "soortid": "808",
+      "soortnaam": "Maquiszanger",
+      "soortkey": "Maquiszanger",
+      "latin": "Scotocerca inquieta",
+      "sortering": "76880"
+    },
+    {
+      "soortid": "132",
+      "soortnaam": "Grote Trap",
+      "soortkey": "Grote Trap",
+      "latin": "Otis tarda",
+      "sortering": "11820"
+    },
+    {
+      "soortid": "809",
+      "soortnaam": "Siberische Sprinkhaanzanger",
+      "soortkey": "Siberische Sprinkhaanzanger",
+      "latin": "Helopsaltes certhiola",
+      "sortering": "78550"
+    },
+    {
+      "soortid": "294",
+      "soortnaam": "Heggenmus",
+      "soortkey": "Heggen",
+      "latin": "Prunella modularis",
+      "sortering": "100010"
+    },
+    {
+      "soortid": "419",
+      "soortnaam": "Goudvink",
+      "soortkey": "Goudv",
+      "latin": "Pyrrhula pyrrhula",
+      "sortering": "100980"
+    },
+    {
+      "soortid": "995",
+      "soortnaam": "zangvogel spec.",
+      "soortkey": "zangS",
+      "latin": "Passeriformes spec.",
+      "sortering": "108062"
+    },
+    {
+      "soortid": "276",
+      "soortnaam": "Siberische Boompieper",
+      "soortkey": "Siberische Boompieper",
+      "latin": "Anthus hodgsoni",
+      "sortering": "100430"
+    },
+    {
+      "soortid": "124",
+      "soortnaam": "Klein Waterhoen",
+      "soortkey": "Klein Waterhoen",
+      "latin": "Zapornia parva",
+      "sortering": "18730"
+    },
+    {
+      "soortid": "144",
+      "soortnaam": "Morinelplevier",
+      "soortkey": "Morinelplevier",
+      "latin": "Eudromias morinellus",
+      "sortering": "20080"
+    },
+    {
+      "soortid": "305",
+      "soortnaam": "Paapje",
+      "soortkey": "Paap",
+      "latin": "Saxicola rubetra",
+      "sortering": "93830"
+    },
+    {
+      "soortid": "1108",
+      "soortnaam": "Bryde's Vinvis",
+      "soortkey": "Bryde's Vinvis",
+      "latin": "Balaenoptera Edeni",
+      "sortering": "110230"
+    },
+    {
+      "soortid": "355",
+      "soortnaam": "Raddes Boszanger",
+      "soortkey": "Raddes Boszanger",
+      "latin": "Phylloscopus schwarzi",
+      "sortering": "77220"
+    },
+    {
+      "soortid": "501",
+      "soortnaam": "Bruine Gent",
+      "soortkey": "Bruine Gent",
+      "latin": "Sula leucogaster",
+      "sortering": "25450"
+    },
+    {
+      "soortid": "4607",
+      "soortnaam": "Vuurlibel",
+      "soortkey": "Vuurlibel",
+      "latin": "Crocothemis erythraea",
+      "sortering": "90300"
+    },
+    {
+      "soortid": "570",
+      "soortnaam": "Rosse Stekelstaart",
+      "soortkey": "Rosse Stekelstaart",
+      "latin": "Oxyura jamaicensis",
+      "sortering": "2310"
+    },
+    {
+      "soortid": "4695",
+      "soortnaam": "siberische braamsluiper spec.",
+      "soortkey": "siberische braamsluiper spec.",
+      "latin": "Curruca curruca blythi / halamodendri",
+      "sortering": "81072"
+    },
+    {
+      "soortid": "270",
+      "soortnaam": "Oeverzwaluw",
+      "soortkey": "Oeverzw",
+      "latin": "Riparia riparia",
+      "sortering": "75610"
+    },
+    {
+      "soortid": "86",
+      "soortnaam": "Wespendief",
+      "soortkey": "Wespend",
+      "latin": "Pernis apivorus",
+      "sortering": "27420"
+    },
+    {
+      "soortid": "4860",
+      "soortnaam": "Indische Bruinvis",
+      "soortkey": "Indische Bruinvis",
+      "latin": "Neophocaena phocaenoides",
+      "sortering": "100001"
+    },
+    {
+      "soortid": "223",
+      "soortnaam": "Witvleugelstern",
+      "soortkey": "Witvleugelstern",
+      "latin": "Chlidonias leucopterus",
+      "sortering": "22310"
+    },
+    {
+      "soortid": "272",
+      "soortnaam": "Roodstuitzwaluw",
+      "soortkey": "Roodstuitzwaluw",
+      "latin": "Cecropis daurica",
+      "sortering": "76170"
+    },
+    {
+      "soortid": "151",
+      "soortnaam": "Kanoet",
+      "soortkey": "Kanoet",
+      "latin": "Calidris canutus",
+      "sortering": "21620"
+    },
+    {
+      "soortid": "2302",
+      "soortnaam": "Kok-/Dunbekmeeuw",
+      "soortkey": "Kok-/Dunbekmeeuw",
+      "latin": "Chroicocephalus genei/ridibundus",
+      "sortering": "22612"
+    },
+    {
+      "soortid": "813",
+      "soortnaam": "Struikrietzanger",
+      "soortkey": "Struikrietzanger",
+      "latin": "Acrocephalus dumetorum",
+      "sortering": "78340"
+    },
+    {
+      "soortid": "260",
+      "soortnaam": "Zwarte Specht",
+      "soortkey": "ZwSpecht",
+      "latin": "Dryocopus martius",
+      "sortering": "39420"
+    },
+    {
+      "soortid": "1050",
+      "soortnaam": "Oostelijke Vale Spotvogel",
+      "soortkey": "Oostelijke Vale Spotvogel",
+      "latin": "Iduna pallida",
+      "sortering": "78420"
+    },
+    {
+      "soortid": "307",
+      "soortnaam": "Tapuit",
+      "soortkey": "Tapuit",
+      "latin": "Oenanthe oenanthe",
+      "sortering": "94110"
+    },
+    {
+      "soortid": "32",
+      "soortnaam": "Ooievaar",
+      "soortkey": "Ooiev",
+      "latin": "Ciconia ciconia",
+      "sortering": "25330"
+    },
+    {
+      "soortid": "254",
+      "soortnaam": "Bijeneter",
+      "soortkey": "Bijeneter",
+      "latin": "Merops apiaster",
+      "sortering": "35480"
+    },
+    {
+      "soortid": "4650",
+      "soortnaam": "Yelkouantype-pijlstormvogel",
+      "soortkey": "Yelkouantype-pijlstormvogel",
+      "latin": "Puffinus yelkouan type",
+      "sortering": "24892"
+    },
+    {
+      "soortid": "847",
+      "soortnaam": "Rotskruiper",
+      "soortkey": "Rotskruiper",
+      "latin": "Tichodroma muraria",
+      "sortering": "87420"
+    },
+    {
+      "soortid": "565",
+      "soortnaam": "Buffelkopeend",
+      "soortkey": "Buffelkopeend",
+      "latin": "Bucephala albeola",
+      "sortering": "2190"
+    },
+    {
+      "soortid": "755",
+      "soortnaam": "Kleine Kortteenleeuwerik",
+      "soortkey": "Kleine Kortteenleeuwerik",
+      "latin": "Alaudala rufescens",
+      "sortering": "73760"
+    },
+    {
+      "soortid": "253",
+      "soortnaam": "Groene Bijeneter",
+      "soortkey": "Groene Bijeneter",
+      "latin": "Merops persicus",
+      "sortering": "35410"
+    },
+    {
+      "soortid": "172",
+      "soortnaam": "Rosse Grutto",
+      "soortkey": "RosseGr",
+      "latin": "Limosa lapponica",
+      "sortering": "20970"
+    },
+    {
+      "soortid": "968",
+      "soortnaam": "Dolfijn van Cuvier",
+      "soortkey": "Dolfijn van Cuvier",
+      "latin": "Ziphius cavirostris",
+      "sortering": "100180"
+    },
+    {
+      "soortid": "192",
+      "soortnaam": "Kleine Jager",
+      "soortkey": "KleJag",
+      "latin": "Stercorarius parasiticus",
+      "sortering": "23070"
+    },
+    {
+      "soortid": "1078",
+      "soortnaam": "Bont Zandoogje",
+      "soortkey": "Bont Zandoogje",
+      "latin": "Pararge aegeria",
+      "sortering": "80290"
+    },
+    {
+      "soortid": "197",
+      "soortnaam": "Dwergmeeuw",
+      "soortkey": "Dwergm",
+      "latin": "Hydrocoloeus minutus",
+      "sortering": "22540"
+    },
+    {
+      "soortid": "761",
+      "soortnaam": "Rotszwaluw",
+      "soortkey": "Rotszwaluw",
+      "latin": "Ptyonoprogne rupestris",
+      "sortering": "75920"
+    },
+    {
+      "soortid": "163",
+      "soortnaam": "Breedbekstrandloper",
+      "soortkey": "Breedbekstrandloper",
+      "latin": "Calidris falcinellus",
+      "sortering": "21650"
+    },
+    {
+      "soortid": "1102",
+      "soortnaam": "Blauwe/Grauwe/Steppekiekendief",
+      "soortkey": "Bl/Gr/Steppekiek",
+      "latin": "Circus cyaneus/pygargus/macrourus",
+      "sortering": "29042"
+    },
+    {
+      "soortid": "40",
+      "soortnaam": "Taigarietgans",
+      "soortkey": "Taigarietgans",
+      "latin": "Anser fabalis",
+      "sortering": "860"
+    },
+    {
+      "soortid": "125",
+      "soortnaam": "Kleinst Waterhoen",
+      "soortkey": "Kleinst Waterhoen",
+      "latin": "Zapornia pusilla",
+      "sortering": "18710"
+    },
+    {
+      "soortid": "822",
+      "soortnaam": "Rüppells Grasmus",
+      "soortkey": "Rüppells Grasmus",
+      "latin": "Curruca ruppeli",
+      "sortering": "81170"
+    },
+    {
+      "soortid": "465",
+      "soortnaam": "Roodhalsgans",
+      "soortkey": "Roodhalsgans",
+      "latin": "Branta ruficollis",
+      "sortering": "750"
+    },
+    {
+      "soortid": "346",
+      "soortnaam": "Sperwergrasmus",
+      "soortkey": "Sperwergrasmus",
+      "latin": "Curruca nisoria",
+      "sortering": "81030"
+    },
+    {
+      "soortid": "380",
+      "soortnaam": "Boomkruiper",
+      "soortkey": "Boomkr",
+      "latin": "Certhia brachydactyla",
+      "sortering": "87460"
+    },
+    {
+      "soortid": "488",
+      "soortnaam": "Donsstormvogel",
+      "soortkey": "Donsstormvogel",
+      "latin": "Pterodroma mollis",
+      "sortering": "24380"
+    },
+    {
+      "soortid": "911",
+      "soortnaam": "Kleine Canadese Gans",
+      "soortkey": "Kleine Canadese Gans",
+      "latin": "Branta hutchinsii",
+      "sortering": "790"
+    },
+    {
+      "soortid": "979",
+      "soortnaam": "Zeehond spec.",
+      "soortkey": "Zeehond spec.",
+      "latin": "Phoca vitulina/Halichoerus grypus",
+      "sortering": "100690"
+    },
+    {
+      "soortid": "681",
+      "soortnaam": "Heuglins Meeuw",
+      "soortkey": "Heuglins Meeuw",
+      "latin": "Larus heuglini",
+      "sortering": "23001"
+    },
+    {
+      "soortid": "1112",
+      "soortnaam": "Dikkopschildpad",
+      "soortkey": "Dikkopschildpad",
+      "latin": "Caretta Caretta",
+      "sortering": "120000"
+    },
+    {
+      "soortid": "404",
+      "soortnaam": "Europese Kanarie",
+      "soortkey": "EuroKan",
+      "latin": "Serinus serinus",
+      "sortering": "102520"
+    },
+    {
+      "soortid": "353",
+      "soortnaam": "Pallas' Boszanger",
+      "soortkey": "Pallas' Boszanger",
+      "latin": "Phylloscopus proregulus",
+      "sortering": "77190"
+    },
+    {
+      "soortid": "457",
+      "soortnaam": "duiker spec.",
+      "soortkey": "duikerSpec",
+      "latin": "Gavia spec.",
+      "sortering": "23472"
+    },
+    {
+      "soortid": "247",
+      "soortnaam": "Ruigpootuil",
+      "soortkey": "Ruigpootuil",
+      "latin": "Aegolius funereus",
+      "sortering": "30450"
+    },
+    {
+      "soortid": "1134",
+      "soortnaam": "Arabische Babbelaar",
+      "soortkey": "Arabische Babbelaar",
+      "latin": "Argya squamiceps",
+      "sortering": "85180"
+    },
+    {
+      "soortid": "1035",
+      "soortnaam": "Bruinnekraaf",
+      "soortkey": "Bruinnekraaf",
+      "latin": "Corvus ruficollis",
+      "sortering": "70630"
+    },
+    {
+      "soortid": "692",
+      "soortnaam": "Koningsstern",
+      "soortkey": "Koningsstern",
+      "latin": "Thalasseus maximus",
+      "sortering": "22500"
+    },
+    {
+      "soortid": "507",
+      "soortnaam": "Kroeskoppelikaan",
+      "soortkey": "Kroeskoppelikaan",
+      "latin": "Pelecanus crispus",
+      "sortering": "27110"
+    },
+    {
+      "soortid": "915",
+      "soortnaam": "geelpootmeeuw spec.",
+      "soortkey": "geelpootmeeuw spec.",
+      "latin": "L. michahellis/cachinnans",
+      "sortering": "22962"
+    },
+    {
+      "soortid": "149",
+      "soortnaam": "Witstaartkievit",
+      "soortkey": "Witstaartkievit",
+      "latin": "Vanellus leucurus",
+      "sortering": "20410"
+    },
+    {
+      "soortid": "72",
+      "soortnaam": "Topper",
+      "soortkey": "Topper",
+      "latin": "Aythya marila",
+      "sortering": "2040"
+    },
+    {
+      "soortid": "1125",
+      "soortnaam": "Kleine Monarchvlinder",
+      "soortkey": "Kleine Monarchvlinder",
+      "latin": "Danaus chrysippus",
+      "sortering": "80090"
+    },
+    {
+      "soortid": "29",
+      "soortnaam": "Blauwe Reiger",
+      "soortkey": "BlaR",
+      "latin": "Ardea cinerea",
+      "sortering": "26970"
+    },
+    {
+      "soortid": "4866",
+      "soortnaam": "Grijswang-/ Bicknells Dwerglijster",
+      "soortkey": "Grijswang-/ Bicknells Dwerglijster",
+      "latin": "Catharus minimus/Catharus bicknelli",
+      "sortering": "89612"
+    },
+    {
+      "soortid": "267",
+      "soortnaam": "Boomleeuwerik",
+      "soortkey": "Booml",
+      "latin": "Lullula arborea",
+      "sortering": "73380"
+    },
+    {
+      "soortid": "388",
+      "soortnaam": "Ekster",
+      "soortkey": "Ekster",
+      "latin": "Pica pica",
+      "sortering": "70030"
+    },
+    {
+      "soortid": "330",
+      "soortnaam": "Sprinkhaanzanger",
+      "soortkey": "Sprinkh",
+      "latin": "Locustella naevia",
+      "sortering": "78640"
+    },
+    {
+      "soortid": "467",
+      "soortnaam": "Aziatische Goudplevier",
+      "soortkey": "Aziatische Goudplevier",
+      "latin": "Pluvialis fulva",
+      "sortering": "20030"
+    },
+    {
+      "soortid": "702",
+      "soortnaam": "Brilstern",
+      "soortkey": "Brilstern",
+      "latin": "Onychoprion anaethetus",
+      "sortering": "22140"
+    },
+    {
+      "soortid": "1185",
+      "soortnaam": "Bleke Rotsmus",
+      "soortkey": "Bleke Rotsmus",
+      "latin": "Carpospiza brachydactyla",
+      "sortering": "96670"
+    },
+    {
+      "soortid": "138",
+      "soortnaam": "Vorkstaartplevier",
+      "soortkey": "Vorkstaartplevier",
+      "latin": "Glareola pratincola",
+      "sortering": "22010"
+    },
+    {
+      "soortid": "861",
+      "soortnaam": "Blauwe Ekster",
+      "soortkey": "Blauwe Ekster",
+      "latin": "Cyanopica cooki",
+      "sortering": "69830"
+    },
+    {
+      "soortid": "147",
+      "soortnaam": "Zilverplevier",
+      "soortkey": "Zilverpl",
+      "latin": "Pluvialis squatarola",
+      "sortering": "20010"
+    },
+    {
+      "soortid": "158",
+      "soortnaam": "Gestreepte Strandloper",
+      "soortkey": "Gestreepte Strandloper",
+      "latin": "Calidris melanotos",
+      "sortering": "21820"
+    },
+    {
+      "soortid": "298",
+      "soortnaam": "Nachtegaal",
+      "soortkey": "Nachtegaal",
+      "latin": "Luscinia megarhynchos",
+      "sortering": "92580"
+    },
+    {
+      "soortid": "747",
+      "soortnaam": "Woestijnleeuwerik",
+      "soortkey": "Woestijnleeuwerik",
+      "latin": "Ammomanes deserti",
+      "sortering": "72930"
+    },
+    {
+      "soortid": "775",
+      "soortnaam": "Rosse Waaierstaart",
+      "soortkey": "Rosse Waaierstaart",
+      "latin": "Cercotrichas galactotes",
+      "sortering": "91020"
+    },
+    {
+      "soortid": "101",
+      "soortnaam": "Buizerd",
+      "soortkey": "Buizerd",
+      "latin": "Buteo buteo",
+      "sortering": "29750"
+    },
+    {
+      "soortid": "257",
+      "soortnaam": "Draaihals",
+      "soortkey": "Draaihals",
+      "latin": "Jynx torquilla",
+      "sortering": "37610"
+    },
+    {
+      "soortid": "468",
+      "soortnaam": "Amerikaanse Goudplevier",
+      "soortkey": "Amerikaanse Goudplevier",
+      "latin": "Pluvialis dominica",
+      "sortering": "20040"
+    },
+    {
+      "soortid": "34",
+      "soortnaam": "Lepelaar",
+      "soortkey": "Lepel",
+      "latin": "Platalea leucorodia",
+      "sortering": "26260"
+    },
+    {
+      "soortid": "833",
+      "soortnaam": "Balkanbergfluiter",
+      "soortkey": "Balkanbergfluiter",
+      "latin": "Phylloscopus orientalis",
+      "sortering": "77090"
+    },
+    {
+      "soortid": "510",
+      "soortnaam": "pelikaan spec.",
+      "soortkey": "pelikaan spec.",
+      "latin": "Pelecanus spec.",
+      "sortering": "27152"
+    },
+    {
+      "soortid": "418",
+      "soortnaam": "Haakbek",
+      "soortkey": "Haakbek",
+      "latin": "Pinicola enucleator",
+      "sortering": "100910"
+    },
+    {
+      "soortid": "1075",
+      "soortnaam": "Gamma-uil",
+      "soortkey": "Gamma-uil",
+      "latin": "Autographa gamma",
+      "sortering": "80020"
+    },
+    {
+      "soortid": "105",
+      "soortnaam": "Schreeuwarend",
+      "soortkey": "Schreeuwarend",
+      "latin": "Clanga pomarina",
+      "sortering": "28080"
+    },
+    {
+      "soortid": "10",
+      "soortnaam": "Noordse Stormvogel",
+      "soortkey": "NoStorm",
+      "latin": "Fulmarus glacialis",
+      "sortering": "24170"
+    },
+    {
+      "soortid": "287",
+      "soortnaam": "Grote Gele Kwikstaart",
+      "soortkey": "GrGeleKw",
+      "latin": "Motacilla cinerea",
+      "sortering": "100110"
+    },
+    {
+      "soortid": "4605",
+      "soortnaam": "Zadellibel",
+      "soortkey": "Zadellibel",
+      "latin": "Anax ephippiger",
+      "sortering": "90004"
+    },
+    {
+      "soortid": "329",
+      "soortnaam": "Kleine Sprinkhaanzanger",
+      "soortkey": "Kleine Sprinkhaanzanger",
+      "latin": "Locustella lanceolata",
+      "sortering": "78580"
+    },
+    {
+      "soortid": "1509",
+      "soortnaam": "Stejnegers Roodborsttapuit",
+      "soortkey": "Stejnegers Roodborsttapuit",
+      "latin": "Saxicola stejnegeri",
+      "sortering": "93890"
+    },
+    {
+      "soortid": "112",
+      "soortnaam": "Smelleken",
+      "soortkey": "Smel",
+      "latin": "Falco columbarius",
+      "sortering": "40500"
+    },
+    {
+      "soortid": "508",
+      "soortnaam": "Kleine Pelikaan",
+      "soortkey": "Kleine Pelikaan",
+      "latin": "Pelecanus rufescens",
+      "sortering": "27090"
+    },
+    {
+      "soortid": "1188",
+      "soortnaam": "Westelijke Baardgrasmus",
+      "soortkey": "Westelijke Baardgrasmus",
+      "latin": "Curruca iberiae",
+      "sortering": "81200"
+    },
+    {
+      "soortid": "1005",
+      "soortnaam": "Muskaatvink",
+      "soortkey": "Muskaatvink",
+      "latin": "Lonchura punctulata",
+      "sortering": "98580"
+    },
+    {
+      "soortid": "500",
+      "soortnaam": "stormvogeltje spec.",
+      "soortkey": "stormvogeltje spec.",
+      "latin": "Oceanodroma spec.",
+      "sortering": "23982"
+    },
+    {
+      "soortid": "432",
+      "soortnaam": "Bruinkeelortolaan",
+      "soortkey": "Bruinkeelortolaan",
+      "latin": "Emberiza caesia",
+      "sortering": "103340"
+    },
+    {
+      "soortid": "60",
+      "soortnaam": "Siberische Taling",
+      "soortkey": "Siberische Taling",
+      "latin": "Sibirionetta formosa",
+      "sortering": "1400"
+    },
+    {
+      "soortid": "854",
+      "soortnaam": "Daurische Klauwier",
+      "soortkey": "Daurische Klauwier",
+      "latin": "Lanius isabellinus",
+      "sortering": "69270"
+    },
+    {
+      "soortid": "79",
+      "soortnaam": "Brilzee-eend",
+      "soortkey": "Brilzee-eend",
+      "latin": "Melanitta perspicillata",
+      "sortering": "2120"
+    },
+    {
+      "soortid": "37",
+      "soortnaam": "Kleine Zwaan",
+      "soortkey": "KlZwaan",
+      "latin": "Cygnus columbianus",
+      "sortering": "960"
+    },
+    {
+      "soortid": "284",
+      "soortnaam": "Noordse Kwikstaart",
+      "soortkey": "NrdseKwik",
+      "latin": "Motacilla flava thunbergi",
+      "sortering": "100051"
+    },
+    {
+      "soortid": "92",
+      "soortnaam": "Vale Gier",
+      "soortkey": "Vale Gier",
+      "latin": "Gyps fulvus",
+      "sortering": "27630"
+    },
+    {
+      "soortid": "985",
+      "soortnaam": "Stadsduif",
+      "soortkey": "Stadsduif",
+      "latin": "Columba livia f. domestica",
+      "sortering": "13772"
+    },
+    {
+      "soortid": "394",
+      "soortnaam": "Zwarte Kraai",
+      "soortkey": "ZwKraai",
+      "latin": "Corvus corone",
+      "sortering": "70500"
+    },
+    {
+      "soortid": "199",
+      "soortnaam": "Kleine Kokmeeuw",
+      "soortkey": "Kleine Kokmeeuw",
+      "latin": "Chroicocephalus philadelphia",
+      "sortering": "22620"
+    },
+    {
+      "soortid": "225",
+      "soortnaam": "Kortbekzeekoet",
+      "soortkey": "Kortbekzeekoet",
+      "latin": "Uria lomvia",
+      "sortering": "23310"
+    },
+    {
+      "soortid": "167",
+      "soortnaam": "Watersnip",
+      "soortkey": "WaterSn",
+      "latin": "Gallinago gallinago",
+      "sortering": "21280"
+    },
+    {
+      "soortid": "1478",
+      "soortnaam": "Pluvialis sp.",
+      "soortkey": "Pluvialis sp.",
+      "latin": "Pluvialis sp.",
+      "sortering": "20012"
+    },
+    {
+      "soortid": "976",
+      "soortnaam": "Grijze Zeehond",
+      "soortkey": "GrijZeeho",
+      "latin": "Halichoerus grypus",
+      "sortering": "100660"
+    },
+    {
+      "soortid": "734",
+      "soortnaam": "Siberische Gierzwaluw",
+      "soortkey": "Siberische Gierzwaluw",
+      "latin": "Apus pacificus",
+      "sortering": "7830"
+    },
+    {
+      "soortid": "1049",
+      "soortnaam": "Westelijke Vale Spotvogel",
+      "soortkey": "Westelijke Vale Spotvogel",
+      "latin": "Iduna opaca",
+      "sortering": "78430"
+    },
+    {
+      "soortid": "599",
+      "soortnaam": "Sakervalk",
+      "soortkey": "Sakervalk",
+      "latin": "Falco cherrug",
+      "sortering": "40630"
+    },
+    {
+      "soortid": "82",
+      "soortnaam": "Nonnetje",
+      "soortkey": "Nonnetje",
+      "latin": "Mergellus albellus",
+      "sortering": "2220"
+    },
+    {
+      "soortid": "81",
+      "soortnaam": "Brilduiker",
+      "soortkey": "Brildui",
+      "latin": "Bucephala clangula",
+      "sortering": "2200"
+    },
+    {
+      "soortid": "218",
+      "soortnaam": "Noordse Stern",
+      "soortkey": "NoStern",
+      "latin": "Sterna paradisaea",
+      "sortering": "22350"
+    },
+    {
+      "soortid": "20",
+      "soortnaam": "Aalscholver",
+      "soortkey": "Aal",
+      "latin": "Phalacrocorax carbo",
+      "sortering": "25750"
+    },
+    {
+      "soortid": "378",
+      "soortnaam": "Boomklever",
+      "soortkey": "Boomkl",
+      "latin": "Sitta europaea",
+      "sortering": "87360"
+    },
+    {
+      "soortid": "733",
+      "soortnaam": "Vale Gierzwaluw",
+      "soortkey": "Vale Gierzwaluw",
+      "latin": "Apus pallidus",
+      "sortering": "7770"
+    },
+    {
+      "soortid": "408",
+      "soortnaam": "Kneu",
+      "soortkey": "Kneu",
+      "latin": "Linaria cannabina",
+      "sortering": "102340"
+    },
+    {
+      "soortid": "299",
+      "soortnaam": "Blauwborst",
+      "soortkey": "BlaBorst",
+      "latin": "Luscinia svecica",
+      "sortering": "92590"
+    },
+    {
+      "soortid": "21",
+      "soortnaam": "Kuifaalscholver",
+      "soortkey": "Kuifaal",
+      "latin": "Gulosus aristotelis",
+      "sortering": "25760"
+    },
+    {
+      "soortid": "47",
+      "soortnaam": "Ross' Gans",
+      "soortkey": "Ross' Gans",
+      "latin": "Anser rossii",
+      "sortering": "820"
+    },
+    {
+      "soortid": "1160",
+      "soortnaam": "Laatvlieger",
+      "soortkey": "Laatvlieger",
+      "latin": "Eptesicus serotinus",
+      "sortering": "101030"
+    },
+    {
+      "soortid": "983",
+      "soortnaam": "Atalanta",
+      "soortkey": "Atalanta",
+      "latin": "Vanessa atalanta",
+      "sortering": "80410"
+    },
+    {
+      "soortid": "18",
+      "soortnaam": "Roodsnavelkeerkringvogel",
+      "soortkey": "Roodsnavelkeerkringvogel",
+      "latin": "Phaethon aethereus",
+      "sortering": "23400"
+    },
+    {
+      "soortid": "95",
+      "soortnaam": "Bruine Kiekendief",
+      "soortkey": "BrKiek",
+      "latin": "Circus aeruginosus",
+      "sortering": "28890"
+    },
+    {
+      "soortid": "593",
+      "soortnaam": "Kleine Torenvalk",
+      "soortkey": "Kleine Torenvalk",
+      "latin": "Falco naumanni",
+      "sortering": "40290"
+    },
+    {
+      "soortid": "417",
+      "soortnaam": "Roodmus",
+      "soortkey": "Roodmus",
+      "latin": "Carpodacus erythrinus",
+      "sortering": "101140"
+    },
+    {
+      "soortid": "4612",
+      "soortnaam": "Bloedrode heidelibel",
+      "soortkey": "Bloedrode heidelibel",
+      "latin": "Sympetrum sanguineum",
+      "sortering": "90350"
+    },
+    {
+      "soortid": "4865",
+      "soortnaam": "Gierzwaluw / Vale Gierzwaluw",
+      "soortkey": "Gierzwaluw / Vale Gierzwaluw",
+      "latin": "Apus apus / Apus pallidus",
+      "sortering": "7772"
+    },
+    {
+      "soortid": "1074",
+      "soortnaam": "koolwitje spec.",
+      "soortkey": "koolwitje spec.",
+      "latin": "Pieris spec.ies",
+      "sortering": "80350"
+    },
+    {
+      "soortid": "268",
+      "soortnaam": "Veldleeuwerik",
+      "soortkey": "Veldl",
+      "latin": "Alauda arvensis",
+      "sortering": "73490"
+    },
+    {
+      "soortid": "1090",
+      "soortnaam": "Rosse Vleermuis",
+      "soortkey": "Rosse Vleermuis",
+      "latin": "Nyctalus noctula",
+      "sortering": "101150"
+    },
+    {
+      "soortid": "331",
+      "soortnaam": "Krekelzanger",
+      "soortkey": "Krekelzanger",
+      "latin": "Locustella fluviatilis",
+      "sortering": "78600"
+    },
+    {
+      "soortid": "624",
+      "soortnaam": "Jufferkraanvogel",
+      "soortkey": "Jufferkraanvogel",
+      "latin": "Grus virgo",
+      "sortering": "19110"
+    },
+    {
+      "soortid": "256",
+      "soortnaam": "Hop",
+      "soortkey": "Hop",
+      "latin": "Upupa epops",
+      "sortering": "32890"
+    },
+    {
+      "soortid": "374",
+      "soortnaam": "Kuifmees",
+      "soortkey": "Kuifmees",
+      "latin": "Lophophanes cristatus",
+      "sortering": "72090"
+    },
+    {
+      "soortid": "301",
+      "soortnaam": "Blauwstaart",
+      "soortkey": "Blauwstaart",
+      "latin": "Tarsiger cyanurus",
+      "sortering": "93500"
+    },
+    {
+      "soortid": "323",
+      "soortnaam": "Kramsvogel",
+      "soortkey": "Krams",
+      "latin": "Turdus pilaris",
+      "sortering": "90410"
+    },
+    {
+      "soortid": "960",
+      "soortnaam": "Dwergpotvis",
+      "soortkey": "Dwergpotvis",
+      "latin": "Kogia breviceps",
+      "sortering": "100100"
+    },
+    {
+      "soortid": "39",
+      "soortnaam": "rietgans spec.",
+      "soortkey": "rietgasp",
+      "latin": "Anser fabalis/serrirostris/brachyrhynchus",
+      "sortering": "882"
+    },
+    {
+      "soortid": "751",
+      "soortnaam": "Bergkalanderleeuwerik",
+      "soortkey": "Bergkalanderleeuwerik",
+      "latin": "Melanocorypha bimaculata",
+      "sortering": "73650"
+    },
+    {
+      "soortid": "154",
+      "soortnaam": "Kleine Strandloper",
+      "soortkey": "KlStrand",
+      "latin": "Calidris minuta",
+      "sortering": "21790"
+    },
+    {
+      "soortid": "157",
+      "soortnaam": "Bairds Strandloper",
+      "soortkey": "Bairds Strandloper",
+      "latin": "Calidris bairdii",
+      "sortering": "21780"
+    },
+    {
+      "soortid": "139",
+      "soortnaam": "Steppevorkstaartplevier",
+      "soortkey": "Steppevorkstaartplevier",
+      "latin": "Glareola nordmanni",
+      "sortering": "22000"
+    },
+    {
+      "soortid": "1135",
+      "soortnaam": "Cyprusgrasmus",
+      "soortkey": "Cyprusgrasmus",
+      "latin": "Curruca melanothorax",
+      "sortering": "81180"
+    },
+    {
+      "soortid": "962",
+      "soortnaam": "Narwal",
+      "soortkey": "Narwal",
+      "latin": "Monodon monoceros",
+      "sortering": "100120"
+    },
+    {
+      "soortid": "4611",
+      "soortnaam": "Bruinrode heidelibel",
+      "soortkey": "Bruinrode heidelibel",
+      "latin": "Sympetrum striolatum",
+      "sortering": "90340"
+    },
+    {
+      "soortid": "127",
+      "soortnaam": "Waterhoen",
+      "soortkey": "Waterhoen",
+      "latin": "Gallinula chloropus",
+      "sortering": "18160"
+    },
+    {
+      "soortid": "365",
+      "soortnaam": "Grauwe Vliegenvanger",
+      "soortkey": "GrVlieg",
+      "latin": "Muscicapa striata",
+      "sortering": "91570"
+    },
+    {
+      "soortid": "864",
+      "soortnaam": "Alpenkraai",
+      "soortkey": "Alpenkraai",
+      "latin": "Pyrrhocorax pyrrhocorax",
+      "sortering": "70180"
+    },
+    {
+      "soortid": "973",
+      "soortnaam": "Bultrug",
+      "soortkey": "Bultrug",
+      "latin": "Megaptera novaeangliae",
+      "sortering": "100230"
+    },
+    {
+      "soortid": "1152",
+      "soortnaam": "Gewone Dwergvleermuis",
+      "soortkey": "Gewone Dwergvleermuis",
+      "latin": "Pipistrellus pipistrellus",
+      "sortering": "101170"
+    },
+    {
+      "soortid": "989",
+      "soortnaam": "kleine meeuw spec.",
+      "soortkey": "kleine meeuw spec.",
+      "latin": "Small gull",
+      "sortering": "22672"
+    },
+    {
+      "soortid": "440",
+      "soortnaam": "Grauwe Gors",
+      "soortkey": "GrGors",
+      "latin": "Emberiza calandra",
+      "sortering": "103230"
+    },
+    {
+      "soortid": "1193",
+      "soortnaam": "zee-eend spec.",
+      "soortkey": "zee-eend spec.",
+      "latin": "Melanitta spec.",
+      "sortering": "2172"
+    },
+    {
+      "soortid": "999",
+      "soortnaam": "Buizerd/Wespendief",
+      "soortkey": "Buz/Wesp",
+      "latin": "Buteo buteo/Pernis apivorus",
+      "sortering": "29752"
+    },
+    {
+      "soortid": "293",
+      "soortnaam": "Winterkoning",
+      "soortkey": "Winterk",
+      "latin": "Troglodytes troglodytes",
+      "sortering": "86660"
+    },
+    {
+      "soortid": "939",
+      "soortnaam": "Geoorde Fuut / Kuifduiker",
+      "soortkey": "Geoorde Fuut / Kuifduiker",
+      "latin": "P. nigricollis/P. auritus",
+      "sortering": "19342"
+    },
+    {
+      "soortid": "83",
+      "soortnaam": "Middelste Zaagbek",
+      "soortkey": "MiZa",
+      "latin": "Mergus serrator",
+      "sortering": "2270"
+    },
+    {
+      "soortid": "397",
+      "soortnaam": "Spreeuw",
+      "soortkey": "Spreeuw",
+      "latin": "Sturnus vulgaris",
+      "sortering": "88620"
+    },
+    {
+      "soortid": "413",
+      "soortnaam": "Witstuitbarmsijs",
+      "soortkey": "Witstuitbarmsijs",
+      "latin": "Acanthis hornemanni",
+      "sortering": "102390"
+    },
+    {
+      "soortid": "122",
+      "soortnaam": "Waterral",
+      "soortkey": "Waterra",
+      "latin": "Rallus aquaticus",
+      "sortering": "17740"
+    },
+    {
+      "soortid": "133",
+      "soortnaam": "Scholekster",
+      "soortkey": "Schol",
+      "latin": "Haematopus ostralegus",
+      "sortering": "19840"
+    },
+    {
+      "soortid": "164",
+      "soortnaam": "Blonde Ruiter",
+      "soortkey": "Blonde Ruiter",
+      "latin": "Calidris subruficollis",
+      "sortering": "21730"
+    },
+    {
+      "soortid": "166",
+      "soortnaam": "Bokje",
+      "soortkey": "Bokje",
+      "latin": "Lymnocryptes minimus",
+      "sortering": "21040"
+    },
+    {
+      "soortid": "5251",
+      "soortnaam": "Aziatische Grote Zee-eend",
+      "soortkey": "Aziatische Grote Zee-eend",
+      "latin": "Melanitta stejnegeri",
+      "sortering": "2150"
+    },
+    {
+      "soortid": "140",
+      "soortnaam": "Kleine Plevier",
+      "soortkey": "KlPlev",
+      "latin": "Charadrius dubius",
+      "sortering": "20180"
+    },
+    {
+      "soortid": "4622",
+      "soortnaam": "Gewone Oeverlibel",
+      "soortkey": "Gewone Oeverlibel",
+      "latin": "Orthetrum cancellatum",
+      "sortering": "90450"
+    },
+    {
+      "soortid": "375",
+      "soortnaam": "Zwarte Mees",
+      "soortkey": "ZwMees",
+      "latin": "Periparus ater",
+      "sortering": "72050"
+    },
+    {
+      "soortid": "452",
+      "soortnaam": "Canadese x Grauwe Gans",
+      "soortkey": "Canadese x Grauwe Gans",
+      "latin": "B. canadensis x A. anser",
+      "sortering": "772"
+    },
+    {
+      "soortid": "351",
+      "soortnaam": "Grauwe Fitis",
+      "soortkey": "Grauwe Fitis",
+      "latin": "Phylloscopus trochiloides",
+      "sortering": "77540"
+    },
+    {
+      "soortid": "845",
+      "soortnaam": "Pleskes Mees",
+      "soortkey": "Pleskes Mees",
+      "latin": "Cyanistes caeruleus x cyanus",
+      "sortering": "72381"
+    },
+    {
+      "soortid": "383",
+      "soortnaam": "Grauwe Klauwier",
+      "soortkey": "Grauwe Klauwier",
+      "latin": "Lanius collurio",
+      "sortering": "69280"
+    },
+    {
+      "soortid": "743",
+      "soortnaam": "Witrugspecht",
+      "soortkey": "Witrugspecht",
+      "latin": "Dendrocopos leucotos",
+      "sortering": "39030"
+    },
+    {
+      "soortid": "303",
+      "soortnaam": "Zwarte Roodstaart",
+      "soortkey": "ZwRoods",
+      "latin": "Phoenicurus ochruros",
+      "sortering": "93610"
+    },
+    {
+      "soortid": "959",
+      "soortnaam": "Tuimelaar",
+      "soortkey": "Tuimelaar",
+      "latin": "Tursiops truncatus",
+      "sortering": "100090"
+    },
+    {
+      "soortid": "731",
+      "soortnaam": "Schoorsteengierzwaluw",
+      "soortkey": "Schoorsteengierzwaluw",
+      "latin": "Chaetura pelagica",
+      "sortering": "7540"
+    },
+    {
+      "soortid": "2297",
+      "soortnaam": "Escape onbekend",
+      "soortkey": "Escape onbekend",
+      "latin": "avis spec. (escape)",
+      "sortering": "108062"
+    },
+    {
+      "soortid": "859",
+      "soortnaam": "Maskerklauwier",
+      "soortkey": "Maskerklauwier",
+      "latin": "Lanius nubicus",
+      "sortering": "69150"
+    },
+    {
+      "soortid": "212",
+      "soortnaam": "Ivoormeeuw",
+      "soortkey": "Ivoormeeuw",
+      "latin": "Pagophila eburnea",
+      "sortering": "22580"
+    },
+    {
+      "soortid": "414",
+      "soortnaam": "Witbandkruisbek",
+      "soortkey": "Witbandkruisbek",
+      "latin": "Loxia leucoptera",
+      "sortering": "102440"
+    },
+    {
+      "soortid": "971",
+      "soortnaam": "Blauwe Vinvis",
+      "soortkey": "Blauwe Vinvis",
+      "latin": "Balaenoptera musculus",
+      "sortering": "100210"
+    },
+    {
+      "soortid": "505",
+      "soortnaam": "aalscholver spec.",
+      "soortkey": "aalscholver spec.",
+      "latin": "Phalacrocorax spec.",
+      "sortering": "25752"
+    },
+    {
+      "soortid": "156",
+      "soortnaam": "Bonapartes Strandloper",
+      "soortkey": "Bona",
+      "latin": "Calidris fuscicollis",
+      "sortering": "21810"
+    },
+    {
+      "soortid": "68",
+      "soortnaam": "Tafeleend",
+      "soortkey": "Tafel",
+      "latin": "Aythya ferina",
+      "sortering": "1960"
+    },
+    {
+      "soortid": "489",
+      "soortnaam": "Gon-gon",
+      "soortkey": "Gon-gon",
+      "latin": "Pterodroma feae",
+      "sortering": "24400"
+    },
+    {
+      "soortid": "108",
+      "soortnaam": "Havikarend",
+      "soortkey": "Havikarend",
+      "latin": "Aquila fasciata",
+      "sortering": "28240"
+    },
+    {
+      "soortid": "12",
+      "soortnaam": "Grote Pijlstormvogel",
+      "soortkey": "GrotePijl",
+      "latin": "Ardenna gravis",
+      "sortering": "24860"
+    },
+    {
+      "soortid": "406",
+      "soortnaam": "Putter",
+      "soortkey": "Putter",
+      "latin": "Carduelis carduelis",
+      "sortering": "102480"
+    },
+    {
+      "soortid": "250",
+      "soortnaam": "Alpengierzwaluw",
+      "soortkey": "Alpengierzwaluw",
+      "latin": "Tachymarptis melba",
+      "sortering": "7710"
+    },
+    {
+      "soortid": "463",
+      "soortnaam": "Zwarte Rotgans",
+      "soortkey": "Zwarte Rotgans",
+      "latin": "Branta nigricans",
+      "sortering": "741"
+    },
+    {
+      "soortid": "957",
+      "soortnaam": "Zwarte zwaardwalvis",
+      "soortkey": "Zwarte zwaardwalvis",
+      "latin": "Pseudorca crassidens",
+      "sortering": "100070"
+    },
+    {
+      "soortid": "322",
+      "soortnaam": "Zwartkeellijster",
+      "soortkey": "Zwartkeellijster",
+      "latin": "Turdus atrogularis",
+      "sortering": "90430"
+    },
+    {
+      "soortid": "1141",
+      "soortnaam": "Kaspische Roodborsttapuit ",
+      "soortkey": "Kaspische Roodborsttapuit ",
+      "latin": "Saxicola maurus hemprichii",
+      "sortering": "93931"
+    },
+    {
+      "soortid": "890",
+      "soortnaam": "Brilparulazanger",
+      "soortkey": "Brilparulazanger",
+      "latin": "Setophaga americana",
+      "sortering": "106700"
+    },
+    {
+      "soortid": "541",
+      "soortnaam": "zwaan spec.",
+      "soortkey": "zwaan spec.",
+      "latin": "Cygnus spec.",
+      "sortering": "972"
+    },
+    {
+      "soortid": "325",
+      "soortnaam": "Koperwiek",
+      "soortkey": "Koperw",
+      "latin": "Turdus iliacus",
+      "sortering": "90230"
+    },
+    {
+      "soortid": "310",
+      "soortnaam": "Woestijntapuit",
+      "soortkey": "Woestijntapuit",
+      "latin": "Oenanthe deserti",
+      "sortering": "94190"
+    },
+    {
+      "soortid": "502",
+      "soortnaam": "Grote Aalscholver",
+      "soortkey": "Grote Aalscholver",
+      "latin": "Phalacrocorax carbo carbo",
+      "sortering": "25751"
+    },
+    {
+      "soortid": "4646",
+      "soortnaam": "Vale-/Yelkouanpijlstormvogel",
+      "soortkey": "Vale-/Yelkouanpijlstormvogel",
+      "latin": "Puffinus mauretanicus / yelkouan",
+      "sortering": "24902"
+    },
+    {
+      "soortid": "425",
+      "soortnaam": "IJsgors",
+      "soortkey": "IJsgors",
+      "latin": "Calcarius lapponicus",
+      "sortering": "103150"
+    },
+    {
+      "soortid": "69",
+      "soortnaam": "Ringsnaveleend",
+      "soortkey": "Ringsnaveleend",
+      "latin": "Aythya collaris",
+      "sortering": "2020"
+    },
+    {
+      "soortid": "1067",
+      "soortnaam": "Groot koolwitje",
+      "soortkey": "Groot koolwitje",
+      "latin": "Pieris brassicae",
+      "sortering": "80320"
+    },
+    {
+      "soortid": "188",
+      "soortnaam": "Grote Franjepoot",
+      "soortkey": "Grote Franjepoot",
+      "latin": "Phalaropus tricolor",
+      "sortering": "21360"
+    },
+    {
+      "soortid": "1100",
+      "soortnaam": "Torenvalk/Kleine Torenvalk",
+      "soortkey": "TV/KleineTV",
+      "latin": "Falco tinnunculus/naumanni",
+      "sortering": "40302"
+    },
+    {
+      "soortid": "214",
+      "soortnaam": "Reuzenstern",
+      "soortkey": "Reuzenstern",
+      "latin": "Hydroprogne caspia",
+      "sortering": "22260"
+    },
+    {
+      "soortid": "42",
+      "soortnaam": "Kleine Rietgans",
+      "soortkey": "KlRiet",
+      "latin": "Anser brachyrhynchus",
+      "sortering": "870"
+    },
+    {
+      "soortid": "289",
+      "soortnaam": "Witte Kwikstaart",
+      "soortkey": "WitteKwik",
+      "latin": "Motacilla alba alba",
+      "sortering": "100130"
+    },
+    {
+      "soortid": "25",
+      "soortnaam": "Ralreiger",
+      "soortkey": "Ralreiger",
+      "latin": "Ardeola ralloides",
+      "sortering": "26850"
+    },
+    {
+      "soortid": "461",
+      "soortnaam": "Wilsons Stormvogeltje",
+      "soortkey": "Wilsons Stormvogeltje",
+      "latin": "Oceanites oceanicus",
+      "sortering": "23660"
+    },
+    {
+      "soortid": "312",
+      "soortnaam": "Goudlijster",
+      "soortkey": "Goudlijster",
+      "latin": "Zoothera aurea",
+      "sortering": "89720"
+    },
+    {
+      "soortid": "410",
+      "soortnaam": "Barmsijs",
+      "soortkey": "Barmsijs",
+      "latin": "Acanthis spec.",
+      "sortering": "102392"
+    },
+    {
+      "soortid": "455",
+      "soortnaam": "jager spec.",
+      "soortkey": "jagerSpec",
+      "latin": "Stercorarius spec.",
+      "sortering": "23062"
+    },
+    {
+      "soortid": "33",
+      "soortnaam": "Zwarte Ibis",
+      "soortkey": "Zwarte Ibis",
+      "latin": "Plegadis falcinellus",
+      "sortering": "26220"
+    },
+    {
+      "soortid": "265",
+      "soortnaam": "Kortteenleeuwerik",
+      "soortkey": "Kortteenleeuwerik",
+      "latin": "Calandrella brachydactyla",
+      "sortering": "73640"
+    },
+    {
+      "soortid": "120",
+      "soortnaam": "Kwartel",
+      "soortkey": "Kwartel",
+      "latin": "Coturnix coturnix",
+      "sortering": "5050"
+    },
+    {
+      "soortid": "291",
+      "soortnaam": "Pestvogel",
+      "soortkey": "Pestv",
+      "latin": "Bombycilla garrulus",
+      "sortering": "71760"
+    },
+    {
+      "soortid": "1063",
+      "soortnaam": "Mees spec.",
+      "soortkey": "Mees spec.",
+      "latin": "Parus spec.",
+      "sortering": "72422"
+    },
+    {
+      "soortid": "281",
+      "soortnaam": "gele kwikstaart spec.",
+      "soortkey": "geleKwSpec",
+      "latin": "Motacilla flava",
+      "sortering": "100052"
+    },
+    {
+      "soortid": "8",
+      "soortnaam": "Kuifduiker",
+      "soortkey": "Kuifdkr",
+      "latin": "Podiceps auritus",
+      "sortering": "19330"
+    },
+    {
+      "soortid": "872",
+      "soortnaam": "Spaanse Mus",
+      "soortkey": "Spaanse Mus",
+      "latin": "Passer hispaniolensis",
+      "sortering": "96990"
+    }
+  ]
+}

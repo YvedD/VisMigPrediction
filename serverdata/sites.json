@@ -1,0 +1,100 @@
+{
+  "json": [
+    {
+      "telpostid": "3949",
+      "telpostnaam": "Bredene Merelstraat nachttrek",
+      "r1": "nvt",
+      "r2": "nvt",
+      "typetelpost": "5",
+      "protocolid": "1"
+    },
+    {
+      "telpostid": "3745",
+      "telpostnaam": "Bufferbekken Bredene",
+      "r1": "ZW",
+      "r2": "NO",
+      "typetelpost": "1",
+      "protocolid": "1"
+    },
+    {
+      "telpostid": "79",
+      "telpostnaam": "Duinbrug",
+      "r1": "ZW",
+      "r2": "NO",
+      "typetelpost": "1",
+      "protocolid": "1"
+    },
+    {
+      "telpostid": "74",
+      "telpostnaam": "Fonteintjes",
+      "r1": "Z",
+      "r2": "N",
+      "typetelpost": "1",
+      "protocolid": "1"
+    },
+    {
+      "telpostid": "78",
+      "telpostnaam": "Kijkuit, De Haan",
+      "r1": "Z",
+      "r2": "N",
+      "typetelpost": "1",
+      "protocolid": "1"
+    },
+    {
+      "telpostid": "1949",
+      "telpostnaam": "Nieuwpoort oosterstaketsel (zeetrek)",
+      "r1": "Z",
+      "r2": "N",
+      "typetelpost": "2",
+      "protocolid": "1"
+    },
+    {
+      "telpostid": "5719",
+      "telpostnaam": "Poeyelheide Gierle",
+      "r1": "Z",
+      "r2": "N",
+      "typetelpost": "1",
+      "protocolid": "1"
+    },
+    {
+      "telpostid": "4310",
+      "telpostnaam": "Spanjaardduinen",
+      "r1": "ZW",
+      "r2": "NO",
+      "typetelpost": "1",
+      "protocolid": "1"
+    },
+    {
+      "telpostid": "5177",
+      "telpostnaam": "VoiceTally Testsite",
+      "r1": "ZW",
+      "r2": "NO",
+      "typetelpost": "1",
+      "protocolid": "1"
+    },
+    {
+      "telpostid": "3045",
+      "telpostnaam": "Wenduine Spioenkop",
+      "r1": "ZW",
+      "r2": "NO",
+      "typetelpost": "2",
+      "protocolid": "1"
+    },
+    {
+      "telpostid": "1989",
+      "telpostnaam": "Zandpanne De Haan",
+      "r1": "Z",
+      "r2": "N",
+      "typetelpost": "1",
+      "protocolid": "1"
+    },
+    {
+      "telpostid": "113",
+      "telpostnaam": "Zoutekreek Zandvoorde",
+      "r1": "Z",
+      "r2": "N",
+      "typetelpost": "1",
+      "protocolid": "1"
+    }
+  ]
+}

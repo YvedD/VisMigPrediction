@@ -1,0 +1,1747 @@
+{
+    "info": "VT5 Wetenschappelijke Taxonomie - Gebaseerd op effectieve waarnemingen.",
+    "generatedAt": "2026-08-31 22:30:04",
+    "groups": [
+        {
+            "guild": "Kustvogels (Zee-eenden/Duikers/Futen)",
+            "strategy": "VISMIG",
+            "scientificOrder": "Anseriformes / Gaviiformes / Podicipediformes",
+            "species": [
+                {
+                    "id": "81",
+                    "name": "Brilduiker",
+                    "latin": "Bucephala clangula"
+                },
+                {
+                    "id": "79",
+                    "name": "Brilzee-eend",
+                    "latin": "Melanitta perspicillata"
+                },
+                {
+                    "id": "73",
+                    "name": "Eider",
+                    "latin": "Somateria mollissima"
+                },
+                {
+                    "id": "84",
+                    "name": "Grote Zaagbek",
+                    "latin": "Mergus merganser"
+                },
+                {
+                    "id": "80",
+                    "name": "Grote Zee-eend",
+                    "latin": "Melanitta fusca"
+                },
+                {
+                    "id": "3",
+                    "name": "IJsduiker",
+                    "latin": "Gavia immer"
+                },
+                {
+                    "id": "77",
+                    "name": "IJseend",
+                    "latin": "Clangula hyemalis"
+                },
+                {
+                    "id": "83",
+                    "name": "Middelste Zaagbek",
+                    "latin": "Mergus serrator"
+                },
+                {
+                    "id": "82",
+                    "name": "Nonnetje",
+                    "latin": "Mergellus albellus"
+                },
+                {
+                    "id": "2",
+                    "name": "Parelduiker",
+                    "latin": "Gavia arctica"
+                },
+                {
+                    "id": "1",
+                    "name": "Roodkeelduiker",
+                    "latin": "Gavia stellata"
+                },
+                {
+                    "id": "78",
+                    "name": "Zwarte Zee-eend",
+                    "latin": "Melanitta nigra"
+                }
+            ]
+        },
+        {
+            "guild": "Landvogels",
+            "strategy": "VISMIG",
+            "scientificOrder": "Columbiformes / Apodiformes / Hirundinidae",
+            "species": [
+                {
+                    "id": "271",
+                    "name": "Boerenzwaluw",
+                    "latin": "Hirundo rustica"
+                },
+                {
+                    "id": "249",
+                    "name": "Gierzwaluw",
+                    "latin": "Apus apus"
+                },
+                {
+                    "id": "232",
+                    "name": "Holenduif",
+                    "latin": "Columba oenas"
+                },
+                {
+                    "id": "233",
+                    "name": "Houtduif",
+                    "latin": "Columba palumbus"
+                },
+                {
+                    "id": "736",
+                    "name": "Huisgierzwaluw",
+                    "latin": "Apus affinis"
+                },
+                {
+                    "id": "273",
+                    "name": "Huiszwaluw",
+                    "latin": "Delichon urbicum"
+                },
+                {
+                    "id": "270",
+                    "name": "Oeverzwaluw",
+                    "latin": "Riparia riparia"
+                },
+                {
+                    "id": "272",
+                    "name": "Roodstuitzwaluw",
+                    "latin": "Cecropis daurica"
+                },
+                {
+                    "id": "761",
+                    "name": "Rotszwaluw",
+                    "latin": "Ptyonoprogne rupestris"
+                },
+                {
+                    "id": "985",
+                    "name": "Stadsduif",
+                    "latin": "Columba livia f. domestica"
+                },
+                {
+                    "id": "234",
+                    "name": "Turkse Tortel",
+                    "latin": "Streptopelia decaocto"
+                },
+                {
+                    "id": "733",
+                    "name": "Vale Gierzwaluw",
+                    "latin": "Apus pallidus"
+                },
+                {
+                    "id": "235",
+                    "name": "Zomertortel",
+                    "latin": "Streptopelia turtur"
+                },
+                {
+                    "id": "720",
+                    "name": "tortel spec",
+                    "latin": "Streptopelia spec."
+                }
+            ]
+        },
+        {
+            "guild": "Meeuwen & Sterns",
+            "strategy": "VISMIG",
+            "scientificOrder": "Charadriiformes (Lari)",
+            "species": [
+                {
+                    "id": "702",
+                    "name": "Brilstern",
+                    "latin": "Onychoprion anaethetus"
+                },
+                {
+                    "id": "216",
+                    "name": "Dougalls Stern",
+                    "latin": "Sterna dougallii"
+                },
+                {
+                    "id": "211",
+                    "name": "Drieteenmeeuw",
+                    "latin": "Rissa tridactyla"
+                },
+                {
+                    "id": "197",
+                    "name": "Dwergmeeuw",
+                    "latin": "Hydrocoloeus minutus"
+                },
+                {
+                    "id": "220",
+                    "name": "Dwergstern",
+                    "latin": "Sternula albifrons"
+                },
+                {
+                    "id": "445",
+                    "name": "Geelpootmeeuw",
+                    "latin": "Larus michahellis"
+                },
+                {
+                    "id": "208",
+                    "name": "Grote Burgemeester",
+                    "latin": "Larus hyperboreus"
+                },
+                {
+                    "id": "209",
+                    "name": "Grote Mantelmeeuw",
+                    "latin": "Larus marinus"
+                },
+                {
+                    "id": "215",
+                    "name": "Grote Stern",
+                    "latin": "Thalasseus sandvicensis"
+                },
+                {
+                    "id": "207",
+                    "name": "Kleine Burgemeester",
+                    "latin": "Larus glaucoides"
+                },
+                {
+                    "id": "203",
+                    "name": "Kleine Mantelmeeuw",
+                    "latin": "Larus fuscus"
+                },
+                {
+                    "id": "200",
+                    "name": "Kokmeeuw",
+                    "latin": "Chroicocephalus ridibundus"
+                },
+                {
+                    "id": "213",
+                    "name": "Lachstern",
+                    "latin": "Gelochelidon nilotica"
+                },
+                {
+                    "id": "218",
+                    "name": "Noordse Stern",
+                    "latin": "Sterna paradisaea"
+                },
+                {
+                    "id": "444",
+                    "name": "Pontische Meeuw",
+                    "latin": "Larus cachinnans"
+                },
+                {
+                    "id": "214",
+                    "name": "Reuzenstern",
+                    "latin": "Hydroprogne caspia"
+                },
+                {
+                    "id": "202",
+                    "name": "Stormmeeuw",
+                    "latin": "Larus canus"
+                },
+                {
+                    "id": "217",
+                    "name": "Visdief",
+                    "latin": "Sterna hirundo"
+                },
+                {
+                    "id": "198",
+                    "name": "Vorkstaartmeeuw",
+                    "latin": "Xema sabini"
+                },
+                {
+                    "id": "223",
+                    "name": "Witvleugelstern",
+                    "latin": "Chlidonias leucopterus"
+                },
+                {
+                    "id": "221",
+                    "name": "Witwangstern",
+                    "latin": "Chlidonias hybrida"
+                },
+                {
+                    "id": "206",
+                    "name": "Zilvermeeuw",
+                    "latin": "Larus argentatus"
+                },
+                {
+                    "id": "222",
+                    "name": "Zwarte Stern",
+                    "latin": "Chlidonias niger"
+                },
+                {
+                    "id": "196",
+                    "name": "Zwartkopmeeuw",
+                    "latin": "Ichthyaetus melanocephalus"
+                }
+            ]
+        },
+        {
+            "guild": "Ooievaars (Zwevers)",
+            "strategy": "THERMAL",
+            "scientificOrder": "Ciconiiformes (Ciconiidae)",
+            "species": [
+                {
+                    "id": "32",
+                    "name": "Ooievaar",
+                    "latin": "Ciconia ciconia"
+                },
+                {
+                    "id": "31",
+                    "name": "Zwarte Ooievaar",
+                    "latin": "Ciconia nigra"
+                }
+            ]
+        },
+        {
+            "guild": "Overige Vogels",
+            "strategy": "VISMIG",
+            "scientificOrder": "Overig / Niet-geclassificeerd",
+            "species": [
+                {
+                    "id": "250",
+                    "name": "Alpengierzwaluw",
+                    "latin": "Tachymarptis melba"
+                },
+                {
+                    "id": "961",
+                    "name": "Beloega",
+                    "latin": "Delphinapterus leucas"
+                },
+                {
+                    "id": "244",
+                    "name": "Bosuil",
+                    "latin": "Strix aluco"
+                },
+                {
+                    "id": "491",
+                    "name": "Bulwers Stormvogel",
+                    "latin": "Bulweria bulwerii"
+                },
+                {
+                    "id": "452",
+                    "name": "Canadese x Grauwe Gans",
+                    "latin": "B. canadensis x A. anser"
+                },
+                {
+                    "id": "1924",
+                    "name": "Citroenvlinder",
+                    "latin": "Gonepteryx rhamni"
+                },
+                {
+                    "id": "35",
+                    "name": "Europese Flamingo",
+                    "latin": "Phoenicopterus roseus"
+                },
+                {
+                    "id": "121",
+                    "name": "Fazant",
+                    "latin": "Phasianus colchicus"
+                },
+                {
+                    "id": "1069",
+                    "name": "Gehakkelde aurelia",
+                    "latin": "Polygonia c-album"
+                },
+                {
+                    "id": "1152",
+                    "name": "Gewone Dwergvleermuis",
+                    "latin": "Pipistrellus pipistrellus"
+                },
+                {
+                    "id": "4691",
+                    "name": "Grasparkiet",
+                    "latin": "Melopsittacus undulatus"
+                },
+                {
+                    "id": "328",
+                    "name": "Graszanger",
+                    "latin": "Cisticola juncidis"
+                },
+                {
+                    "id": "169",
+                    "name": "Grote Grijze Snip",
+                    "latin": "Limnodromus scolopaceus"
+                },
+                {
+                    "id": "449",
+                    "name": "Halsbandparkiet",
+                    "latin": "Psittacula krameri"
+                },
+                {
+                    "id": "294",
+                    "name": "Heggenmus",
+                    "latin": "Prunella modularis"
+                },
+                {
+                    "id": "228",
+                    "name": "Kleine Alk",
+                    "latin": "Alle alle"
+                },
+                {
+                    "id": "1098",
+                    "name": "Kolibrievlinder",
+                    "latin": "Macroglossum stellatarum"
+                },
+                {
+                    "id": "472",
+                    "name": "Koninginnepage",
+                    "latin": "Papilio machaon"
+                },
+                {
+                    "id": "265",
+                    "name": "Kortteenleeuwerik",
+                    "latin": "Calandrella brachydactyla"
+                },
+                {
+                    "id": "507",
+                    "name": "Kroeskoppelikaan",
+                    "latin": "Pelecanus crispus"
+                },
+                {
+                    "id": "21",
+                    "name": "Kuifaalscholver",
+                    "latin": "Gulosus aristotelis"
+                },
+                {
+                    "id": "120",
+                    "name": "Kwartel",
+                    "latin": "Coturnix coturnix"
+                },
+                {
+                    "id": "1160",
+                    "name": "Laatvlieger",
+                    "latin": "Eptesicus serotinus"
+                },
+                {
+                    "id": "144",
+                    "name": "Morinelplevier",
+                    "latin": "Eudromias morinellus"
+                },
+                {
+                    "id": "1091",
+                    "name": "Napoleonwever",
+                    "latin": "Euplectes afer"
+                },
+                {
+                    "id": "944",
+                    "name": "Noordse (trompet) Goudvink",
+                    "latin": "P. p. pyrrhula"
+                },
+                {
+                    "id": "119",
+                    "name": "Patrijs",
+                    "latin": "Perdix perdix"
+                },
+                {
+                    "id": "245",
+                    "name": "Ransuil",
+                    "latin": "Asio otus"
+                },
+                {
+                    "id": "1090",
+                    "name": "Rosse Vleermuis",
+                    "latin": "Nyctalus noctula"
+                },
+                {
+                    "id": "506",
+                    "name": "Roze Pelikaan",
+                    "latin": "Pelecanus onocrotalus"
+                },
+                {
+                    "id": "269",
+                    "name": "Strandleeuwerik",
+                    "latin": "Eremophila alpestris"
+                },
+                {
+                    "id": "142",
+                    "name": "Strandplevier",
+                    "latin": "Anarhynchus alexandrinus"
+                },
+                {
+                    "id": "4806",
+                    "name": "Valkparkiet",
+                    "latin": "Nymphicus hollandicus"
+                },
+                {
+                    "id": "246",
+                    "name": "Velduil",
+                    "latin": "Asio flammeus"
+                },
+                {
+                    "id": "227",
+                    "name": "Zwarte Zeekoet",
+                    "latin": "Cepphus grylle"
+                },
+                {
+                    "id": "1150",
+                    "name": "middelgrote roofvogel",
+                    "latin": "Medium sized raptor"
+                }
+            ]
+        },
+        {
+            "guild": "Reigers",
+            "strategy": "ACTIVE",
+            "scientificOrder": "Pelecaniformes (Ardeidae)",
+            "species": [
+                {
+                    "id": "29",
+                    "name": "Blauwe Reiger",
+                    "latin": "Ardea cinerea"
+                },
+                {
+                    "id": "28",
+                    "name": "Grote Zilverreiger",
+                    "latin": "Ardea alba"
+                },
+                {
+                    "id": "27",
+                    "name": "Kleine Zilverreiger",
+                    "latin": "Egretta garzetta"
+                },
+                {
+                    "id": "26",
+                    "name": "Koereiger",
+                    "latin": "Bubulcus ibis"
+                },
+                {
+                    "id": "24",
+                    "name": "Kwak",
+                    "latin": "Nycticorax nycticorax"
+                },
+                {
+                    "id": "34",
+                    "name": "Lepelaar",
+                    "latin": "Platalea leucorodia"
+                },
+                {
+                    "id": "30",
+                    "name": "Purperreiger",
+                    "latin": "Ardea purpurea"
+                },
+                {
+                    "id": "25",
+                    "name": "Ralreiger",
+                    "latin": "Ardeola ralloides"
+                },
+                {
+                    "id": "22",
+                    "name": "Roerdomp",
+                    "latin": "Botaurus stellaris"
+                },
+                {
+                    "id": "33",
+                    "name": "Zwarte Ibis",
+                    "latin": "Plegadis falcinellus"
+                }
+            ]
+        },
+        {
+            "guild": "Roofvogels (Actief)",
+            "strategy": "ACTIVE",
+            "scientificOrder": "Accipitriformes / Falconiformes",
+            "species": [
+                {
+                    "id": "96",
+                    "name": "Blauwe Kiekendief",
+                    "latin": "Circus cyaneus"
+                },
+                {
+                    "id": "113",
+                    "name": "Boomvalk",
+                    "latin": "Falco subbuteo"
+                },
+                {
+                    "id": "95",
+                    "name": "Bruine Kiekendief",
+                    "latin": "Circus aeruginosus"
+                },
+                {
+                    "id": "98",
+                    "name": "Grauwe Kiekendief",
+                    "latin": "Circus pygargus"
+                },
+                {
+                    "id": "87",
+                    "name": "Grijze Wouw",
+                    "latin": "Elanus caeruleus"
+                },
+                {
+                    "id": "99",
+                    "name": "Havik",
+                    "latin": "Accipiter gentilis"
+                },
+                {
+                    "id": "111",
+                    "name": "Roodpootvalk",
+                    "latin": "Falco vespertinus"
+                },
+                {
+                    "id": "599",
+                    "name": "Sakervalk",
+                    "latin": "Falco cherrug"
+                },
+                {
+                    "id": "115",
+                    "name": "Slechtvalk",
+                    "latin": "Falco peregrinus"
+                },
+                {
+                    "id": "112",
+                    "name": "Smelleken",
+                    "latin": "Falco columbarius"
+                },
+                {
+                    "id": "100",
+                    "name": "Sperwer",
+                    "latin": "Accipiter nisus"
+                },
+                {
+                    "id": "97",
+                    "name": "Steppekiekendief",
+                    "latin": "Circus macrourus"
+                },
+                {
+                    "id": "110",
+                    "name": "Torenvalk",
+                    "latin": "Falco tinnunculus"
+                }
+            ]
+        },
+        {
+            "guild": "Roofvogels (Zwevers)",
+            "strategy": "THERMAL",
+            "scientificOrder": "Accipitriformes / Falconiformes",
+            "species": [
+                {
+                    "id": "578",
+                    "name": "Aasgier",
+                    "latin": "Neophron percnopterus"
+                },
+                {
+                    "id": "101",
+                    "name": "Buizerd",
+                    "latin": "Buteo buteo"
+                },
+                {
+                    "id": "592",
+                    "name": "Dwergarend",
+                    "latin": "Hieraaetus pennatus"
+                },
+                {
+                    "id": "89",
+                    "name": "Rode Wouw",
+                    "latin": "Milvus milvus"
+                },
+                {
+                    "id": "104",
+                    "name": "Ruigpootbuizerd",
+                    "latin": "Buteo lagopus"
+                },
+                {
+                    "id": "94",
+                    "name": "Slangenarend",
+                    "latin": "Circaetus gallicus"
+                },
+                {
+                    "id": "109",
+                    "name": "Visarend",
+                    "latin": "Pandion haliaetus"
+                },
+                {
+                    "id": "86",
+                    "name": "Wespendief",
+                    "latin": "Pernis apivorus"
+                },
+                {
+                    "id": "91",
+                    "name": "Zeearend",
+                    "latin": "Haliaeetus albicilla"
+                },
+                {
+                    "id": "88",
+                    "name": "Zwarte Wouw",
+                    "latin": "Milvus migrans"
+                }
+            ]
+        },
+        {
+            "guild": "Speciale Landvogels",
+            "strategy": "VISMIG",
+            "scientificOrder": "Coraciiformes / Upupiformes / Piciformes / Cuculiformes / Oriolidae / Laniidae",
+            "species": [
+                {
+                    "id": "254",
+                    "name": "Bijeneter",
+                    "latin": "Merops apiaster"
+                },
+                {
+                    "id": "257",
+                    "name": "Draaihals",
+                    "latin": "Jynx torquilla"
+                },
+                {
+                    "id": "259",
+                    "name": "Groene Specht",
+                    "latin": "Picus viridis"
+                },
+                {
+                    "id": "261",
+                    "name": "Grote Bonte Specht",
+                    "latin": "Dendrocopos major"
+                },
+                {
+                    "id": "256",
+                    "name": "Hop",
+                    "latin": "Upupa epops"
+                },
+                {
+                    "id": "251",
+                    "name": "IJsvogel",
+                    "latin": "Alcedo atthis"
+                },
+                {
+                    "id": "385",
+                    "name": "Klapekster",
+                    "latin": "Lanius excubitor"
+                },
+                {
+                    "id": "263",
+                    "name": "Kleine Bonte Specht",
+                    "latin": "Dryobates minor"
+                },
+                {
+                    "id": "237",
+                    "name": "Koekoek",
+                    "latin": "Cuculus canorus"
+                },
+                {
+                    "id": "382",
+                    "name": "Wielewaal",
+                    "latin": "Oriolus oriolus"
+                },
+                {
+                    "id": "260",
+                    "name": "Zwarte Specht",
+                    "latin": "Dryocopus martius"
+                }
+            ]
+        },
+        {
+            "guild": "Steltlopers",
+            "strategy": "ACTIVE",
+            "scientificOrder": "Charadriiformes (Scolopaci/Charadrii)",
+            "species": [
+                {
+                    "id": "166",
+                    "name": "Bokje",
+                    "latin": "Lymnocryptes minimus"
+                },
+                {
+                    "id": "141",
+                    "name": "Bontbekplevier",
+                    "latin": "Charadrius hiaticula"
+                },
+                {
+                    "id": "161",
+                    "name": "Bonte Strandloper",
+                    "latin": "Calidris alpina"
+                },
+                {
+                    "id": "183",
+                    "name": "Bosruiter",
+                    "latin": "Tringa glareola"
+                },
+                {
+                    "id": "152",
+                    "name": "Drieteenstrandloper",
+                    "latin": "Calidris alba"
+                },
+                {
+                    "id": "145",
+                    "name": "Goudplevier",
+                    "latin": "Pluvialis apricaria"
+                },
+                {
+                    "id": "189",
+                    "name": "Grauwe Franjepoot",
+                    "latin": "Phalaropus lobatus"
+                },
+                {
+                    "id": "136",
+                    "name": "Griel",
+                    "latin": "Burhinus oedicnemus"
+                },
+                {
+                    "id": "180",
+                    "name": "Groenpootruiter",
+                    "latin": "Tringa nebularia"
+                },
+                {
+                    "id": "171",
+                    "name": "Grutto",
+                    "latin": "Limosa limosa"
+                },
+                {
+                    "id": "170",
+                    "name": "Houtsnip",
+                    "latin": "Scolopax rusticola"
+                },
+                {
+                    "id": "151",
+                    "name": "Kanoet",
+                    "latin": "Calidris canutus"
+                },
+                {
+                    "id": "165",
+                    "name": "Kemphaan",
+                    "latin": "Calidris pugnax"
+                },
+                {
+                    "id": "150",
+                    "name": "Kievit",
+                    "latin": "Vanellus vanellus"
+                },
+                {
+                    "id": "140",
+                    "name": "Kleine Plevier",
+                    "latin": "Charadrius dubius"
+                },
+                {
+                    "id": "154",
+                    "name": "Kleine Strandloper",
+                    "latin": "Calidris minuta"
+                },
+                {
+                    "id": "135",
+                    "name": "Kluut",
+                    "latin": "Recurvirostra avosetta"
+                },
+                {
+                    "id": "129",
+                    "name": "Kraanvogel",
+                    "latin": "Grus grus"
+                },
+                {
+                    "id": "159",
+                    "name": "Krombekstrandloper",
+                    "latin": "Calidris ferruginea"
+                },
+                {
+                    "id": "128",
+                    "name": "Meerkoet",
+                    "latin": "Fulica atra"
+                },
+                {
+                    "id": "185",
+                    "name": "Oeverloper",
+                    "latin": "Actitis hypoleucos"
+                },
+                {
+                    "id": "160",
+                    "name": "Paarse Strandloper",
+                    "latin": "Calidris maritima"
+                },
+                {
+                    "id": "1478",
+                    "name": "Pluvialis sp.",
+                    "latin": "Pluvialis sp."
+                },
+                {
+                    "id": "179",
+                    "name": "Poelruiter",
+                    "latin": "Tringa stagnatilis"
+                },
+                {
+                    "id": "123",
+                    "name": "Porseleinhoen",
+                    "latin": "Porzana porzana"
+                },
+                {
+                    "id": "173",
+                    "name": "Regenwulp",
+                    "latin": "Numenius phaeopus"
+                },
+                {
+                    "id": "190",
+                    "name": "Rosse Franjepoot",
+                    "latin": "Phalaropus fulicarius"
+                },
+                {
+                    "id": "172",
+                    "name": "Rosse Grutto",
+                    "latin": "Limosa lapponica"
+                },
+                {
+                    "id": "133",
+                    "name": "Scholekster",
+                    "latin": "Haematopus ostralegus"
+                },
+                {
+                    "id": "187",
+                    "name": "Steenloper",
+                    "latin": "Arenaria interpres"
+                },
+                {
+                    "id": "134",
+                    "name": "Steltkluut",
+                    "latin": "Himantopus himantopus"
+                },
+                {
+                    "id": "155",
+                    "name": "Temmincks Strandloper",
+                    "latin": "Calidris temminckii"
+                },
+                {
+                    "id": "177",
+                    "name": "Tureluur",
+                    "latin": "Tringa totanus"
+                },
+                {
+                    "id": "138",
+                    "name": "Vorkstaartplevier",
+                    "latin": "Glareola pratincola"
+                },
+                {
+                    "id": "122",
+                    "name": "Waterral",
+                    "latin": "Rallus aquaticus"
+                },
+                {
+                    "id": "167",
+                    "name": "Watersnip",
+                    "latin": "Gallinago gallinago"
+                },
+                {
+                    "id": "182",
+                    "name": "Witgat",
+                    "latin": "Tringa ochropus"
+                },
+                {
+                    "id": "175",
+                    "name": "Wulp",
+                    "latin": "Numenius arquata"
+                },
+                {
+                    "id": "147",
+                    "name": "Zilverplevier",
+                    "latin": "Pluvialis squatarola"
+                },
+                {
+                    "id": "176",
+                    "name": "Zwarte Ruiter",
+                    "latin": "Tringa erythropus"
+                }
+            ]
+        },
+        {
+            "guild": "Watervogels (Ganzen/Grondeleenden)",
+            "strategy": "VISMIG",
+            "scientificOrder": "Anseriformes",
+            "species": [
+                {
+                    "id": "20",
+                    "name": "Aalscholver",
+                    "latin": "Phalacrocorax carbo"
+                },
+                {
+                    "id": "54",
+                    "name": "Bergeend",
+                    "latin": "Tadorna tadorna"
+                },
+                {
+                    "id": "49",
+                    "name": "Brandgans",
+                    "latin": "Branta leucopsis"
+                },
+                {
+                    "id": "53",
+                    "name": "Casarca",
+                    "latin": "Tadorna ferruginea"
+                },
+                {
+                    "id": "5",
+                    "name": "Dodaars",
+                    "latin": "Tachybaptus ruficollis"
+                },
+                {
+                    "id": "44",
+                    "name": "Dwerggans",
+                    "latin": "Anser erythropus"
+                },
+                {
+                    "id": "6",
+                    "name": "Fuut",
+                    "latin": "Podiceps cristatus"
+                },
+                {
+                    "id": "9",
+                    "name": "Geoorde Fuut",
+                    "latin": "Podiceps nigricollis"
+                },
+                {
+                    "id": "45",
+                    "name": "Grauwe Gans",
+                    "latin": "Anser anser"
+                },
+                {
+                    "id": "48",
+                    "name": "Grote Canadese Gans",
+                    "latin": "Branta canadensis"
+                },
+                {
+                    "id": "544",
+                    "name": "Indische Gans",
+                    "latin": "Anser indicus"
+                },
+                {
+                    "id": "911",
+                    "name": "Kleine Canadese Gans",
+                    "latin": "Branta hutchinsii"
+                },
+                {
+                    "id": "42",
+                    "name": "Kleine Rietgans",
+                    "latin": "Anser brachyrhynchus"
+                },
+                {
+                    "id": "37",
+                    "name": "Kleine Zwaan",
+                    "latin": "Cygnus columbianus"
+                },
+                {
+                    "id": "36",
+                    "name": "Knobbelzwaan",
+                    "latin": "Cygnus olor"
+                },
+                {
+                    "id": "43",
+                    "name": "Kolgans",
+                    "latin": "Anser albifrons"
+                },
+                {
+                    "id": "59",
+                    "name": "Krakeend",
+                    "latin": "Mareca strepera"
+                },
+                {
+                    "id": "8",
+                    "name": "Kuifduiker",
+                    "latin": "Podiceps auritus"
+                },
+                {
+                    "id": "71",
+                    "name": "Kuifeend",
+                    "latin": "Aythya fuligula"
+                },
+                {
+                    "id": "52",
+                    "name": "Nijlgans",
+                    "latin": "Alopochen aegyptiaca"
+                },
+                {
+                    "id": "63",
+                    "name": "Pijlstaart",
+                    "latin": "Anas acuta"
+                },
+                {
+                    "id": "7",
+                    "name": "Roodhalsfuut",
+                    "latin": "Podiceps grisegena"
+                },
+                {
+                    "id": "465",
+                    "name": "Roodhalsgans",
+                    "latin": "Branta ruficollis"
+                },
+                {
+                    "id": "50",
+                    "name": "Rotgans",
+                    "latin": "Branta bernicla"
+                },
+                {
+                    "id": "66",
+                    "name": "Slobeend",
+                    "latin": "Spatula clypeata"
+                },
+                {
+                    "id": "56",
+                    "name": "Smient",
+                    "latin": "Mareca penelope"
+                },
+                {
+                    "id": "46",
+                    "name": "Sneeuwgans",
+                    "latin": "Anser caerulescens"
+                },
+                {
+                    "id": "1006",
+                    "name": "Soepgans",
+                    "latin": "Anser (feral)"
+                },
+                {
+                    "id": "68",
+                    "name": "Tafeleend",
+                    "latin": "Aythya ferina"
+                },
+                {
+                    "id": "41",
+                    "name": "Toendrarietgans",
+                    "latin": "Anser serrirostris"
+                },
+                {
+                    "id": "72",
+                    "name": "Topper",
+                    "latin": "Aythya marila"
+                },
+                {
+                    "id": "62",
+                    "name": "Wilde Eend",
+                    "latin": "Anas platyrhynchos"
+                },
+                {
+                    "id": "38",
+                    "name": "Wilde Zwaan",
+                    "latin": "Cygnus cygnus"
+                },
+                {
+                    "id": "61",
+                    "name": "Wintertaling",
+                    "latin": "Anas crecca"
+                },
+                {
+                    "id": "51",
+                    "name": "Witbuikrotgans",
+                    "latin": "Branta hrota"
+                },
+                {
+                    "id": "64",
+                    "name": "Zomertaling",
+                    "latin": "Spatula querquedula"
+                },
+                {
+                    "id": "448",
+                    "name": "Zwarte Zwaan",
+                    "latin": "Cygnus atratus"
+                }
+            ]
+        },
+        {
+            "guild": "Zangvogels",
+            "strategy": "VISMIG",
+            "scientificOrder": "Passeriformes",
+            "species": [
+                {
+                    "id": "421",
+                    "name": "Appelvink",
+                    "latin": "Coccothraustes coccothraustes"
+                },
+                {
+                    "id": "369",
+                    "name": "Baardman",
+                    "latin": "Panurus biarmicus"
+                },
+                {
+                    "id": "410",
+                    "name": "Barmsijs",
+                    "latin": "Acanthis spec."
+                },
+                {
+                    "id": "314",
+                    "name": "Beflijster",
+                    "latin": "Turdus torquatus"
+                },
+                {
+                    "id": "354",
+                    "name": "Bladkoning",
+                    "latin": "Phylloscopus inornatus"
+                },
+                {
+                    "id": "299",
+                    "name": "Blauwborst",
+                    "latin": "Luscinia svecica"
+                },
+                {
+                    "id": "395",
+                    "name": "Bonte Kraai",
+                    "latin": "Corvus cornix"
+                },
+                {
+                    "id": "368",
+                    "name": "Bonte Vliegenvanger",
+                    "latin": "Ficedula hypoleuca"
+                },
+                {
+                    "id": "378",
+                    "name": "Boomklever",
+                    "latin": "Sitta europaea"
+                },
+                {
+                    "id": "380",
+                    "name": "Boomkruiper",
+                    "latin": "Certhia brachydactyla"
+                },
+                {
+                    "id": "267",
+                    "name": "Boomleeuwerik",
+                    "latin": "Lullula arborea"
+                },
+                {
+                    "id": "277",
+                    "name": "Boompieper",
+                    "latin": "Anthus trivialis"
+                },
+                {
+                    "id": "434",
+                    "name": "Bosgors",
+                    "latin": "Emberiza rustica"
+                },
+                {
+                    "id": "336",
+                    "name": "Bosrietzanger",
+                    "latin": "Acrocephalus palustris"
+                },
+                {
+                    "id": "347",
+                    "name": "Braamsluiper",
+                    "latin": "Curruca curruca"
+                },
+                {
+                    "id": "381",
+                    "name": "Buidelmees",
+                    "latin": "Remiz pendulinus"
+                },
+                {
+                    "id": "327",
+                    "name": "Cetti's Zanger",
+                    "latin": "Cettia cetti"
+                },
+                {
+                    "id": "286",
+                    "name": "Citroenkwikstaart",
+                    "latin": "Motacilla citreola"
+                },
+                {
+                    "id": "275",
+                    "name": "Duinpieper",
+                    "latin": "Anthus campestris"
+                },
+                {
+                    "id": "435",
+                    "name": "Dwerggors",
+                    "latin": "Emberiza pusilla"
+                },
+                {
+                    "id": "388",
+                    "name": "Ekster",
+                    "latin": "Pica pica"
+                },
+                {
+                    "id": "283",
+                    "name": "Engelse Kwikstaart",
+                    "latin": "Motacilla flava flavissima"
+                },
+                {
+                    "id": "404",
+                    "name": "Europese Kanarie",
+                    "latin": "Serinus serinus"
+                },
+                {
+                    "id": "361",
+                    "name": "Fitis",
+                    "latin": "Phylloscopus trochilus"
+                },
+                {
+                    "id": "358",
+                    "name": "Fluiter",
+                    "latin": "Phylloscopus sibilatrix"
+                },
+                {
+                    "id": "409",
+                    "name": "Frater",
+                    "latin": "Linaria flavirostris"
+                },
+                {
+                    "id": "387",
+                    "name": "Gaai",
+                    "latin": "Garrulus glandarius"
+                },
+                {
+                    "id": "429",
+                    "name": "Geelgors",
+                    "latin": "Emberiza citrinella"
+                },
+                {
+                    "id": "304",
+                    "name": "Gekraagde Roodstaart",
+                    "latin": "Phoenicurus phoenicurus"
+                },
+                {
+                    "id": "282",
+                    "name": "Gele Kwikstaart",
+                    "latin": "Motacilla flava flava"
+                },
+                {
+                    "id": "363",
+                    "name": "Goudhaan",
+                    "latin": "Regulus regulus"
+                },
+                {
+                    "id": "419",
+                    "name": "Goudvink",
+                    "latin": "Pyrrhula pyrrhula"
+                },
+                {
+                    "id": "348",
+                    "name": "Grasmus",
+                    "latin": "Curruca communis"
+                },
+                {
+                    "id": "278",
+                    "name": "Graspieper",
+                    "latin": "Anthus pratensis"
+                },
+                {
+                    "id": "440",
+                    "name": "Grauwe Gors",
+                    "latin": "Emberiza calandra"
+                },
+                {
+                    "id": "365",
+                    "name": "Grauwe Vliegenvanger",
+                    "latin": "Muscicapa striata"
+                },
+                {
+                    "id": "308",
+                    "name": "Groenlandse Tapuit",
+                    "latin": "Oenanthe oenanthe leucorhoa"
+                },
+                {
+                    "id": "405",
+                    "name": "Groenling",
+                    "latin": "Chloris chloris"
+                },
+                {
+                    "id": "411",
+                    "name": "Grote Barmsijs",
+                    "latin": "Acanthis flammea"
+                },
+                {
+                    "id": "287",
+                    "name": "Grote Gele Kwikstaart",
+                    "latin": "Motacilla cinerea"
+                },
+                {
+                    "id": "338",
+                    "name": "Grote Karekiet",
+                    "latin": "Acrocephalus arundinaceus"
+                },
+                {
+                    "id": "416",
+                    "name": "Grote Kruisbek",
+                    "latin": "Loxia pytyopsittacus"
+                },
+                {
+                    "id": "326",
+                    "name": "Grote Lijster",
+                    "latin": "Turdus viscivorus"
+                },
+                {
+                    "id": "274",
+                    "name": "Grote Pieper",
+                    "latin": "Anthus richardi"
+                },
+                {
+                    "id": "399",
+                    "name": "Huismus",
+                    "latin": "Passer domesticus"
+                },
+                {
+                    "id": "425",
+                    "name": "IJsgors",
+                    "latin": "Calcarius lapponicus"
+                },
+                {
+                    "id": "391",
+                    "name": "Kauw",
+                    "latin": "Coloeus monedula"
+                },
+                {
+                    "id": "403",
+                    "name": "Keep",
+                    "latin": "Fringilla montifringilla"
+                },
+                {
+                    "id": "412",
+                    "name": "Kleine Barmsijs",
+                    "latin": "Acanthis cabaret"
+                },
+                {
+                    "id": "337",
+                    "name": "Kleine Karekiet",
+                    "latin": "Acrocephalus scirpaceus"
+                },
+                {
+                    "id": "366",
+                    "name": "Kleine Vliegenvanger",
+                    "latin": "Ficedula parva"
+                },
+                {
+                    "id": "408",
+                    "name": "Kneu",
+                    "latin": "Linaria cannabina"
+                },
+                {
+                    "id": "377",
+                    "name": "Koolmees",
+                    "latin": "Parus major"
+                },
+                {
+                    "id": "325",
+                    "name": "Koperwiek",
+                    "latin": "Turdus iliacus"
+                },
+                {
+                    "id": "323",
+                    "name": "Kramsvogel",
+                    "latin": "Turdus pilaris"
+                },
+                {
+                    "id": "415",
+                    "name": "Kruisbek",
+                    "latin": "Loxia curvirostra"
+                },
+                {
+                    "id": "266",
+                    "name": "Kuifleeuwerik",
+                    "latin": "Galerida cristata"
+                },
+                {
+                    "id": "374",
+                    "name": "Kuifmees",
+                    "latin": "Lophophanes cristatus"
+                },
+                {
+                    "id": "315",
+                    "name": "Merel",
+                    "latin": "Turdus merula"
+                },
+                {
+                    "id": "298",
+                    "name": "Nachtegaal",
+                    "latin": "Luscinia megarhynchos"
+                },
+                {
+                    "id": "284",
+                    "name": "Noordse Kwikstaart",
+                    "latin": "Motacilla flava thunbergi"
+                },
+                {
+                    "id": "443",
+                    "name": "Oeverpieper",
+                    "latin": "Anthus petrosus"
+                },
+                {
+                    "id": "341",
+                    "name": "Orpheusspotvogel",
+                    "latin": "Hippolais polyglotta"
+                },
+                {
+                    "id": "431",
+                    "name": "Ortolaan",
+                    "latin": "Emberiza hortulana"
+                },
+                {
+                    "id": "305",
+                    "name": "Paapje",
+                    "latin": "Saxicola rubetra"
+                },
+                {
+                    "id": "353",
+                    "name": "Pallas' Boszanger",
+                    "latin": "Phylloscopus proregulus"
+                },
+                {
+                    "id": "291",
+                    "name": "Pestvogel",
+                    "latin": "Bombycilla garrulus"
+                },
+                {
+                    "id": "376",
+                    "name": "Pimpelmees",
+                    "latin": "Cyanistes caeruleus"
+                },
+                {
+                    "id": "406",
+                    "name": "Putter",
+                    "latin": "Carduelis carduelis"
+                },
+                {
+                    "id": "396",
+                    "name": "Raaf",
+                    "latin": "Corvus corax"
+                },
+                {
+                    "id": "438",
+                    "name": "Rietgors",
+                    "latin": "Emberiza schoeniclus"
+                },
+                {
+                    "id": "334",
+                    "name": "Rietzanger",
+                    "latin": "Acrocephalus schoenobaenus"
+                },
+                {
+                    "id": "400",
+                    "name": "Ringmus",
+                    "latin": "Passer montanus"
+                },
+                {
+                    "id": "393",
+                    "name": "Roek",
+                    "latin": "Corvus frugilegus"
+                },
+                {
+                    "id": "296",
+                    "name": "Roodborst",
+                    "latin": "Erithacus rubecula"
+                },
+                {
+                    "id": "306",
+                    "name": "Roodborsttapuit",
+                    "latin": "Saxicola rubicola"
+                },
+                {
+                    "id": "279",
+                    "name": "Roodkeelpieper",
+                    "latin": "Anthus cervinus"
+                },
+                {
+                    "id": "417",
+                    "name": "Roodmus",
+                    "latin": "Carpodacus erythrinus"
+                },
+                {
+                    "id": "290",
+                    "name": "Rouwkwikstaart",
+                    "latin": "Motacilla alba yarrellii"
+                },
+                {
+                    "id": "398",
+                    "name": "Roze Spreeuw",
+                    "latin": "Pastor roseus"
+                },
+                {
+                    "id": "276",
+                    "name": "Siberische Boompieper",
+                    "latin": "Anthus hodgsoni"
+                },
+                {
+                    "id": "360",
+                    "name": "Siberische Tjiftjaf",
+                    "latin": "Phylloscopus tristis"
+                },
+                {
+                    "id": "407",
+                    "name": "Sijs",
+                    "latin": "Spinus spinus"
+                },
+                {
+                    "id": "426",
+                    "name": "Sneeuwgors",
+                    "latin": "Plectrophenax nivalis"
+                },
+                {
+                    "id": "332",
+                    "name": "Snor",
+                    "latin": "Locustella luscinioides"
+                },
+                {
+                    "id": "346",
+                    "name": "Sperwergrasmus",
+                    "latin": "Curruca nisoria"
+                },
+                {
+                    "id": "340",
+                    "name": "Spotvogel",
+                    "latin": "Hippolais icterina"
+                },
+                {
+                    "id": "397",
+                    "name": "Spreeuw",
+                    "latin": "Sturnus vulgaris"
+                },
+                {
+                    "id": "330",
+                    "name": "Sprinkhaanzanger",
+                    "latin": "Locustella naevia"
+                },
+                {
+                    "id": "370",
+                    "name": "Staartmees",
+                    "latin": "Aegithalos caudatus"
+                },
+                {
+                    "id": "307",
+                    "name": "Tapuit",
+                    "latin": "Oenanthe oenanthe"
+                },
+                {
+                    "id": "359",
+                    "name": "Tjiftjaf",
+                    "latin": "Phylloscopus collybita"
+                },
+                {
+                    "id": "349",
+                    "name": "Tuinfluiter",
+                    "latin": "Sylvia borin"
+                },
+                {
+                    "id": "268",
+                    "name": "Veldleeuwerik",
+                    "latin": "Alauda arvensis"
+                },
+                {
+                    "id": "402",
+                    "name": "Vink",
+                    "latin": "Fringilla coelebs"
+                },
+                {
+                    "id": "364",
+                    "name": "Vuurgoudhaan",
+                    "latin": "Regulus ignicapilla"
+                },
+                {
+                    "id": "280",
+                    "name": "Waterpieper",
+                    "latin": "Anthus spinoletta"
+                },
+                {
+                    "id": "293",
+                    "name": "Winterkoning",
+                    "latin": "Troglodytes troglodytes"
+                },
+                {
+                    "id": "371",
+                    "name": "Witkopstaartmees",
+                    "latin": "Aegithalos caudatus caudatus"
+                },
+                {
+                    "id": "289",
+                    "name": "Witte Kwikstaart",
+                    "latin": "Motacilla alba alba"
+                },
+                {
+                    "id": "324",
+                    "name": "Zanglijster",
+                    "latin": "Turdus philomelos"
+                },
+                {
+                    "id": "394",
+                    "name": "Zwarte Kraai",
+                    "latin": "Corvus corone"
+                },
+                {
+                    "id": "375",
+                    "name": "Zwarte Mees",
+                    "latin": "Periparus ater"
+                },
+                {
+                    "id": "303",
+                    "name": "Zwarte Roodstaart",
+                    "latin": "Phoenicurus ochruros"
+                },
+                {
+                    "id": "350",
+                    "name": "Zwartkop",
+                    "latin": "Sylvia atricapilla"
+                },
+                {
+                    "id": "841",
+                    "name": "vliegenvanger spec",
+                    "latin": "Muscicapa / Ficedula spec."
+                }
+            ]
+        },
+        {
+            "guild": "Zeevogels (Pelagics)",
+            "strategy": "VISMIG",
+            "scientificOrder": "Procellariiformes / Suliformes / Gaviiformes / Podicipediformes",
+            "species": [
+                {
+                    "id": "226",
+                    "name": "Alk",
+                    "latin": "Alca torda"
+                },
+                {
+                    "id": "13",
+                    "name": "Grauwe Pijlstormvogel",
+                    "latin": "Ardenna grisea"
+                },
+                {
+                    "id": "194",
+                    "name": "Grote Jager",
+                    "latin": "Stercorarius skua"
+                },
+                {
+                    "id": "19",
+                    "name": "Jan-van-gent",
+                    "latin": "Morus bassanus"
+                },
+                {
+                    "id": "192",
+                    "name": "Kleine Jager",
+                    "latin": "Stercorarius parasiticus"
+                },
+                {
+                    "id": "193",
+                    "name": "Kleinste Jager",
+                    "latin": "Stercorarius longicaudus"
+                },
+                {
+                    "id": "2307",
+                    "name": "Kuhls Pijlstormvogel",
+                    "latin": "Calonectris borealis"
+                },
+                {
+                    "id": "191",
+                    "name": "Middelste Jager",
+                    "latin": "Stercorarius pomarinus"
+                },
+                {
+                    "id": "14",
+                    "name": "Noordse Pijlstormvogel",
+                    "latin": "Puffinus puffinus"
+                },
+                {
+                    "id": "10",
+                    "name": "Noordse Stormvogel",
+                    "latin": "Fulmarus glacialis"
+                },
+                {
+                    "id": "229",
+                    "name": "Papegaaiduiker",
+                    "latin": "Fratercula arctica"
+                },
+                {
+                    "id": "16",
+                    "name": "Stormvogeltje",
+                    "latin": "Hydrobates pelagicus"
+                },
+                {
+                    "id": "17",
+                    "name": "Vaal Stormvogeltje",
+                    "latin": "Hydrobates leucorhous"
+                },
+                {
+                    "id": "454",
+                    "name": "Vale Pijlstormvogel",
+                    "latin": "Puffinus mauretanicus"
+                },
+                {
+                    "id": "224",
+                    "name": "Zeekoet",
+                    "latin": "Uria aalge"
+                }
+            ]
+        }
+    ]
+}

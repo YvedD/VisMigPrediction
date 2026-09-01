@@ -1,0 +1,76 @@
+{
+    "locaties": [
+        {
+            "telpostid": "4310",
+            "latitude": 51.25951297082393,
+            "longitude": 2.9913372742085187,
+            "timestamp": 1786295600345
+        },
+        {
+            "telpostid": "1949",
+            "latitude": 51.15689370902615,
+            "longitude": 2.7181828022003174,
+            "timestamp": 1786295600346
+        },
+        {
+            "telpostid": "1989",
+            "latitude": 51.28425258391496,
+            "longitude": 3.0524826049804688,
+            "timestamp": 1786295600347
+        },
+        {
+            "telpostid": "113",
+            "latitude": 51.19280287381523,
+            "longitude": 2.9454053386324404,
+            "timestamp": 1786296818186
+        },
+        {
+            "telpostid": "3045",
+            "latitude": 51.29977588558421,
+            "longitude": 3.0757790175896673,
+            "timestamp": 1787086803714
+        },
+        {
+            "telpostid": "3745",
+            "latitude": 51.223567461044894,
+            "longitude": 2.980039344698838,
+            "timestamp": 1786296872843
+        },
+        {
+            "telpostid": "3949",
+            "latitude": 51.23016336438118,
+            "longitude": 2.972451276320612,
+            "timestamp": 1786296894563
+        },
+        {
+            "telpostid": "5177",
+            "latitude": 51.2301315853216,
+            "longitude": 2.972375250278162,
+            "timestamp": 1786370796429
+        },
+        {
+            "telpostid": "5719",
+            "latitude": 51.25060786570579,
+            "longitude": 4.85820601764317,
+            "timestamp": 1786296945390
+        },
+        {
+            "telpostid": "74",
+            "latitude": 51.32554219340657,
+            "longitude": 3.165243990376723,
+            "timestamp": 1786295638952
+        },
+        {
+            "telpostid": "78",
+            "latitude": 51.2712947898751,
+            "longitude": 3.016563998295112,
+            "timestamp": 1786370721942
+        },
+        {
+            "telpostid": "79",
+            "latitude": 51.24315862164526,
+            "longitude": 2.9443661481275853,
+            "timestamp": 1786296852320
+        }
+    ]
+}
