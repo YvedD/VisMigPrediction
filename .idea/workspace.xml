@@ -4,31 +4,26 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ab09ec76-2466-4833-b2e9-3cf62d6c3b9f" name="Changes" comment="initial commit">
-      <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AI-models/active_scientific_taxonomy.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AI-models/expert_knowledge.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AI-models/model_labels.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AI-models/neural_engine.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AI-models/personal_lite_model.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config_loader.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/voicetally.db" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/db_manager.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/import_naar_turso.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/maak_dump.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/parsers.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/serverdata/sites.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/serverdata/species.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/serverdata/telpost_locaties.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_leeuw_db.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_verbinding.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/weather_manager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/VisMigPrediction.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/VisMigPrediction.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="ab09ec76-2466-4833-b2e9-3cf62d6c3b9f" name="Changes" comment="Eerste werkende stappen (in geheugen) zonder oracle">
+      <change afterPath="$PROJECT_DIR$/bsi/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bsi/card_evaluator.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bsi/config.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bsi/corridor_engine.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bsi/data_preparer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bsi/expert_knowledge.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bsi/forecast_system.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bsi/guild_mapper.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bsi/image_manager.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bsi/inference_engine.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bsi/neural_engine.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bsi/solar_engine.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bsi/sparkline_engine.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bsi/species_resolver.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bsi/weather_service.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/db_manager.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,23 +58,23 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.0" />
-      <entry key="S2" value="1.0" />
-      <entry key="S5" value="1.000002092480775" />
-      <entry key="S10" value="1.0090469962054258" />
-      <entry key="S30" value="3.496941318840677" />
-      <entry key="S60" value="11.230012553063489" />
-      <entry key="M2" value="21.769050927863262" />
-      <entry key="M5" value="36.069476156544376" />
-      <entry key="M10" value="51.767650157134284" />
-      <entry key="M15" value="62.29069302182642" />
-      <entry key="M30" value="78.26952726745783" />
-      <entry key="H1" value="89.26763540756151" />
-      <entry key="H2" value="95.75033647736561" />
-      <entry key="H4" value="99.2735247209962" />
-      <entry key="D1" value="102.36428504538202" />
-      <entry key="W1" value="102.90881818785569" />
+      <entry key="MS100" value="1.2468541486568083" />
+      <entry key="MS500" value="2.9315625598718382" />
+      <entry key="S2" value="4.2927519749893595" />
+      <entry key="S5" value="4.69656189718974" />
+      <entry key="S10" value="4.844601495726225" />
+      <entry key="S30" value="4.94735742415736" />
+      <entry key="S60" value="4.973571695190433" />
+      <entry key="M2" value="4.986758969241402" />
+      <entry key="M5" value="4.994697178923845" />
+      <entry key="M10" value="4.997891127955915" />
+      <entry key="M15" value="5.010517792181228" />
+      <entry key="M30" value="5.420100766052106" />
+      <entry key="H1" value="8.983623856443689" />
+      <entry key="H2" value="23.010905581557406" />
+      <entry key="H4" value="51.93127187231642" />
+      <entry key="D1" value="121.97442837334609" />
+      <entry key="W1" value="143.0925045640073" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
@@ -101,23 +96,23 @@
       <entry key="W1" value="0.0" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.6973718331752027" />
-      <entry key="MS500" value="0.9304496577030154" />
-      <entry key="S2" value="0.9821395952633915" />
-      <entry key="S5" value="0.9928192783514767" />
-      <entry key="S10" value="1.005441307888871" />
-      <entry key="S30" value="3.495070505661854" />
-      <entry key="S60" value="11.22806206608193" />
-      <entry key="M2" value="21.76739065301707" />
-      <entry key="M5" value="36.06841630943339" />
-      <entry key="M10" value="51.766873465292925" />
-      <entry key="M15" value="62.29006066145405" />
-      <entry key="M30" value="78.26912281784402" />
-      <entry key="H1" value="89.26740254945494" />
-      <entry key="H2" value="95.75021098753929" />
-      <entry key="H4" value="99.27345950982149" />
-      <entry key="D1" value="102.3642738159065" />
-      <entry key="W1" value="102.90881657455576" />
+      <entry key="MS100" value="1.2040662951554675" />
+      <entry key="MS500" value="2.911085923397235" />
+      <entry key="S2" value="4.285294850191975" />
+      <entry key="S5" value="4.693303177376818" />
+      <entry key="S10" value="4.842921623477451" />
+      <entry key="S30" value="4.946785784756681" />
+      <entry key="S60" value="4.973284385696977" />
+      <entry key="M2" value="4.986614939792641" />
+      <entry key="M5" value="4.994639476925091" />
+      <entry key="M10" value="4.9978622586336945" />
+      <entry key="M15" value="5.01049848223776" />
+      <entry key="M30" value="5.42008889969689" />
+      <entry key="H1" value="8.983604790083454" />
+      <entry key="H2" value="23.010871111101192" />
+      <entry key="H4" value="51.931231297912994" />
+      <entry key="D1" value="121.97441281034736" />
+      <entry key="W1" value="143.09250197189033" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -145,7 +140,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "codeWithMe.voiceChat.enabledByDefault": "false",
-    "com.google.cloudcode.ide_session_index": "20260901_0008",
+    "com.google.cloudcode.ide_session_index": "20260902_0000",
     "git-widget-placeholder": "master",
     "last_opened_file_path": "C:/Eigen bestanden Yves/Programeren/Python/VisMigPrediction/AI-models",
     "node.js.detected.package.eslint": "true",
@@ -324,7 +319,8 @@
       <workItem from="1788277210775" duration="1577000" />
       <workItem from="1788278849331" duration="931000" />
       <workItem from="1788279899831" duration="190000" />
-      <workItem from="1788280107952" duration="14443000" />
+      <workItem from="1788280107952" duration="14508000" />
+      <workItem from="1788347447658" duration="20354000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <option name="closed" value="true" />
@@ -334,7 +330,15 @@
       <option name="project" value="LOCAL" />
       <updated>1788272465935</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Eerste werkende stappen (in geheugen) zonder oracle">
+      <option name="closed" value="true" />
+      <created>1788297979481</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1788297979481</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -342,7 +346,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="initial commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="initial commit" />
+    <MESSAGE value="Eerste werkende stappen (in geheugen) zonder oracle" />
+    <option name="LAST_COMMIT_MESSAGE" value="Eerste werkende stappen (in geheugen) zonder oracle" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/VisMigPrediction$test_leeuw_db.coverage" NAME="test_leeuw_db Coverage Results" MODIFIED="1788283597167" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
