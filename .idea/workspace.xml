@@ -5,25 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ab09ec76-2466-4833-b2e9-3cf62d6c3b9f" name="Changes" comment="Eerste werkende stappen (in geheugen) zonder oracle">
-      <change afterPath="$PROJECT_DIR$/bsi/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bsi/card_evaluator.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bsi/config.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bsi/corridor_engine.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bsi/data_preparer.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bsi/expert_knowledge.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bsi/forecast_system.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bsi/guild_mapper.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bsi/image_manager.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bsi/inference_engine.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bsi/neural_engine.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bsi/solar_engine.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bsi/sparkline_engine.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bsi/species_resolver.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bsi/weather_service.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bsi/seabreeze_engine.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/db_manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bsi/corridor_engine.py" beforeDir="false" afterPath="$PROJECT_DIR$/bsi/corridor_engine.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bsi/forecast_system.py" beforeDir="false" afterPath="$PROJECT_DIR$/bsi/forecast_system.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bsi/inference_engine.py" beforeDir="false" afterPath="$PROJECT_DIR$/bsi/inference_engine.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -140,7 +127,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "codeWithMe.voiceChat.enabledByDefault": "false",
-    "com.google.cloudcode.ide_session_index": "20260902_0000",
+    "com.google.cloudcode.ide_session_index": "20260903_0001",
     "git-widget-placeholder": "master",
     "last_opened_file_path": "C:/Eigen bestanden Yves/Programeren/Python/VisMigPrediction/AI-models",
     "node.js.detected.package.eslint": "true",
@@ -320,7 +307,8 @@
       <workItem from="1788278849331" duration="931000" />
       <workItem from="1788279899831" duration="190000" />
       <workItem from="1788280107952" duration="14508000" />
-      <workItem from="1788347447658" duration="20354000" />
+      <workItem from="1788347447658" duration="20444000" />
+      <workItem from="1788431786049" duration="3497000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <option name="closed" value="true" />
@@ -338,11 +326,30 @@
       <option name="project" value="LOCAL" />
       <updated>1788297979481</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Eerste werkende stappen (in geheugen) zonder oracle">
+      <option name="closed" value="true" />
+      <created>1788382955718</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1788382955718</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="initial commit" />

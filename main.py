@@ -36,11 +36,52 @@ from bsi.species_resolver import SpeciesResolver
 # Pagina configuratie
 st.set_page_config(page_title="VisMigPrediction Platform", layout="wide")
 
-# CSS injectie voor professionele CardViews met Smooth Hover/Touch Overlay
+# CSS injectie voor professionele CardViews, Smooth Hover en Grafische Weer-Boxes
 st.markdown("""
     <style>
         .forecast-date-header { font-size: 12px !important; font-weight: bold; color: #fff; margin-bottom: 4px; text-align: center; }
-        .weather-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 8px; min-height: 80px; display: flex; flex-direction: column; justify-content: center; margin-bottom: 10px; color: #e2e8f0; font-size: 11px; text-align: center; }
+
+        /* Stijlvolle Grafische Weer-Box met Zonsopgang en Zonsondergang */
+        .weather-box { 
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); 
+            border: 1px solid #334155; 
+            border-radius: 8px; 
+            padding: 8px; 
+            margin-bottom: 10px; 
+            color: #f8fafc; 
+            font-size: 11px; 
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); 
+        }
+        .weather-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4px;
+            text-align: center;
+            margin-bottom: 6px;
+        }
+        .weather-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 4px 2px;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .weather-val { font-weight: bold; color: #38bdf8; font-size: 12px; }
+        .weather-lbl { font-size: 7px; color: #94a3b8; text-transform: uppercase; }
+        .weather-sun-row {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 5px;
+            font-size: 10px;
+            color: #fbbf24;
+        }
+        .wind-arrow {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: bold;
+            color: #f43f5e;
+        }
 
         .bsi-card { 
             background-color: #ffffff; 
@@ -161,10 +202,6 @@ def get_available_telpost_options():
 
 # --- Hulpfunctie: Cluster-gebaseerde fenologie profielen ophalen (Alle data binnen 35km) ---
 def fetch_cluster_species_profiles(db_path: str, site_ids: List[str], target_dt: datetime) -> List[Dict[str, Any]]:
-    """
-    Haalt de historische waarnemingen op voor ALLE telposten in de 35km cluster
-    binnen het 7/9-daagse floating fenologische venster.
-    """
     day_of_year = target_dt.timetuple().tm_yday
     window_size = BsiConfig.BOI_FLOATING_WINDOW_DAYS
     day_start = day_of_year - (window_size // 2)
@@ -280,8 +317,12 @@ elif app_mode == "Excel Upload (.xlsx)":
 # --- PAGINA 3: PROGNOSES ---
 elif app_mode == "Prognoses":
     st.header("📈 BSI 4.1 Migratie Prognoses & Toekomstvenster")
-    mode_choice = st.radio("Selecteer Modus", ["Live Prognose (Enkele Datum)", "+5 Dagen (120-Uur) Naast Elkaar"],
-                           horizontal=True)
+    mode_choice = st.radio(
+        "Selecteer Modus",
+        ["Live Prognose (Enkele Datum)", "+5 Dagen (120-Uur met 2-Uur Blokken)",
+         "Twee-Uurlijkse Dag-Timeline (2-Uur Blokken)"],
+        horizontal=True
+    )
 
     all_telposts = get_available_telpost_options()
     formatted_telpost_options = [f"{p['telpostid']} - {p['naam']}" for p in all_telposts] if all_telposts else [
@@ -294,7 +335,7 @@ elif app_mode == "Prognoses":
             formatted_telpost_options,
         )
     with col_p2:
-        if mode_choice.startswith("Live"):
+        if mode_choice.startswith("Live") or mode_choice.startswith("Twee-Uurlijkse"):
             prognose_datum = st.date_input("Datum voor prognose", value=datetime.now())
 
     selected_telpost_id = selected_telpost_str.split(" - ")[0]
@@ -402,34 +443,55 @@ elif app_mode == "Prognoses":
                             )
                             st.markdown(card_html, unsafe_allow_html=True)
 
-    else:  # +5 Dagen Naast Elkaar (5 Kolommen)
-        if st.button("🚀 Genereer 120-Uur (+5 Dagen) Cluster Vergelijking"):
-            with st.spinner(
-                    "120-uurs weersvoorspelling, Europese corridors en 35km cluster multi-site data doorrekenen..."):
-                forecast_sys = BsiForecastSystem(get_db_path(), resolver)
-                forecast_results = forecast_sys.generate_5day_prognosis(main_lat, main_lon, site_ids=cluster_site_ids)
+    elif mode_choice.startswith("Twee-Uurlijkse"):
+        if st.button("⏱️ Genereer 2-Uurlijkse Dag-Timeline (Zonsopgang - Zonsondergang)"):
+            dt_target = datetime.combine(prognose_datum, datetime.min.time())
 
-                if not forecast_results:
-                    st.warning("⚠️ Kon geen 5-daagse prognose genereren.")
+            with st.spinner("Zonnestand berekenen en 2-uurlijkse weervensters doorrekenen voor de cluster..."):
+                forecast_sys = BsiForecastSystem(db_path_str, resolver)
+                timeline_blocks = forecast_sys.generate_daily_timeline_prognosis(main_lat, main_lon, cluster_site_ids,
+                                                                                 dt_target)
+
+                if not timeline_blocks:
+                    st.warning("⚠️ Kon geen timeline genereren voor deze datum.")
                 else:
                     st.success(
-                        f"✅ 120-Uurs Toekomstvenster voor cluster ({len(cluster_site_ids)} posten) succesvol geladen!")
+                        f"✅ Dag-timeline succesvol geladen ({len(timeline_blocks)} tijdblokken tussen zonsopgang en zonsondergang)!")
 
-                    day_cols = st.columns(len(forecast_results))
+                    weather_summaries = [b["weather_summary"] for b in timeline_blocks]
+                    is_weather_stable = len(set(weather_summaries)) <= 1
 
-                    for idx, col in enumerate(day_cols):
-                        res = forecast_results[idx]
-                        with col:
-                            st.markdown(f'<div class="forecast-date-header">📅 {res.display_date}</div>',
-                                        unsafe_allow_html=True)
-                            st.markdown(
-                                f'<div class="weather-box">🌤️ {res.weather_summary}<br>🌍 <b>Corridor</b>: +{int(res.corridor_boost * 100)}%</div>',
-                                unsafe_allow_html=True)
+                    if is_weather_stable:
+                        st.info(
+                            "💡 **Meteorologische opmerking:** De weersomstandigheden (wind en temperatuur) blijven op deze dag stabiel volgens de voorspelling. Hierdoor tonen de opeenvolgende 2-uur blokken een gelijkmatig beeld. Zodra er op een dag sprake is van een weersomslag of zeebriesfront, zie je hier direct de dynamische verschuivingen in soorten ontstaan!")
+                    else:
+                        st.info(
+                            "💡 **Weersomslag gedetecteerd:** De weersomstandigheden veranderen in de loop van de dag (bijv. thermiek opbouw rond de middag). Blader door de tabbladen om de verschuivingen per 2-uur blok te bekijken!")
 
-                            if not res.top_species:
-                                st.write("Geen trek verwacht.")
+                    tab_labels = [block["time_block"] for block in timeline_blocks]
+                    tabs = st.tabs(tab_labels)
+
+                    for idx, tab in enumerate(tabs):
+                        block = timeline_blocks[idx]
+                        with tab:
+                            b_deg = block['wind_deg']
+                            weather_box_html = (
+                                f'<div class="weather-box">'
+                                f'<div class="weather-grid">'
+                                f'<div class="weather-item"><div class="weather-val">{block["temp"]}°C</div><div class="weather-lbl">Temperatuur</div></div>'
+                                f'<div class="weather-item"><div class="weather-val">{block["wind_label"]} {block["wind_bft"]}Bft</div><div class="weather-lbl">Windkracht</div></div>'
+                                f'<div class="weather-item"><div class="weather-val"><span class="wind-arrow" style="transform: rotate({b_deg}deg); display: inline-block;">➔</span> {int(b_deg)}°</div><div class="weather-lbl">Windrichting</div></div>'
+                                f'</div>'
+                                f'<div class="weather-sun-row"><span>🌅 Zonsopgang: <b>{block["sunrise"]}</b></span><span>🌇 Zonsondergang: <b>{block["sunset"]}</b></span></div>'
+                                f'</div>'
+                            )
+                            st.markdown(weather_box_html, unsafe_allow_html=True)
+
+                            if not block["top_species"]:
+                                st.write("Geen significante trek verwacht in dit tijdsvenster.")
                             else:
-                                for s_idx, item in enumerate(res.top_species):
+                                cols = st.columns(min(3, len(block["top_species"])))
+                                for s_idx, item in enumerate(block["top_species"]):
                                     card_data = evaluator.build_comparative_card(item, item, cluster_site_ids)
                                     if not card_data:
                                         continue
@@ -438,13 +500,13 @@ elif app_mode == "Prognoses":
                                     img_data_uri = image_manager.get_species_image_base64(card_data.latin_name)
                                     img_html = f'<img src="{img_data_uri}" class="bsi-species-img" alt="{card_data.latin_name}">' if img_data_uri else '<div class="bsi-species-placeholder">🦅</div>'
 
-                                    dt_item = datetime.strptime(res.date_str, "%Y-%m-%d")
                                     weekly_rows = fetch_species_weekly_distribution(card_data.soortid, cluster_site_ids)
                                     norm_buf = SparklineEngine.prepare_normalized_buffer(weekly_rows)
-                                    spark_uri = SparklineEngine.get_sparkline_base64(norm_buf, target_dt=dt_item)
+                                    spark_uri = SparklineEngine.get_sparkline_base64(norm_buf, target_dt=dt_target)
                                     spark_html = f'<img src="{spark_uri}" class="sparkline-img" alt="Fenologie">'
 
-                                    large_spark_uri = SparklineEngine.get_sparkline_base64(norm_buf, target_dt=dt_item,
+                                    large_spark_uri = SparklineEngine.get_sparkline_base64(norm_buf,
+                                                                                           target_dt=dt_target,
                                                                                            width_px=320, height_px=90)
                                     large_spark_html = f'<img src="{large_spark_uri}" style="width:100%; border-radius:4px; margin-top:4px;" alt="Uitvergrote Fenologie">'
 
@@ -459,20 +521,120 @@ elif app_mode == "Prognoses":
                                         f'<b>Najaar Piek:</b> {card_data.autumn_peak}</div>'
                                         f'{large_spark_html}'
                                         f'</div>'
-                                        f'<div class="bsi-header" style="color: {bc};"><span>{card_data.guild_name}</span><span>H:{card_data.heuristic_prob}% | P:{card_data.prototype_prob}%</span></div>'
+                                        f'<div class="bsi-header" style="color: {bc};"><span>🛡️ {card_data.guild_name}</span><span>H:{card_data.heuristic_prob}% | P:{card_data.prototype_prob}%</span></div>'
                                         f'<div class="bsi-title-container">{img_html}<div>'
                                         f'<div class="bsi-title">{card_data.soortnaam}</div>'
                                         f'<div style="font-size: 9px; color: #666; font-style: italic;">{card_data.latin_name}</div>'
                                         f'</div></div>'
                                         f'<div class="bsi-metrics">'
-                                        f'<div class="metric-box"><div class="metric-val" style="color: #27ae60;">{card_data.display_prob}%</div><div class="metric-label">Kans</div></div>'
+                                        f'<div class="metric-box"><div class="metric-val" style="color: #27ae60;">{card_data.display_prob}%</div><div class="metric-label">BSI Kans</div></div>'
                                         f'<div class="metric-box"><div class="metric-val">{card_data.norm_score_ex_h:.1f}</div><div class="metric-label">Norm/u</div></div>'
                                         f'</div>'
                                         f'<div class="peak-badge" style="font-size:9px; padding:2px;"><b>Voorjaar:</b> {card_data.spring_peak} | <b>Najaar:</b> {card_data.autumn_peak}</div>'
                                         f'{spark_html}'
                                         f'</div>'
                                     )
-                                    st.markdown(card_html, unsafe_allow_html=True)
+                                    with cols[s_idx % len(cols)]:
+                                        st.markdown(card_html, unsafe_allow_html=True)
+
+    else:  # +5 Dagen (120-Uur met 2-Uur Blokken)
+        if st.button("🚀 Genereer 120-Uur Toekomstvenster (met 2-Uur Blokken per Dag)"):
+            with st.spinner(
+                    "120-uurs weersvoorspelling, zonnestanden en 2-uurlijkse cluster tijdblokken doorrekenen..."):
+                forecast_sys = BsiForecastSystem(get_db_path(), resolver)
+                five_day_timeline = forecast_sys.generate_5day_timeline_prognosis(main_lat, main_lon, cluster_site_ids)
+
+                if not five_day_timeline:
+                    st.warning("⚠️ Kon geen 5-daagse tijdlijn genereren.")
+                else:
+                    st.success(
+                        f"✅ 120-Uurs Toekomstvenster voor cluster ({len(cluster_site_ids)} posten) succesvol geladen!")
+
+                    # Hoofdtabs voor de 5 opeenvolgende dagen
+                    day_tab_labels = [f"📅 {day_data['display_date']}" for day_data in five_day_timeline]
+                    day_tabs = st.tabs(day_tab_labels)
+
+                    for day_idx, day_tab in enumerate(day_tabs):
+                        day_data = five_day_timeline[day_idx]
+                        with day_tab:
+                            # Sub-tabs voor de 2-uurlijkse blokken van deze specifieke dag
+                            blocks = day_data["blocks"]
+                            if not blocks:
+                                st.write("Geen daglichtblokken beschikbaar.")
+                                continue
+
+                            block_tab_labels = [b["time_block"] for b in blocks]
+                            block_tabs = st.tabs(block_tab_labels)
+
+                            for b_idx, block_tab in enumerate(block_tabs):
+                                block = blocks[b_idx]
+                                with block_tab:
+                                    b_deg = block['wind_deg']
+                                    weather_box_html = (
+                                        f'<div class="weather-box">'
+                                        f'<div class="weather-grid">'
+                                        f'<div class="weather-item"><div class="weather-val">{block["temp"]}°C</div><div class="weather-lbl">Temperatuur</div></div>'
+                                        f'<div class="weather-item"><div class="weather-val">{block["wind_label"]} {block["wind_bft"]}Bft</div><div class="weather-lbl">Windkracht</div></div>'
+                                        f'<div class="weather-item"><div class="weather-val"><span class="wind-arrow" style="transform: rotate({b_deg}deg); display: inline-block;">➔</span> {int(b_deg)}°</div><div class="weather-lbl">Windrichting</div></div>'
+                                        f'</div>'
+                                        f'<div class="weather-sun-row"><span>🌅 Zonsopgang: <b>{day_data["sunrise"]}</b></span><span>🌍 Corridor Boost: <b>+{int(day_data["corridor_boost"] * 100)}%</b></span><span>🌇 Zonsondergang: <b>{day_data["sunset"]}</b></span></div>'
+                                        f'</div>'
+                                    )
+                                    st.markdown(weather_box_html, unsafe_allow_html=True)
+
+                                    if not block["top_species"]:
+                                        st.write("Geen significante trek verwacht in dit tijdsvenster.")
+                                    else:
+                                        cols = st.columns(min(3, len(block["top_species"])))
+                                        for s_idx, item in enumerate(block["top_species"]):
+                                            card_data = evaluator.build_comparative_card(item, item, cluster_site_ids)
+                                            if not card_data:
+                                                continue
+
+                                            bc = GILDE_KLEUREN.get(card_data.guild_name, "#5cb85c")
+                                            img_data_uri = image_manager.get_species_image_base64(card_data.latin_name)
+                                            img_html = f'<img src="{img_data_uri}" class="bsi-species-img" alt="{card_data.latin_name}">' if img_data_uri else '<div class="bsi-species-placeholder">🦅</div>'
+
+                                            dt_item = datetime.strptime(day_data["date_str"], "%Y-%m-%d")
+                                            weekly_rows = fetch_species_weekly_distribution(card_data.soortid,
+                                                                                            cluster_site_ids)
+                                            norm_buf = SparklineEngine.prepare_normalized_buffer(weekly_rows)
+                                            spark_uri = SparklineEngine.get_sparkline_base64(norm_buf,
+                                                                                             target_dt=dt_item)
+                                            spark_html = f'<img src="{spark_uri}" class="sparkline-img" alt="Fenologie">'
+
+                                            large_spark_uri = SparklineEngine.get_sparkline_base64(norm_buf,
+                                                                                                   target_dt=dt_item,
+                                                                                                   width_px=320,
+                                                                                                   height_px=90)
+                                            large_spark_html = f'<img src="{large_spark_uri}" style="width:100%; border-radius:4px; margin-top:4px;" alt="Uitvergrote Fenologie">'
+
+                                            card_html = (
+                                                f'<div class="bsi-card" style="border-left-color: {bc};">'
+                                                f'<div class="bsi-card-overlay">'
+                                                f'<div class="overlay-title">🔍 {card_data.soortnaam}</div>'
+                                                f'<div class="overlay-text"><b>Gilde:</b> {card_data.guild_name}<br>'
+                                                f'<b>AI Model:</b> {card_data.sources_label} (Heur: {card_data.heuristic_prob}% | Proto: {card_data.prototype_prob}%)<br>'
+                                                f'<b>Norm Score (Cluster):</b> {card_data.norm_score_ex_h:.2f} ex/u<br>'
+                                                f'<b>Voorjaar Piek:</b> {card_data.spring_peak}<br>'
+                                                f'<b>Najaar Piek:</b> {card_data.autumn_peak}</div>'
+                                                f'{large_spark_html}'
+                                                f'</div>'
+                                                f'<div class="bsi-header" style="color: {bc};"><span>{card_data.guild_name}</span><span>H:{card_data.heuristic_prob}% | P:{card_data.prototype_prob}%</span></div>'
+                                                f'<div class="bsi-title-container">{img_html}<div>'
+                                                f'<div class="bsi-title">{card_data.soortnaam}</div>'
+                                                f'<div style="font-size: 9px; color: #666; font-style: italic;">{card_data.latin_name}</div>'
+                                                f'</div></div>'
+                                                f'<div class="bsi-metrics">'
+                                                f'<div class="metric-box"><div class="metric-val" style="color: #27ae60;">{card_data.display_prob}%</div><div class="metric-label">Kans</div></div>'
+                                                f'<div class="metric-box"><div class="metric-val">{card_data.norm_score_ex_h:.1f}</div><div class="metric-label">Norm/u</div></div>'
+                                                f'</div>'
+                                                f'<div class="peak-badge" style="font-size:9px; padding:2px;"><b>Voorjaar:</b> {card_data.spring_peak} | <b>Najaar:</b> {card_data.autumn_peak}</div>'
+                                                f'{spark_html}'
+                                                f'</div>'
+                                            )
+                                            with cols[s_idx % len(cols)]:
+                                                st.markdown(card_html, unsafe_allow_html=True)
 
 # --- PAGINA 4: CLUSTER KAART ---
 elif app_mode == "Cluster Kaart":

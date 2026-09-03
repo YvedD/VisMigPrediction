@@ -1,6 +1,7 @@
 """
 bsi/forecast_system.py
-Orchestratie van de 5-daagse (120-uurs) BSI vogelprognose inclusief Europese corridors.
+Orchestratie van de 5-daagse (120-uurs) en dagelijkse BSI vogelprognoses
+inclusief Europese corridors, zonsopgang/ondergang en 2-uurlijkse tijdsblokken.
 """
 
 import math
@@ -17,6 +18,28 @@ from .species_resolver import SpeciesResolver
 from .corridor_engine import CorridorEngine
 
 
+def calculate_sun_times(lat: float, lon: float, dt: datetime):
+    """Berekent exact de zonsopgang en zonsondergang tijdstippen voor een locatie en datum."""
+    day_of_year = dt.timetuple().tm_yday
+    decl = 0.409 * math.sin(2.0 * math.pi * (day_of_year - 81) / 365.0)
+    lat_rad = math.radians(lat)
+    tan_val = -math.tan(lat_rad) * math.tan(decl)
+    tan_val = max(-1.0, min(1.0, tan_val))
+    hour_angle = math.acos(tan_val)
+    day_length_hours = (2.0 * math.degrees(hour_angle)) / 15.0
+    solar_noon = 12.0 - (lon / 15.0)
+
+    sr_dec = solar_noon - (day_length_hours / 2.0)
+    ss_dec = solar_noon + (day_length_hours / 2.0)
+
+    sr_h = max(4, int(sr_dec))
+    sr_m = int((sr_dec - sr_h) * 60)
+    ss_h = min(22, int(ss_dec))
+    ss_m = int((ss_dec - ss_h) * 60)
+
+    return sr_h, ss_h, f"{sr_h:02d}:{sr_m:02d}", f"{ss_h:02d}:{ss_m:02d}"
+
+
 @dataclass
 class DailyForecastResult:
     date_str: str
@@ -26,6 +49,10 @@ class DailyForecastResult:
     temp: float
     wind_bft: int
     wind_label: str
+    wind_deg: float
+    weather_trend: str
+    sunrise: str
+    sunset: str
     top_species: List[VogelSuggestie]
 
 
@@ -35,9 +62,6 @@ class BsiForecastSystem:
         self.resolver = species_resolver
 
     def fetch_5day_weather_forecast(self, lat: float, lon: float) -> Optional[List[Dict[str, Any]]]:
-        """
-        Haalt de 5-daagse uursvoorspelling op via Open-Meteo.
-        """
         url = (
             f"https://api.open-meteo.com/v1/forecast"
             f"?latitude={lat}&longitude={lon}"
@@ -67,99 +91,190 @@ class BsiForecastSystem:
             print(f"[ForecastSystem] Fout bij ophalen 5d forecast: {e}")
             return None
 
-    def generate_5day_prognosis(
+    def fetch_72h_weather_forecast(self, lat: float, lon: float) -> Optional[List[Dict[str, Any]]]:
+        return self.fetch_5day_weather_forecast(lat, lon)
+
+    def generate_5day_timeline_prognosis(
         self,
         lat: float,
         lon: float,
         site_ids: List[str],
         start_dt: Optional[datetime] = None
-    ) -> List[DailyForecastResult]:
+    ) -> List[Dict[str, Any]]:
         """
-        Genereert de volledige 5-daagse BSI vogelprognose inclusief corridor-boosts.
+        Genereert een 5-daagse prognose waarin ELKE dag is opgesplitst in 2-uurlijkse blokken
+        tussen zonsopgang en zonsondergang.
         """
         if start_dt is None:
             start_dt = datetime.now(timezone.utc)
 
-        # 1. Bepaal seizoenscorridor (Najaar: Juli t/m Nov = maanden 7-11)
         current_month = start_dt.month
         is_autumn = 7 <= current_month <= 11
 
-        # Haal weerbericht op voor telpost (5 dagen) en de 6 corridor punten
         hourly_weather = self.fetch_5day_weather_forecast(lat, lon)
         corridor_data = CorridorEngine.fetch_corridor_forecasts(is_autumn=is_autumn)
 
         if not hourly_weather:
             return []
 
-        # Filter op de 10:00u ijkmomenten voor de 5 opeenvolgende dagen
-        daily_snapshots = [h for h in hourly_weather if h["time"].endswith("T10:00") or h["time"].endswith(" 10:00")]
-        if not daily_snapshots:
-            # Fallback op index-sprongen van 24 uur (24, 48, 72, 96, 120)
-            daily_snapshots = [hourly_weather[i] for i in [10, 34, 58, 82, 106] if i < len(hourly_weather)]
+        all_days_results = []
 
-        results: List[DailyForecastResult] = []
+        for day_offset in range(5):
+            current_day_dt = start_dt + timedelta(days=day_offset)
+            target_date_str = current_day_dt.strftime("%Y-%m-%d")
+            day_weather = [h for h in hourly_weather if h["time"].startswith(target_date_str)]
 
-        for snapshot in daily_snapshots:
-            time_str = snapshot["time"]
-            dt_day = datetime.fromisoformat(time_str.replace("Z", "+00:00")) if "T" in time_str else datetime.strptime(time_str, "%Y-%m-%d %H:%M")
+            if not day_weather:
+                continue
 
-            day_of_year = dt_day.timetuple().tm_yday
+            sr_h, ss_h, sr_str, ss_str = calculate_sun_times(lat, lon, current_day_dt)
+
+            day_of_year = current_day_dt.timetuple().tm_yday
             window_size = BsiConfig.BOI_FLOATING_WINDOW_DAYS
             day_start = day_of_year - (window_size // 2)
             day_end = day_of_year + (window_size // 2)
 
             species_profiles = self._fetch_phenology_profiles_from_db(day_start, day_end, site_ids)
-            if not species_profiles:
-                continue
+            reg_boost = CorridorEngine.calculate_corridor_boost_at_time(current_day_dt, corridor_data, is_autumn=is_autumn)
+
+            blocks = []
+            for start_hour in range(sr_h, ss_h, 2):
+                end_hour = min(ss_h, start_hour + 2)
+                block_label = f"{start_hour:02d}:00 - {end_hour:02d}:00"
+
+                matching_weather = [
+                    h for h in day_weather
+                    if start_hour <= datetime.fromisoformat(h["time"].replace("Z", "+00:00")).hour < end_hour
+                ]
+                w_sample = matching_weather[0] if matching_weather else day_weather[0]
+                dt_block = current_day_dt.replace(hour=start_hour, minute=0, second=0)
+
+                w_ctx = WeatherContext(
+                    lat=lat,
+                    lon=lon,
+                    temp=w_sample.get("temp"),
+                    wind_speed=w_sample.get("wind_speed"),
+                    wind_deg=w_sample.get("wind_deg"),
+                    cloud_percent=w_sample.get("cloud_cover"),
+                    pressure=w_sample.get("pressure"),
+                    visibility=10000,
+                    pressure_trend=0.0
+                )
+
+                suggesties = AiInferenceEngine.calculate_bsi_prognosis(
+                    lat=lat, lon=lon, dt=dt_block, weather=w_ctx,
+                    species_profiles=species_profiles, neural_engine=None
+                )
+
+                combined_list = []
+                for s_obj in suggesties:
+                    s_obj.latin_name = self.resolver.get_latin(s_obj.soortid)
+                    s_obj.score *= (1.0 + reg_boost)
+                    s_obj.kans = int(min(98, s_obj.kans * (1.0 + (reg_boost * 0.5))))
+                    combined_list.append(s_obj)
+
+                top_species = sorted(combined_list, key=lambda x: (x.kans, x.score), reverse=True)[:8]
+
+                bft = WeatherManagerUtils.ms_to_beaufort(w_sample.get("wind_speed", 0.0))
+                wind_lbl = WeatherManagerUtils.deg_to_16_wind_label(w_sample.get("wind_deg"))
+                temp_c = round(w_sample.get("temp", 0.0), 1)
+
+                blocks.append({
+                    "time_block": block_label,
+                    "temp": temp_c,
+                    "wind_bft": bft,
+                    "wind_label": wind_lbl,
+                    "wind_deg": float(w_sample.get("wind_deg", 0.0)),
+                    "cloud_cover": w_sample.get("cloud_cover", 50.0),
+                    "top_species": top_species
+                })
+
+            all_days_results.append({
+                "date_str": target_date_str,
+                "display_date": current_day_dt.strftime("%A %d %B").capitalize(),
+                "sunrise": sr_str,
+                "sunset": ss_str,
+                "corridor_boost": reg_boost,
+                "blocks": blocks
+            })
+
+        return all_days_results
+
+    def generate_daily_timeline_prognosis(
+            self,
+            lat: float,
+            lon: float,
+            site_ids: List[str],
+            target_dt: datetime
+    ) -> List[Dict[str, Any]]:
+        hourly_weather = self.fetch_72h_weather_forecast(lat, lon)
+        if not hourly_weather:
+            return []
+
+        target_date_str = target_dt.strftime("%Y-%m-%d")
+        day_weather = [h for h in hourly_weather if h["time"].startswith(target_date_str)]
+        if not day_weather:
+            day_weather = hourly_weather[:24]
+
+        sr_h, ss_h, sr_str, ss_str = calculate_sun_times(lat, lon, target_dt)
+
+        timeline_results = []
+
+        day_of_year = target_dt.timetuple().tm_yday
+        window_size = BsiConfig.BOI_FLOATING_WINDOW_DAYS
+        day_start = day_of_year - (window_size // 2)
+        day_end = day_of_year + (window_size // 2)
+        species_profiles = self._fetch_phenology_profiles_from_db(day_start, day_end, site_ids)
+
+        if not species_profiles:
+            return []
+
+        for start_hour in range(sr_h, ss_h, 2):
+            end_hour = min(ss_h, start_hour + 2)
+            block_label = f"{start_hour:02d}:00 - {end_hour:02d}:00"
+
+            matching_weather = [
+                h for h in day_weather
+                if start_hour <= datetime.fromisoformat(h["time"].replace("Z", "+00:00")).hour < end_hour
+            ]
+            w_sample = matching_weather[0] if matching_weather else day_weather[0]
+            dt_block = target_dt.replace(hour=start_hour, minute=0, second=0)
 
             w_ctx = WeatherContext(
                 lat=lat,
                 lon=lon,
-                temp=snapshot.get("temp"),
-                wind_speed=snapshot.get("wind_speed"),
-                wind_deg=snapshot.get("wind_deg"),
-                cloud_percent=snapshot.get("cloud_cover"),
-                pressure=snapshot.get("pressure"),
+                temp=w_sample.get("temp"),
+                wind_speed=w_sample.get("wind_speed"),
+                wind_deg=w_sample.get("wind_deg"),
+                cloud_percent=w_sample.get("cloud_cover"),
+                pressure=w_sample.get("pressure"),
                 visibility=10000,
                 pressure_trend=0.0
             )
 
-            # Bereken stroomopwaartse corridor boost (regBoost) voor dit tijdstip
-            reg_boost = CorridorEngine.calculate_corridor_boost_at_time(dt_day, corridor_data, is_autumn=is_autumn)
-
-            baseline_suggesties = AiInferenceEngine.calculate_bsi_prognosis(
-                lat=lat, lon=lon, dt=dt_day, weather=w_ctx,
+            suggesties = AiInferenceEngine.calculate_bsi_prognosis(
+                lat=lat, lon=lon, dt=dt_block, weather=w_ctx,
                 species_profiles=species_profiles, neural_engine=None
             )
-            baseline_map = {s.soortid: s for s in baseline_suggesties}
 
-            combined_list = []
-            for sid, s_obj in baseline_map.items():
-                s_obj.latin_name = self.resolver.get_latin(sid)
-                # Pas de corridor boost toe op de score en kans
-                s_obj.score *= (1.0 + reg_boost)
-                s_obj.kans = int(min(98, s_obj.kans * (1.0 + (reg_boost * 0.5))))
-                combined_list.append(s_obj)
+            bft = WeatherManagerUtils.ms_to_beaufort(w_sample.get("wind_speed", 0.0))
+            wind_lbl = WeatherManagerUtils.deg_to_16_wind_label(w_sample.get("wind_deg"))
+            temp_c = round(w_sample.get("temp", 0.0), 1)
 
-            top_10 = sorted(combined_list, key=lambda x: (x.kans, x.score), reverse=True)[:10]
+            timeline_results.append({
+                "time_block": block_label,
+                "temp": temp_c,
+                "wind_bft": bft,
+                "wind_label": wind_lbl,
+                "wind_deg": float(w_sample.get("wind_deg", 0.0)),
+                "cloud_cover": w_sample.get("cloud_cover", 50.0),
+                "sunrise": sr_str,
+                "sunset": ss_str,
+                "weather_summary": f"Wind: {wind_lbl} {bft}Bft | Temp: {temp_c}°C",
+                "top_species": suggesties[:8]
+            })
 
-            bft = WeatherManagerUtils.ms_to_beaufort(snapshot.get("wind_speed", 0.0))
-            wind_lbl = WeatherManagerUtils.deg_to_16_wind_label(snapshot.get("wind_deg"))
-            temp_c = round(snapshot.get("temp", 0.0), 1)
-            summary = f"Wind: {wind_lbl} {bft}Bft | Temp: {temp_c}°C"
-
-            results.append(DailyForecastResult(
-                date_str=dt_day.strftime("%Y-%m-%d"),
-                display_date=dt_day.strftime("%A %d %B").capitalize(),
-                weather_summary=summary,
-                corridor_boost=reg_boost,
-                temp=temp_c,
-                wind_bft=bft,
-                wind_label=wind_lbl,
-                top_species=top_10
-            ))
-
-        return results
+        return timeline_results
 
     def _fetch_phenology_profiles_from_db(self, day_start: int, day_end: int, site_ids: List[str]) -> List[Dict[str, Any]]:
         import sqlite3

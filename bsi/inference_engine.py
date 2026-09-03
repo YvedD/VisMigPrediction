@@ -1,6 +1,6 @@
 """
 bsi/inference_engine.py
-De master BSI 4.1 voorspellingsmotor (Fijnafgesteld met storm- en kustoptimalisatie).
+De master BSI 4.1 voorspellingsmotor (Fijnafgesteld met storm-, kust- en zeebriesoptimalisatie).
 """
 
 import math
@@ -16,7 +16,7 @@ from .weather_service import WeatherContext, WeatherManagerUtils
 from .data_preparer import TrainingDataPreparer
 from .neural_engine import LiteNeuralEngine
 from .expert_knowledge import ExpertKnowledgeBase
-
+from .seabreeze_engine import SeaBreezeEngine
 
 @dataclass
 class VogelSuggestie:
@@ -137,7 +137,7 @@ class AiInferenceEngine:
                 else:
                     f_time = math.exp(-(hour_diff ** 2) / 25.0)
 
-            # F5: Local Wind Gatekeeper & Data-Driven Storm Boost (Correct ingesprongen)
+            # F5: Local Wind Gatekeeper & Data-Driven Storm Boost
             f_gatekeeper = 1.0
             is_off_shore = current_wind_label in {"O", "OZO", "ZO", "ZZO", "Z"}
             is_on_shore = current_wind_label in {"NW", "WNW", "W", "ZW", "NNW"}
@@ -145,14 +145,12 @@ class AiInferenceEngine:
             # Controleer of er historische stormdata beschikbaar is voor deze soort bij deze wind
             storm_bonus_multiplier = 1.0
             if 'storm_df' in p and not p['storm_df'].empty:
-                # Filter op huidige windrichting en windkracht >= 5
                 match_storm = p['storm_df'][
                     (p['storm_df']['soortid'] == soortid) &
                     (p['storm_df']['wind_richting'] == current_wind_label) &
                     (p['storm_df']['wind_bft'] >= bft)
                 ]
                 if not match_storm.empty:
-                    # Als deze soort historisch floreert bij deze zware wind, geef extra boost!
                     totaal_historisch = match_storm['totaal_aantal'].sum()
                     storm_bonus_multiplier = 1.0 + min(2.0, math.log10(max(10.0, totaal_historisch)) * 0.4)
 
@@ -160,7 +158,6 @@ class AiInferenceEngine:
                 if is_off_shore:
                     f_gatekeeper = 0.001
                 elif is_on_shore:
-                    # Basis pelagische storm boost versterkt met de historische data-boost
                     base_pelagic_boost = 2.0 * (1.0 + (bft - 4) * 0.5) if bft >= BsiConfig.EFFICIENCY_BOOST_PELAGIC_BFT else 2.0
                     f_gatekeeper = base_pelagic_boost * storm_bonus_multiplier
 
@@ -170,8 +167,19 @@ class AiInferenceEngine:
                 elif current_wind_label in {"O", "ONO", "NO"}:
                     f_gatekeeper = 1.5 * storm_bonus_multiplier
 
-            # Aggregatie van BSI Score
-            total_score = f_massa * f_wind * f_special * f_time * f_gatekeeper * efficiency_ratio
+            # Zeebries-remmingsfactor / concentratie-boost voor land- en zangvogels in de middag
+            seabreeze_factor = 1.0
+            if guild in {Guild.PASSERINES, Guild.LANDBIRDS_REG, Guild.LANDBIRDS_SPECIAL}:
+                seabreeze_factor = SeaBreezeEngine.get_seabreeze_multiplier(
+                    dt=dt,
+                    temp=weather.temp,
+                    cloud_percent=weather.cloud_percent,
+                    wind_speed=weather.wind_speed,
+                    is_coastal=BsiConfig.IS_COASTAL_SITE
+                )
+
+            # Aggregatie van BSI Score inclusief zeebries-dynamica
+            total_score = f_massa * f_wind * f_special * f_time * f_gatekeeper * efficiency_ratio * seabreeze_factor
 
             # Neurale Boost
             if neural_predictions is not None and model_labels and soortid in model_labels:

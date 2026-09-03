@@ -1,118 +1,127 @@
 """
 bsi/corridor_engine.py
-Berekent de Europese Corridor Boost voor meerdaagse BSI vogelprognoses.
+Beheert stroomopwaartse Europese corridors (bijv. Scandinavië / Baltische Staten)
+en berekent corridor-boosts op basis van weersomstandigheden en windstroom.
 """
 
 import requests
-from datetime import datetime, timedelta
-from typing import List, Dict, Any
-from .config import BsiConfig
-from .weather_service import WeatherManagerUtils
+from datetime import datetime, timezone
+from typing import List, Dict, Any, Optional
 
 
 class CorridorEngine:
-    @staticmethod
-    def calculate_single_point_score(wind_deg: float, pressure_hpa: float, is_autumn: bool) -> float:
-        """
-        Beoordeelt of een enkel corridor-punt op een specifiek uur ideale vertrekcondities heeft.
-        """
-        wind_label = WeatherManagerUtils.deg_to_16_wind_label(wind_deg)
-        p = pressure_hpa if pressure_hpa is not None else 1013.0
-
-        if is_autumn:
-            # Najaar: Rugwind uit N, NNO, NO, ONO, O en Hoge Luchtdruk (> 1014 hPa)
-            if wind_label in ["N", "NNO", "NO", "ONO", "O"] and p > 1014.0:
-                return 1.0
-            return 0.0
-        else:
-            # Voorjaar: Rugwind uit Z, ZZW, ZW, WZW en Goede Luchtdruk (> 1010 hPa)
-            if wind_label in ["Z", "ZZW", "ZW", "WZW"] and p > 1010.0:
-                return 1.0
-            return 0.0
+    # Coördinaten van belangrijke stroomopwaartse migratiecorridors in Noord-/Oost-Europa
+    CORRIDOR_POINTS = [
+        {"name": "Zuid-Zweden (Falsterbo)", "lat": 55.38, "lon": 12.82},
+        {"name": "Denemarken (Skagen)", "lat": 57.73, "lon": 10.58},
+        {"name": "Noord-Duitsland (Elbe)", "lat": 53.55, "lon": 9.99},
+        {"name": "Baltische Kust (Kurland)", "lat": 57.35, "lon": 21.55},
+        {"name": "Oost-Nederland (Lauwersmeer)", "lat": 53.35, "lon": 6.20},
+        {"name": "Noord-Frankrijk (Cap Gris-Nez)", "lat": 50.87, "lon": 1.58}
+    ]
 
     @classmethod
-    def fetch_corridor_forecasts(cls, is_autumn: bool) -> Dict[str, List[Dict[str, Any]]]:
+    def fetch_corridor_forecasts(cls, is_autumn: bool = True) -> List[Dict[str, Any]]:
         """
-        Haalt de 5-daagse weersvoorspelling op voor de 6 relevante corridor-punten via Open-Meteo.
+        Haalt weersvoorspellingen op voor alle corridor-punten via Open-Meteo.
         """
-        ref_points = BsiConfig.REFERENCE_POINTS[:6] if is_autumn else BsiConfig.REFERENCE_POINTS[-6:]
-
-        lats = ",".join(str(p.lat) for p in ref_points)
-        lons = ",".join(str(p.lon) for p in ref_points)
-
-        url = (
-            f"https://api.open-meteo.com/v1/forecast"
-            f"?latitude={lats}&longitude={lons}"
-            f"&hourly=temperature_2m,wind_speed_10m,wind_direction_10m,surface_pressure"
-            f"&wind_speed_unit=ms&forecast_days=5&timezone=auto"
-        )
-
-        try:
-            resp = requests.get(url, timeout=10)
-            if resp.status_code != 200:
-                return {}
-
-            data = resp.json()
-            data_list = data if isinstance(data, list) else [data]
-
-            results: Dict[str, List[Dict[str, Any]]] = {}
-            for i, p_data in enumerate(data_list):
-                point_name = ref_points[i].name
-                hourly = p_data.get("hourly", {})
-                times = hourly.get("time", [])
-
-                point_hours = []
-                for j in range(len(times)):
-                    point_hours.append({
-                        "time": times[j],
-                        "temp": hourly.get("temperature_2m", [])[j],
-                        "wind_speed": hourly.get("wind_speed_10m", [])[j],
-                        "wind_deg": hourly.get("wind_direction_10m", [])[j],
-                        "pressure": hourly.get("surface_pressure", [])[j]
+        corridor_results = []
+        for point in cls.CORRIDOR_POINTS:
+            url = (
+                f"https://api.open-meteo.com/v1/forecast"
+                f"?latitude={point['lat']}&longitude={point['lon']}"
+                f"&hourly=temperature_2m,wind_speed_10m,wind_direction_10m,surface_pressure,cloud_cover"
+                f"&wind_speed_unit=ms&forecast_days=5&timezone=auto"
+            )
+            try:
+                resp = requests.get(url, timeout=5)
+                if resp.status_code == 200:
+                    data = resp.json()
+                    hourly = data.get("hourly", {})
+                    corridor_results.append({
+                        "name": point["name"],
+                        "hourly": hourly
                     })
-                results[point_name] = point_hours
-
-            return results
-        except Exception as e:
-            print(f"[CorridorEngine] Fout bij ophalen corridor forecast: {e}")
-            return {}
+            except Exception as e:
+                print(f"[CorridorEngine] Kon data niet ophalen voor {point['name']}: {e}")
+        return corridor_results
 
     @classmethod
     def calculate_corridor_boost_at_time(
-            cls,
-            target_dt: datetime,
-            corridor_forecasts: Dict[str, List[Dict[str, Any]]],
-            is_autumn: bool
+        cls,
+        target_dt: datetime,
+        corridor_data: List[Dict[str, Any]],
+        is_autumn: bool = True
     ) -> float:
         """
-        Berekent de regBoost (0.0 tot 1.0) voor een specifiek voorspeld tijdstip op basis van stroomopwaartse wind.
-        """
-        if not corridor_forecasts:
+        Berekent de stroomopwaartse corridor boost op een specifiek tijdstip.
+        Vergelijkt datums veilig zonder timezone-conflicten.
+      """
+        if not corridor_data:
             return 0.0
 
-        total_max_score = 0.0
+        # Maak target_dt timezone-naive voor veilige vergelijking
+        target_naive = target_dt.replace(tzinfo=None)
+        total_score = 0.0
+        count = 0
 
-        for point_name, hourly_list in corridor_forecasts.items():
-            window_start = target_dt - timedelta(hours=6)
-            window_end = target_dt + timedelta(hours=1)
+        for point in corridor_data:
+            hourly = point.get("hourly", {})
+            times = hourly.get("time", [])
+            temps = hourly.get("temperature_2m", [])
+            wind_speeds = hourly.get("wind_speed_10m", [])
+            wind_degs = hourly.get("wind_direction_10m", [])
+            pressures = hourly.get("surface_pressure", [])
 
-            best_in_window = 0.0
+            for i, time_str in enumerate(times):
+                try:
+                    # Parse corridor tijdstip en maak ook dit timezone-naive
+                    if "T" in time_str:
+                        dt_entry = datetime.fromisoformat(time_str.replace("Z", "+00:00")).replace(tzinfo=None)
+                    else:
+                        dt_entry = datetime.strptime(time_str, "%Y-%m-%d %H:%M").replace(tzinfo=None)
 
-            for entry in hourly_list:
-                time_str = entry["time"]
-                dt_entry = datetime.fromisoformat(
-                    time_str.replace("Z", "+00:00")) if "T" in time_str else datetime.strptime(time_str,
-                                                                                               "%Y-%m-%d %H:%M")
+                    # Match binnen een venster van 2 uur
+                    if abs((dt_entry - target_naive).total_seconds()) <= 7200:
+                        score = cls.calculate_single_point_score(
+                            wind_deg=wind_degs[i] if i < len(wind_degs) else 0.0,
+                            pressure_hpa=pressures[i] if i < len(pressures) else 1013.0,
+                            temp=temps[i] if i < len(temps) else 15.0,
+                            wind_speed=wind_speeds[i] if i < len(wind_speeds) else 5.0,
+                            is_autumn=is_autumn
+                        )
+                        total_score += score
+                        count += 1
+                        break
+                except Exception:
+                    continue
 
-                if window_start <= dt_entry <= window_end:
-                    score = cls.calculate_single_point_score(
-                        wind_deg=entry.get("wind_deg", 0.0),
-                        pressure_hpa=entry.get("pressure", 1013.0),
-                        is_autumn=is_autumn
-                    )
-                    if score > best_in_window:
-                        best_in_window = score
+        if count == 0:
+            return 0.0
 
-            total_max_score += best_in_window
+        avg_score = total_score / count
+        # Normaliseer naar een boost factor tussen 0.0 en 0.40 (+40% max boost)
+        return min(0.40, max(0.0, avg_score * 0.15))
 
-        return total_max_score / float(len(corridor_forecasts))
+    @staticmethod
+    def calculate_single_point_score(
+        wind_deg: float,
+        pressure_hpa: float,
+        temp: float,
+        wind_speed: float,
+        is_autumn: bool
+    ) -> float:
+        score = 1.0
+        # In najaar helpt rugwind uit het noordoosten/oosten (40°-90°)
+        if is_autumn:
+            if 30 <= wind_deg <= 110:
+                score += 1.2
+        else:  # Voorjaar: rugwind vanuit zuid/zuidwest (180°-240°)
+            if 160 <= wind_deg <= 260:
+                score += 1.2
+
+        # Hoge druk achter de rug stimuleert vertrek
+        if pressure_hpa > 1016:
+            score += 0.5
+
+        return score
