@@ -1,6 +1,6 @@
 """
 bsi/solar_engine.py
-Berekent biologische dagsegmenten op basis van de zonnestand.
+Berekent biologische dagsegmenten op basis van zonnestand.
 """
 
 import math
@@ -20,6 +20,9 @@ class SolarPhase(Enum):
 class SolarTimeEngine:
     @staticmethod
     def get_solar_phase(lat: float, lon: float, dt: datetime) -> SolarPhase:
+        """
+        Bepaalt de biologische dagfase op basis van ruwe zonnestand.
+        """
         day_of_year = dt.timetuple().tm_yday
         hour_fraction = dt.hour + dt.minute / 60.0 + dt.second / 3600.0
 
@@ -30,7 +33,7 @@ class SolarTimeEngine:
         hour_angle = math.acos(tan_val)
         day_length_hours = (2.0 * math.degrees(hour_angle)) / 15.0
 
-        tz_offset = dt.utcoffset().total_seconds() / 3600.0 if dt.utcoffset() else 0.0
+        tz_offset = dt.utcoffset().total_seconds() / 3600.0 if dt.utcoffset() else 2.0
         solar_noon = 12.0 - (lon / 15.0) + tz_offset
 
         sunrise = solar_noon - (day_length_hours / 2.0)

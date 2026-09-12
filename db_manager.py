@@ -2,6 +2,7 @@ import base64
 import os
 import sqlite3
 import pandas as pd
+import streamlit as st
 from datetime import datetime
 from config_loader import load_species
 
@@ -14,6 +15,7 @@ def check_database():
     path = get_db_path()
     return os.path.exists(path), path
 
+@st.cache_data(ttl=3600)
 def fetch_species_weekly_distribution(soort_id, site_ids):
     """Haalt wekelijkse waarnemingen (0-53) op uit SQLite voor een soort[cite: 7]."""
     path = get_db_path()
@@ -39,6 +41,7 @@ def fetch_species_weekly_distribution(soort_id, site_ids):
         print(f"Fout bij ophalen weekdistributie: {e}")
         return []
 
+@st.cache_data(ttl=3600)
 def fetch_storm_wind_correlations(db_path: str, site_ids: list) -> pd.DataFrame:
     """
     Haalt historische windkracht vs. windrichting correlaties op voor de cluster,
@@ -109,6 +112,7 @@ def fetch_species_image_base64(identifier):
     return None
 
 
+@st.cache_data(ttl=300)
 def fetch_real_species_profiles(telpost_id=None, target_dt=None):
     """Haalt historische waarnemingen op uit SQLite en past het
 
@@ -355,6 +359,7 @@ def check_weather_archive_exists(telpost_id, year):
     return count > 7000
 
 
+@st.cache_data(ttl=300)
 def fetch_training_data(limit=10):
     path = get_db_path()
     conn = sqlite3.connect(path)
@@ -380,6 +385,7 @@ def fetch_training_data(limit=10):
     return df
 
 
+@st.cache_data(ttl=3600)
 def fetch_phenology_profile():
     path = get_db_path()
     conn = sqlite3.connect(path)

@@ -5,11 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ab09ec76-2466-4833-b2e9-3cf62d6c3b9f" name="Changes" comment="Eerste werkende stappen (in geheugen) zonder oracle">
-      <change afterPath="$PROJECT_DIR$/bsi/seabreeze_engine.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BSI_logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run_public.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/site_dna_builder.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bsi/corridor_engine.py" beforeDir="false" afterPath="$PROJECT_DIR$/bsi/corridor_engine.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bsi/forecast_system.py" beforeDir="false" afterPath="$PROJECT_DIR$/bsi/forecast_system.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bsi/guild_mapper.py" beforeDir="false" afterPath="$PROJECT_DIR$/bsi/guild_mapper.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bsi/inference_engine.py" beforeDir="false" afterPath="$PROJECT_DIR$/bsi/inference_engine.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bsi/solar_engine.py" beforeDir="false" afterPath="$PROJECT_DIR$/bsi/solar_engine.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bsi/weather_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/bsi/weather_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config_loader.py" beforeDir="false" afterPath="$PROJECT_DIR$/config_loader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/db_manager.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -45,23 +53,23 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.2468541486568083" />
-      <entry key="MS500" value="2.9315625598718382" />
-      <entry key="S2" value="4.2927519749893595" />
-      <entry key="S5" value="4.69656189718974" />
-      <entry key="S10" value="4.844601495726225" />
-      <entry key="S30" value="4.94735742415736" />
-      <entry key="S60" value="4.973571695190433" />
-      <entry key="M2" value="4.986758969241402" />
-      <entry key="M5" value="4.994697178923845" />
-      <entry key="M10" value="4.997891127955915" />
-      <entry key="M15" value="5.010517792181228" />
-      <entry key="M30" value="5.420100766052106" />
-      <entry key="H1" value="8.983623856443689" />
-      <entry key="H2" value="23.010905581557406" />
-      <entry key="H4" value="51.93127187231642" />
-      <entry key="D1" value="121.97442837334609" />
-      <entry key="W1" value="143.0925045640073" />
+      <entry key="MS100" value="1.3794176222469567" />
+      <entry key="MS500" value="2.457998550306635" />
+      <entry key="S2" value="5.419435476207711" />
+      <entry key="S5" value="13.341475864629246" />
+      <entry key="S10" value="27.332055956384448" />
+      <entry key="S30" value="55.2718549429317" />
+      <entry key="S60" value="68.33318603340102" />
+      <entry key="M2" value="76.49698918402967" />
+      <entry key="M5" value="82.23721176326043" />
+      <entry key="M10" value="84.98699012955494" />
+      <entry key="M15" value="87.13012568506376" />
+      <entry key="M30" value="93.04400215933266" />
+      <entry key="H1" value="101.54578910906112" />
+      <entry key="H2" value="115.41558256357301" />
+      <entry key="H4" value="143.33545091640318" />
+      <entry key="D1" value="239.41464519432103" />
+      <entry key="W1" value="275.8973340342063" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
@@ -83,24 +91,27 @@
       <entry key="W1" value="0.0" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="1.2040662951554675" />
-      <entry key="MS500" value="2.911085923397235" />
-      <entry key="S2" value="4.285294850191975" />
-      <entry key="S5" value="4.693303177376818" />
-      <entry key="S10" value="4.842921623477451" />
-      <entry key="S30" value="4.946785784756681" />
-      <entry key="S60" value="4.973284385696977" />
-      <entry key="M2" value="4.986614939792641" />
-      <entry key="M5" value="4.994639476925091" />
-      <entry key="M10" value="4.9978622586336945" />
-      <entry key="M15" value="5.01049848223776" />
-      <entry key="M30" value="5.42008889969689" />
-      <entry key="H1" value="8.983604790083454" />
-      <entry key="H2" value="23.010871111101192" />
-      <entry key="H4" value="51.931231297912994" />
-      <entry key="D1" value="121.97441281034736" />
-      <entry key="W1" value="143.09250197189033" />
+      <entry key="MS100" value="1.2919839343430417" />
+      <entry key="MS500" value="2.427956862553875" />
+      <entry key="S2" value="5.401994190805464" />
+      <entry key="S5" value="13.323682573805979" />
+      <entry key="S10" value="27.31274343062254" />
+      <entry key="S30" value="55.25553039954838" />
+      <entry key="S60" value="68.32164283740988" />
+      <entry key="M2" value="76.48995165338225" />
+      <entry key="M5" value="82.23398909867281" />
+      <entry key="M10" value="84.98511667951138" />
+      <entry key="M15" value="87.12854936119437" />
+      <entry key="M30" value="93.04258163507745" />
+      <entry key="H1" value="101.54460242879972" />
+      <entry key="H2" value="115.41474634889593" />
+      <entry key="H4" value="143.33492668578967" />
+      <entry key="D1" value="239.41452964363535" />
+      <entry key="W1" value="275.8973164090175" />
     </decayedShown>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="AISelfReview" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1,
@@ -127,9 +138,9 @@
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "codeWithMe.voiceChat.enabledByDefault": "false",
-    "com.google.cloudcode.ide_session_index": "20260903_0001",
+    "com.google.cloudcode.ide_session_index": "20260912_0001",
     "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Eigen bestanden Yves/Programeren/Python/VisMigPrediction/AI-models",
+    "last_opened_file_path": "C:/Eigen bestanden Yves/Programeren/Python/VisMigPrediction",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.jshint": "true",
     "node.js.detected.package.tslint": "true",
@@ -142,6 +153,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Eigen bestanden Yves\Programeren\Python\VisMigPrediction" />
       <recent name="C:\Eigen bestanden Yves\Programeren\Python\VisMigPrediction\AI-models" />
       <recent name="C:\Eigen bestanden Yves\Programeren\Python\VisMigPrediction\serverdata" />
       <recent name="C:\Eigen bestanden Yves\Programeren\Python\VisMigPrediction\database" />
@@ -308,7 +320,13 @@
       <workItem from="1788279899831" duration="190000" />
       <workItem from="1788280107952" duration="14508000" />
       <workItem from="1788347447658" duration="20444000" />
-      <workItem from="1788431786049" duration="3497000" />
+      <workItem from="1788431786049" duration="3558000" />
+      <workItem from="1788622180546" duration="632000" />
+      <workItem from="1788778638055" duration="16305000" />
+      <workItem from="1788891441828" duration="1245000" />
+      <workItem from="1788969557800" duration="4229000" />
+      <workItem from="1789154843178" duration="3049000" />
+      <workItem from="1789211798927" duration="1118000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <option name="closed" value="true" />
@@ -334,7 +352,15 @@
       <option name="project" value="LOCAL" />
       <updated>1788382955718</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Eerste werkende stappen (in geheugen) zonder oracle">
+      <option name="closed" value="true" />
+      <created>1788462698750</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1788462698750</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

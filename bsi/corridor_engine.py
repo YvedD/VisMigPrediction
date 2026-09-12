@@ -5,6 +5,7 @@ en berekent corridor-boosts op basis van weersomstandigheden en windstroom.
 """
 
 import requests
+import streamlit as st
 from datetime import datetime, timezone
 from typing import List, Dict, Any, Optional
 
@@ -21,6 +22,7 @@ class CorridorEngine:
     ]
 
     @classmethod
+    @st.cache_data(ttl=900)
     def fetch_corridor_forecasts(cls, is_autumn: bool = True) -> List[Dict[str, Any]]:
         """
         Haalt weersvoorspellingen op voor alle corridor-punten via Open-Meteo.

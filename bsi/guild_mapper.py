@@ -1,6 +1,6 @@
 """
 bsi/guild_mapper.py
-Mapping van Latijnse vogelnamen naar gilde-categorieën en vliegstrategieën.
+Mapping van Latijnse namen (vogels, insecten, zoogdieren) naar gilde-categorieën en vliegstrategieën.
 """
 
 from enum import Enum
@@ -9,23 +9,25 @@ from typing import Optional
 
 class FlightStrategy(Enum):
     THERMAL = "Thermal"  # Zwevers (Ooievaar, Buizerd, Wespendief)
-    ACTIVE = "Active"    # Actieve vliegers (Reigers, Kiekendieven, Valken, Steltlopers)
+    ACTIVE = "Active"    # Actieve vliegers (Reigers, Kiekendieven, Valken, Steltlopers, Zoogdieren, Insecten)
     VISMIG = "Vismig"    # Visuele trek (Zangvogels, Zwaluwen, Sterns, Eenden)
 
 
 class Guild(Enum):
-    WATERFOWL = ("Watervogels (Ganzen/Grondeleenden)", False, FlightStrategy.VISMIG)
-    COASTAL_BIRDS = ("Kustvogels (Zee-eenden/Duikers/Futen)", False, FlightStrategy.VISMIG)
-    RAPTORS_THERMAL = ("Roofvogels (Zwevers)", False, FlightStrategy.THERMAL)
-    RAPTORS_ACTIVE = ("Roofvogels (Actief)", False, FlightStrategy.ACTIVE)
+    WATERFOWL = ("Watervogels", False, FlightStrategy.VISMIG)
+    COASTAL_BIRDS = ("Kustvogels", False, FlightStrategy.VISMIG)
+    RAPTORS_THERMAL = ("Roofvogels (Zwevend)", False, FlightStrategy.THERMAL)
+    RAPTORS_ACTIVE = ("Roofvogels (Actief vliegend)", False, FlightStrategy.ACTIVE)
     HERONS = ("Reigers", False, FlightStrategy.ACTIVE)
-    STORKS = ("Ooievaars (Zwevers)", False, FlightStrategy.THERMAL)
+    STORKS = ("Ooievaars (Zwevend)", False, FlightStrategy.THERMAL)
     SHOREBIRDS = ("Steltlopers", False, FlightStrategy.ACTIVE)
     GULLS_TERNS = ("Meeuwen & Sterns", False, FlightStrategy.VISMIG)
     PELAGICS = ("Zeevogels (Pelagics)", False, FlightStrategy.VISMIG)
     LANDBIRDS_SPECIAL = ("Speciale Landvogels", True, FlightStrategy.VISMIG)
     LANDBIRDS_REG = ("Landvogels", False, FlightStrategy.VISMIG)
     PASSERINES = ("Zangvogels", False, FlightStrategy.VISMIG)
+    INSECTS = ("Insecten", False, FlightStrategy.ACTIVE)
+    MAMMALS = ("Zoogdieren", False, FlightStrategy.ACTIVE)
     UNCLASSIFIED_BIRDS = ("Overige Vogels", False, FlightStrategy.VISMIG)
     OTHER = ("Niet-vogels", False, FlightStrategy.VISMIG)
 
@@ -43,6 +45,21 @@ class SpeciesGuildMapper:
 
         genus = latin_name.strip().split()[0]
 
+        # --- NIEUW: Insecten (Vlinders, Libellen, etc.) ---
+        if genus in {
+            "Vanessa", "Pieris", "Colias", "Aglais", "Macroglossum", "Autographa",
+            "Sympetrum", "Aeshna", "Anax", "Libellula", "Orthetrum", "Cordulegaster"
+        }:
+            return Guild.INSECTS
+
+        # --- NIEUW: Zoogdieren (Vleermuizen, Bruinvis, etc.) ---
+        if genus in {
+            "Pipistrellus", "Nyctalus", "Eptesicus", "Myotis", "Plecotus",
+            "Barbastella", "Vespertilio", "Phocoena"
+        }:
+            return Guild.MAMMALS
+
+        # --- Bestaande vogel-gilden ---
         if genus in {
             "Anser", "Branta", "Cygnus", "Anas", "Spatula", "Mareca", "Netta", "Aythya",
             "Tadorna", "Aix", "Alopochen", "Oxyura", "Phalacrocorax", "Microcarbo",
@@ -105,7 +122,7 @@ class SpeciesGuildMapper:
 
         if genus in {
             "Columba", "Streptopelia", "Apus", "Hirundo", "Delichon", "Riparia",
-            "Ptyonoprogne", "Cecropis"
+            "Ptyonoprogne", "Cecropis", "Corvus", "Garrulus", "Pica"
         }:
             return Guild.LANDBIRDS_REG
 
@@ -118,8 +135,8 @@ class SpeciesGuildMapper:
             "Curruca", "Phylloscopus", "Acrocephalus", "Iduna", "Hippolais",
             "Locustella", "Cettia", "Parus", "Cyanistes", "Periparus", "Lophophanes",
             "Poecile", "Aegithalos", "Sitta", "Certhia", "Troglodytes", "Cinclus",
-            "Regulus", "Panurus", "Corvus", "Coloeus", "Pica", "Garrulus",
-            "Nucifraga", "Pyrrhocorax", "Remiz", "Bombycilla", "Carpodacus"
+            "Regulus", "Panurus", "Coloeus", "Cisticola",
+            "Nucifraga", "Pyrrhocorax", "Remiz", "Bombycilla", "Carpodacus", "Prunella"
         }:
             return Guild.PASSERINES
 

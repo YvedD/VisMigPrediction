@@ -5,6 +5,7 @@ Weer-integratie via Open-Meteo REST API's.
 
 import math
 import requests
+import streamlit as st
 from dataclasses import dataclass
 from typing import Optional, Tuple, Dict, Any, List
 
@@ -63,6 +64,7 @@ class WeatherManagerUtils:
 
 class AiWeatherService:
     @staticmethod
+    @st.cache_data(ttl=300)
     def fetch_contextual_weather(lat: float, lon: float) -> Optional[WeatherContext]:
         """
         Haalt het actuele weer op via Open-Meteo inclusief de 6-uurs luchtdruktrend.

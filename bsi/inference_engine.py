@@ -1,6 +1,7 @@
 """
 bsi/inference_engine.py
-De master BSI 4.1 voorspellingsmotor (Fijnafgesteld met storm-, kust- en zeebriesoptimalisatie).
+De master BSI 4.1 voorspellingsmotor met strikte 11.25° wind-DNA tolerantie
+en database-brede fenologie-analyse.
 """
 
 import math
@@ -43,7 +44,7 @@ class AiInferenceEngine:
         expert_kb: Optional[ExpertKnowledgeBase] = None
     ) -> List[VogelSuggestie]:
         """
-        Berekent de volledige BSI 4.1 prognose voor een gegeven tijdstip en locatie.
+        Berekent de volledige BSI 4.1 prognose met strikte 11.25° wind-tolerantie.
         """
         epoch_sec = int(dt.timestamp())
         phase = SolarTimeEngine.get_solar_phase(lat, lon, dt)
@@ -53,7 +54,6 @@ class AiInferenceEngine:
         current_wind_label = WeatherManagerUtils.deg_to_16_wind_label(current_wind_deg)
         bft = WeatherManagerUtils.ms_to_beaufort(weather.wind_speed if weather.wind_speed is not None else 0.0)
 
-        # Neuraal netwerk voorwaartse pass
         neural_predictions = None
         if neural_engine and model_labels and BsiConfig.USE_NEURAL_INFERENCE:
             features = TrainingDataPreparer.build_feature_vector_for_context(
@@ -69,9 +69,7 @@ class AiInferenceEngine:
             neural_predictions = neural_engine.predict(features)
 
         scored_species: List[VogelSuggestie] = []
-
-        # FINETUNING: Noemer verlaagd van 5.0 naar 3.0 voor betere percentages
-        ideal_score = 3.0
+        ideal_score = 2.5
 
         for p in species_profiles:
             soortid = p["soortid"]
@@ -89,97 +87,60 @@ class AiInferenceEngine:
 
             # F1: Massa (Log)
             f_massa_raw = math.log10(max(1.0, float(p.get("count", 1))))
-            f_massa = 1.0 + (f_massa_raw * 0.4)
+            f_massa = 1.0 + (f_massa_raw * 0.3)
 
-            # FINETUNING: Efficiency Ratio ondergrens verhoogd van 0.01 naar 0.25
+            # Efficiency Ratio
             best_count = float(p.get("bestWindCount", 1))
             curr_count = float(p.get("currentWindCount", 0))
-            efficiency_ratio = max(0.25, min(1.0, curr_count / (best_count if best_count > 0 else 1.0)))
+            efficiency_ratio = max(0.35, min(1.0, curr_count / (best_count if best_count > 0 else 1.0)))
 
-            # F2: Wind-DNA (met de nieuwe 12° tolerantie)
+            # F2: STRIKTE WIND-DNA (Foutmarge exact 11.25°)
             hist_wind_deg = TrainingDataPreparer.parse_wind_direction_to_degrees(p.get("mainWind")) or current_wind_deg
             diff = abs(current_wind_deg - hist_wind_deg)
             normalized_diff = 360.0 - diff if diff > 180 else diff
 
-            if normalized_diff <= BsiConfig.WIND_TOLERANCE_DEGREES:
-                f_wind = 1.8
+            wind_tolerance = 11.25  # Strikte foutmarge van 11.25°
+            if normalized_diff <= wind_tolerance:
+                f_wind = 2.0
             else:
-                f_wind = max(0.1, 1.8 * math.exp(-(normalized_diff ** 2) / 400.0))
+                # Vloeiende afname buiten de 11.25° marge
+                f_wind = max(0.15, 2.0 * math.exp(-((normalized_diff - wind_tolerance) ** 2) / 600.0))
 
             # F3: Special / Krenten
             f_special = 1.0
             is_krent = expert_kb and (soortid in expert_kb.discovered_krenten or soortid in expert_kb.pinned_species)
             if p.get("isRemarkable") == 1:
-                f_special = 4.5
+                f_special = 4.0
             elif is_krent:
-                f_special = 3.0
+                f_special = 2.5
 
-            # F4: Tijd & Strategie
+            # F4: Tijd & Strategie (Gezonde spreiding tijdens daglicht)
             f_time = 1.0
             target_hour = float(p.get("avgHour", 10.0))
             hour_diff = abs(current_hour - target_hour)
 
-            if strategy == FlightStrategy.THERMAL:
-                if current_hour < 9 or current_hour > 18 or phase == SolarPhase.NIGHT or bft >= 6:
-                    f_time = 0.0001
-                else:
-                    f_time = 0.5 + (max(0.1, min(10.0, current_temp - 10.0)) / 10.0)
+            if phase == SolarPhase.NIGHT and guild != Guild.PELAGICS:
+                f_time = 0.05
+            else:
+                f_time = max(0.4, math.exp(-(hour_diff ** 2) / 45.0))
 
-            elif strategy == FlightStrategy.ACTIVE:
-                if phase == SolarPhase.NIGHT and guild != Guild.PELAGICS:
-                    f_time = 0.01
-                else:
-                    f_time = math.exp(-(hour_diff ** 2) / 40.0)
-
-            elif strategy == FlightStrategy.VISMIG:
-                if phase == SolarPhase.NIGHT:
-                    f_time = 0.0001
-                else:
-                    f_time = math.exp(-(hour_diff ** 2) / 25.0)
-
-            # F5: Local Wind Gatekeeper & Data-Driven Storm Boost
+            # F5: Gatekeeper & Kustleidraad
             f_gatekeeper = 1.0
             is_off_shore = current_wind_label in {"O", "OZO", "ZO", "ZZO", "Z"}
             is_on_shore = current_wind_label in {"NW", "WNW", "W", "ZW", "NNW"}
 
-            # Controleer of er historische stormdata beschikbaar is voor deze soort bij deze wind
-            storm_bonus_multiplier = 1.0
-            if 'storm_df' in p and not p['storm_df'].empty:
-                match_storm = p['storm_df'][
-                    (p['storm_df']['soortid'] == soortid) &
-                    (p['storm_df']['wind_richting'] == current_wind_label) &
-                    (p['storm_df']['wind_bft'] >= bft)
-                ]
-                if not match_storm.empty:
-                    totaal_historisch = match_storm['totaal_aantal'].sum()
-                    storm_bonus_multiplier = 1.0 + min(2.0, math.log10(max(10.0, totaal_historisch)) * 0.4)
-
             if guild == Guild.PELAGICS:
                 if is_off_shore:
-                    f_gatekeeper = 0.001
+                    f_gatekeeper = 0.05
                 elif is_on_shore:
-                    base_pelagic_boost = 2.0 * (1.0 + (bft - 4) * 0.5) if bft >= BsiConfig.EFFICIENCY_BOOST_PELAGIC_BFT else 2.0
-                    f_gatekeeper = base_pelagic_boost * storm_bonus_multiplier
+                    f_gatekeeper = 1.8 if bft >= 4 else 1.2
 
             elif guild in {Guild.RAPTORS_ACTIVE, Guild.RAPTORS_THERMAL, Guild.PASSERINES, Guild.HERONS}:
-                if BsiConfig.IS_COASTAL_SITE and is_on_shore:
-                    f_gatekeeper = 0.5 if bft >= 4 else 0.8
-                elif current_wind_label in {"O", "ONO", "NO"}:
-                    f_gatekeeper = 1.5 * storm_bonus_multiplier
+                if current_wind_label in {"ZW", "WZW", "W"} and 2 <= bft <= 5:
+                    f_gatekeeper = 1.35  # Kustleidraad boost
 
-            # Zeebries-remmingsfactor / concentratie-boost voor land- en zangvogels in de middag
-            seabreeze_factor = 1.0
-            if guild in {Guild.PASSERINES, Guild.LANDBIRDS_REG, Guild.LANDBIRDS_SPECIAL}:
-                seabreeze_factor = SeaBreezeEngine.get_seabreeze_multiplier(
-                    dt=dt,
-                    temp=weather.temp,
-                    cloud_percent=weather.cloud_percent,
-                    wind_speed=weather.wind_speed,
-                    is_coastal=BsiConfig.IS_COASTAL_SITE
-                )
-
-            # Aggregatie van BSI Score inclusief zeebries-dynamica
-            total_score = f_massa * f_wind * f_special * f_time * f_gatekeeper * efficiency_ratio * seabreeze_factor
+            # Aggregatie van BSI Score
+            total_score = f_massa * f_wind * f_special * f_time * f_gatekeeper * efficiency_ratio
 
             # Neurale Boost
             if neural_predictions is not None and model_labels and soortid in model_labels:
@@ -188,7 +149,6 @@ class AiInferenceEngine:
                     prob = float(neural_predictions[idx])
                     total_score *= (1.0 + BsiConfig.NEURAL_INTEGRATION_WEIGHT * prob)
 
-            # Percentage omzetting (max 98%)
             prob_raw = int(min(0.98, total_score / ideal_score) * 100)
 
             if prob_raw >= BsiConfig.MIN_BSI_QUALITY_THRESHOLD:
