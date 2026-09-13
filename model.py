@@ -1,8 +1,9 @@
 import json
-import os
 import numpy as np
 import pandas as pd
 import streamlit as st
+
+from app_paths import project_path
 
 
 def sigmoid(x):
@@ -19,8 +20,8 @@ class LiteNeuralEnginePredictor:
 
   def _load_model_weights(self):
     """Laadt de MLP gewichten en biassen uit neural_engine.json[cite: 10, 11]."""
-    path = os.path.join("AI-models", "neural_engine.json")
-    if os.path.exists(path):
+    path = project_path("AI-models", "neural_engine.json")
+    if path.exists():
       with open(path, "r", encoding="utf-8") as f:
         data = json.load(f)
         w_in = np.array(data.get("wInputHidden", []))

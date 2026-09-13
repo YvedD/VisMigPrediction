@@ -9,6 +9,8 @@ from pathlib import Path
 from dataclasses import dataclass
 from typing import Dict, List, Optional, Any
 
+from app_paths import project_path
+
 
 @dataclass
 class SpeciesItem:
@@ -20,8 +22,8 @@ class SpeciesItem:
 
 
 class SpeciesResolver:
-    def __init__(self, base_dir: Path = Path(".")):
-        self.base_dir = Path(base_dir)
+    def __init__(self, base_dir: Optional[Path] = None):
+        self.base_dir = Path(base_dir) if base_dir is not None else project_path()
         self.species_by_id: Dict[str, SpeciesItem] = {}
         self.species_by_canonical: Dict[str, str] = {}
         self.model_labels: Optional[List[str]] = None
@@ -43,8 +45,7 @@ class SpeciesResolver:
         # Controleer meerdere mogelijke locaties voor maximale robuustheid
         possible_paths = [
             self.base_dir / "serverdata" / "species.json",
-            Path("serverdata") / "species.json",
-            Path("C:/Eigen bestanden Yves/Programeren/Python/VisMigPrediction/serverdata/species.json"),
+            project_path("serverdata", "species.json"),
             self.base_dir / "VT5" / "serverdata" / "species.json"
         ]
 
@@ -85,8 +86,7 @@ class SpeciesResolver:
     def _load_model_labels(self):
         possible_paths = [
             self.base_dir / "AI-models" / "models" / "model_labels.json",
-            Path("AI-models") / "models" / "model_labels.json",
-            Path("C:/Eigen bestanden Yves/Programeren/Python/VisMigPrediction/AI-models/models/model_labels.json"),
+            project_path("AI-models", "models", "model_labels.json"),
             self.base_dir / "VT5" / "AI-models" / "models" / "model_labels.json"
         ]
 

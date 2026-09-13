@@ -1,8 +1,10 @@
-import os
 import sqlite3
 
-# Pad naar je database
-db_path = os.path.join("database", "voicetally_1785686365175.db")
+from app_paths import project_path
+
+
+# Pad naar je lokale database
+db_path = project_path("database", "voicetally.db")
 
 conn = sqlite3.connect(db_path)
 cursor = conn.cursor()

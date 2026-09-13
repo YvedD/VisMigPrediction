@@ -1,25 +1,25 @@
 import base64
-import os
 import sqlite3
 import pandas as pd
 import streamlit as st
 from datetime import datetime
+from app_paths import project_path
 from config_loader import load_species
 
 
 def get_db_path():
-    return os.path.join("database", "voicetally.db")
+    return project_path("database", "voicetally.db")
 
 
 def check_database():
     path = get_db_path()
-    return os.path.exists(path), path
+    return path.exists(), str(path)
 
 @st.cache_data(ttl=3600)
 def fetch_species_weekly_distribution(soort_id, site_ids):
     """Haalt wekelijkse waarnemingen (0-53) op uit SQLite voor een soort[cite: 7]."""
     path = get_db_path()
-    if not os.path.exists(path):
+    if not path.exists():
         return []
     try:
         conn = sqlite3.connect(path)
@@ -84,7 +84,7 @@ def fetch_species_image_base64(identifier):
     op basis van wetenschappelijke of Nederlandse naam.
     """
     path = get_db_path()
-    if not os.path.exists(path) or not identifier:
+    if not path.exists() or not identifier:
         return None
 
     try:
@@ -119,7 +119,7 @@ def fetch_real_species_profiles(telpost_id=None, target_dt=None):
     Floating 7/9-Day Fenologische Venster toe op basis van de datum (Sectie 15).
     """
     path = get_db_path()
-    if not os.path.exists(path):
+    if not path.exists():
         return []
 
     if target_dt is None:
@@ -345,7 +345,7 @@ def save_weather_to_archive_safe(telpost_id, year, df_weather):
 
 def check_weather_archive_exists(telpost_id, year):
     path = get_db_path()
-    if not os.path.exists(path):
+    if not path.exists():
         return False
     conn = sqlite3.connect(path)
     cursor = conn.cursor()

@@ -1,15 +1,19 @@
 import os
 import sqlite3
+
 from dotenv import load_dotenv
 import libsql_client
+
+from app_paths import project_path
+
 
 load_dotenv()
 
 url = os.getenv("TURSO_DATABASE_URL")
 auth_token = os.getenv("TURSO_AUTH_TOKEN")
-db_path = os.path.join("database", "voicetally_1785686365175.db")
+db_path = project_path("database", "voicetally.db")
 
-if not os.path.exists(db_path):
+if not db_path.exists():
     print(f"❌ Kan lokale database niet vinden op {db_path}")
     exit()
 
@@ -50,20 +54,18 @@ with libsql_client.create_client_sync(url=url, auth_token=auth_token) as cloud_c
             if not rows:
                 break
 
-            # Bouw een lijst van queries voor deze batch
             batch_statements = [(insert_sql, list(row)) for row in rows]
 
             try:
                 cloud_client.batch(batch_statements)
                 total_migrated += len(rows)
                 print(f"   -> {total_migrated} rijen overgezet...", end="\r")
-            except Exception as e:
-                # Als een batch faalt, vangen we het op per individuele rij in die batch
+            except Exception:
                 for row in rows:
                     try:
                         cloud_client.execute(insert_sql, list(row))
                         total_migrated += 1
-                    except:
+                    except Exception:
                         pass
 
         print(f"\n   ✅ Tabel '{table_name}' voltooid! Totaal overgezet: {total_migrated} rijen.")

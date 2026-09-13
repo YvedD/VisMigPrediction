@@ -21,14 +21,14 @@ class CorridorEngine:
         {"name": "Noord-Frankrijk (Cap Gris-Nez)", "lat": 50.87, "lon": 1.58}
     ]
 
-    @classmethod
+    @staticmethod
     @st.cache_data(ttl=900)
-    def fetch_corridor_forecasts(cls, is_autumn: bool = True) -> List[Dict[str, Any]]:
+    def fetch_corridor_forecasts(is_autumn: bool = True) -> List[Dict[str, Any]]:
         """
         Haalt weersvoorspellingen op voor alle corridor-punten via Open-Meteo.
         """
         corridor_results = []
-        for point in cls.CORRIDOR_POINTS:
+        for point in CorridorEngine.CORRIDOR_POINTS:
             url = (
                 f"https://api.open-meteo.com/v1/forecast"
                 f"?latitude={point['lat']}&longitude={point['lon']}"

@@ -1,19 +1,26 @@
-import os
 import sqlite3
 
-# Pad naar je lokale database
-db_path = os.path.join("database", "voicetally_1785686365175.db")
-dump_path = "backup_dump.sql"
+from app_paths import project_path
 
-print("⏳ Bezig met genereren van de SQL-dump via Python...")
 
-# Open de lokale database
+# Pad naar je database
+db_path = project_path("database", "voicetally.db")
+
 conn = sqlite3.connect(db_path)
+cursor = conn.cursor()
 
-# Schrijf alle SQL-statements weg naar een bestand
-with open(dump_path, "w", encoding="utf-8") as f:
-  for line in conn.iterdump():
-    f.write(f"{line}\n")
+# Vraag de kolommen en de eerste 5 rijen op uit 'waarnemingen'
+cursor.execute("SELECT * FROM waarnemingen LIMIT 5;")
+rows = cursor.fetchall()
+
+# Haal de kolomnamen op zodat we weten wat wat is
+column_names = [description[0] for description in cursor.description]
+
+print("📋 Kolommen in 'waarnemingen':")
+print(column_names)
+print("\n🔍 Eerste 5 rijen:")
+
+for i, row in enumerate(rows, 1):
+  print(f"\nRij {i}: {row}")
 
 conn.close()
-print(f"✅ Succes! Je SQL-dump is opgeslagen als '{dump_path}' in je projectmap.")

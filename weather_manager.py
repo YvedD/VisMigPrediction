@@ -1,10 +1,10 @@
 from datetime import date, datetime, timedelta
 import json
-import os
 import time
 import numpy as np
 import pandas as pd
 import requests
+from app_paths import project_path
 from db_manager import (
     check_weather_archive_exists,
     init_weather_archive_table,
@@ -14,8 +14,8 @@ from db_manager import (
 
 def load_telpost_coordinates(telpost_id):
   """Zoekt de coördinaten op uit telpost_locaties.json."""
-  path = os.path.join("serverdata", "telpost_locaties.json")
-  if os.path.exists(path):
+  path = project_path("serverdata", "telpost_locaties.json")
+  if path.exists():
     with open(path, "r", encoding="utf-8") as f:
       data = json.load(f)
       locaties = data.get("locaties", [])

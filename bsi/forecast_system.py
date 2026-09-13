@@ -35,6 +35,33 @@ class DailyForecastResult:
     top_species: List[VogelSuggestie]
 
 
+def wmo_code_to_precipitation_type(code) -> str:
+    """Converteert WMO weerscodes naar een leesbare neerslagsoort voor de voorspelling."""
+    if code is None:
+        return "Droog"
+    try:
+        code = int(code)
+    except (TypeError, ValueError):
+        return "Droog"
+
+    if code in {51, 53, 55, 56, 57}:
+        return "Motregen"
+    elif code in {61, 63, 65, 66, 67}:
+        return "Regen"
+    elif code in {71, 73, 75, 77}:
+        return "Sneeuw"
+    elif code in {80, 81, 82}:
+        return "Buien"
+    elif code in {85, 86}:
+        return "Sneeuwbuien"
+    elif code >= 95:
+        return "Onweer"
+    elif code in {1, 2, 3}:
+        return "Bewolkt"
+    else:
+        return "Droog"
+
+
 class BsiForecastSystem:
     def __init__(self, db_path: str, species_resolver: SpeciesResolver):
         self.db_path = db_path
@@ -48,7 +75,7 @@ class BsiForecastSystem:
         url = (
             f"https://api.open-meteo.com/v1/forecast"
             f"?latitude={lat}&longitude={lon}"
-            f"&hourly=temperature_2m,wind_speed_10m,wind_direction_10m,surface_pressure,cloud_cover"
+            f"&hourly=temperature_2m,wind_speed_10m,wind_direction_10m,surface_pressure,cloud_cover,precipitation,precipitation_probability,weather_code"
             f"&daily=sunrise,sunset"
             f"&wind_speed_unit=ms&forecast_days=5&timezone=auto"
         )
@@ -60,15 +87,29 @@ class BsiForecastSystem:
 
             hourly = data.get("hourly", {})
             times = hourly.get("time", [])
+
+            temps = hourly.get("temperature_2m", [])
+            wind_speeds = hourly.get("wind_speed_10m", [])
+            wind_degs = hourly.get("wind_direction_10m", [])
+            pressures = hourly.get("surface_pressure", [])
+            cloud_covers = hourly.get("cloud_cover", [])
+            precips = hourly.get("precipitation", [])
+            precip_probs = hourly.get("precipitation_probability", [])
+            weather_codes = hourly.get("weather_code", [])
+
             hourly_result = []
             for i in range(len(times)):
+                w_code = weather_codes[i] if i < len(weather_codes) else 0
                 hourly_result.append({
                     "time": times[i],
-                    "temp": hourly.get("temperature_2m", [])[i],
-                    "wind_speed": hourly.get("wind_speed_10m", [])[i],
-                    "wind_deg": hourly.get("wind_direction_10m", [])[i],
-                    "pressure": hourly.get("surface_pressure", [])[i],
-                    "cloud_cover": hourly.get("cloud_cover", [])[i]
+                    "temp": temps[i] if i < len(temps) else 15.0,
+                    "wind_speed": wind_speeds[i] if i < len(wind_speeds) else 3.0,
+                    "wind_deg": wind_degs[i] if i < len(wind_degs) else 0.0,
+                    "pressure": pressures[i] if i < len(pressures) else 1016.0,
+                    "cloud_cover": cloud_covers[i] if i < len(cloud_covers) else 20.0,
+                    "precip_mm": precips[i] if i < len(precips) else 0.0,
+                    "precip_prob": precip_probs[i] if i < len(precip_probs) else 0,
+                    "precip_type": wmo_code_to_precipitation_type(w_code)
                 })
 
             daily = data.get("daily", {})
@@ -193,7 +234,6 @@ class BsiForecastSystem:
                     s_obj.kans = int(min(98, s_obj.kans * (1.0 + (reg_boost * 0.5))))
                     combined_list.append(s_obj)
 
-                # GEEN LIMIET MEER OP TOP_SPECIES (toont alles wat de drempel haalt)
                 top_species = sorted(combined_list, key=lambda x: (x.kans, x.score), reverse=True)
 
                 bft = WeatherManagerUtils.ms_to_beaufort(w_sample.get("wind_speed", 0.0))
@@ -206,6 +246,10 @@ class BsiForecastSystem:
                     "wind_bft": bft,
                     "wind_label": wind_lbl,
                     "wind_deg": float(w_sample.get("wind_deg", 0.0)),
+                    "pressure": w_sample.get("pressure", 1016.0),
+                    "precip_mm": w_sample.get("precip_mm", 0.0),
+                    "precip_prob": w_sample.get("precip_prob", 0),
+                    "precip_type": w_sample.get("precip_type", "Droog"),
                     "cloud_cover": w_sample.get("cloud_cover", 50.0),
                     "top_species": top_species
                 })
@@ -289,7 +333,6 @@ class BsiForecastSystem:
                 species_profiles=species_profiles, neural_engine=None
             )
 
-            # GEEN LIMIET OP SUGGESTIES
             top_species = sorted(suggesties, key=lambda x: (x.kans, x.score), reverse=True)
 
             bft = WeatherManagerUtils.ms_to_beaufort(w_sample.get("wind_speed", 0.0))
@@ -302,6 +345,10 @@ class BsiForecastSystem:
                 "wind_bft": bft,
                 "wind_label": wind_lbl,
                 "wind_deg": float(w_sample.get("wind_deg", 0.0)),
+                "pressure": w_sample.get("pressure", 1016.0),
+                "precip_mm": w_sample.get("precip_mm", 0.0),
+                "precip_prob": w_sample.get("precip_prob", 0),
+                "precip_type": w_sample.get("precip_type", "Droog"),
                 "cloud_cover": w_sample.get("cloud_cover", 50.0),
                 "sunrise": sr_str,
                 "sunset": ss_str,

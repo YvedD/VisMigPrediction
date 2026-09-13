@@ -1,7 +1,13 @@
 streamlit
 pandas
+numpy
 openpyxl
 requests
 python-dotenv
 matplotlib
+Pillow
+pydeck
+folium
 streamlit-folium
+libsql
+libsql-client

@@ -12,7 +12,12 @@ from datetime import date, datetime
 from pathlib import Path
 from typing import List, Dict, Any, Optional
 from PIL import Image
+import subprocess
+import threading
+import time
+import re
 
+from app_paths import project_path
 from config_loader import (
     load_neural_engine,
     load_species,
@@ -37,7 +42,7 @@ from bsi.species_resolver import SpeciesResolver
 from site_dna_builder import generate_sites_dna
 
 # Veilige inlading van het BSI Logo als Favicon via PIL
-icon_path = Path("BSI_logo.png")
+icon_path = project_path("BSI_logo.png")
 page_icon_img = Image.open(icon_path) if icon_path.exists() else "🦅"
 
 # Pagina configuratie
@@ -49,6 +54,58 @@ st.set_page_config(
 
 # Vaste drempel op 15%
 BsiConfig.MIN_BSI_QUALITY_THRESHOLD = 15
+
+
+# --- Optionele cloudflared tunnel voor lokaal testen ---
+ENABLE_TUNNEL = os.getenv("VISMIG_ENABLE_TUNNEL", "0") == "1"
+if 'cloudflared_proc' not in st.session_state:
+    st.session_state.cloudflared_proc = None
+if 'tunnel_url_cache' not in st.session_state:
+    st.session_state.tunnel_url_cache = ""
+
+def start_background_tunnel(port: int = 8501):
+    """Start cloudflared automatisch in de achtergrond, print output naar de terminal en vang de URL op."""
+    if not ENABLE_TUNNEL:
+        return
+    if st.session_state.cloudflared_proc is not None:
+        return
+
+    exe_name = "cloudflared.exe" if os.name == "nt" else "cloudflared"
+    cloudflared_path = project_path(exe_name) if project_path(exe_name).exists() else "cloudflared"
+
+    try:
+        proc = subprocess.Popen(
+            [cloudflared_path, "tunnel", "--url", f"http://localhost:{port}"],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            text=True,
+            encoding='utf-8',
+            errors='ignore'
+        )
+        st.session_state.cloudflared_proc = proc
+
+        def read_output(p):
+            pattern = re.compile(r'https?://[^\s\"]*trycloudflare\.com[^\s\"]*')
+            for line in p.stdout:
+                print(line, end='', flush=True)
+                if 'website-terms' in line or 'policies' in line:
+                    continue
+                m = pattern.search(line)
+                if m:
+                    url = m.group(0)
+                    st.session_state.tunnel_url_cache = url
+                    try:
+                        project_path("active_tunnel_url.txt").write_text(url, encoding="utf-8")
+                    except Exception:
+                        pass
+
+        threading.Thread(target=read_output, args=(proc,), daemon=True).start()
+    except Exception as e:
+        print(f"[Cloudflared] Kon tunnel niet automatisch starten: {e}")
+
+# Start de tunnel direct bij opstarten
+start_background_tunnel(8501)
+
 
 # --- WELKOMST POP-UP VOOR BÉTATESTERS (Eenmalig per sessie) ---
 if "welcomed" not in st.session_state:
@@ -74,10 +131,10 @@ if not st.session_state.welcomed:
     welcome_popup()
 
 # Genereer eenmalig de pretty-printed sites_DNA.json bij opstarten indien afwezig met feedback
-sites_dna_path = Path("sites_DNA.json")
+sites_dna_path = project_path("sites_DNA.json")
 if not sites_dna_path.exists():
     with st.spinner("🧬 Ecologisch site-DNA per telpost opbouwen op basis van alle historische data..."):
-        generate_sites_dna(get_db_path(), "sites_DNA.json")
+        generate_sites_dna(str(get_db_path()), str(sites_dna_path))
     st.success("✅ 'sites_DNA.json' succesvol gegenereerd en opgeslagen!")
 
 # CSS injectie voor LUXE DARK THEME UI/UX EN RESPONSIVE CSS GRID
@@ -85,7 +142,7 @@ st.markdown("""
     <style>
         .forecast-date-header { font-size: 13px !important; font-weight: bold; color: #fff; margin-bottom: 4px; text-align: center; }
 
-        /* Stijlvolle Grafische Weer-Box met Zonsopgang en Zonsondergang */
+        /* Stijlvolle Grafische Weer-Box met Neerslag en Luchtdruk */
         .weather-box { 
             background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); 
             border: 1px solid #334155; 
@@ -98,7 +155,7 @@ st.markdown("""
         }
         .weather-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(115px, 1fr));
             gap: 8px;
             text-align: center;
             margin-bottom: 8px;
@@ -109,7 +166,7 @@ st.markdown("""
             border-radius: 6px;
             border: 1px solid rgba(255, 255, 255, 0.06);
         }
-        .weather-val { font-weight: 800; color: #38bdf8; font-size: 16px; letter-spacing: -0.01em; }
+        .weather-val { font-weight: 800; color: #38bdf8; font-size: 15px; letter-spacing: -0.01em; }
         .weather-lbl { font-size: 9px; color: #94a3b8; text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; margin-top: 2px; }
         .weather-sun-row {
             display: flex;
@@ -285,12 +342,24 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# --- SIDEBAR: LOGO & NAVIGATIE ---
+# --- SIDEBAR: LOGO, PUBLIEKE LINK & NAVIGATIE ---
 logo_path = Path("BSI_logo.png")
 if logo_path.exists():
     st.sidebar.image(str(logo_path), width=140)
 
 st.sidebar.title("Bio Statistic Intelligence")
+
+tunnel_url = st.session_state.get('tunnel_url_cache', '')
+if not tunnel_url:
+    tunnel_file = project_path("active_tunnel_url.txt")
+    if tunnel_file.exists():
+        tunnel_url = tunnel_file.read_text(encoding="utf-8").strip()
+
+if tunnel_url:
+    st.sidebar.markdown("### 🌐 Live Bètatester Link")
+    st.sidebar.caption("Deel deze link met je tester:")
+    st.sidebar.code(tunnel_url, language="")
+    st.sidebar.markdown("---")
 
 st.sidebar.subheader("Navigatie")
 app_mode = st.sidebar.selectbox(
@@ -312,9 +381,8 @@ def calculate_distance_km(lat1, lon1, lat2, lon2):
 @st.cache_data
 def load_sites_mapping():
     possible_paths = [
-        Path("serverdata/sites.json"),
-        Path("VT5/serverdata/sites.json"),
-        Path("C:/Eigen bestanden Yves/Programeren/Python/VisMigPrediction/serverdata/sites.json")
+        project_path("serverdata", "sites.json"),
+        project_path("VT5", "serverdata", "sites.json")
     ]
     mapping = {}
     for p in possible_paths:
@@ -447,11 +515,11 @@ def fetch_cluster_species_profiles(db_path: str, target_date: date) -> List[Dict
               AND h.telpostid != '5177'
             GROUP BY w.soortid
             ORDER BY count DESC
-                LIMIT 150 \
+                LIMIT 150 
             """
 
     params = [day_start, day_end, day_start, day_end, day_start, day_end]
-    resolver = SpeciesResolver(Path("."))
+    resolver = SpeciesResolver(project_path())
 
     try:
         with sqlite3.connect(db_path) as conn:
@@ -471,7 +539,7 @@ def fetch_cluster_species_profiles(db_path: str, target_date: date) -> List[Dict
         return []
 
 
-# --- UITGEBREIDE UNIEKE GILDEN KLEURENPALET (Inclusief Insecten & Zoogdieren) ---
+# --- UITGEBREIDE UNIEKE GILDEN KLEURENPALET ---
 GILDE_KLEUREN = {
     "Roofvogels (Zwevers)": "#d9534f",
     "Roofvogels (Actief)": "#c0392b",
@@ -485,8 +553,8 @@ GILDE_KLEUREN = {
     "Steltlopers": "#9b59b6",
     "Meeuwen & Sterns": "#e84393",
     "Ooievaars (Zwevers)": "#d35400",
-    "Insecten": "#16a085",  # Turquoise voor vlinders/libellen
-    "Zoogdieren": "#8e44ad"  # Paars/Brons voor vleermuizen/bruinvissen
+    "Insecten": "#16a085",
+    "Zoogdieren": "#8e44ad"
 }
 
 
@@ -594,6 +662,40 @@ def render_grouped_species_cards(items, evaluator, image_manager, cluster_site_i
             st.markdown(grid_html, unsafe_allow_html=True)
 
 
+# --- Hulpfunctie: Helper voor het renderen van de uitgebreide weerbalk ---
+def render_weather_box(block):
+    b_deg = block.get('wind_deg', 0)
+    rot_deg = (int(b_deg) + 180) % 360
+
+    temp = block.get('temp', 15)
+    wind_label = block.get('wind_label', 'W')
+    wind_bft = block.get('wind_bft', 2)
+    pressure = block.get('pressure', 1016)
+    precip_mm = block.get('precip_mm', 0.0)
+    precip_prob = block.get('precip_prob', 0)
+    cloud_percent = block.get('cloud_percent', 10)
+    sunrise = block.get('sunrise', '06:00')
+    sunset = block.get('sunset', '20:00')
+    corridor_boost = block.get('corridor_boost', None)
+
+    corridor_html = f'<span>🌍 Corridor Boost: <b>+{int(corridor_boost * 100)}%</b></span>' if corridor_boost is not None else ''
+
+    weather_box_html = (
+        f'<div class="weather-box">'
+        f'<div class="weather-grid">'
+        f'<div class="weather-item"><div class="weather-val">{temp}°C</div><div class="weather-lbl">Temperatuur</div></div>'
+        f'<div class="weather-item"><div class="weather-val">{wind_label} {wind_bft}Bft</div><div class="weather-lbl">Windkracht</div></div>'
+        f'<div class="weather-item"><div class="weather-val"><span class="wind-arrow" style="transform: rotate({rot_deg}deg); display: inline-block;">↑</span> {int(b_deg)}°</div><div class="weather-lbl">Windrichting</div></div>'
+        f'<div class="weather-item"><div class="weather-val">{pressure} hPa</div><div class="weather-lbl">Luchtdruk</div></div>'
+        f'<div class="weather-item"><div class="weather-val">{precip_mm} mm</div><div class="weather-lbl">Neerslag ({precip_prob}%)</div></div>'
+        f'<div class="weather-item"><div class="weather-val">{cloud_percent}%</div><div class="weather-lbl">Bewolking</div></div>'
+        f'</div>'
+        f'<div class="weather-sun-row"><span>🌅 Zonsopgang: <b>{sunrise}</b></span>{corridor_html}<span>🌇 Zonsondergang: <b>{sunset}</b></span></div>'
+        f'</div>'
+    )
+    st.markdown(weather_box_html, unsafe_allow_html=True)
+
+
 # --- PAGINA 1: OVERZICHT ---
 if app_mode == "Overzicht":
     st.header("📋 Systeemstatus & Data-integratie")
@@ -667,7 +769,7 @@ elif app_mode == "Prognoses":
 
     cluster_site_ids = get_ecologically_filtered_cluster(selected_telpost_id, raw_cluster_ids)
 
-    resolver = SpeciesResolver(Path("."))
+    resolver = SpeciesResolver(project_path())
     db_path_str = get_db_path()
     evaluator = CardEvaluator(db_path_str, resolver)
     image_manager = SpeciesImageManager(db_path_str)
@@ -696,6 +798,20 @@ elif app_mode == "Prognoses":
                 if not weather:
                     weather = WeatherContext(lat=main_lat, lon=main_lon, temp=15.0, wind_speed=5.0, wind_deg=45.0,
                                              cloud_percent=4.0, pressure=1016.0, visibility=10000, pressure_trend=1.0)
+
+                live_block = {
+                    "temp": weather.temp,
+                    "wind_label": WeatherManagerUtils.get_wind_direction_label(weather.wind_deg) if hasattr(WeatherManagerUtils, 'get_wind_direction_label') else "W",
+                    "wind_bft": WeatherManagerUtils.Beaufort(weather.wind_speed) if hasattr(WeatherManagerUtils, 'Beaufort') else 3,
+                    "wind_deg": weather.wind_deg,
+                    "pressure": weather.pressure,
+                    "precip_mm": getattr(weather, 'precipitation', 0.0),
+                    "precip_prob": getattr(weather, 'precipitation_probability', 0),
+                    "cloud_percent": weather.cloud_percent,
+                    "sunrise": "06:30",
+                    "sunset": "20:15"
+                }
+                render_weather_box(live_block)
 
                 dt_target = datetime.combine(prognose_datum, datetime.now().time())
                 species_profiles = fetch_cluster_species_profiles(db_path_str, prognose_datum)
@@ -733,19 +849,7 @@ elif app_mode == "Prognoses":
                     for idx, tab in enumerate(tabs):
                         block = timeline_blocks[idx]
                         with tab:
-                            b_deg = block['wind_deg']
-                            rot_deg = (int(b_deg) + 180) % 360
-                            weather_box_html = (
-                                f'<div class="weather-box">'
-                                f'<div class="weather-grid">'
-                                f'<div class="weather-item"><div class="weather-val">{block["temp"]}°C</div><div class="weather-lbl">Temperatuur</div></div>'
-                                f'<div class="weather-item"><div class="weather-val">{block["wind_label"]} {block["wind_bft"]}Bft</div><div class="weather-lbl">Windkracht</div></div>'
-                                f'<div class="weather-item"><div class="weather-val"><span class="wind-arrow" style="transform: rotate({rot_deg}deg); display: inline-block;">↑</span> {int(b_deg)}°</div><div class="weather-lbl">Windrichting</div></div>'
-                                f'</div>'
-                                f'<div class="weather-sun-row"><span>🌅 Zonsopgang: <b>{block["sunrise"]}</b></span><span>🌇 Zonsondergang: <b>{block["sunset"]}</b></span></div>'
-                                f'</div>'
-                            )
-                            st.markdown(weather_box_html, unsafe_allow_html=True)
+                            render_weather_box(block)
                             render_grouped_species_cards(block["top_species"], evaluator, image_manager,
                                                          cluster_site_ids, dt_target)
 
@@ -782,20 +886,8 @@ elif app_mode == "Prognoses":
                             for b_idx, block_tab in enumerate(block_tabs):
                                 block = blocks[b_idx]
                                 with block_tab:
-                                    b_deg = block['wind_deg']
-                                    rot_deg = (int(b_deg) + 180) % 360
-                                    weather_box_html = (
-                                        f'<div class="weather-box">'
-                                        f'<div class="weather-grid">'
-                                        f'<div class="weather-item"><div class="weather-val">{block["temp"]}°C</div><div class="weather-lbl">Temperatuur</div></div>'
-                                        f'<div class="weather-item"><div class="weather-val">{block["wind_label"]} {block["wind_bft"]}Bft</div><div class="weather-lbl">Windkracht</div></div>'
-                                        f'<div class="weather-item"><div class="weather-val"><span class="wind-arrow" style="transform: rotate({rot_deg}deg); display: inline-block;">↑</span> {int(b_deg)}°</div><div class="weather-lbl">Windrichting</div></div>'
-                                        f'</div>'
-                                        f'<div class="weather-sun-row"><span>🌅 Zonsopgang: <b>{day_data["sunrise"]}</b></span><span>🌍 Corridor Boost: <b>+{int(day_data["corridor_boost"] * 100)}%</b></span><span>🌇 Zonsondergang: <b>{day_data["sunset"]}</b></span></div>'
-                                        f'</div>'
-                                    )
-                                    st.markdown(weather_box_html, unsafe_allow_html=True)
-                                    dt_item = datetime.strptime(day_data["date_str"], "%Y-%m-%d")
+                                    render_weather_box(block)
+                                    dt_item = datetime.strptime(day_data['date_str'], "%Y-%m-%d")
                                     render_grouped_species_cards(block["top_species"], evaluator, image_manager,
                                                                  cluster_site_ids, dt_item)
 
