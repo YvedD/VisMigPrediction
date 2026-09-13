@@ -1,0 +1,11 @@
+.venv/
+.idea/
+__pycache__/
+.env
+cloudflared.exe
+active_tunnel_url.txt
+*.pyc
+*.log
+*.db-wal
+*.db-shm
+backup_dump.sql
