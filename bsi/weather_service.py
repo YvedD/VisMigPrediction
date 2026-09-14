@@ -24,6 +24,30 @@ class WeatherContext:
 
 
 class WeatherManagerUtils:
+    # Definitieve 16-traps windroos intervals direct overgenomen uit 16-traps_windroos.txt
+    _labels_intervals = [
+        ("N", 348.75, 11.25),
+        ("NNO", 11.25, 33.75),
+        ("NO", 33.75, 56.25),
+        ("ONO", 56.25, 78.75),
+        ("O", 78.75, 101.25),
+        ("OZO", 101.25, 123.75),
+        ("ZO", 123.75, 146.25),
+        ("ZZO", 146.25, 168.75),
+        ("Z", 168.75, 191.25),
+        ("ZZW", 191.25, 213.75),
+        ("ZW", 213.75, 236.25),
+        ("WZW", 236.25, 258.75),
+        ("W", 258.75, 281.25),
+        ("WNW", 281.25, 303.75),
+        ("NW", 303.75, 326.25),
+        ("NNW", 326.25, 348.75)
+    ]
+
+    @classmethod
+    def _load_16_traps_mapping(cls):
+        return cls._labels_intervals
+
     @staticmethod
     def ms_to_beaufort(ms: float) -> int:
         if ms < 0.3:
@@ -53,22 +77,50 @@ class WeatherManagerUtils:
         else:
             return 12
 
-    @staticmethod
-    def deg_to_16_wind_label(deg: Optional[float]) -> str:
+    @classmethod
+    def deg_to_16_wind_label(cls, deg: Optional[float]) -> str:
         if deg is None:
             return ""
-        labels = ["N", "NNO", "NO", "ONO", "O", "OZO", "ZO", "ZZO", "Z", "ZZW", "ZW", "WZW", "W", "WNW", "NW", "NNW"]
-        idx = int(round(deg / 22.5)) % 16
-        return labels[idx]
+        intervals = cls._load_16_traps_mapping()
+        d = float(deg) % 360.0
+        for label, start, end in intervals:
+            s = float(start) % 360.0
+            e = float(end) % 360.0
+            if s <= e:
+                if d >= s and d < e:
+                    return label
+            else:
+                if d >= s or d < e:
+                    return label
+
+        # Fallback naar dichtstbijzijnde centrum
+        centers = []
+        for label, start, end in intervals:
+            s = float(start) % 360.0
+            e = float(end) % 360.0
+            mid = ((s + ((e - s + 360.0) % 360.0) / 2.0) % 360.0)
+            centers.append((label, mid))
+        best = None
+        best_dist = 360.0
+        for label, center in centers:
+            diff = abs(d - center) % 360.0
+            diff = min(diff, 360.0 - diff)
+            if diff < best_dist:
+                best_dist = diff
+                best = label
+        return best if best is not None else ""
+
+    @staticmethod
+    def normalize_wind_label(label: Optional[str]) -> str:
+        if not label:
+            return ""
+        return str(label).strip().upper()
 
 
 class AiWeatherService:
     @staticmethod
     @st.cache_data(ttl=300)
     def fetch_contextual_weather(lat: float, lon: float) -> Optional[WeatherContext]:
-        """
-        Haalt het actuele weer op via Open-Meteo inclusief de 6-uurs luchtdruktrend.
-        """
         try:
             url = f"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}&current=temperature_2m,wind_speed_10m,wind_direction_10m,cloud_cover,surface_pressure,visibility&hourly=pressure_msl&past_days=1&forecast_days=1&wind_speed_unit=ms"
             resp = requests.get(url, timeout=10)
@@ -78,7 +130,6 @@ class AiWeatherService:
             data = resp.json()
             curr = data.get("current", {})
 
-            # Luchtdruk trend (nu minus 6 uur geleden)
             pressure_trend = None
             hourly_p = data.get("hourly", {}).get("pressure_msl", [])
             if len(hourly_p) >= 24:

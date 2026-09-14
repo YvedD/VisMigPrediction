@@ -17,6 +17,7 @@ from .inference_engine import AiInferenceEngine, VogelSuggestie
 from .solar_engine import SolarTimeEngine
 from .species_resolver import SpeciesResolver
 from .corridor_engine import CorridorEngine
+from .period_computer import periodize_hours
 
 
 @dataclass
@@ -36,7 +37,6 @@ class DailyForecastResult:
 
 
 def wmo_code_to_precipitation_type(code) -> str:
-    """Converteert WMO weerscodes naar een leesbare neerslagsoort voor de voorspelling."""
     if code is None:
         return "Droog"
     try:
@@ -66,7 +66,6 @@ class BsiForecastSystem:
     def __init__(self, db_path: str, species_resolver: SpeciesResolver):
         self.db_path = db_path
         self.resolver = species_resolver
-        # Drempel vastleggen op 15%
         BsiConfig.MIN_BSI_QUALITY_THRESHOLD = 15
 
     @staticmethod
@@ -186,7 +185,7 @@ class BsiForecastSystem:
             sr_str = sun_info["sunrise_str"]
             ss_str = sun_info["sunset_str"]
 
-            start_h = max(0, math.floor(sr_float) - 1)
+            start_h = math.floor(sr_float)
             end_h = math.ceil(ss_float)
 
             day_of_year = current_day_dt.timetuple().tm_yday
@@ -196,28 +195,38 @@ class BsiForecastSystem:
             species_profiles = self._fetch_phenology_profiles_from_db(day_start, day_end)
             reg_boost = CorridorEngine.calculate_corridor_boost_at_time(current_day_dt, corridor_data, is_autumn=is_autumn)
 
+            periods = periodize_hours(
+                hourly_samples=day_weather,
+                start_hour=start_h,
+                end_hour=end_h
+            )
+
             blocks = []
-            for start_hour in range(start_h, int(end_h), 2):
-                end_hour = start_hour + 2
-                if start_hour >= int(end_h):
-                    break
-                block_label = f"{start_hour:02d}:00 - {end_hour:02d}:00"
+            for period in periods:
+                p_start_h = period["start_hour"]
+                p_end_h = period["end_hour"]
+                wind_lbl = period["modal_wind_label"]
+                bft = period["median_bft"]
+                block_label = f"{period['start_time']} - {period['end_time']} ({wind_lbl} {bft}Bft)"
 
                 matching_weather = [
                     h for h in day_weather
-                    if start_hour <= datetime.fromisoformat(h["time"].replace("Z", "+00:00")).hour < end_hour
+                    if p_start_h <= datetime.fromisoformat(h["time"].replace("Z", "+00:00")).hour < p_end_h
                 ]
                 w_sample = matching_weather[0] if matching_weather else day_weather[0]
-                dt_block = current_day_dt.replace(hour=start_hour, minute=0, second=0)
+                dt_block = current_day_dt.replace(hour=p_start_h, minute=0, second=0)
+
+                pressures = [h.get("pressure", 1016.0) for h in matching_weather if h.get("pressure") is not None]
+                avg_pressure = int(round(sum(pressures) / len(pressures))) if pressures else 1016
 
                 w_ctx = WeatherContext(
                     lat=lat,
                     lon=lon,
-                    temp=w_sample.get("temp"),
-                    wind_speed=w_sample.get("wind_speed"),
-                    wind_deg=w_sample.get("wind_deg"),
-                    cloud_percent=w_sample.get("cloud_cover"),
-                    pressure=w_sample.get("pressure"),
+                    temp=period["avg_temp"],
+                    wind_speed=period["median_wind_speed"],
+                    wind_deg=period["modal_wind_deg"],
+                    cloud_percent=period["avg_cloud"],
+                    pressure=float(avg_pressure),
                     visibility=10000,
                     pressure_trend=0.0
                 )
@@ -236,21 +245,19 @@ class BsiForecastSystem:
 
                 top_species = sorted(combined_list, key=lambda x: (x.kans, x.score), reverse=True)
 
-                bft = WeatherManagerUtils.ms_to_beaufort(w_sample.get("wind_speed", 0.0))
-                wind_lbl = WeatherManagerUtils.deg_to_16_wind_label(w_sample.get("wind_deg"))
-                temp_c = round(w_sample.get("temp", 0.0), 1)
+                temp_c = round(period["avg_temp"], 1) if period["avg_temp"] is not None else 15.0
 
                 blocks.append({
                     "time_block": block_label,
                     "temp": temp_c,
                     "wind_bft": bft,
                     "wind_label": wind_lbl,
-                    "wind_deg": float(w_sample.get("wind_deg", 0.0)),
-                    "pressure": w_sample.get("pressure", 1016.0),
-                    "precip_mm": w_sample.get("precip_mm", 0.0),
-                    "precip_prob": w_sample.get("precip_prob", 0),
+                    "wind_deg": float(period["modal_wind_deg"]),
+                    "pressure": avg_pressure,
+                    "precip_mm": period["avg_precip_mm"],
+                    "precip_prob": period["avg_precip_prob"],
                     "precip_type": w_sample.get("precip_type", "Droog"),
-                    "cloud_cover": w_sample.get("cloud_cover", 50.0),
+                    "cloud_cover": period["avg_cloud"] if period["avg_cloud"] is not None else 50.0,
                     "top_species": top_species
                 })
 
@@ -290,7 +297,7 @@ class BsiForecastSystem:
         sr_str = sun_info["sunrise_str"]
         ss_str = sun_info["sunset_str"]
 
-        start_h = max(0, math.floor(sr_float) - 1)
+        start_h = math.floor(sr_float)
         end_h = math.ceil(ss_float)
 
         timeline_results = []
@@ -303,27 +310,37 @@ class BsiForecastSystem:
         if not species_profiles:
             return []
 
-        for start_hour in range(start_h, int(end_h), 2):
-            end_hour = start_hour + 2
-            if start_hour >= int(end_h):
-                break
-            block_label = f"{start_hour:02d}:00 - {end_hour:02d}:00"
+        periods = periodize_hours(
+            hourly_samples=day_weather,
+            start_hour=start_h,
+            end_hour=end_h
+        )
+
+        for period in periods:
+            p_start_h = period["start_hour"]
+            p_end_h = period["end_hour"]
+            wind_lbl = period["modal_wind_label"]
+            bft = period["median_bft"]
+            block_label = f"{period['start_time']} - {period['end_time']} ({wind_lbl} {bft}Bft)"
 
             matching_weather = [
                 h for h in day_weather
-                if start_hour <= datetime.fromisoformat(h["time"].replace("Z", "+00:00")).hour < end_hour
+                if p_start_h <= datetime.fromisoformat(h["time"].replace("Z", "+00:00")).hour < p_end_h
             ]
             w_sample = matching_weather[0] if matching_weather else day_weather[0]
-            dt_block = target_dt.replace(hour=start_hour, minute=0, second=0)
+            dt_block = target_dt.replace(hour=p_start_h, minute=0, second=0)
+
+            pressures = [h.get("pressure", 1016.0) for h in matching_weather if h.get("pressure") is not None]
+            avg_pressure = int(round(sum(pressures) / len(pressures))) if pressures else 1016
 
             w_ctx = WeatherContext(
                 lat=lat,
                 lon=lon,
-                temp=w_sample.get("temp"),
-                wind_speed=w_sample.get("wind_speed"),
-                wind_deg=w_sample.get("wind_deg"),
-                cloud_percent=w_sample.get("cloud_cover"),
-                pressure=w_sample.get("pressure"),
+                temp=period["avg_temp"],
+                wind_speed=period["median_wind_speed"],
+                wind_deg=period["modal_wind_deg"],
+                cloud_percent=period["avg_cloud"],
+                pressure=float(avg_pressure),
                 visibility=10000,
                 pressure_trend=0.0
             )
@@ -335,21 +352,19 @@ class BsiForecastSystem:
 
             top_species = sorted(suggesties, key=lambda x: (x.kans, x.score), reverse=True)
 
-            bft = WeatherManagerUtils.ms_to_beaufort(w_sample.get("wind_speed", 0.0))
-            wind_lbl = WeatherManagerUtils.deg_to_16_wind_label(w_sample.get("wind_deg"))
-            temp_c = round(w_sample.get("temp", 0.0), 1)
+            temp_c = round(period["avg_temp"], 1) if period["avg_temp"] is not None else 15.0
 
             timeline_results.append({
                 "time_block": block_label,
                 "temp": temp_c,
                 "wind_bft": bft,
                 "wind_label": wind_lbl,
-                "wind_deg": float(w_sample.get("wind_deg", 0.0)),
-                "pressure": w_sample.get("pressure", 1016.0),
-                "precip_mm": w_sample.get("precip_mm", 0.0),
-                "precip_prob": w_sample.get("precip_prob", 0),
+                "wind_deg": float(period["modal_wind_deg"]),
+                "pressure": avg_pressure,
+                "precip_mm": period["avg_precip_mm"],
+                "precip_prob": period["avg_precip_prob"],
                 "precip_type": w_sample.get("precip_type", "Droog"),
-                "cloud_cover": w_sample.get("cloud_cover", 50.0),
+                "cloud_cover": period["avg_cloud"] if period["avg_cloud"] is not None else 50.0,
                 "sunrise": sr_str,
                 "sunset": ss_str,
                 "weather_summary": f"Wind: {wind_lbl} {bft}Bft | Temp: {temp_c}°C",

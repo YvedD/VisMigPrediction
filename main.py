@@ -55,13 +55,13 @@ st.set_page_config(
 # Vaste drempel op 15%
 BsiConfig.MIN_BSI_QUALITY_THRESHOLD = 15
 
-
 # --- Optionele cloudflared tunnel voor lokaal testen ---
 ENABLE_TUNNEL = os.getenv("VISMIG_ENABLE_TUNNEL", "0") == "1"
 if 'cloudflared_proc' not in st.session_state:
     st.session_state.cloudflared_proc = None
 if 'tunnel_url_cache' not in st.session_state:
     st.session_state.tunnel_url_cache = ""
+
 
 def start_background_tunnel(port: int = 8501):
     """Start cloudflared automatisch in de achtergrond, print output naar de terminal en vang de URL op."""
@@ -103,9 +103,9 @@ def start_background_tunnel(port: int = 8501):
     except Exception as e:
         print(f"[Cloudflared] Kon tunnel niet automatisch starten: {e}")
 
+
 # Start de tunnel direct bij opstarten
 start_background_tunnel(8501)
-
 
 # --- WELKOMST POP-UP VOOR BÉTATESTERS (Eenmalig per sessie) ---
 if "welcomed" not in st.session_state:
@@ -117,7 +117,7 @@ def welcome_popup():
     st.markdown("""
     Welkom bij de bètatester versie van het **VisMigPrediction Platform (BSI 4.1)**! 🦅
 
-    ⚠️ **Belangrijke tip over het 120-Uurs Toekomstvenster:**  
+    ⚠️ **Belangrijke tip over het 120-uurs Toekomstvenster:**  
     Het opzoeken en berekenen van een volledige 120-uurs prognose kan **enkele minuten** in beslag nemen. Dit komt doordat de AI-engine meer dan **5.600+ historische tellingen** en ruim **12.000.000+ waargenomen vogels** uit de database van de afgelopen 23 jaar diepgaand analyseert. 
 
     *💡 Wil je snel resultaat? Gebruik dan de **Live Prognose** of de **Twee-Uurlijkse Dag-Timeline**, deze berekenen en tonen direct de resultaten binnen enkele seconden!*
@@ -342,6 +342,152 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
+
+# --- Robuuste Functie voor genereren van wind_sector_baseline.json (Inclusief Maand & Beaufort-dimensie) ---
+def generate_wind_sector_baseline(db_path: str, output_path: str) -> bool:
+    resolver = SpeciesResolver(project_path())
+
+    if not os.path.exists(db_path):
+        st.sidebar.error(f"Database niet gevonden op pad: {db_path}")
+        return False
+
+    try:
+        with sqlite3.connect(db_path) as conn:
+            query = """
+                    SELECT UPPER(TRIM(h.windrichting))                                                          as raw_wind, \
+                           h.windkracht                                                                         as raw_bft, \
+                           h.tellingid, \
+                           w.soortid, \
+                           CAST(strftime('%m', \
+                                         datetime(CAST(h.begintijd AS INTEGER), 'unixepoch')) AS INTEGER)       as month_num, \
+                           SUM( \
+                                   CAST(COALESCE(w.aantal, 0) AS INTEGER) + \
+                                   CAST(COALESCE(w.aantalterug, 0) AS INTEGER) \
+                           ) as count
+                    FROM waarnemingen w
+                        INNER JOIN telling_headers h \
+                    ON w.tellingid = h.tellingid
+                    WHERE h.windrichting IS NOT NULL
+                      AND TRIM (h.windrichting) != ''
+                      AND h.begintijd IS NOT NULL
+                      AND w.soortid IS NOT NULL
+                    GROUP BY h.tellingid, w.soortid, raw_wind, raw_bft, month_num \
+                    """
+            df = pd.read_sql_query(query, conn)
+    except Exception as e:
+        st.sidebar.error(f"SQL Fout: {e}")
+        print(f"[WindBaseline] SQL Fout: {e}")
+        return False
+
+    if df.empty:
+        st.sidebar.warning("Geen records gevonden met een geldige windrichting en tijdstip.")
+        return False
+
+    known_intervals = WeatherManagerUtils._load_16_traps_mapping()
+    valid_labels = {lbl for lbl, _, _ in known_intervals}
+
+    def resolve_to_16_wind(val):
+        if not val:
+            return None
+        s = str(val).strip().upper()
+
+        norm = WeatherManagerUtils.normalize_wind_label(s)
+        if norm in valid_labels:
+            return norm
+
+        clean_num = s.replace("°", "").replace(",", ".").strip()
+        try:
+            deg = float(clean_num)
+            return WeatherManagerUtils.deg_to_16_wind_label(deg)
+        except ValueError:
+            pass
+
+        clean_label = re.sub(r'[^A-Z]', '', norm)
+        if clean_label in valid_labels:
+            return clean_label
+
+        return None
+
+    def get_bft_class(val):
+        try:
+            b = float(str(val).replace(",", ".").strip())
+            if b <= 2.5:
+                return "0-2 Bft"
+            elif b <= 4.5:
+                return "3-4 Bft"
+            else:
+                return "5+ Bft"
+        except (TypeError, ValueError):
+            return "Onbekend"
+
+    df['sector'] = df['raw_wind'].apply(resolve_to_16_wind)
+    df['bft_class'] = df['raw_bft'].apply(get_bft_class)
+    df = df.dropna(subset=['sector'])
+    df = df[df['bft_class'] != 'Onbekend']
+
+    if df.empty:
+        st.sidebar.warning("Geen geldige sectoren of windkrachten kunnen mappen.")
+        return False
+
+    baseline_data = {}
+
+    # Groepeer per windsector, maand én windkracht-klasse
+    for sector, sec_group in df.groupby('sector'):
+        baseline_data[sector] = {"maanden": {}}
+
+        for month, month_group in sec_group.groupby('month_num'):
+            month_str = str(int(month))
+            if month_str not in baseline_data[sector]["maanden"]:
+                baseline_data[sector]["maanden"][month_str] = {}
+
+            for bft_cls, bft_group in month_group.groupby('bft_class'):
+                total_teldagen = bft_group['tellingid'].nunique()
+                species_grouped = bft_group.groupby('soortid').agg(
+                    waarnemingsdagen=('tellingid', 'nunique'),
+                    totaal_aantal=('count', 'sum')
+                ).reset_index()
+
+                species_dict = {}
+                for _, row in species_grouped.iterrows():
+                    sp_id = str(row['soortid']).strip()
+                    name = resolver.get_name(sp_id)
+                    latin = resolver.get_latin(sp_id)
+                    w_dagen = int(row['waarnemingsdagen'])
+                    t_aantal = int(row['totaal_aantal'])
+                    gem_per_telling = round(t_aantal / total_teldagen, 2) if total_teldagen > 0 else 0.0
+
+                    species_dict[sp_id] = {
+                        "naam": name,
+                        "latin": latin,
+                        "waarnemingsdagen": w_dagen,
+                        "totaal_aantal": t_aantal,
+                        "gemiddeld_per_telling": gem_per_telling,
+                        "frequentie_pct": round((w_dagen / total_teldagen) * 100, 2) if total_teldagen > 0 else 0.0
+                    }
+
+                sorted_species = dict(
+                    sorted(species_dict.items(), key=lambda item: item[1]['totaal_aantal'], reverse=True))
+
+                baseline_data[sector]["maanden"][month_str][bft_cls] = {
+                    "totaal_teldagen": int(total_teldagen),
+                    "totaal_soorten": len(sorted_species),
+                    "soorten": sorted_species
+                }
+
+    try:
+        out_file = Path(output_path)
+        out_file.parent.mkdir(parents=True, exist_ok=True)
+        with open(out_file, "w", encoding="utf-8") as f:
+            json.dump(baseline_data, f, indent=2, ensure_ascii=False)
+
+        print(f"[WindBaseline] Opgeslagen op: {out_file.resolve()}")
+        return True
+    except Exception as e:
+        st.sidebar.error(f"Fout bij wegschrijven JSON: {e}")
+        print(f"[WindBaseline] JSON Fout: {e}")
+        return False
+
+
 # --- SIDEBAR: LOGO, PUBLIEKE LINK & NAVIGATIE ---
 logo_path = Path("BSI_logo.png")
 if logo_path.exists():
@@ -365,6 +511,21 @@ st.sidebar.subheader("Navigatie")
 app_mode = st.sidebar.selectbox(
     "Schakel naar", ["Prognoses", "Overzicht", "Excel Upload (.xlsx)", "Cluster Kaart"]
 )
+
+st.sidebar.markdown("---")
+st.sidebar.subheader("⚙️ Databeheer & Matrix")
+
+if st.sidebar.button("📊 Genereer Wind-Sector Baseline"):
+    baseline_json_path = project_path("wind_sector_baseline.json")
+    db_file_path = str(get_db_path())
+
+    with st.spinner("⏳ Bezig met analyseren van historische tellingen per windsector, maand en windkracht..."):
+        success = generate_wind_sector_baseline(db_file_path, str(baseline_json_path))
+
+    if success:
+        st.sidebar.success("✅ 'wind_sector_baseline.json' succesvol opgeslagen met Maand & Beaufort dimensie!")
+    else:
+        st.sidebar.error("❌ Fout opgetreden bij het genereren van de baseline.")
 
 
 # --- Hulpfunctie: Haversine Afstandsberekening ---
@@ -515,7 +676,7 @@ def fetch_cluster_species_profiles(db_path: str, target_date: date) -> List[Dict
               AND h.telpostid != '5177'
             GROUP BY w.soortid
             ORDER BY count DESC
-                LIMIT 150 
+                LIMIT 150 \
             """
 
     params = [day_start, day_end, day_start, day_end, day_start, day_end]
@@ -670,10 +831,10 @@ def render_weather_box(block):
     temp = block.get('temp', 15)
     wind_label = block.get('wind_label', 'W')
     wind_bft = block.get('wind_bft', 2)
-    pressure = block.get('pressure', 1016)
+    pressure = int(round(block.get('pressure', 1016)))
     precip_mm = block.get('precip_mm', 0.0)
     precip_prob = block.get('precip_prob', 0)
-    cloud_percent = block.get('cloud_percent', 10)
+    cloud_percent = block.get('cloud_cover', 10)
     sunrise = block.get('sunrise', '06:00')
     sunset = block.get('sunset', '20:00')
     corridor_boost = block.get('corridor_boost', None)
@@ -801,8 +962,10 @@ elif app_mode == "Prognoses":
 
                 live_block = {
                     "temp": weather.temp,
-                    "wind_label": WeatherManagerUtils.get_wind_direction_label(weather.wind_deg) if hasattr(WeatherManagerUtils, 'get_wind_direction_label') else "W",
-                    "wind_bft": WeatherManagerUtils.Beaufort(weather.wind_speed) if hasattr(WeatherManagerUtils, 'Beaufort') else 3,
+                    "wind_label": WeatherManagerUtils.get_wind_direction_label(weather.wind_deg) if hasattr(
+                        WeatherManagerUtils, 'get_wind_direction_label') else "W",
+                    "wind_bft": WeatherManagerUtils.Beaufort(weather.wind_speed) if hasattr(WeatherManagerUtils,
+                                                                                            'Beaufort') else 3,
                     "wind_deg": weather.wind_deg,
                     "pressure": weather.pressure,
                     "precip_mm": getattr(weather, 'precipitation', 0.0),

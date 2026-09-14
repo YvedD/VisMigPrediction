@@ -1,15 +1,18 @@
 """
 bsi/inference_engine.py
-De master BSI 4.1 voorspellingsmotor met strikte 11.25° wind-DNA tolerantie
-en database-brede fenologie-analyse.
+De master BSI 4.1 voorspellingsmotor met strikte 11.25° wind-DNA tolerantie,
+database-brede fenologie-analyse en empirische wind-sector/maand/beaufort baseline.
 """
 
 import math
+import json
 import numpy as np
 from dataclasses import dataclass
 from datetime import datetime
+from pathlib import Path
 from typing import List, Dict, Optional, Any
 
+from app_paths import project_path
 from .config import BsiConfig
 from .solar_engine import SolarTimeEngine, SolarPhase
 from .guild_mapper import SpeciesGuildMapper, FlightStrategy, Guild
@@ -31,6 +34,18 @@ class VogelSuggestie:
 
 
 class AiInferenceEngine:
+    @staticmethod
+    def _load_wind_sector_baseline() -> Dict[str, Any]:
+        """Laadt de lokale Empirische Wind-Sector Baseline in het geheugen."""
+        path = project_path("wind_sector_baseline.json")
+        if path.exists():
+            try:
+                with open(path, "r", encoding="utf-8") as f:
+                    return json.load(f)
+            except Exception:
+                pass
+        return {}
+
     @classmethod
     def calculate_bsi_prognosis(
         cls,
@@ -44,15 +59,32 @@ class AiInferenceEngine:
         expert_kb: Optional[ExpertKnowledgeBase] = None
     ) -> List[VogelSuggestie]:
         """
-        Berekent de volledige BSI 4.1 prognose met strikte 11.25° wind-tolerantie.
+        Berekent de volledige BSI 4.1 prognose met strikte 11.25° wind-tolerantie
+        en integratie van de empirische wind-sector/maand/beaufort baseline.
         """
         epoch_sec = int(dt.timestamp())
         phase = SolarTimeEngine.get_solar_phase(lat, lon, dt)
         current_hour = dt.hour
+        current_month_str = str(dt.month)
         current_temp = weather.temp if weather.temp is not None else 15.0
+        current_wind_speed = weather.wind_speed if weather.wind_speed is not None else 0.0
         current_wind_deg = weather.wind_deg if weather.wind_deg is not None else 0.0
         current_wind_label = WeatherManagerUtils.deg_to_16_wind_label(current_wind_deg)
-        bft = WeatherManagerUtils.ms_to_beaufort(weather.wind_speed if weather.wind_speed is not None else 0.0)
+        bft = WeatherManagerUtils.ms_to_beaufort(current_wind_speed)
+
+        # Bepaal Beaufort klasse voor baseline lookup
+        if current_wind_speed <= 2.5:
+            bft_class = "0-2 Bft"
+        elif current_wind_speed <= 4.5:
+            bft_class = "3-4 Bft"
+        else:
+            bft_class = "5+ Bft"
+
+        # Laad de empirische wind-sector baseline op basis van maand en windkracht
+        baseline = cls._load_wind_sector_baseline()
+        sector_baseline = baseline.get(current_wind_label, {})
+        month_baseline = sector_baseline.get("maanden", {}).get(current_month_str, {})
+        bft_baseline_soorten = month_baseline.get(bft_class, {}).get("soorten", {})
 
         neural_predictions = None
         if neural_engine and model_labels and BsiConfig.USE_NEURAL_INFERENCE:
@@ -72,7 +104,7 @@ class AiInferenceEngine:
         ideal_score = 2.5
 
         for p in species_profiles:
-            soortid = p["soortid"]
+            soortid = str(p["soortid"]).strip()
             name = p["soortnaam"]
             latin = p.get("latin", "")
 
@@ -82,8 +114,6 @@ class AiInferenceEngine:
             guild = SpeciesGuildMapper.get_guild_by_latin(latin)
             if guild == Guild.OTHER:
                 continue
-
-            strategy = guild.strategy
 
             # F1: Massa (Log)
             f_massa_raw = math.log10(max(1.0, float(p.get("count", 1))))
@@ -103,10 +133,17 @@ class AiInferenceEngine:
             if normalized_diff <= wind_tolerance:
                 f_wind = 2.0
             else:
-                # Vloeiende afname buiten de 11.25° marge
                 f_wind = max(0.15, 2.0 * math.exp(-((normalized_diff - wind_tolerance) ** 2) / 600.0))
 
-            # F3: Special / Krenten
+            # F3: Empirische Baseline Factor (f_baseline) uit wind_sector_baseline.json
+            f_baseline = 1.0
+            if soortid in bft_baseline_soorten:
+                sp_stats = bft_baseline_soorten[soortid]
+                freq_pct = float(sp_stats.get("frequentie_pct", 0.0))
+                # Hoe hoger de historische frequentie onder dít specifieke weer, des te sterker de boost
+                f_baseline = 1.0 + (freq_pct / 100.0) * 0.6
+
+            # F4: Special / Krenten
             f_special = 1.0
             is_krent = expert_kb and (soortid in expert_kb.discovered_krenten or soortid in expert_kb.pinned_species)
             if p.get("isRemarkable") == 1:
@@ -114,7 +151,7 @@ class AiInferenceEngine:
             elif is_krent:
                 f_special = 2.5
 
-            # F4: Tijd & Strategie (Gezonde spreiding tijdens daglicht)
+            # F5: Tijd & Strategie (Gezonde spreiding tijdens daglicht)
             f_time = 1.0
             target_hour = float(p.get("avgHour", 10.0))
             hour_diff = abs(current_hour - target_hour)
@@ -124,7 +161,7 @@ class AiInferenceEngine:
             else:
                 f_time = max(0.4, math.exp(-(hour_diff ** 2) / 45.0))
 
-            # F5: Gatekeeper & Kustleidraad
+            # F6: Gatekeeper & Kustleidraad
             f_gatekeeper = 1.0
             is_off_shore = current_wind_label in {"O", "OZO", "ZO", "ZZO", "Z"}
             is_on_shore = current_wind_label in {"NW", "WNW", "W", "ZW", "NNW"}
@@ -139,8 +176,8 @@ class AiInferenceEngine:
                 if current_wind_label in {"ZW", "WZW", "W"} and 2 <= bft <= 5:
                     f_gatekeeper = 1.35  # Kustleidraad boost
 
-            # Aggregatie van BSI Score
-            total_score = f_massa * f_wind * f_special * f_time * f_gatekeeper * efficiency_ratio
+            # Aggregatie van BSI Score (inclusief empirische baseline factor)
+            total_score = f_massa * f_wind * f_baseline * f_special * f_time * f_gatekeeper * efficiency_ratio
 
             # Neurale Boost
             if neural_predictions is not None and model_labels and soortid in model_labels:
