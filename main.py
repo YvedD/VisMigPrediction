@@ -833,7 +833,7 @@ def render_grouped_species_cards(items, evaluator, image_manager, cluster_site_i
             st.markdown(grid_html, unsafe_allow_html=True)
 
 
-# --- Hulpfunctie: Helper voor het renderen van de uitgebreide weerbalk (Met correcte decimalen) ---
+# --- Hulpfunctie: Helper voor het renderen van de uitgebreide weerbalk (Met correcte decimalen en achtsten) ---
 def render_weather_box(block):
     # Geen decimalen voor windrichting graden, temperatuur, bft en luchtdruk
     b_deg = block.get('wind_deg', 0)
@@ -871,12 +871,15 @@ def render_weather_box(block):
 
     precip_prob = block.get('precip_prob', 0)
 
-    # Bewolkingspercentage: 1 decimaal
+    # Bewolking: Percentage met 2 decimalen + omrekening naar achtsten (oktaves)
     cloud_percent = block.get('cloud_cover', 10)
     try:
         cloud_val = float(cloud_percent)
     except (TypeError, ValueError):
         cloud_val = 10.0
+
+    cloud_octaves = max(0, min(8, int(round((cloud_val / 100.0) * 8))))
+    cloud_display_str = f"{cloud_val:.2f}% - {cloud_octaves}/8"
 
     sunrise = block.get('sunrise', '06:00')
     sunset = block.get('sunset', '20:00')
@@ -892,7 +895,7 @@ def render_weather_box(block):
         f'<div class="weather-item"><div class="weather-val"><span class="wind-arrow" style="transform: rotate({rot_deg}deg); display: inline-block;">↑</span> {b_deg_val}°</div><div class="weather-lbl">Windrichting</div></div>'
         f'<div class="weather-item"><div class="weather-val">{pressure_val} hPa</div><div class="weather-lbl">Luchtdruk</div></div>'
         f'<div class="weather-item"><div class="weather-val">{precip_val:.2f} mm</div><div class="weather-lbl">Neerslag ({precip_prob}%)</div></div>'
-        f'<div class="weather-item"><div class="weather-val">{cloud_val:.2f}%</div><div class="weather-lbl">Bewolking</div></div>'
+        f'<div class="weather-item"><div class="weather-val">{cloud_display_str}</div><div class="weather-lbl">Bewolking</div></div>'
         f'</div>'
         f'<div class="weather-sun-row"><span>🌅 Zonsopgang: <b>{sunrise}</b></span>{corridor_html}<span>🌇 Zonsondergang: <b>{sunset}</b></span></div>'
         f'</div>'
