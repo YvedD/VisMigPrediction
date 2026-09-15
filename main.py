@@ -833,18 +833,51 @@ def render_grouped_species_cards(items, evaluator, image_manager, cluster_site_i
             st.markdown(grid_html, unsafe_allow_html=True)
 
 
-# --- Hulpfunctie: Helper voor het renderen van de uitgebreide weerbalk ---
+# --- Hulpfunctie: Helper voor het renderen van de uitgebreide weerbalk (Met correcte decimalen) ---
 def render_weather_box(block):
+    # Geen decimalen voor windrichting graden, temperatuur, bft en luchtdruk
     b_deg = block.get('wind_deg', 0)
-    rot_deg = (int(b_deg) + 180) % 360
+    try:
+        b_deg_val = int(round(float(b_deg)))
+    except (TypeError, ValueError):
+        b_deg_val = 0
+    rot_deg = (b_deg_val + 180) % 360
 
     temp = block.get('temp', 15)
+    try:
+        temp_val = int(round(float(temp)))
+    except (TypeError, ValueError):
+        temp_val = 15
+
     wind_label = block.get('wind_label', 'W')
     wind_bft = block.get('wind_bft', 2)
-    pressure = int(round(block.get('pressure', 1016)))
+    try:
+        bft_val = int(round(float(wind_bft)))
+    except (TypeError, ValueError):
+        bft_val = 2
+
+    pressure = block.get('pressure', 1016)
+    try:
+        pressure_val = int(round(float(pressure)))
+    except (TypeError, ValueError):
+        pressure_val = 1016
+
+    # Neerslag in mm: 2 decimalen
     precip_mm = block.get('precip_mm', 0.0)
+    try:
+        precip_val = float(precip_mm)
+    except (TypeError, ValueError):
+        precip_val = 0.0
+
     precip_prob = block.get('precip_prob', 0)
+
+    # Bewolkingspercentage: 1 decimaal
     cloud_percent = block.get('cloud_cover', 10)
+    try:
+        cloud_val = float(cloud_percent)
+    except (TypeError, ValueError):
+        cloud_val = 10.0
+
     sunrise = block.get('sunrise', '06:00')
     sunset = block.get('sunset', '20:00')
     corridor_boost = block.get('corridor_boost', None)
@@ -854,12 +887,12 @@ def render_weather_box(block):
     weather_box_html = (
         f'<div class="weather-box">'
         f'<div class="weather-grid">'
-        f'<div class="weather-item"><div class="weather-val">{temp}°C</div><div class="weather-lbl">Temperatuur</div></div>'
-        f'<div class="weather-item"><div class="weather-val">{wind_label} {wind_bft}Bft</div><div class="weather-lbl">Windkracht</div></div>'
-        f'<div class="weather-item"><div class="weather-val"><span class="wind-arrow" style="transform: rotate({rot_deg}deg); display: inline-block;">↑</span> {int(b_deg)}°</div><div class="weather-lbl">Windrichting</div></div>'
-        f'<div class="weather-item"><div class="weather-val">{pressure} hPa</div><div class="weather-lbl">Luchtdruk</div></div>'
-        f'<div class="weather-item"><div class="weather-val">{precip_mm} mm</div><div class="weather-lbl">Neerslag ({precip_prob}%)</div></div>'
-        f'<div class="weather-item"><div class="weather-val">{cloud_percent}%</div><div class="weather-lbl">Bewolking</div></div>'
+        f'<div class="weather-item"><div class="weather-val">{temp_val}°C</div><div class="weather-lbl">Temperatuur</div></div>'
+        f'<div class="weather-item"><div class="weather-val">{wind_label} {bft_val}Bft</div><div class="weather-lbl">Windkracht</div></div>'
+        f'<div class="weather-item"><div class="weather-val"><span class="wind-arrow" style="transform: rotate({rot_deg}deg); display: inline-block;">↑</span> {b_deg_val}°</div><div class="weather-lbl">Windrichting</div></div>'
+        f'<div class="weather-item"><div class="weather-val">{pressure_val} hPa</div><div class="weather-lbl">Luchtdruk</div></div>'
+        f'<div class="weather-item"><div class="weather-val">{precip_val:.2f} mm</div><div class="weather-lbl">Neerslag ({precip_prob}%)</div></div>'
+        f'<div class="weather-item"><div class="weather-val">{cloud_val:.2f}%</div><div class="weather-lbl">Bewolking</div></div>'
         f'</div>'
         f'<div class="weather-sun-row"><span>🌅 Zonsopgang: <b>{sunrise}</b></span>{corridor_html}<span>🌇 Zonsondergang: <b>{sunset}</b></span></div>'
         f'</div>'
