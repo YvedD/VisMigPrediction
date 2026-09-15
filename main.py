@@ -120,7 +120,7 @@ def welcome_popup():
     ⚠️ **Belangrijke tip over het 120-uurs Toekomstvenster:**  
     Het opzoeken en berekenen van een volledige 120-uurs prognose kan **enkele minuten** in beslag nemen. Dit komt doordat de AI-engine meer dan **5.600+ historische tellingen** en ruim **12.000.000+ waargenomen vogels** uit de database van de afgelopen 23 jaar diepgaand analyseert. 
 
-    *💡 Wil je snel resultaat? Gebruik dan de **Live Prognose** of de **Twee-Uurlijkse Dag-Timeline**, deze berekenen en tonen direct de resultaten binnen enkele seconden!*
+    *💡 Wil je snel resultaat? Gebruik dan de **Live Prognose** of de **Dag-Timeline in blokken met identiek weerbeeld**, deze berekenen en tonen direct de resultaten binnen enkele seconden!*
     """)
     if st.button("Begrepen, start de applicatie 🚀", use_container_width=True):
         st.session_state.welcomed = True
@@ -354,24 +354,24 @@ def generate_wind_sector_baseline(db_path: str, output_path: str) -> bool:
     try:
         with sqlite3.connect(db_path) as conn:
             query = """
-                    SELECT UPPER(TRIM(h.windrichting))                                                          as raw_wind, \
-                           h.windkracht                                                                         as raw_bft, \
-                           h.tellingid, \
-                           w.soortid, \
-                           CAST(strftime('%m', \
-                                         datetime(CAST(h.begintijd AS INTEGER), 'unixepoch')) AS INTEGER)       as month_num, \
-                           SUM( \
-                                   CAST(COALESCE(w.aantal, 0) AS INTEGER) + \
-                                   CAST(COALESCE(w.aantalterug, 0) AS INTEGER) \
+                    SELECT UPPER(TRIM(h.windrichting))                                                          as raw_wind,
+                           h.windkracht                                                                         as raw_bft,
+                           h.tellingid,
+                           w.soortid,
+                           CAST(strftime('%m',
+                                         datetime(CAST(h.begintijd AS INTEGER), 'unixepoch')) AS INTEGER)       as month_num,
+                           SUM(
+                                   CAST(COALESCE(w.aantal, 0) AS INTEGER) +
+                                   CAST(COALESCE(w.aantalterug, 0) AS INTEGER)
                            ) as count
                     FROM waarnemingen w
-                        INNER JOIN telling_headers h \
+                        INNER JOIN telling_headers h
                     ON w.tellingid = h.tellingid
                     WHERE h.windrichting IS NOT NULL
                       AND TRIM (h.windrichting) != ''
                       AND h.begintijd IS NOT NULL
                       AND w.soortid IS NOT NULL
-                    GROUP BY h.tellingid, w.soortid, raw_wind, raw_bft, month_num \
+                    GROUP BY h.tellingid, w.soortid, raw_wind, raw_bft, month_num
                     """
             df = pd.read_sql_query(query, conn)
     except Exception as e:
@@ -676,7 +676,7 @@ def fetch_cluster_species_profiles(db_path: str, target_date: date) -> List[Dict
               AND h.telpostid != '5177'
             GROUP BY w.soortid
             ORDER BY count DESC
-                LIMIT 150 \
+                LIMIT 150
             """
 
     params = [day_start, day_end, day_start, day_end, day_start, day_end]
@@ -733,13 +733,22 @@ def render_species_card(card_data, cluster_site_ids, dt_target, image_manager) -
     large_spark_uri = SparklineEngine.get_sparkline_base64(norm_buf, target_dt=dt_target, width_px=320, height_px=90)
     large_spark_html = f'<img src="{large_spark_uri}" style="width:100%; border-radius:6px; margin-top:6px;" alt="Uitvergrote Fenologie">'
 
+    # Bepaal decimaal weergave en rode zeldzaamheidsmelding op basis van waarde < 0.05
+    val = card_data.norm_score_ex_h
+    if val < 0.05:
+        score_str = f"{val:.3f}"
+        rare_note_html = '<div style="font-size: 8.5px; color: #ef4444; font-weight: 700; text-transform: uppercase; margin-top: 4px; letter-spacing: 0.3px; text-align: center;">⚠️ Zeldzame soort, ooit waargenomen in deze periode</div>'
+    else:
+        score_str = f"{val:.1f}"
+        rare_note_html = ''
+
     card_html = (
         f'<div class="bsi-card" style="border-left-color: {bc};">'
         f'<div class="bsi-card-overlay">'
         f'<div class="overlay-title">🔍 {card_data.soortnaam}</div>'
         f'<div class="overlay-text"><b>Gilde:</b> {card_data.guild_name}<br>'
         f'<b>AI Model:</b> {card_data.sources_label} (Heur: {card_data.heuristic_prob}% | Proto: {card_data.prototype_prob}%)<br>'
-        f'<b>Norm Score:</b> {card_data.norm_score_ex_h:.2f} ex/u<br>'
+        f'<b>Norm Score:</b> {val:.4f} ex/u<br>'
         f'<b>Voorjaar Piek:</b> {card_data.spring_peak}<br>'
         f'<b>Najaar Piek:</b> {card_data.autumn_peak}</div>'
         f'{large_spark_html}'
@@ -762,11 +771,12 @@ def render_species_card(card_data, cluster_site_ids, dt_target, image_manager) -
         f'</div>'
         f'<div class="metric-divider"></div>'
         f'<div class="metric-box">'
-        f'<div class="metric-val" style="color: #f8fafc;">{card_data.norm_score_ex_h:.1f}</div>'
+        f'<div class="metric-val" style="color: #f8fafc;">{score_str}</div>'
         f'<div class="metric-label">ex. / uur</div>'
         f'</div>'
         f'</div>'
-        f'<div class="peak-badge">📅 <b>Voorjaar:</b> {card_data.spring_peak} &nbsp;&bull;&nbsp; <b>Najaar:</b> {card_data.autumn_peak}</div>'
+        f'{rare_note_html}'
+        f'<div class="peak-badge" style="margin-top: 6px;">📅 <b>Voorjaar:</b> {card_data.spring_peak} &nbsp;&bull;&nbsp; <b>Najaar:</b> {card_data.autumn_peak}</div>'
         f'<div class="sparkline-wrapper">{spark_html}</div>'
         f'</div>'
     )
@@ -894,8 +904,8 @@ elif app_mode == "Prognoses":
 
     mode_choice = st.radio(
         "Selecteer Modus",
-        ["Live Prognose (Enkele Datum)", "+5 Dagen (120-Uur met 2-Uur Blokken)",
-         "Twee-Uurlijkse Dag-Timeline (2-Uur Blokken)"],
+        ["Live Prognose (Enkele Datum)", "+5 Dagen (120-Uur in Weer-Blokken)",
+         "Dag-Timeline (in Weer-blokken)"],
         horizontal=True
     )
 
@@ -910,7 +920,7 @@ elif app_mode == "Prognoses":
             formatted_telpost_options,
         )
     with col_p2:
-        if mode_choice.startswith("Live") or mode_choice.startswith("Twee-Uurlijkse"):
+        if mode_choice.startswith("Live") or mode_choice.startswith("Dag-Timeline"):
             prognose_datum = st.date_input("Datum voor prognose", value=datetime.now())
 
     selected_telpost_id = selected_telpost_str.split(" - ")[0]
@@ -992,11 +1002,11 @@ elif app_mode == "Prognoses":
                         st.success(f"🎯 {len(suggesties)} soorten/taxa succesvol doorgerekend en gegroepeerd per gilde!")
                         render_grouped_species_cards(suggesties, evaluator, image_manager, cluster_site_ids, dt_target)
 
-    elif mode_choice.startswith("Twee-Uurlijkse"):
-        if st.button("Genereer 2-Uurlijkse Dag-Timeline (Zonsopgang - Zonsondergang)"):
+    elif mode_choice.startswith("Dag-Timeline"):
+        if st.button("Genereer Dag-Timeline (Zonsopgang - Zonsondergang)"):
             dt_target = datetime.combine(prognose_datum, datetime.min.time())
 
-            with st.spinner("Zonnestand berekenen en 2-uurlijkse weervensters doorrekenen..."):
+            with st.spinner("Zonnestand berekenen en dagelijkse weervensters doorrekenen..."):
                 forecast_sys = BsiForecastSystem(db_path_str, resolver)
                 timeline_blocks = forecast_sys.generate_daily_timeline_prognosis(main_lat, main_lon, cluster_site_ids,
                                                                                  dt_target)
@@ -1016,7 +1026,7 @@ elif app_mode == "Prognoses":
                             render_grouped_species_cards(block["top_species"], evaluator, image_manager,
                                                          cluster_site_ids, dt_target)
 
-    else:  # +5 Dagen (120-Uur met 2-Uur Blokken)
+    else:  # +5 Dagen (120-Uur in Weer-Blokken)
         if st.button("Genereer 120-Uur prognose"):
             with st.spinner("120-uurs weersvoorspelling, zonnestanden en tijdblokken doorrekenen..."):
                 forecast_sys = BsiForecastSystem(db_path_str, resolver)

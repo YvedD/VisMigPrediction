@@ -238,6 +238,8 @@ class BsiForecastSystem:
 
                 combined_list = []
                 for s_obj in suggesties:
+                    if s_obj.expected_index <= 0.0:
+                        continue
                     s_obj.latin_name = self.resolver.get_latin(s_obj.soortid)
                     s_obj.score *= (1.0 + reg_boost)
                     s_obj.kans = int(min(98, s_obj.kans * (1.0 + (reg_boost * 0.5))))
@@ -350,7 +352,11 @@ class BsiForecastSystem:
                 species_profiles=species_profiles, neural_engine=None
             )
 
-            top_species = sorted(suggesties, key=lambda x: (x.kans, x.score), reverse=True)
+            filtered_suggesties = [
+                s for s in suggesties
+                if s.expected_index > 0.0
+            ]
+            top_species = sorted(filtered_suggesties, key=lambda x: (x.kans, x.score), reverse=True)
 
             temp_c = round(period["avg_temp"], 1) if period["avg_temp"] is not None else 15.0
 
