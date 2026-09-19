@@ -8,7 +8,7 @@ import streamlit as st
 import pydeck as pdk
 import folium
 from streamlit_folium import st_folium
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 from pathlib import Path
 from typing import List, Dict, Any, Optional
 from PIL import Image
@@ -33,7 +33,7 @@ from parsers import handle_excel_upload
 
 from bsi.config import BsiConfig
 from bsi.inference_engine import AiInferenceEngine
-from bsi.weather_service import WeatherContext, WeatherManagerUtils
+from bsi.weather_service import WeatherContext, WeatherManagerUtils, AiWeatherService
 from bsi.forecast_system import BsiForecastSystem
 from bsi.sparkline_engine import SparklineEngine
 from bsi.card_evaluator import CardEvaluator
@@ -354,12 +354,12 @@ def generate_wind_sector_baseline(db_path: str, output_path: str) -> bool:
     try:
         with sqlite3.connect(db_path) as conn:
             query = """
-                    SELECT UPPER(TRIM(h.windrichting))                                                          as raw_wind,
-                           h.windkracht                                                                         as raw_bft,
+                    SELECT UPPER(TRIM(h.windrichting))                                                    as raw_wind,
+                           h.windkracht                                                                   as raw_bft,
                            h.tellingid,
                            w.soortid,
                            CAST(strftime('%m',
-                                         datetime(CAST(h.begintijd AS INTEGER), 'unixepoch')) AS INTEGER)       as month_num,
+                                         datetime(CAST(h.begintijd AS INTEGER), 'unixepoch')) AS INTEGER) as month_num,
                            SUM(
                                    CAST(COALESCE(w.aantal, 0) AS INTEGER) +
                                    CAST(COALESCE(w.aantalterug, 0) AS INTEGER)
@@ -986,44 +986,118 @@ elif app_mode == "Prognoses":
             st.success(
                 f"✅ BSI Engine gestart voor telpost **{selected_telpost_str}** met ecologisch gefilterd cluster ({len(cluster_site_ids)} zusterposten)!")
 
-            with st.spinner("Database-brede fenologie en BSI-inferentie uitvoeren..."):
-                path = get_db_path()
+            with st.spinner("Actueel live weer van dit moment opvragen en 2-uurs venster doorrekenen..."):
+                now_dt = datetime.now()
+                forecast_sys = BsiForecastSystem(db_path_str, resolver)
+                forecast_data = forecast_sys.fetch_5day_weather_forecast(main_lat, main_lon)
 
-                weather = None
-                if os.path.exists(path):
-                    conn = sqlite3.connect(path)
-                    query = "SELECT temperature, wind_speed, wind_direction, pressure, cloud_cover FROM weather_archive WHERE telpostid = ? ORDER BY time DESC LIMIT 1;"
-                    df_w = pd.read_sql(query, conn, params=(selected_telpost_id,))
-                    conn.close()
-                    if not df_w.empty:
-                        r = df_w.iloc[0]
-                        weather = WeatherContext(lat=main_lat, lon=main_lon, temp=r["temperature"],
-                                                 wind_speed=r["wind_speed"],
-                                                 wind_deg=r["wind_direction"], cloud_percent=r["cloud_cover"],
-                                                 pressure=r["pressure"], visibility=10000, pressure_trend=1.5)
+                w_sample = None
+                next_sample = None
+                if forecast_data and "hourly" in forecast_data:
+                    hourly_list = forecast_data["hourly"]
+                    # Zoek het uur dat overeenkomt met het huidige uur (now_dt.hour)
+                    for idx, h in enumerate(hourly_list):
+                        if h["time"].startswith(now_dt.strftime("%Y-%m-%dT%H")):
+                            w_sample = h
+                            if idx + 1 < len(hourly_list):
+                                next_sample = hourly_list[idx + 1]
+                            break
+                    if not w_sample and hourly_list:
+                        w_sample = hourly_list[0]
+                        next_sample = hourly_list[1] if len(hourly_list) > 1 else w_sample
 
-                if not weather:
-                    weather = WeatherContext(lat=main_lat, lon=main_lon, temp=15.0, wind_speed=5.0, wind_deg=45.0,
-                                             cloud_percent=4.0, pressure=1016.0, visibility=10000, pressure_trend=1.0)
+                if w_sample:
+                    # Combineer het huidige uur en het volgende uur voor een 2-uurs live venster
+                    t_vals = [w_sample["temp"]]
+                    w_speeds = [w_sample["wind_speed"]]
+                    w_degs = [w_sample["wind_deg"]]
+                    press = [w_sample["pressure"]]
+                    clouds = [w_sample["cloud_cover"]]
+                    precips = [w_sample["precip_mm"]]
+                    probs = [w_sample["precip_prob"]]
 
-                live_block = {
-                    "temp": weather.temp,
-                    "wind_label": WeatherManagerUtils.get_wind_direction_label(weather.wind_deg) if hasattr(
-                        WeatherManagerUtils, 'get_wind_direction_label') else "W",
-                    "wind_bft": WeatherManagerUtils.Beaufort(weather.wind_speed) if hasattr(WeatherManagerUtils,
-                                                                                            'Beaufort') else 3,
-                    "wind_deg": weather.wind_deg,
-                    "pressure": weather.pressure,
-                    "precip_mm": getattr(weather, 'precipitation', 0.0),
-                    "precip_prob": getattr(weather, 'precipitation_probability', 0),
-                    "cloud_percent": weather.cloud_percent,
-                    "sunrise": "06:30",
-                    "sunset": "20:15"
-                }
+                    if next_sample:
+                        t_vals.append(next_sample["temp"])
+                        w_speeds.append(next_sample["wind_speed"])
+                        w_degs.append(next_sample["wind_deg"])
+                        press.append(next_sample["pressure"])
+                        clouds.append(next_sample["cloud_cover"])
+                        precips.append(next_sample["precip_mm"])
+                        probs.append(next_sample["precip_prob"])
+
+                    avg_temp = sum(t_vals) / len(t_vals)
+                    avg_speed = sum(w_speeds) / len(w_speeds)
+                    avg_deg = sum(w_degs) / len(w_degs)
+                    avg_press = sum(press) / len(press)
+                    avg_cloud = sum(clouds) / len(clouds)
+                    total_precip = sum(precips)
+                    max_prob = max(probs) if probs else 0
+
+                    wind_lbl = WeatherManagerUtils.deg_to_16_wind_label(avg_deg)
+                    wind_bft_val = WeatherManagerUtils.ms_to_beaufort(avg_speed)
+
+                    end_dt = now_dt + timedelta(hours=2)
+                    block_label = f"Live 2-Uur Venster: {now_dt.strftime('%H:%M')} - {end_dt.strftime('%H:%M')} ({wind_lbl} {wind_bft_val}Bft)"
+
+                    weather = WeatherContext(
+                        lat=main_lat,
+                        lon=main_lon,
+                        temp=avg_temp,
+                        wind_speed=avg_speed,
+                        wind_deg=avg_deg,
+                        cloud_percent=avg_cloud,
+                        pressure=avg_press,
+                        visibility=10000,
+                        pressure_trend=0.0
+                    )
+
+                    sun_info = forecast_data.get("sun_map", {}).get(now_dt.strftime("%Y-%m-%d"), {})
+                    live_block = {
+                        "time_block": block_label,
+                        "temp": avg_temp,
+                        "wind_label": wind_lbl,
+                        "wind_bft": wind_bft_val,
+                        "wind_deg": avg_deg,
+                        "pressure": int(round(avg_press)),
+                        "precip_mm": total_precip,
+                        "precip_prob": max_prob,
+                        "cloud_cover": avg_cloud,
+                        "sunrise": sun_info.get("sunrise_str", "06:30"),
+                        "sunset": sun_info.get("sunset_str", "20:15")
+                    }
+                else:
+                    # Fallback naar directe current API als forecast faalt
+                    weather = AiWeatherService.fetch_contextual_weather(main_lat, main_lon)
+                    if not weather:
+                        weather = WeatherContext(lat=main_lat, lon=main_lon, temp=15.0, wind_speed=5.0, wind_deg=45.0,
+                                                 cloud_percent=4.0, pressure=1016.0, visibility=10000,
+                                                 pressure_trend=1.0)
+                    wind_lbl = WeatherManagerUtils.deg_to_16_wind_label(
+                        weather.wind_deg) if weather.wind_deg is not None else "W"
+                    wind_bft_val = WeatherManagerUtils.ms_to_beaufort(
+                        weather.wind_speed) if weather.wind_speed is not None else 3
+                    end_dt = now_dt + timedelta(hours=2)
+                    live_block = {
+                        "time_block": f"Live Huidig Moment ({now_dt.strftime('%H:%M')} - {end_dt.strftime('%H:%M')})",
+                        "temp": weather.temp if weather.temp is not None else 15.0,
+                        "wind_label": wind_lbl,
+                        "wind_bft": wind_bft_val,
+                        "wind_deg": weather.wind_deg if weather.wind_deg is not None else 0.0,
+                        "pressure": int(round(weather.pressure if weather.pressure is not None else 1016.0)),
+                        "precip_mm": 0.0,
+                        "precip_prob": 0,
+                        "cloud_cover": weather.cloud_percent if weather.cloud_percent is not None else 10.0,
+                        "sunrise": "06:30",
+                        "sunset": "20:15"
+                    }
+
+                # Prominent bovenaan weergeven
+                st.markdown(
+                    f"### ⚡ Snelle Live 2-Uurs Prognose ({now_dt.strftime('%d-%m-%Y %H:%M')} tot {(now_dt + timedelta(hours=2)).strftime('%H:%M')})")
                 render_weather_box(live_block)
 
-                dt_target = datetime.combine(prognose_datum, datetime.now().time())
-                species_profiles = fetch_cluster_species_profiles(db_path_str, prognose_datum)
+                dt_target = now_dt
+                species_profiles = fetch_cluster_species_profiles(db_path_str, now_dt.date())
 
                 if not species_profiles:
                     st.warning("⚠️ Geen waarnemingen gevonden binnen dit fenologische venster.")

@@ -1,7 +1,8 @@
 """
 bsi/inference_engine.py
 De master BSI 4.1 voorspellingsmotor met strikte 11.25° wind-DNA tolerantie,
-database-brede fenologie-analyse en empirische wind-sector/maand/beaufort baseline.
+database-brede fenologie-analyse, empirische wind-sector/maand/beaufort baseline,
+aangepaste Pelagics-curve, en strikte ecologische remmen voor zangvogels (tijd- en windkracht).
 """
 
 import math
@@ -33,10 +34,43 @@ class VogelSuggestie:
     score: float
 
 
+def calculate_pelagic_factor(bft: float, wind_label: str) -> float:
+    """
+    Berekent de windfactor voor Pelagics (Zeevogels) op basis van windkracht én de verfijnde windrichtingsmatrix:
+    - Absolute ondergrens voor betere aantallen: 5 Beaufort.
+    - Ideale piekperiode / plateau: 7 tot 9 Beaufort.
+    - Windrichting: NW = 1.0, WNW & NNW = 0.7 (-30%), W & N = 0.35, en ZW/NO = 0.05 (afstraffing).
+    """
+    if bft < 2.0:
+        bft_score = 0.02
+    elif bft < 5.0:
+        bft_score = (bft / 5.0) ** 3.0 * 0.3
+    elif bft <= 9.0:
+        if bft < 7.0:
+            bft_score = 0.4 + 0.6 * ((bft - 5.0) / 2.0)
+        else:
+            bft_score = 1.0
+    else:
+        bft_score = max(0.05, 1.0 - (bft - 9.0) * 0.4)
+
+    label_upper = wind_label.strip().upper()
+    if label_upper in {"NW"}:
+        dir_score = 1.0
+    elif label_upper in {"WNW", "NNW"}:
+        dir_score = 0.7
+    elif label_upper in {"W", "N"}:
+        dir_score = 0.35
+    elif label_upper in {"ZW", "ZZW", "WZW", "NO", "NNO", "ONO", "Z", "ZZO", "ZO", "OZO", "O"}:
+        dir_score = 0.05
+    else:
+        dir_score = 0.05
+
+    return max(0.005, bft_score * dir_score * 2.2)
+
+
 class AiInferenceEngine:
     @staticmethod
     def _load_wind_sector_baseline() -> Dict[str, Any]:
-        """Laadt de lokale Empirische Wind-Sector Baseline in het geheugen."""
         path = project_path("wind_sector_baseline.json")
         if path.exists():
             try:
@@ -58,10 +92,6 @@ class AiInferenceEngine:
         model_labels: Optional[List[str]] = None,
         expert_kb: Optional[ExpertKnowledgeBase] = None
     ) -> List[VogelSuggestie]:
-        """
-        Berekent de volledige BSI 4.1 prognose met strikte 11.25° wind-tolerantie
-        en integratie van de empirische wind-sector/maand/beaufort baseline.
-        """
         epoch_sec = int(dt.timestamp())
         phase = SolarTimeEngine.get_solar_phase(lat, lon, dt)
         current_hour = dt.hour
@@ -71,8 +101,8 @@ class AiInferenceEngine:
         current_wind_deg = weather.wind_deg if weather.wind_deg is not None else 0.0
         current_wind_label = WeatherManagerUtils.deg_to_16_wind_label(current_wind_deg)
         bft = WeatherManagerUtils.ms_to_beaufort(current_wind_speed)
+        precipitation_mm = getattr(weather, 'precipitation', 0.0) or 0.0
 
-        # Bepaal Beaufort klasse voor baseline lookup
         if current_wind_speed <= 2.5:
             bft_class = "0-2 Bft"
         elif current_wind_speed <= 4.5:
@@ -80,7 +110,6 @@ class AiInferenceEngine:
         else:
             bft_class = "5+ Bft"
 
-        # Laad de empirische wind-sector baseline op basis van maand en windkracht
         baseline = cls._load_wind_sector_baseline()
         sector_baseline = baseline.get(current_wind_label, {})
         month_baseline = sector_baseline.get("maanden", {}).get(current_month_str, {})
@@ -96,7 +125,7 @@ class AiInferenceEngine:
                 wind_force=weather.wind_speed,
                 cloud_cover=weather.cloud_percent,
                 hpa=weather.pressure,
-                precipitation_flag=False
+                precipitation_flag=(precipitation_mm > 0.0)
             )
             neural_predictions = neural_engine.predict(features)
 
@@ -129,18 +158,17 @@ class AiInferenceEngine:
             diff = abs(current_wind_deg - hist_wind_deg)
             normalized_diff = 360.0 - diff if diff > 180 else diff
 
-            wind_tolerance = 11.25  # Strikte foutmarge van 11.25°
+            wind_tolerance = 11.25
             if normalized_diff <= wind_tolerance:
                 f_wind = 2.0
             else:
                 f_wind = max(0.15, 2.0 * math.exp(-((normalized_diff - wind_tolerance) ** 2) / 600.0))
 
-            # F3: Empirische Baseline Factor (f_baseline) uit wind_sector_baseline.json
+            # F3: Empirische Baseline Factor
             f_baseline = 1.0
             if soortid in bft_baseline_soorten:
                 sp_stats = bft_baseline_soorten[soortid]
                 freq_pct = float(sp_stats.get("frequentie_pct", 0.0))
-                # Hoe hoger de historische frequentie onder dít specifieke weer, des te sterker de boost
                 f_baseline = 1.0 + (freq_pct / 100.0) * 0.6
 
             # F4: Special / Krenten
@@ -151,33 +179,53 @@ class AiInferenceEngine:
             elif is_krent:
                 f_special = 2.5
 
-            # F5: Tijd & Strategie (Gezonde spreiding tijdens daglicht)
+            # F5: Tijd & Strategie (Strikte afbouw voor zangvogels na 13:00 uur)
             f_time = 1.0
             target_hour = float(p.get("avgHour", 10.0))
             hour_diff = abs(current_hour - target_hour)
 
             if phase == SolarPhase.NIGHT and guild != Guild.PELAGICS:
-                f_time = 0.05
+                f_time = 0.02
             else:
-                f_time = max(0.4, math.exp(-(hour_diff ** 2) / 45.0))
+                if guild == Guild.PASSERINES:
+                    if current_hour > 13:
+                        f_time = max(0.01, 0.4 * math.exp(-((current_hour - 11) ** 2) / 8.0))
+                    else:
+                        f_time = max(0.05, math.exp(-(hour_diff ** 2) / 30.0))
+                else:
+                    f_time = max(0.03, math.exp(-(hour_diff ** 2) / 35.0))
 
-            # F6: Gatekeeper & Kustleidraad
+            # F6: Avond-rush factor (voor watervogels, reigers en lepelaars)
+            f_evening_rush = 1.0
+            is_lepelaar = ("lepelaar" in name.lower()) or ("platalea" in latin.lower())
+            if 15 <= current_hour <= 19 and bft <= 4 and precipitation_mm < 0.2:
+                if guild in {Guild.HERONS, Guild.WATERFOWL, Guild.SHOREBIRDS} or is_lepelaar:
+                    f_evening_rush = 1.6
+
+            # F7: Neerslag rem
+            f_rain = 1.0
+            if precipitation_mm > 0.1:
+                f_rain = max(0.1, 1.0 - (precipitation_mm * 0.5))
+
+            # F8: Gatekeeper & Windkracht rem voor Zangvogels (Passerines haten harde wind >= 4 Bft)
             f_gatekeeper = 1.0
-            is_off_shore = current_wind_label in {"O", "OZO", "ZO", "ZZO", "Z"}
-            is_on_shore = current_wind_label in {"NW", "WNW", "W", "ZW", "NNW"}
-
             if guild == Guild.PELAGICS:
-                if is_off_shore:
-                    f_gatekeeper = 0.05
-                elif is_on_shore:
-                    f_gatekeeper = 1.8 if bft >= 4 else 1.2
+                f_gatekeeper = calculate_pelagic_factor(float(bft), current_wind_label)
+            elif guild == Guild.PASSERINES:
+                if bft >= 5:
+                    f_gatekeeper = 0.15  # Zware straf bij 5 Bft of meer
+                elif bft == 4:
+                    f_gatekeeper = 0.45
+                elif current_wind_label in {"ZW", "WZW", "W"} and 2 <= bft <= 3:
+                    f_gatekeeper = 1.15
+                else:
+                    f_gatekeeper = 0.8
+            elif guild in {Guild.RAPTORS_ACTIVE, Guild.RAPTORS_THERMAL, Guild.HERONS}:
+                if current_wind_label in {"ZW", "WZW", "W"} and 2 <= bft <= 4:
+                    f_gatekeeper = 1.25
 
-            elif guild in {Guild.RAPTORS_ACTIVE, Guild.RAPTORS_THERMAL, Guild.PASSERINES, Guild.HERONS}:
-                if current_wind_label in {"ZW", "WZW", "W"} and 2 <= bft <= 5:
-                    f_gatekeeper = 1.35  # Kustleidraad boost
-
-            # Aggregatie van BSI Score (inclusief empirische baseline factor)
-            total_score = f_massa * f_wind * f_baseline * f_special * f_time * f_gatekeeper * efficiency_ratio
+            # Aggregatie van BSI Score
+            total_score = f_massa * f_wind * f_baseline * f_special * f_time * f_evening_rush * f_rain * f_gatekeeper * efficiency_ratio
 
             # Neurale Boost
             if neural_predictions is not None and model_labels and soortid in model_labels:
