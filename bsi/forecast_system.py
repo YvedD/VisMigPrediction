@@ -14,6 +14,8 @@ from dataclasses import dataclass
 from .config import BsiConfig
 from .weather_service import WeatherContext, WeatherManagerUtils
 from .inference_engine import AiInferenceEngine, VogelSuggestie
+from .neural_engine import LiteNeuralEngine
+from .expert_knowledge import ExpertKnowledgeBase
 from .solar_engine import SolarTimeEngine
 from .species_resolver import SpeciesResolver
 from .corridor_engine import CorridorEngine
@@ -63,9 +65,17 @@ def wmo_code_to_precipitation_type(code) -> str:
 
 
 class BsiForecastSystem:
-    def __init__(self, db_path: str, species_resolver: SpeciesResolver):
+    def __init__(
+        self,
+        db_path: str,
+        species_resolver: SpeciesResolver,
+        neural_engine: Optional[LiteNeuralEngine] = None,
+        expert_kb: Optional[ExpertKnowledgeBase] = None,
+    ):
         self.db_path = db_path
         self.resolver = species_resolver
+        self.neural_engine = neural_engine
+        self.expert_kb = expert_kb
         BsiConfig.MIN_BSI_QUALITY_THRESHOLD = 15
 
     @staticmethod
@@ -153,7 +163,8 @@ class BsiForecastSystem:
         lat: float,
         lon: float,
         site_ids: List[str],
-        start_dt: Optional[datetime] = None
+        start_dt: Optional[datetime] = None,
+        selected_site_id: Optional[str] = None,
     ) -> List[Dict[str, Any]]:
         if start_dt is None:
             start_dt = datetime.now(timezone.utc)
@@ -192,7 +203,9 @@ class BsiForecastSystem:
             day_start = day_of_year - 3
             day_end = day_of_year + 3
 
-            species_profiles = self._fetch_phenology_profiles_from_db(day_start, day_end)
+            species_profiles = self._fetch_phenology_profiles_from_db(
+                day_start, day_end, site_ids, selected_site_id
+            )
             reg_boost = CorridorEngine.calculate_corridor_boost_at_time(current_day_dt, corridor_data, is_autumn=is_autumn)
 
             periods = periodize_hours(
@@ -233,7 +246,10 @@ class BsiForecastSystem:
 
                 suggesties = AiInferenceEngine.calculate_bsi_prognosis(
                     lat=lat, lon=lon, dt=dt_block, weather=w_ctx,
-                    species_profiles=species_profiles, neural_engine=None
+                    species_profiles=species_profiles,
+                    neural_engine=self.neural_engine,
+                    model_labels=self.resolver.model_labels,
+                    expert_kb=self.expert_kb,
                 )
 
                 combined_list = []
@@ -279,7 +295,8 @@ class BsiForecastSystem:
             lat: float,
             lon: float,
             site_ids: List[str],
-            target_dt: datetime
+            target_dt: datetime,
+            selected_site_id: Optional[str] = None,
     ) -> List[Dict[str, Any]]:
         forecast_data = self.fetch_72h_weather_forecast(lat, lon)
         if not forecast_data:
@@ -307,7 +324,9 @@ class BsiForecastSystem:
         day_of_year = target_dt.timetuple().tm_yday
         day_start = day_of_year - 3
         day_end = day_of_year + 3
-        species_profiles = self._fetch_phenology_profiles_from_db(day_start, day_end)
+        species_profiles = self._fetch_phenology_profiles_from_db(
+            day_start, day_end, site_ids, selected_site_id
+        )
 
         if not species_profiles:
             return []
@@ -349,7 +368,10 @@ class BsiForecastSystem:
 
             suggesties = AiInferenceEngine.calculate_bsi_prognosis(
                 lat=lat, lon=lon, dt=dt_block, weather=w_ctx,
-                species_profiles=species_profiles, neural_engine=None
+                species_profiles=species_profiles,
+                neural_engine=self.neural_engine,
+                model_labels=self.resolver.model_labels,
+                expert_kb=self.expert_kb,
             )
 
             filtered_suggesties = [
@@ -379,12 +401,19 @@ class BsiForecastSystem:
 
         return timeline_results
 
-    def _fetch_phenology_profiles_from_db(self, day_start: int, day_end: int) -> List[Dict[str, Any]]:
+    def _fetch_phenology_profiles_from_db(
+        self,
+        day_start: int,
+        day_end: int,
+        site_ids: Optional[List[str]] = None,
+        selected_site_id: Optional[str] = None,
+    ) -> List[Dict[str, Any]]:
         import sqlite3
         query = """
             SELECT 
                 w.soortid, 
-                SUM(CAST(w.aantal AS INTEGER) + CAST(w.aantalterug AS INTEGER) + CAST(w.aantal_plus AS INTEGER) + CAST(w.aantalterug_plus AS INTEGER)) as count,
+                SUM((CAST(w.aantal AS INTEGER) + CAST(w.aantalterug AS INTEGER) + CAST(w.aantal_plus AS INTEGER) + CAST(w.aantalterug_plus AS INTEGER)) *
+                    CASE WHEN h.telpostid = ? THEN 1.5 ELSE 1.0 END) as count,
                 AVG(CAST(NULLIF(h.temperatuur, '') AS FLOAT)) as avgTemp,
                 UPPER(h.windrichting) as mainWind,
                 AVG(CAST(NULLIF(h.windkracht, '') AS FLOAT)) as avgBft,
@@ -399,9 +428,25 @@ class BsiForecastSystem:
                AND h.telpostid != '5177'
             GROUP BY w.soortid
             ORDER BY count DESC
-            LIMIT 150
         """
-        params = [day_start, day_end, day_start, day_end, day_start, day_end]
+        params = [
+            str(selected_site_id) if selected_site_id else "",
+            day_start, day_end, day_start, day_end, day_start, day_end,
+        ]
+        if site_ids:
+            valid_site_ids = [str(site_id) for site_id in site_ids if str(site_id) != "5177"]
+            if valid_site_ids:
+                placeholders = ",".join("?" for _ in valid_site_ids)
+                query = query.replace(
+                    "AND h.telpostid != '5177'",
+                    f"AND h.telpostid IN ({placeholders}) AND h.telpostid != '5177'",
+                )
+                params.extend(valid_site_ids)
+            else:
+                query = query.replace(
+                    "AND h.telpostid != '5177'",
+                    "AND 1 = 0",
+                )
 
         try:
             with sqlite3.connect(self.db_path) as conn:

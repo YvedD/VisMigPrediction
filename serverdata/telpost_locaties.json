@@ -4,73 +4,105 @@
             "telpostid": "4310",
             "latitude": 51.25951297082393,
             "longitude": 2.9913372742085187,
-            "timestamp": 1786295600345
+            "timestamp": 1786295600345,
+            "Telpostnaam": "Spanjaardduinen",
+            "Is_Coastal_Post": true
         },
         {
             "telpostid": "1949",
             "latitude": 51.15689370902615,
             "longitude": 2.7181828022003174,
-            "timestamp": 1786295600346
+            "timestamp": 1786295600346,
+            "Telpostnaam": "Nieuwpoort oosterstaketsel (zeetrek)\t",
+            "Is_Coastal_Post": true
         },
         {
             "telpostid": "1989",
             "latitude": 51.28425258391496,
             "longitude": 3.0524826049804688,
-            "timestamp": 1786295600347
+            "timestamp": 1786295600347,
+            "Telpostnaam": "Zandpanne De Haan",
+            "Is_Coastal_Post": false
         },
         {
             "telpostid": "113",
             "latitude": 51.19280287381523,
             "longitude": 2.9454053386324404,
-            "timestamp": 1786296818186
+            "timestamp": 1786296818186,
+            "Telpostnaam": "Zoutekreek Zandvoorde",
+            "Is_Coastal_Post": false
         },
         {
             "telpostid": "3045",
             "latitude": 51.29977588558421,
             "longitude": 3.0757790175896673,
-            "timestamp": 1787086803714
+            "timestamp": 1787086803714,
+            "Telpostnaam": "Wenduine Spioenkop",
+            "Is_Coastal_Post": true
         },
         {
             "telpostid": "3745",
             "latitude": 51.223567461044894,
             "longitude": 2.980039344698838,
-            "timestamp": 1786296872843
+            "timestamp": 1786296872843,
+            "Telpostnaam": "Bufferbekken Bredene",
+            "Is_Coastal_Post": false
         },
         {
             "telpostid": "3949",
             "latitude": 51.23016336438118,
             "longitude": 2.972451276320612,
-            "timestamp": 1786296894563
+            "timestamp": 1786296894563,
+            "Telpostnaam": "Bredene Merelstraat nachttrek",
+            "Is_Coastal_Post": false
         },
         {
             "telpostid": "5177",
             "latitude": 51.2301315853216,
             "longitude": 2.972375250278162,
-            "timestamp": 1786370796429
+            "timestamp": 1786370796429,
+            "Telpostnaam": "VoiceTally Testsite",
+            "Is_Coastal_Post": false
         },
         {
             "telpostid": "5719",
             "latitude": 51.25060786570579,
             "longitude": 4.85820601764317,
-            "timestamp": 1786296945390
+            "timestamp": 1786296945390,
+            "Telpostnaam": "Poeyelheide Gierle",
+            "Is_Coastal_Post": false
         },
         {
             "telpostid": "74",
             "latitude": 51.32554219340657,
             "longitude": 3.165243990376723,
-            "timestamp": 1786295638952
+            "timestamp": 1786295638952,
+            "Telpostnaam": "Fonteintjes",
+            "Is_Coastal_Post": true
         },
         {
             "telpostid": "78",
             "latitude": 51.2712947898751,
             "longitude": 3.016563998295112,
-            "timestamp": 1786370721942
+            "timestamp": 1786370721942,
+            "Telpostnaam": "Kijkuit, De Haan",
+            "Is_Coastal_Post": false
         },
         {
             "telpostid": "79",
             "latitude": 51.24315862164526,
             "longitude": 2.9443661481275853,
-            "timestamp": 1786296852320
+            "timestamp": 1786296852320,
+            "Telpostnaam": "Duinbrug",
+            "Is_Coastal_Post": false
+        },
+        {
+            "telpostid": "772",
+            "latitude": 51.0404907930153,
+            "longitude": 4.999613,
+            "timestamp": 1789838106029,
+            "Telpostnaam": "Averbode Bos en Heide",
+            "Is_Coastal_Post": false
         }
     ]
 }

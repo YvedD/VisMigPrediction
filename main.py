@@ -33,6 +33,8 @@ from parsers import handle_excel_upload
 
 from bsi.config import BsiConfig
 from bsi.inference_engine import AiInferenceEngine
+from bsi.neural_engine import LiteNeuralEngine
+from bsi.expert_knowledge import ExpertKnowledgeBase
 from bsi.weather_service import WeatherContext, WeatherManagerUtils, AiWeatherService
 from bsi.forecast_system import BsiForecastSystem
 from bsi.sparkline_engine import SparklineEngine
@@ -40,6 +42,9 @@ from bsi.card_evaluator import CardEvaluator
 from bsi.image_manager import SpeciesImageManager
 from bsi.species_resolver import SpeciesResolver
 from site_dna_builder import generate_sites_dna
+
+# Nieuwe module voor telpost registratie en beheer
+import telpost_manager
 
 # Veilige inlading van het BSI Logo als Favicon via PIL
 icon_path = project_path("BSI_logo.png")
@@ -118,9 +123,9 @@ def welcome_popup():
     Welkom bij de bètatester versie van het **VisMigPrediction Platform (BSI 4.1)**! 🦅
 
     ⚠️ **Belangrijke tip over het 120-uurs Toekomstvenster:**  
-    Het opzoeken en berekenen van een volledige 120-uurs prognose kan **enkele minuten** in beslag nemen. Dit komt doordat de AI-engine meer dan **5.600+ historische tellingen** en ruim **12.000.000+ waargenomen vogels** uit de database van de afgelopen 23 jaar diepgaand analyseert. 
+    Het opzoeken en berekenen van een volledige 120-uurs prognose kan **enkele minuten** in beslag nemen. Dit komt doordat de AI-engine meer dan **5.600+ historische tellingen** en ruim **12.000.000+ waargenomen vogels** uit de laatste 23 jaar diepgaand analyseert. 
 
-    *💡 Wil je snel resultaat? Gebruik dan de **Live Prognose** of de **Dag-Timeline in blokken met identiek weerbeeld**, deze berekenen en tonen direct de resultaten binnen enkele seconden!*
+    *💡 Wil je snel resultaat? Gebruik dan de **Live Prognose** of de **Dag-Timeline in blokken met identiek weerbeeld**!*
     """)
     if st.button("Begrepen, start de applicatie 🚀", use_container_width=True):
         st.session_state.welcomed = True
@@ -130,7 +135,6 @@ def welcome_popup():
 if not st.session_state.welcomed:
     welcome_popup()
 
-# Genereer eenmalig de pretty-printed sites_DNA.json bij opstarten indien afwezig met feedback
 sites_dna_path = project_path("sites_DNA.json")
 if not sites_dna_path.exists():
     with st.spinner("🧬 Ecologisch site-DNA per telpost opbouwen op basis van alle historische data..."):
@@ -142,7 +146,6 @@ st.markdown("""
     <style>
         .forecast-date-header { font-size: 13px !important; font-weight: bold; color: #fff; margin-bottom: 4px; text-align: center; }
 
-        /* Stijlvolle Grafische Weer-Box met Neerslag en Luchtdruk */
         .weather-box { 
             background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); 
             border: 1px solid #334155; 
@@ -185,7 +188,6 @@ st.markdown("""
             color: #f43f5e;
         }
 
-        /* --- RESPONSIVE CSS GRID VOOR SOORT-TEGELS --- */
         .bsi-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -193,7 +195,6 @@ st.markdown("""
             margin-bottom: 16px;
         }
 
-        /* --- HARMONISCHE DONKERE SOORT-TEGELS (BSI CARDS) --- */
         .bsi-card { 
             background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); 
             border-radius: 14px; 
@@ -279,7 +280,6 @@ st.markdown("""
             font-weight: 500;
         }
 
-        /* METRICS BLOK */
         .bsi-metrics { 
             display: flex; 
             align-items: center;
@@ -315,7 +315,6 @@ st.markdown("""
         }
         .sparkline-img { width: 100%; height: 65px; object-fit: contain; display: block; filter: brightness(0.95); }
 
-        /* Hover / Touch Overlay voor Details */
         .bsi-card-overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -343,7 +342,6 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 
-# --- Robuuste Functie voor genereren van wind_sector_baseline.json (Inclusief Maand & Beaufort-dimensie) ---
 def generate_wind_sector_baseline(db_path: str, output_path: str) -> bool:
     resolver = SpeciesResolver(project_path())
 
@@ -376,11 +374,9 @@ def generate_wind_sector_baseline(db_path: str, output_path: str) -> bool:
             df = pd.read_sql_query(query, conn)
     except Exception as e:
         st.sidebar.error(f"SQL Fout: {e}")
-        print(f"[WindBaseline] SQL Fout: {e}")
         return False
 
     if df.empty:
-        st.sidebar.warning("Geen records gevonden met een geldige windrichting en tijdstip.")
         return False
 
     known_intervals = WeatherManagerUtils._load_16_traps_mapping()
@@ -390,33 +386,19 @@ def generate_wind_sector_baseline(db_path: str, output_path: str) -> bool:
         if not val:
             return None
         s = str(val).strip().upper()
-
         norm = WeatherManagerUtils.normalize_wind_label(s)
         if norm in valid_labels:
             return norm
-
-        clean_num = s.replace("°", "").replace(",", ".").strip()
         try:
-            deg = float(clean_num)
-            return WeatherManagerUtils.deg_to_16_wind_label(deg)
+            return WeatherManagerUtils.deg_to_16_wind_label(float(s.replace("°", "").replace(",", ".").strip()))
         except ValueError:
             pass
-
-        clean_label = re.sub(r'[^A-Z]', '', norm)
-        if clean_label in valid_labels:
-            return clean_label
-
         return None
 
     def get_bft_class(val):
         try:
             b = float(str(val).replace(",", ".").strip())
-            if b <= 2.5:
-                return "0-2 Bft"
-            elif b <= 4.5:
-                return "3-4 Bft"
-            else:
-                return "5+ Bft"
+            return "0-2 Bft" if b <= 2.5 else ("3-4 Bft" if b <= 4.5 else "5+ Bft")
         except (TypeError, ValueError):
             return "Onbekend"
 
@@ -426,20 +408,14 @@ def generate_wind_sector_baseline(db_path: str, output_path: str) -> bool:
     df = df[df['bft_class'] != 'Onbekend']
 
     if df.empty:
-        st.sidebar.warning("Geen geldige sectoren of windkrachten kunnen mappen.")
         return False
 
     baseline_data = {}
-
-    # Groepeer per windsector, maand én windkracht-klasse
     for sector, sec_group in df.groupby('sector'):
         baseline_data[sector] = {"maanden": {}}
-
         for month, month_group in sec_group.groupby('month_num'):
             month_str = str(int(month))
-            if month_str not in baseline_data[sector]["maanden"]:
-                baseline_data[sector]["maanden"][month_str] = {}
-
+            baseline_data[sector]["maanden"][month_str] = {}
             for bft_cls, bft_group in month_group.groupby('bft_class'):
                 total_teldagen = bft_group['tellingid'].nunique()
                 species_grouped = bft_group.groupby('soortid').agg(
@@ -450,24 +426,19 @@ def generate_wind_sector_baseline(db_path: str, output_path: str) -> bool:
                 species_dict = {}
                 for _, row in species_grouped.iterrows():
                     sp_id = str(row['soortid']).strip()
-                    name = resolver.get_name(sp_id)
-                    latin = resolver.get_latin(sp_id)
-                    w_dagen = int(row['waarnemingsdagen'])
-                    t_aantal = int(row['totaal_aantal'])
-                    gem_per_telling = round(t_aantal / total_teldagen, 2) if total_teldagen > 0 else 0.0
-
                     species_dict[sp_id] = {
-                        "naam": name,
-                        "latin": latin,
-                        "waarnemingsdagen": w_dagen,
-                        "totaal_aantal": t_aantal,
-                        "gemiddeld_per_telling": gem_per_telling,
-                        "frequentie_pct": round((w_dagen / total_teldagen) * 100, 2) if total_teldagen > 0 else 0.0
+                        "naam": resolver.get_name(sp_id),
+                        "latin": resolver.get_latin(sp_id),
+                        "waarnemingsdagen": int(row['waarnemingsdagen']),
+                        "totaal_aantal": int(row['totaal_aantal']),
+                        "gemiddeld_per_telling": round(int(row['totaal_aantal']) / total_teldagen,
+                                                       2) if total_teldagen > 0 else 0.0,
+                        "frequentie_pct": round((int(row['waarnemingsdagen']) / total_teldagen) * 100,
+                                                2) if total_teldagen > 0 else 0.0
                     }
 
                 sorted_species = dict(
                     sorted(species_dict.items(), key=lambda item: item[1]['totaal_aantal'], reverse=True))
-
                 baseline_data[sector]["maanden"][month_str][bft_cls] = {
                     "totaal_teldagen": int(total_teldagen),
                     "totaal_soorten": len(sorted_species),
@@ -479,16 +450,11 @@ def generate_wind_sector_baseline(db_path: str, output_path: str) -> bool:
         out_file.parent.mkdir(parents=True, exist_ok=True)
         with open(out_file, "w", encoding="utf-8") as f:
             json.dump(baseline_data, f, indent=2, ensure_ascii=False)
-
-        print(f"[WindBaseline] Opgeslagen op: {out_file.resolve()}")
         return True
-    except Exception as e:
-        st.sidebar.error(f"Fout bij wegschrijven JSON: {e}")
-        print(f"[WindBaseline] JSON Fout: {e}")
+    except Exception:
         return False
 
 
-# --- SIDEBAR: LOGO, PUBLIEKE LINK & NAVIGATIE ---
 logo_path = Path("BSI_logo.png")
 if logo_path.exists():
     st.sidebar.image(str(logo_path), width=140)
@@ -509,7 +475,16 @@ if tunnel_url:
 
 st.sidebar.subheader("Navigatie")
 app_mode = st.sidebar.selectbox(
-    "Schakel naar", ["Prognoses", "Overzicht", "Excel Upload (.xlsx)", "Cluster Kaart"]
+    "Schakel naar",
+    [
+        "Prognoses",
+        "Overzicht",
+        "Excel Upload (.xlsx)",
+        "Cluster Kaart",
+        "🧭 Windroos & Weekprofielen",
+        "📍 Mijn Telpost Registreren",
+        "🔐 Beheer (Admin)"
+    ]
 )
 
 st.sidebar.markdown("---")
@@ -518,17 +493,14 @@ st.sidebar.subheader("⚙️ Databeheer & Matrix")
 if st.sidebar.button("📊 Genereer Wind-Sector Baseline"):
     baseline_json_path = project_path("wind_sector_baseline.json")
     db_file_path = str(get_db_path())
-
-    with st.spinner("⏳ Bezig met analyseren van historische tellingen per windsector, maand en windkracht..."):
+    with st.spinner("⏳ Bezig met analyseren van historische tellingen..."):
         success = generate_wind_sector_baseline(db_file_path, str(baseline_json_path))
-
     if success:
-        st.sidebar.success("✅ 'wind_sector_baseline.json' succesvol opgeslagen met Maand & Beaufort dimensie!")
+        st.sidebar.success("✅ Baseline succesvol opgeslagen!")
     else:
-        st.sidebar.error("❌ Fout opgetreden bij het genereren van de baseline.")
+        st.sidebar.error("❌ Fout bij genereren baseline.")
 
 
-# --- Hulpfunctie: Haversine Afstandsberekening ---
 def calculate_distance_km(lat1, lon1, lat2, lon2):
     R = 6371.0
     dlat = math.radians(lat2 - lat1)
@@ -538,7 +510,6 @@ def calculate_distance_km(lat1, lon1, lat2, lon2):
     return R * c
 
 
-# --- Hulpfunctie: Inlezen van sites.json voor echte telpostnamen ---
 @st.cache_data
 def load_sites_mapping():
     possible_paths = [
@@ -560,30 +531,40 @@ def load_sites_mapping():
                             mapping[sid] = sname
                 if mapping:
                     break
-            except Exception as e:
-                print(f"[SitesLoader] Fout bij laden {p}: {e}")
+            except Exception:
+                pass
     return mapping
 
 
-# --- Hulpfunctie: Haal alle telposten op met coördinaten en namen ---
 @st.cache_data
 def get_available_telpost_options():
+    user_data = telpost_manager.laad_telpost_data()
+    user_list = user_data.get("locaties", [])
+
     telpost_locations = load_telpost_locations()
     sites_mapping = load_sites_mapping()
 
-    raw_list = []
+    base_list = []
     if isinstance(telpost_locations, dict):
-        raw_list = telpost_locations.get("locaties", telpost_locations.get("json", []))
+        base_list = telpost_locations.get("locaties", telpost_locations.get("json", []))
     elif isinstance(telpost_locations, list):
-        raw_list = telpost_locations
+        base_list = telpost_locations
+
+    seen_ids = set()
+    combined_list = []
+    for item in user_list + base_list:
+        sid = str(item.get("telpostid", "")).strip()
+        if sid and sid not in seen_ids:
+            seen_ids.add(sid)
+            combined_list.append(item)
 
     posts = []
-    for item in raw_list:
+    for item in combined_list:
         sid = str(item.get("telpostid", "")).strip()
         lat = pd.to_numeric(item.get("latitude"), errors='coerce')
         lon = pd.to_numeric(item.get("longitude"), errors='coerce')
         if sid and not math.isnan(lat) and not math.isnan(lon):
-            name = sites_mapping.get(sid, f"Telpost {sid}")
+            name = item.get("Telpostnaam") or sites_mapping.get(sid, f"Telpost {sid}")
             posts.append({
                 "telpostid": sid,
                 "naam": name,
@@ -593,7 +574,6 @@ def get_available_telpost_options():
     return posts
 
 
-# --- Hulpfunctie: Ecologische DNA filtering & Thuisvoordeel weging ---
 @st.cache_data(ttl=3600)
 def get_ecologically_filtered_cluster(selected_site_id: str, radius_site_ids: List[str]) -> List[str]:
     dna_path = Path("sites_DNA.json")
@@ -618,9 +598,7 @@ def get_ecologically_filtered_cluster(selected_site_id: str, radius_site_ids: Li
     filtered_sites = [selected_site_id]
 
     for sid in radius_site_ids:
-        if sid == selected_site_id:
-            continue
-        if sid not in dna_data:
+        if sid == selected_site_id or sid not in dna_data:
             continue
 
         other_profile = dna_data[sid]["species_counts"]
@@ -629,11 +607,8 @@ def get_ecologically_filtered_cluster(selected_site_id: str, radius_site_ids: Li
             continue
 
         other_freqs = {sp: count / other_total for sp, count in other_profile.items()}
-
-        overlap = 0.0
-        common_species = set(main_freqs.keys()).intersection(set(other_freqs.keys()))
-        for sp in common_species:
-            overlap += min(main_freqs[sp], other_freqs[sp])
+        overlap = sum(
+            min(main_freqs[sp], other_freqs[sp]) for sp in set(main_freqs.keys()).intersection(set(other_freqs.keys())))
 
         if overlap >= 0.15:
             filtered_sites.append(sid)
@@ -641,17 +616,22 @@ def get_ecologically_filtered_cluster(selected_site_id: str, radius_site_ids: Li
     return filtered_sites
 
 
-# --- Hulpfunctie: Database-brede fenologie profielen ophalen (-5 tot +5 daags venster) ---
 @st.cache_data(ttl=3600)
-def fetch_cluster_species_profiles(db_path: str, target_date: date) -> List[Dict[str, Any]]:
+def fetch_cluster_species_profiles(
+    db_path: str,
+    target_date: date,
+    site_ids: Optional[List[str]] = None,
+    selected_site_id: Optional[str] = None,
+) -> List[Dict[str, Any]]:
     day_of_year = target_date.timetuple().tm_yday
     day_start = day_of_year - 5
     day_end = day_of_year + 5
 
     query = """
             SELECT w.soortid,
-                   SUM(CAST(w.aantal AS INTEGER) + CAST(w.aantalterug AS INTEGER) + CAST(w.aantal_plus AS INTEGER) +
-                       CAST(w.aantalterug_plus AS INTEGER)) as count,
+                   SUM((CAST(w.aantal AS INTEGER) + CAST(w.aantalterug AS INTEGER) + CAST(w.aantal_plus AS INTEGER) +
+                       CAST(w.aantalterug_plus AS INTEGER)) *
+                       CASE WHEN h.telpostid = ? THEN 1.5 ELSE 1.0 END) as count,
             AVG(CAST(NULLIF(h.temperatuur, '') AS FLOAT)) as avgTemp,
             UPPER(h.windrichting) as mainWind,
             AVG(CAST(NULLIF(h.windkracht, '') AS FLOAT)) as avgBft,
@@ -676,10 +656,26 @@ def fetch_cluster_species_profiles(db_path: str, target_date: date) -> List[Dict
               AND h.telpostid != '5177'
             GROUP BY w.soortid
             ORDER BY count DESC
-                LIMIT 150
             """
 
-    params = [day_start, day_end, day_start, day_end, day_start, day_end]
+    params = [
+        str(selected_site_id) if selected_site_id else "",
+        day_start, day_end, day_start, day_end, day_start, day_end,
+    ]
+    if site_ids:
+        valid_site_ids = [str(site_id) for site_id in site_ids if str(site_id) != "5177"]
+        if valid_site_ids:
+            placeholders = ",".join("?" for _ in valid_site_ids)
+            query = query.replace(
+                "AND h.telpostid != '5177'",
+                f"AND h.telpostid IN ({placeholders}) AND h.telpostid != '5177'",
+            )
+            params.extend(valid_site_ids)
+        else:
+            query = query.replace(
+                "AND h.telpostid != '5177'",
+                "AND 1 = 0",
+            )
     resolver = SpeciesResolver(project_path())
 
     try:
@@ -695,12 +691,10 @@ def fetch_cluster_species_profiles(db_path: str, target_date: date) -> List[Dict
                 d["expectedIndex"] = float(d["count"]) / 100.0
                 results.append(d)
             return results
-    except Exception as e:
-        print(f"[ClusterProfiles] SQLite Fout: {e}")
+    except Exception:
         return []
 
 
-# --- UITGEBREIDE UNIEKE GILDEN KLEURENPALET ---
 GILDE_KLEUREN = {
     "Roofvogels (Zwevers)": "#d9534f",
     "Roofvogels (Actief)": "#c0392b",
@@ -719,7 +713,6 @@ GILDE_KLEUREN = {
 }
 
 
-# --- Hulpfunctie: Render Geweldig Mooie Donkere Soortkaart ---
 def render_species_card(card_data, cluster_site_ids, dt_target, image_manager) -> str:
     bc = GILDE_KLEUREN.get(card_data.guild_name, "#5cb85c")
     img_data_uri = image_manager.get_species_image_base64(card_data.latin_name)
@@ -733,7 +726,6 @@ def render_species_card(card_data, cluster_site_ids, dt_target, image_manager) -
     large_spark_uri = SparklineEngine.get_sparkline_base64(norm_buf, target_dt=dt_target, width_px=320, height_px=90)
     large_spark_html = f'<img src="{large_spark_uri}" style="width:100%; border-radius:6px; margin-top:6px;" alt="Uitvergrote Fenologie">'
 
-    # Bepaal decimaal weergave en rode zeldzaamheidsmelding op basis van waarde < 0.05
     val = card_data.norm_score_ex_h
     if val < 0.05:
         score_str = f"{val:.3f}"
@@ -742,7 +734,7 @@ def render_species_card(card_data, cluster_site_ids, dt_target, image_manager) -
         score_str = f"{val:.1f}"
         rare_note_html = ''
 
-    card_html = (
+    return (
         f'<div class="bsi-card" style="border-left-color: {bc};">'
         f'<div class="bsi-card-overlay">'
         f'<div class="overlay-title">🔍 {card_data.soortnaam}</div>'
@@ -780,10 +772,8 @@ def render_species_card(card_data, cluster_site_ids, dt_target, image_manager) -
         f'<div class="sparkline-wrapper">{spark_html}</div>'
         f'</div>'
     )
-    return card_html
 
 
-# --- Hulpfunctie: Sorteer, Groepeer en Render via Responsive CSS Grid ---
 def render_grouped_species_cards(items, evaluator, image_manager, cluster_site_ids, dt_target):
     if not items:
         st.write("Geen significante trek verwacht in dit tijdsvenster.")
@@ -805,9 +795,7 @@ def render_grouped_species_cards(items, evaluator, image_manager, cluster_site_i
     guild_groups = {}
     for ec in evaluated_cards:
         g = ec["guild"]
-        if g not in guild_groups:
-            guild_groups[g] = []
-        guild_groups[g].append(ec)
+        guild_groups.setdefault(g, []).append(ec)
 
     for g in guild_groups:
         guild_groups[g].sort(key=lambda x: x["score"], reverse=True)
@@ -833,9 +821,7 @@ def render_grouped_species_cards(items, evaluator, image_manager, cluster_site_i
             st.markdown(grid_html, unsafe_allow_html=True)
 
 
-# --- Hulpfunctie: Helper voor het renderen van de uitgebreide weerbalk (Met correcte decimalen en achtsten) ---
 def render_weather_box(block):
-    # Geen decimalen voor windrichting graden, temperatuur, bft en luchtdruk
     b_deg = block.get('wind_deg', 0)
     try:
         b_deg_val = int(round(float(b_deg)))
@@ -862,7 +848,6 @@ def render_weather_box(block):
     except (TypeError, ValueError):
         pressure_val = 1016
 
-    # Neerslag in mm: 2 decimalen
     precip_mm = block.get('precip_mm', 0.0)
     try:
         precip_val = float(precip_mm)
@@ -871,7 +856,6 @@ def render_weather_box(block):
 
     precip_prob = block.get('precip_prob', 0)
 
-    # Bewolking: Percentage met 2 decimalen + omrekening naar achtsten (oktaves)
     cloud_percent = block.get('cloud_cover', 10)
     try:
         cloud_val = float(cloud_percent)
@@ -903,7 +887,6 @@ def render_weather_box(block):
     st.markdown(weather_box_html, unsafe_allow_html=True)
 
 
-# --- PAGINA 1: OVERZICHT ---
 if app_mode == "Overzicht":
     st.header("📋 Systeemstatus & Data-integratie")
     db_status, db_path = check_database()
@@ -912,7 +895,6 @@ if app_mode == "Overzicht":
     else:
         st.success("✅ Lokale SQLite Room-database is gekoppeld.")
 
-# --- PAGINA 2: EXCEL UPLOAD ---
 elif app_mode == "Excel Upload (.xlsx)":
     st.header("📤 Upload Teldata van Telpost")
     uploaded_files = st.file_uploader("Sleep je .xlsx bestanden hierheen", type=["xlsx", "xls"],
@@ -920,7 +902,6 @@ elif app_mode == "Excel Upload (.xlsx)":
     if uploaded_files:
         handle_excel_upload(uploaded_files)
 
-# --- PAGINA 3: PROGNOSES (STANDAARD STARTPUNT) ---
 elif app_mode == "Prognoses":
     header_logo_path = Path("BSI_logo.png")
     if header_logo_path.exists():
@@ -940,8 +921,7 @@ elif app_mode == "Prognoses":
 
     mode_choice = st.radio(
         "Selecteer Modus",
-        ["Live Prognose (Enkele Datum)", "+5 Dagen (120-Uur in Weer-Blokken)",
-         "Dag-Timeline (in Weer-blokken)"],
+        ["Live Prognose (Enkele Datum)", "+5 Dagen (120-Uur in Weer-Blokken)", "Dag-Timeline (in Weer-blokken)"],
         horizontal=True
     )
 
@@ -951,15 +931,21 @@ elif app_mode == "Prognoses":
 
     col_p1, col_p2 = st.columns(2)
     with col_p1:
-        selected_telpost_str = st.selectbox(
-            "Selecteer Hoofdtelpost",
-            formatted_telpost_options,
-        )
+        selected_telpost_str = st.selectbox("Selecteer Hoofdtelpost", formatted_telpost_options)
     with col_p2:
         if mode_choice.startswith("Live") or mode_choice.startswith("Dag-Timeline"):
             prognose_datum = st.date_input("Datum voor prognose", value=datetime.now())
 
     selected_telpost_id = selected_telpost_str.split(" - ")[0]
+
+    telpost_data_json = telpost_manager.laad_telpost_data()
+    raw_locs = telpost_data_json.get("locaties", [])
+    current_post_meta = next((loc for loc in raw_locs if str(loc.get("telpostid")) == str(selected_telpost_id)), {})
+    is_coastal_post = current_post_meta.get("Is_Coastal_Post", False)
+
+    if is_coastal_post:
+        st.info(
+            "🌊 **Kusttelpost geselecteerd:** Deze post is gemarkeerd met zicht op open zee (Pelagische soorten worden meegenomen in de prognose).")
 
     main_lat, main_lon = 52.05, 4.25
     raw_cluster_ids = [selected_telpost_id]
@@ -977,6 +963,24 @@ elif app_mode == "Prognoses":
     cluster_site_ids = get_ecologically_filtered_cluster(selected_telpost_id, raw_cluster_ids)
 
     resolver = SpeciesResolver(project_path())
+    neural_engine = None
+    neural_model_data = load_neural_engine()
+    if neural_model_data:
+        try:
+            neural_engine = LiteNeuralEngine.from_dict(neural_model_data)
+        except (KeyError, TypeError, ValueError):
+            neural_engine = None
+
+    expert_kb = None
+    expert_path = project_path("AI-models", "expert_knowledge.json")
+    if expert_path.exists():
+        try:
+            expert_kb = ExpertKnowledgeBase.from_dict(
+                json.loads(expert_path.read_text(encoding="utf-8"))
+            )
+        except (OSError, json.JSONDecodeError, TypeError):
+            expert_kb = None
+
     db_path_str = get_db_path()
     evaluator = CardEvaluator(db_path_str, resolver)
     image_manager = SpeciesImageManager(db_path_str)
@@ -988,14 +992,18 @@ elif app_mode == "Prognoses":
 
             with st.spinner("Actueel live weer van dit moment opvragen en 2-uurs venster doorrekenen..."):
                 now_dt = datetime.now()
-                forecast_sys = BsiForecastSystem(db_path_str, resolver)
+                forecast_sys = BsiForecastSystem(
+                    db_path_str,
+                    resolver,
+                    neural_engine=neural_engine,
+                    expert_kb=expert_kb,
+                )
                 forecast_data = forecast_sys.fetch_5day_weather_forecast(main_lat, main_lon)
 
                 w_sample = None
                 next_sample = None
                 if forecast_data and "hourly" in forecast_data:
                     hourly_list = forecast_data["hourly"]
-                    # Zoek het uur dat overeenkomt met het huidige uur (now_dt.hour)
                     for idx, h in enumerate(hourly_list):
                         if h["time"].startswith(now_dt.strftime("%Y-%m-%dT%H")):
                             w_sample = h
@@ -1007,7 +1015,6 @@ elif app_mode == "Prognoses":
                         next_sample = hourly_list[1] if len(hourly_list) > 1 else w_sample
 
                 if w_sample:
-                    # Combineer het huidige uur en het volgende uur voor een 2-uurs live venster
                     t_vals = [w_sample["temp"]]
                     w_speeds = [w_sample["wind_speed"]]
                     w_degs = [w_sample["wind_deg"]]
@@ -1066,7 +1073,6 @@ elif app_mode == "Prognoses":
                         "sunset": sun_info.get("sunset_str", "20:15")
                     }
                 else:
-                    # Fallback naar directe current API als forecast faalt
                     weather = AiWeatherService.fetch_contextual_weather(main_lat, main_lon)
                     if not weather:
                         weather = WeatherContext(lat=main_lat, lon=main_lon, temp=15.0, wind_speed=5.0, wind_deg=45.0,
@@ -1091,21 +1097,31 @@ elif app_mode == "Prognoses":
                         "sunset": "20:15"
                     }
 
-                # Prominent bovenaan weergeven
                 st.markdown(
                     f"### ⚡ Snelle Live 2-Uurs Prognose ({now_dt.strftime('%d-%m-%Y %H:%M')} tot {(now_dt + timedelta(hours=2)).strftime('%H:%M')})")
                 render_weather_box(live_block)
 
                 dt_target = now_dt
-                species_profiles = fetch_cluster_species_profiles(db_path_str, now_dt.date())
+                species_profiles = fetch_cluster_species_profiles(
+                    db_path_str,
+                    now_dt.date(),
+                    site_ids=cluster_site_ids,
+                    selected_site_id=selected_telpost_id,
+                )
 
                 if not species_profiles:
                     st.warning("⚠️ Geen waarnemingen gevonden binnen dit fenologische venster.")
                 else:
-                    suggesties = AiInferenceEngine.calculate_bsi_prognosis(lat=main_lat, lon=main_lon, dt=dt_target,
-                                                                           weather=weather,
-                                                                           species_profiles=species_profiles)
-
+                    suggesties = AiInferenceEngine.calculate_bsi_prognosis(
+                        lat=main_lat,
+                        lon=main_lon,
+                        dt=dt_target,
+                        weather=weather,
+                        species_profiles=species_profiles,
+                        neural_engine=neural_engine,
+                        model_labels=resolver.model_labels,
+                        expert_kb=expert_kb,
+                    )
                     if not suggesties:
                         st.warning("⚠️ Geen enkele soort voldeed aan de kwaliteitsdrempel (15%).")
                     else:
@@ -1115,20 +1131,23 @@ elif app_mode == "Prognoses":
     elif mode_choice.startswith("Dag-Timeline"):
         if st.button("Genereer Dag-Timeline (Zonsopgang - Zonsondergang)"):
             dt_target = datetime.combine(prognose_datum, datetime.min.time())
-
             with st.spinner("Zonnestand berekenen en dagelijkse weervensters doorrekenen..."):
-                forecast_sys = BsiForecastSystem(db_path_str, resolver)
+                forecast_sys = BsiForecastSystem(
+                    db_path_str,
+                    resolver,
+                    neural_engine=neural_engine,
+                    expert_kb=expert_kb,
+                )
                 timeline_blocks = forecast_sys.generate_daily_timeline_prognosis(main_lat, main_lon, cluster_site_ids,
-                                                                                 dt_target)
+                                                                                 dt_target,
+                                                                                 selected_site_id=selected_telpost_id)
 
                 if not timeline_blocks:
                     st.warning("⚠️ Kon geen timeline genereren voor deze datum.")
                 else:
                     st.success(f"✅ Dag-timeline succesvol geladen ({len(timeline_blocks)} tijdblokken)!")
-
                     tab_labels = [block["time_block"] for block in timeline_blocks]
                     tabs = st.tabs(tab_labels)
-
                     for idx, tab in enumerate(tabs):
                         block = timeline_blocks[idx]
                         with tab:
@@ -1136,23 +1155,28 @@ elif app_mode == "Prognoses":
                             render_grouped_species_cards(block["top_species"], evaluator, image_manager,
                                                          cluster_site_ids, dt_target)
 
-    else:  # +5 Dagen (120-Uur in Weer-Blokken)
+    else:
         if st.button("Genereer 120-Uur prognose"):
             with st.spinner("120-uurs weersvoorspelling, zonnestanden en tijdblokken doorrekenen..."):
-                forecast_sys = BsiForecastSystem(db_path_str, resolver)
-                five_day_timeline = forecast_sys.generate_5day_timeline_prognosis(main_lat, main_lon, cluster_site_ids)
+                forecast_sys = BsiForecastSystem(
+                    db_path_str,
+                    resolver,
+                    neural_engine=neural_engine,
+                    expert_kb=expert_kb,
+                )
+                five_day_timeline = forecast_sys.generate_5day_timeline_prognosis(
+                    main_lat,
+                    main_lon,
+                    cluster_site_ids,
+                    selected_site_id=selected_telpost_id,
+                )
 
                 if not five_day_timeline:
                     st.warning("⚠️ Kon geen 5-daagse tijdlijn genereren.")
                 else:
                     st.success("✅ 120-Uurs prognose succesvol geladen!")
-
-                    day_tab_labels = []
-                    for day_data in five_day_timeline:
-                        dt_obj = datetime.strptime(day_data['date_str'], "%Y-%m-%d")
-                        date_label = dt_obj.strftime("%d-%m-%Y")
-                        day_tab_labels.append(f"{date_label}")
-
+                    day_tab_labels = [datetime.strptime(day_data['date_str'], "%Y-%m-%d").strftime("%d-%m-%Y") for
+                                      day_data in five_day_timeline]
                     day_tabs = st.tabs(day_tab_labels)
 
                     for day_idx, day_tab in enumerate(day_tabs):
@@ -1162,10 +1186,8 @@ elif app_mode == "Prognoses":
                             if not blocks:
                                 st.write("Geen daglichtblokken beschikbaar.")
                                 continue
-
                             block_tab_labels = [b["time_block"] for b in blocks]
                             block_tabs = st.tabs(block_tab_labels)
-
                             for b_idx, block_tab in enumerate(block_tabs):
                                 block = blocks[b_idx]
                                 with block_tab:
@@ -1174,57 +1196,143 @@ elif app_mode == "Prognoses":
                                     render_grouped_species_cards(block["top_species"], evaluator, image_manager,
                                                                  cluster_site_ids, dt_item)
 
-# --- PAGINA 4: CLUSTER KAART ---
+# --- PAGINA: CLUSTER KAART ---
 elif app_mode == "Cluster Kaart":
     st.header("🗺️ Telposten & Cluster Visualisatie")
-    telpost_locations = load_telpost_locations()
-    sites_mapping = load_sites_mapping()
+    posts_list = get_available_telpost_options()
 
-    if not telpost_locations:
-        st.warning("⚠️ Kon telpost_locaties.json niet laden.")
+    if not posts_list:
+        st.warning("⚠️ Geen locaties gevonden.")
     else:
-        raw_list = telpost_locations.get("locaties", []) if isinstance(telpost_locations, dict) else telpost_locations
-        posts_df = pd.DataFrame(raw_list)
+        posts_df = pd.DataFrame(posts_list)
+        names_list = posts_df['naam'].tolist()
 
-        if posts_df.empty:
-            st.warning("⚠️ Geen locaties gevonden.")
-        else:
-            posts_df['lat'] = pd.to_numeric(posts_df.get('latitude'), errors='coerce')
-            posts_df['lon'] = pd.to_numeric(posts_df.get('longitude'), errors='coerce')
-            posts_df['telpostid'] = posts_df.get('telpostid', '').astype(str)
-            posts_df['naam'] = posts_df['telpostid'].map(sites_mapping).fillna("Telpost " + posts_df['telpostid'])
-            posts_df = posts_df.dropna(subset=['lat', 'lon'])
+        if "cluster_selected_name" not in st.session_state:
+            st.session_state.cluster_selected_name = names_list[0] if names_list else ""
 
-            main_post_name = st.selectbox("Selecteer Hoofdtelpost", posts_df['naam'].tolist(), index=0)
-            main_row = posts_df[posts_df['naam'] == main_post_name].iloc[0]
-            main_lat, main_lon = main_row['lat'], main_row['lon']
+        if st.session_state.cluster_selected_name not in names_list and names_list:
+            st.session_state.cluster_selected_name = names_list[0]
 
-            m = folium.Map(location=[main_lat, main_lon], zoom_start=10, control_scale=True)
-            folium.TileLayer('openstreetmap', name='Standaard (OSM)').add_to(m)
+        current_index = names_list.index(
+            st.session_state.cluster_selected_name) if st.session_state.cluster_selected_name in names_list else 0
+
+        selected_name = st.selectbox(
+            "Selecteer Hoofdtelpost",
+            names_list,
+            index=current_index,
+            key="cluster_selectbox"
+        )
+
+        if selected_name != st.session_state.cluster_selected_name:
+            st.session_state.cluster_selected_name = selected_name
+            st.rerun()
+
+        main_row = posts_df[posts_df['naam'] == st.session_state.cluster_selected_name].iloc[0]
+        main_lat, main_lon = main_row['lat'], main_row['lon']
+
+        m = folium.Map(location=[main_lat, main_lon], zoom_start=10, control_scale=True)
+        folium.TileLayer('openstreetmap', name='Standaard (OSM)').add_to(m)
+
+        cluster_posts = []
+        for _, row in posts_df.iterrows():
+            dist = calculate_distance_km(main_lat, main_lon, row['lat'], row['lon'])
+            if dist <= 35.0:
+                cluster_posts.append(row)
+
+        for row in cluster_posts:
+            is_main = (row['naam'] == st.session_state.cluster_selected_name)
+            circle_color = '#e74c3c' if is_main else '#2ecc71'
+            circle_opacity = 0.08 if is_main else 0.04
 
             folium.Circle(
-                location=[main_lat, main_lon],
+                location=[row['lat'], row['lon']],
                 radius=35000,
-                color='#2ecc71',
-                weight=2,
+                color=circle_color,
+                weight=2 if is_main else 1,
                 fill=True,
-                fill_color='#2ecc71',
-                fill_opacity=0.08,
-                tooltip="35 km Cluster Straal"
+                fill_color=circle_color,
+                fill_opacity=circle_opacity,
+                tooltip=f"35 km straal rond {row['naam']}"
             ).add_to(m)
 
-            for _, row in posts_df.iterrows():
-                dist = calculate_distance_km(main_lat, main_lon, row['lat'], row['lon'])
-                is_main = (row['naam'] == main_post_name)
-                marker_color = 'red' if is_main else ('green' if dist <= 35.0 else 'blue')
-                icon_name = 'star' if is_main else ('ok-sign' if dist <= 35.0 else 'info-sign')
+        for _, row in posts_df.iterrows():
+            dist = calculate_distance_km(main_lat, main_lon, row['lat'], row['lon'])
+            is_main = (row['naam'] == st.session_state.cluster_selected_name)
+            marker_color = 'red' if is_main else ('green' if dist <= 35.0 else 'blue')
+            icon_name = 'star' if is_main else ('ok-sign' if dist <= 35.0 else 'info-sign')
 
-                folium.Marker(
-                    location=[row['lat'], row['lon']],
-                    popup=f"<b>{row['naam']}</b><br>ID: {row['telpostid']}<br>Afstand: {dist:.1f} km",
-                    tooltip=row['naam'],
-                    icon=folium.Icon(color=marker_color, icon=icon_name, prefix='glyphicon')
-                ).add_to(m)
+            folium.Marker(
+                location=[row['lat'], row['lon']],
+                popup=f"<b>{row['naam']}</b><br>ID: {row['telpostid']}<br>Afstand tot hoofdtelpost: {dist:.1f} km",
+                tooltip=row['naam'],
+                icon=folium.Icon(color=marker_color, icon=icon_name, prefix='glyphicon')
+            ).add_to(m)
 
-            folium.LayerControl().add_to(m)
-            st_folium(m, width=1200, height=550)
+        folium.LayerControl().add_to(m)
+
+        map_data = st_folium(m, width=1200, height=550, key="cluster_interactive_map")
+
+        if map_data:
+            clicked_name = None
+
+            if map_data.get("last_object_clicked"):
+                obj = map_data["last_object_clicked"]
+                if obj.get("tooltip") in names_list:
+                    clicked_name = obj.get("tooltip")
+                elif obj.get("popup"):
+                    match = re.search(r'<b>(.*?)<\/b>', obj.get("popup"))
+                    if match:
+                        parsed_name = match.group(1).strip()
+                        if parsed_name in names_list:
+                            clicked_name = parsed_name
+
+            if not clicked_name and map_data.get("last_clicked"):
+                c_lat = map_data["last_clicked"]["lat"]
+                c_lon = map_data["last_clicked"]["lng"]
+                closest_post = None
+                min_dist = float('inf')
+                for _, row in posts_df.iterrows():
+                    d = calculate_distance_km(c_lat, c_lon, row['lat'], row['lon'])
+                    if d < min_dist:
+                        min_dist = d
+                        closest_post = row
+                if closest_post is not None and min_dist < 5.0:
+                    clicked_name = closest_post['naam']
+
+            if clicked_name and clicked_name != st.session_state.cluster_selected_name:
+                st.session_state.cluster_selected_name = clicked_name
+                st.rerun()
+
+elif app_mode == "📍 Mijn Telpost Registreren":
+    telpost_manager.render_telpost_registratie_interface()
+
+elif app_mode == "🧭 Windroos & Weekprofielen":
+    telpost_manager.render_windroos_weekprofielen()
+
+# --- PAGINA: BEHEER ADMIN (Beveiligd met hardcoded wachtwoord) ---
+elif app_mode == "🔐 Beheer (Admin)":
+    st.header("🔐 Beveiligde Beheeromgeving")
+
+    if "admin_ingelogd" not in st.session_state:
+        st.session_state.admin_ingelogd = False
+
+    if not st.session_state.admin_ingelogd:
+        st.warning("Voer het beheerwachtwoord in om toegang te krijgen tot het telpostbeheer.")
+        gekozen_wachtwoord = st.text_input("Wachtwoord", type="password", key="admin_pwd_input")
+
+        if st.button("Inloggen"):
+            if gekozen_wachtwoord == "YvesAtVisMigPred":
+                st.session_state.admin_ingelogd = True
+                st.success("✅ Toegang verleend!")
+                st.rerun()
+            else:
+                st.error("❌ Onjuist wachtwoord.")
+    else:
+        st.success("🔓 Je bent succesvol ingelogd als beheerder.")
+        if st.button("Uitloggen"):
+            st.session_state.admin_ingelogd = False
+            st.rerun()
+
+        st.markdown("---")
+        # Roep hier de werkelijke beheer-interface aan uit de telpost_manager module
+        telpost_manager.render_beheer_pagina()

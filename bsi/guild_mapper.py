@@ -5,6 +5,9 @@ Mapping van Latijnse namen (vogels, insecten, zoogdieren) naar gilde-categorieë
 
 from enum import Enum
 from typing import Optional
+import json
+
+from app_paths import project_path
 
 
 class FlightStrategy(Enum):
@@ -38,10 +41,51 @@ class Guild(Enum):
 
 
 class SpeciesGuildMapper:
+    _taxonomy_loaded = False
+    _taxonomy_by_latin = {}
+
+    @classmethod
+    def _load_taxonomy(cls):
+        if cls._taxonomy_loaded:
+            return
+        cls._taxonomy_loaded = True
+        path = project_path("AI-models", "active_scientific_taxonomy.json")
+        if not path.exists():
+            return
+        try:
+            data = json.loads(path.read_text(encoding="utf-8"))
+            for group in data.get("groups", []):
+                guild = group.get("guild", "")
+                for species in group.get("species", []):
+                    latin = str(species.get("latin", "")).strip().lower()
+                    if latin:
+                        cls._taxonomy_by_latin[latin] = guild
+        except (OSError, json.JSONDecodeError):
+            return
+
     @staticmethod
     def get_guild_by_latin(latin_name: Optional[str]) -> Guild:
+        SpeciesGuildMapper._load_taxonomy()
         if not latin_name or not latin_name.strip():
             return Guild.UNCLASSIFIED_BIRDS
+
+        taxonomy_guild = SpeciesGuildMapper._taxonomy_by_latin.get(latin_name.strip().lower())
+        taxonomy_map = {
+            "Zeevogels (Pelagics)": Guild.PELAGICS,
+            "Meeuwen & Sterns": Guild.GULLS_TERNS,
+            "Kustvogels (Zee-eenden/Duikers/Futen)": Guild.COASTAL_BIRDS,
+            "Watervogels (Ganzen/Grondeleenden)": Guild.WATERFOWL,
+            "Steltlopers": Guild.SHOREBIRDS,
+            "Reigers": Guild.HERONS,
+            "Roofvogels (Actief)": Guild.RAPTORS_ACTIVE,
+            "Roofvogels (Zwevers)": Guild.RAPTORS_THERMAL,
+            "Ooievaars (Zwevers)": Guild.STORKS,
+            "Landvogels": Guild.LANDBIRDS_REG,
+            "Speciale Landvogels": Guild.LANDBIRDS_SPECIAL,
+            "Zangvogels": Guild.PASSERINES,
+        }
+        if taxonomy_guild in taxonomy_map:
+            return taxonomy_map[taxonomy_guild]
 
         genus = latin_name.strip().split()[0]
 

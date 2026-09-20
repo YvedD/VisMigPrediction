@@ -86,7 +86,9 @@ class SpeciesResolver:
     def _load_model_labels(self):
         possible_paths = [
             self.base_dir / "AI-models" / "models" / "model_labels.json",
+            self.base_dir / "AI-models" / "model_labels.json",
             project_path("AI-models", "models", "model_labels.json"),
+            project_path("AI-models", "model_labels.json"),
             self.base_dir / "VT5" / "AI-models" / "models" / "model_labels.json"
         ]
 

@@ -13,6 +13,9 @@ from datetime import datetime
 from typing import List, Dict, Any, Optional
 
 
+GRAPH_BACKGROUND = '#739B9B'
+
+
 class SparklineEngine:
     MONTH_TICKS = [1, 5, 9, 14, 18, 22, 26, 31, 35, 40, 44, 48]
     MONTH_LABELS = ["J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D"]
@@ -50,12 +53,12 @@ class SparklineEngine:
         fig_h = height_px / dpi
 
         fig, ax = plt.subplots(figsize=(fig_w, fig_h), dpi=dpi)
-        fig.patch.set_facecolor('#FFFFFF')
-        ax.set_facecolor('#FFFFFF')
+        fig.patch.set_facecolor(GRAPH_BACKGROUND)
+        ax.set_facecolor(GRAPH_BACKGROUND)
 
         x = np.arange(len(normalized_data))
 
-        ax.plot(x, normalized_data, color='#4CAF50', linewidth=1.6, zorder=2)
+        ax.plot(x, normalized_data, color='#D50011FF', linewidth=1.6, zorder=2)
         ax.fill_between(x, normalized_data, color='#4CAF50', alpha=0.2, zorder=1)
 
         ax.axvline(x=current_week, color='#FF5252', linestyle='--', linewidth=1.3, zorder=3)

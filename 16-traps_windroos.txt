@@ -1,0 +1,19 @@
+
+
+Afkorting	Voluit (Nederlands)	Centrum (Graden)	Sector (Interval)
+N	        Noord	            0° / 360°	        348,75° – 11,25°
+NNO	        Noord-noordoost	    22,5°	            11,25° – 33,75°
+NO	        Noordoost	        45,0°	            33,75° – 56,25°
+ONO	        Oost-noordoost	    67,5°	            56,25° – 78,75°
+O	        Oost	            90,0°	            78,75° – 101,25°
+OZO	        Oost-zuidoost	    112,5°	            101,25° – 123,75°
+ZO	        Zuidoost	        135,0°	            123,75° – 146,25°
+ZZO	        Zuid-zuidoost	    157,5°	            146,25° – 168,75°
+Z	        Zuid	            180,0°	            168,75° – 191,25°
+ZZW	        Zuid-zuidwest	    202,5°	            191,25° – 213,75°
+ZW	        Zuidwest	        225,0°	            213,75° – 236,25°
+WZW	        West-zuidwest	    247,5°	            236,25° – 258,75°
+W	        West	            270,0°	            258,75° – 281,25°
+WNW	        West-noordwest	    292,5°	            281,25° – 303,75°
+NW	        Noordwest	        315,0°	            303,75° – 326,25°
+NNW	        Noord-noordwest	    337,5°	            326,25° – 348,75°

@@ -1,0 +1,12 @@
+{
+    "locaties": [
+        {
+            "telpostid": "772",
+            "latitude": 51.04045,
+            "longitude": 4.99962,
+            "timestamp": 1789837625931,
+            "Telpostnaam": "Averbode Bos en Heide",
+            "Is_Coastal_Post": false
+        }
+    ]
+}

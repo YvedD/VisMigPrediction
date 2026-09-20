@@ -1,6 +1,6 @@
 """
 bsi/inference_engine.py
-De master BSI 4.1 voorspellingsmotor met strikte 11.25° wind-DNA tolerantie,
+De master BSI 4.1 voorspellingsmotor met zachte wind-DNA voorkeuren,
 database-brede fenologie-analyse, empirische wind-sector/maand/beaufort baseline,
 aangepaste Pelagics-curve, en strikte ecologische remmen voor zangvogels (tijd- en windkracht).
 """
@@ -37,17 +37,17 @@ class VogelSuggestie:
 def calculate_pelagic_factor(bft: float, wind_label: str) -> float:
     """
     Berekent de windfactor voor Pelagics (Zeevogels) op basis van windkracht én de verfijnde windrichtingsmatrix:
-    - Absolute ondergrens voor betere aantallen: 5 Beaufort.
-    - Ideale piekperiode / plateau: 7 tot 9 Beaufort.
-    - Windrichting: NW = 1.0, WNW & NNW = 0.7 (-30%), W & N = 0.35, en ZW/NO = 0.05 (afstraffing).
+    - Lage wind geeft weinig extra ondersteuning, maar sluit soorten niet uit.
+    - Ideale piekperiode / plateau: 6 tot 9 Beaufort.
+    - Windrichting werkt als zachte voorkeur en niet als harde uitsluiting.
     """
     if bft < 2.0:
-        bft_score = 0.02
+        bft_score = 0.25
     elif bft < 5.0:
-        bft_score = (bft / 5.0) ** 3.0 * 0.3
+        bft_score = 0.25 + (bft / 5.0) * 0.35
     elif bft <= 9.0:
-        if bft < 7.0:
-            bft_score = 0.4 + 0.6 * ((bft - 5.0) / 2.0)
+        if bft < 6.0:
+            bft_score = 0.6 + 0.4 * ((bft - 5.0) / 1.0)
         else:
             bft_score = 1.0
     else:
@@ -56,16 +56,14 @@ def calculate_pelagic_factor(bft: float, wind_label: str) -> float:
     label_upper = wind_label.strip().upper()
     if label_upper in {"NW"}:
         dir_score = 1.0
-    elif label_upper in {"WNW", "NNW"}:
-        dir_score = 0.7
-    elif label_upper in {"W", "N"}:
-        dir_score = 0.35
-    elif label_upper in {"ZW", "ZZW", "WZW", "NO", "NNO", "ONO", "Z", "ZZO", "ZO", "OZO", "O"}:
-        dir_score = 0.05
+    elif label_upper in {"WNW", "NNW", "W", "N"}:
+        dir_score = 0.75
+    elif label_upper in {"ZW", "ZZW", "WZW", "NO", "NNO", "ONO"}:
+        dir_score = 0.55
     else:
-        dir_score = 0.05
+        dir_score = 0.45
 
-    return max(0.005, bft_score * dir_score * 2.2)
+    return max(0.12, bft_score * dir_score * 1.8)
 
 
 class AiInferenceEngine:
@@ -153,16 +151,12 @@ class AiInferenceEngine:
             curr_count = float(p.get("currentWindCount", 0))
             efficiency_ratio = max(0.35, min(1.0, curr_count / (best_count if best_count > 0 else 1.0)))
 
-            # F2: STRIKTE WIND-DNA (Foutmarge exact 11.25°)
+            # F2: zachte wind-DNA voorkeur; afwijkende historische wind sluit niet uit
             hist_wind_deg = TrainingDataPreparer.parse_wind_direction_to_degrees(p.get("mainWind")) or current_wind_deg
             diff = abs(current_wind_deg - hist_wind_deg)
             normalized_diff = 360.0 - diff if diff > 180 else diff
 
-            wind_tolerance = 11.25
-            if normalized_diff <= wind_tolerance:
-                f_wind = 2.0
-            else:
-                f_wind = max(0.15, 2.0 * math.exp(-((normalized_diff - wind_tolerance) ** 2) / 600.0))
+            f_wind = 0.9 + 0.8 * math.exp(-(normalized_diff ** 2) / 8100.0)
 
             # F3: Empirische Baseline Factor
             f_baseline = 1.0
@@ -236,7 +230,11 @@ class AiInferenceEngine:
 
             prob_raw = int(min(0.98, total_score / ideal_score) * 100)
 
-            if prob_raw >= BsiConfig.MIN_BSI_QUALITY_THRESHOLD:
+            minimum_threshold = BsiConfig.MIN_BSI_QUALITY_THRESHOLD
+            if is_krent:
+                minimum_threshold = min(minimum_threshold, 8)
+
+            if prob_raw >= minimum_threshold:
                 scored_species.append(VogelSuggestie(
                     soortid=soortid,
                     soortnaam=name,
