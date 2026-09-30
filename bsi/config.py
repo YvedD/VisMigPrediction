@@ -15,7 +15,7 @@ class RefPoint:
 
 
 class BsiConfig:
-    # 21 Strategische locaties voor najaar- en voorjaarstrek
+    # 21 Strategische referentielocaties in Europa voor najaar- en voorjaarstrek
     REFERENCE_POINTS: List[RefPoint] = [
         RefPoint("Falsterbo (SE)", 55.38, 12.83),
         RefPoint("Skagen (DK)", 57.72, 10.58),
@@ -40,18 +40,32 @@ class BsiConfig:
         RefPoint("Messina (IT)", 38.19, 15.55)
     ]
 
-    # BSI Drempels & BoI Floating Windows
+    # Minimum aantal waarnemingen vereist om een statistisch betrouwbare BoI-berekening te starten
     BOI_THRESHOLD_OBSERVATIONS: int = 50
+
+    # Aantal dagen in het glijdende venster (floating window) specifiek voor BoI-analyse
     BOI_FLOATING_WINDOW_DAYS: int = 9
+
+    # Aantal dagen in het standaard glijdende venster voor algemene fenologische analyses
     NORMAL_FLOATING_WINDOW_DAYS: int = 7
 
+    # Toegestane tolerantie in graden voor de windrichting ten opzichte van de historische matrix
     WIND_TOLERANCE_DEGREES: float = 12.0
+
+    # Standaardvlag die aangeeft of de geselecteerde locatie een kustlocatie is
     IS_COASTAL_SITE: bool = False
-    MIN_BSI_QUALITY_THRESHOLD: int = 15
+
+    # Minimale kwaliteitsscore/kansdrempel in procenten; ingesteld op 50 om soorten onder de 50% kans te filteren
+    MIN_BSI_QUALITY_THRESHOLD: int = 45
+
+    # Efficiëntieboost factor uitgedrukt in Beaufort voor pelagische (zee)soorten
     EFFICIENCY_BOOST_PELAGIC_BFT: int = 5
 
     # Instelbare straffactor voor aanlandige wind aan de kust (verzacht de harde 90% blokkade)
     COASTAL_ONSHORE_PENALTY: float = 0.5
 
+    # Schakelaar om te bepalen of het neurale netwerkmodel (LiteNeuralEngine) wordt gebruikt voor predicties
     USE_NEURAL_INFERENCE: bool = True
+
+    # Wegingsfactor van de neurale integratie ten opzichte van de traditionele heuristische motor (0.0 tot 1.0)
     NEURAL_INTEGRATION_WEIGHT: float = 0.5

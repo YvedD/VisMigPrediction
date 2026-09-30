@@ -58,7 +58,7 @@ st.set_page_config(
 )
 
 # Vaste drempel op 15%
-BsiConfig.MIN_BSI_QUALITY_THRESHOLD = 15
+BsiConfig.MIN_BSI_QUALITY_THRESHOLD = 45
 
 # --- Optionele cloudflared tunnel voor lokaal testen ---
 ENABLE_TUNNEL = os.getenv("VISMIG_ENABLE_TUNNEL", "0") == "1"

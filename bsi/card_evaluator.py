@@ -107,19 +107,19 @@ class CardEvaluator:
     ) -> Optional[ComparativeCardData]:
         """
         Bouwt de complete vergelijkende CardView dataset voor een soort.
-        Laat alle waarden > 0.0 toe (inclusief zeldzame krenten met kleine decimalen).
+        Laat uitsluitend voorspellingen toe met een kans van minstens 50%.
         """
         primary = prototype_s or heuristic_s
         if not primary:
             return None
 
-        # Alleen complete nullen eruit filteren; zeldzame krenten met kleine waarden worden toegelaten
-        if primary.expected_index <= 0.0:
-            return None
-
         h_prob = heuristic_s.kans if heuristic_s else 0
         p_prob = prototype_s.kans if prototype_s else 0
         max_prob = max(h_prob, p_prob)
+
+        # Strenge filtering: enkel kaarten tonen met een kans van minstens 50%
+        if max_prob < 50 or primary.expected_index <= 0.0:
+            return None
 
         sources = []
         if heuristic_s: sources.append("Heuristiek")

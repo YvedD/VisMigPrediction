@@ -2,7 +2,7 @@
 bsi/inference_engine.py
 De master BSI 4.1 voorspellingsmotor met zachte wind-DNA voorkeuren,
 database-brede fenologie-analyse, empirische wind-sector/maand/beaufort baseline,
-aangepaste Pelagics-curve, en strikte ecologische remmen voor zangvogels (tijd- en windkracht).
+aangepaste Pelagics-curve, en een robuuste ochtendboost vanaf 06:00 voor zangvogels.
 """
 
 import math
@@ -173,19 +173,25 @@ class AiInferenceEngine:
             elif is_krent:
                 f_special = 2.5
 
-            # F5: Tijd & Strategie (Strikte afbouw voor zangvogels na 13:00 uur)
+            # F5: Tijd & Strategie (Inclusief vrijstelling nachtrem vanaf 06:00 en krachtige ochtendboost voor zangvogels)
             f_time = 1.0
             target_hour = float(p.get("avgHour", 10.0))
             hour_diff = abs(current_hour - target_hour)
 
-            if phase == SolarPhase.NIGHT and guild != Guild.PELAGICS:
+            is_early_passerine = (guild == Guild.PASSERINES and current_hour >= 6)
+
+            if phase == SolarPhase.NIGHT and guild != Guild.PELAGICS and not is_early_passerine:
                 f_time = 0.02
             else:
                 if guild == Guild.PASSERINES:
-                    if current_hour > 13:
+                    if 6 <= current_hour <= 9:
+                        f_time = 1.60  # Piek rond zonsopgang en vroege ochtend (06:00 - 09:00)
+                    elif 10 <= current_hour <= 11:
+                        f_time = 1.30  # Doorlopende ochtendtrek (10:00 - 11:00)
+                    elif current_hour > 13:
                         f_time = max(0.01, 0.4 * math.exp(-((current_hour - 11) ** 2) / 8.0))
                     else:
-                        f_time = max(0.05, math.exp(-(hour_diff ** 2) / 30.0))
+                        f_time = 1.0
                 else:
                     f_time = max(0.03, math.exp(-(hour_diff ** 2) / 35.0))
 
@@ -201,19 +207,21 @@ class AiInferenceEngine:
             if precipitation_mm > 0.1:
                 f_rain = max(0.1, 1.0 - (precipitation_mm * 0.5))
 
-            # F8: Gatekeeper & Windkracht rem voor Zangvogels (Passerines haten harde wind >= 4 Bft)
+            # F8: Gatekeeper & Windkracht rem voor Zangvogels (5 Bft is milde grens, 6 Bft is zware straf)
             f_gatekeeper = 1.0
             if guild == Guild.PELAGICS:
                 f_gatekeeper = calculate_pelagic_factor(float(bft), current_wind_label)
             elif guild == Guild.PASSERINES:
-                if bft >= 5:
-                    f_gatekeeper = 0.15  # Zware straf bij 5 Bft of meer
+                if bft >= 6:
+                    f_gatekeeper = 0.25  # Zware straf pas vanaf 6 Bft of meer
+                elif bft == 5:
+                    f_gatekeeper = 0.70  # Vriendelijkere factor bij 5 Bft
                 elif bft == 4:
-                    f_gatekeeper = 0.45
+                    f_gatekeeper = 0.90  # Minimale correctie bij 4 Bft
                 elif current_wind_label in {"ZW", "WZW", "W"} and 2 <= bft <= 3:
-                    f_gatekeeper = 1.15
+                    f_gatekeeper = 1.20  # Extra stimulans bij gunstige windrichting
                 else:
-                    f_gatekeeper = 0.8
+                    f_gatekeeper = 1.0
             elif guild in {Guild.RAPTORS_ACTIVE, Guild.RAPTORS_THERMAL, Guild.HERONS}:
                 if current_wind_label in {"ZW", "WZW", "W"} and 2 <= bft <= 4:
                     f_gatekeeper = 1.25

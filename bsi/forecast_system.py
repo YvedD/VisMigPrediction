@@ -76,7 +76,7 @@ class BsiForecastSystem:
         self.resolver = species_resolver
         self.neural_engine = neural_engine
         self.expert_kb = expert_kb
-        BsiConfig.MIN_BSI_QUALITY_THRESHOLD = 15
+        BsiConfig.MIN_BSI_QUALITY_THRESHOLD = 50
 
     @staticmethod
     @st.cache_data(ttl=900)
