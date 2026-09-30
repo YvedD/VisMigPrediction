@@ -10,3 +10,4 @@ active_tunnel_url.txt
 *.db-wal
 *.db-shm
 backup_dump.sql
+*.tmp

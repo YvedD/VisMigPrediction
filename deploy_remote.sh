@@ -4,18 +4,18 @@ set -euo pipefail
 REPO="/home/ubuntu/vismigprediction"
 cd "$REPO"
 
-# Make sure the server matches the GitHub branch exactly.
+# Keep the remote exactly in sync with origin/master.
 git fetch origin
 git checkout master
 git reset --hard origin/master
 git pull --ff-only origin master
 
-# Create the venv if needed.
+# Ensure Python environment exists.
 if [ ! -d .venv ]; then
   python3 -m venv .venv
 fi
 
-# Activate and install dependencies.
+# Install dependencies.
 . .venv/bin/activate
 python -m pip install --upgrade pip
 
@@ -28,12 +28,12 @@ else
   fi
 fi
 
-# If the app is already running, restart it.
+# Restart the app so the latest code is used.
 pkill -f "streamlit run main.py" || true
 sleep 2
 nohup .venv/bin/streamlit run main.py --server.address 0.0.0.0 --server.port 8501 > /tmp/vismigprediction.log 2>&1 &
 
-# Optional: restart a systemd service if it exists.
+# Optional service/HTTP restart if available.
 if command -v systemctl >/dev/null 2>&1; then
   if systemctl list-unit-files --type=service | grep -q '^vismigprediction\.service'; then
     sudo systemctl restart vismigprediction || true
