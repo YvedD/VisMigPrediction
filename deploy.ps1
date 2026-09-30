@@ -11,13 +11,17 @@ $RemotePath = "/home/ubuntu/vismigprediction"
 
 Set-Location $Repo
 
+# Always stage everything for deploy.
 git add -A
 
-$staged = git diff --cached --name-only
-if ($staged) {
+# Commit only if the index changed.
+git diff --cached --quiet
+if ($LASTEXITCODE -ne 0) {
     git commit -m $Message
 }
 
-git push
+# Push the branch that is currently checked out.
+git push origin HEAD
 
-ssh -i $Key $HostName "cd $RemotePath && ./deploy_remote.sh"
+# Trigger deploy on the remote OCI VM.
+ssh -i $Key $HostName "cd $RemotePath && bash ./deploy_remote.sh"
